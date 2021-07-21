@@ -13,6 +13,7 @@
 		830B1DFA26A8149F00D38AE9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830B1DF926A8149F00D38AE9 /* Preview Assets.xcassets */; };
 		830B1DFC26A8149F00D38AE9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DFB26A8149F00D38AE9 /* Persistence.swift */; };
 		830B1DFF26A8149F00D38AE9 /* monitool.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DFD26A8149F00D38AE9 /* monitool.xcdatamodeld */; };
+		830B1E1826A81A3900D38AE9 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1E1726A81A3900D38AE9 /* AuthenticationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		830B1DFB26A8149F00D38AE9 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		830B1DFE26A8149F00D38AE9 /* monitool.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = monitool.xcdatamodel; sourceTree = "<group>"; };
 		830B1E0026A8149F00D38AE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		830B1E1726A81A3900D38AE9 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,13 +58,19 @@
 		830B1DF126A8149E00D38AE9 /* monitool */ = {
 			isa = PBXGroup;
 			children = (
+				830B1E1626A81A2000D38AE9 /* Services */,
+				830B1E1326A819CE00D38AE9 /* Repositories */,
+				830B1E1126A818C800D38AE9 /* Helper */,
+				830B1E1026A818C300D38AE9 /* Views */,
+				830B1E0F26A818B800D38AE9 /* ViewModels */,
+				830B1E0E26A818B400D38AE9 /* Models */,
+				830B1DF826A8149F00D38AE9 /* Preview Content */,
 				830B1DF226A8149E00D38AE9 /* monitoolApp.swift */,
 				830B1DF426A8149E00D38AE9 /* ContentView.swift */,
 				830B1DF626A8149F00D38AE9 /* Assets.xcassets */,
 				830B1DFB26A8149F00D38AE9 /* Persistence.swift */,
 				830B1E0026A8149F00D38AE9 /* Info.plist */,
 				830B1DFD26A8149F00D38AE9 /* monitool.xcdatamodeld */,
-				830B1DF826A8149F00D38AE9 /* Preview Content */,
 			);
 			path = monitool;
 			sourceTree = "<group>";
@@ -73,6 +81,65 @@
 				830B1DF926A8149F00D38AE9 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		830B1E0E26A818B400D38AE9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		830B1E0F26A818B800D38AE9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		830B1E1026A818C300D38AE9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				830B1E1A26A81AC400D38AE9 /* Company */,
+				830B1E1926A81ABA00D38AE9 /* Task */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		830B1E1126A818C800D38AE9 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		830B1E1326A819CE00D38AE9 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		830B1E1626A81A2000D38AE9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				830B1E1726A81A3900D38AE9 /* AuthenticationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		830B1E1926A81ABA00D38AE9 /* Task */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		830B1E1A26A81AC400D38AE9 /* Company */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Company;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +215,7 @@
 				830B1DF526A8149E00D38AE9 /* ContentView.swift in Sources */,
 				830B1DFF26A8149F00D38AE9 /* monitool.xcdatamodeld in Sources */,
 				830B1DF326A8149E00D38AE9 /* monitoolApp.swift in Sources */,
+				830B1E1826A81A3900D38AE9 /* AuthenticationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
