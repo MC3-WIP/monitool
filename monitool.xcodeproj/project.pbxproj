@@ -14,6 +14,8 @@
 		830B1DFC26A8149F00D38AE9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DFB26A8149F00D38AE9 /* Persistence.swift */; };
 		830B1DFF26A8149F00D38AE9 /* monitool.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DFD26A8149F00D38AE9 /* monitool.xcdatamodeld */; };
 		830B1E1826A81A3900D38AE9 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1E1726A81A3900D38AE9 /* AuthenticationService.swift */; };
+		83ECAF6526AA115B0069CF25 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECAF6126AA115B0069CF25 /* Strings.swift */; };
+		83ECAF6626AA115B0069CF25 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83ECAF6226AA115B0069CF25 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,9 @@
 		830B1DFE26A8149F00D38AE9 /* monitool.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = monitool.xcdatamodel; sourceTree = "<group>"; };
 		830B1E0026A8149F00D38AE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		830B1E1726A81A3900D38AE9 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		83ECAF6126AA115B0069CF25 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		83ECAF6326AA115B0069CF25 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		83ECAF6426AA115B0069CF25 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +63,7 @@
 		830B1DF126A8149E00D38AE9 /* monitool */ = {
 			isa = PBXGroup;
 			children = (
+				83ECAF6026AA115B0069CF25 /* Locales */,
 				830B1E1626A81A2000D38AE9 /* Services */,
 				830B1E1326A819CE00D38AE9 /* Repositories */,
 				830B1E1126A818C800D38AE9 /* Helper */,
@@ -142,6 +148,15 @@
 			path = Company;
 			sourceTree = "<group>";
 		};
+		83ECAF6026AA115B0069CF25 /* Locales */ = {
+			isa = PBXGroup;
+			children = (
+				83ECAF6126AA115B0069CF25 /* Strings.swift */,
+				83ECAF6226AA115B0069CF25 /* Localizable.strings */,
+			);
+			path = Locales;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -183,6 +198,7 @@
 			knownRegions = (
 				en,
 				Base,
+				id,
 			);
 			mainGroup = 830B1DE626A8149E00D38AE9;
 			productRefGroup = 830B1DF026A8149E00D38AE9 /* Products */;
@@ -200,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				830B1DFA26A8149F00D38AE9 /* Preview Assets.xcassets in Resources */,
+				83ECAF6626AA115B0069CF25 /* Localizable.strings in Resources */,
 				830B1DF726A8149F00D38AE9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,11 +232,24 @@
 				830B1DF526A8149E00D38AE9 /* ContentView.swift in Sources */,
 				830B1DFF26A8149F00D38AE9 /* monitool.xcdatamodeld in Sources */,
 				830B1DF326A8149E00D38AE9 /* monitoolApp.swift in Sources */,
+				83ECAF6526AA115B0069CF25 /* Strings.swift in Sources */,
 				830B1E1826A81A3900D38AE9 /* AuthenticationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		83ECAF6226AA115B0069CF25 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				83ECAF6326AA115B0069CF25 /* en */,
+				83ECAF6426AA115B0069CF25 /* id */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		830B1E0126A8149F00D38AE9 /* Debug */ = {
