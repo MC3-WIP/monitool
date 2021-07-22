@@ -16,6 +16,7 @@
 		830B1E1826A81A3900D38AE9 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1E1726A81A3900D38AE9 /* AuthenticationService.swift */; };
 		83ECAF6526AA115B0069CF25 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECAF6126AA115B0069CF25 /* Strings.swift */; };
 		83ECAF6626AA115B0069CF25 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83ECAF6226AA115B0069CF25 /* Localizable.strings */; };
+		83ECAF6B26AA13CC0069CF25 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83ECAF6A26AA13CC0069CF25 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		83ECAF6126AA115B0069CF25 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		83ECAF6326AA115B0069CF25 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		83ECAF6426AA115B0069CF25 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
+		83ECAF6826AA13C30069CF25 /* monitool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = monitool.entitlements; sourceTree = "<group>"; };
+		83ECAF6A26AA13CC0069CF25 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83ECAF6B26AA13CC0069CF25 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +53,7 @@
 			children = (
 				830B1DF126A8149E00D38AE9 /* monitool */,
 				830B1DF026A8149E00D38AE9 /* Products */,
+				83ECAF6926AA13CC0069CF25 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +68,7 @@
 		830B1DF126A8149E00D38AE9 /* monitool */ = {
 			isa = PBXGroup;
 			children = (
+				83ECAF6726AA13640069CF25 /* App */,
 				83ECAF6026AA115B0069CF25 /* Locales */,
 				830B1E1626A81A2000D38AE9 /* Services */,
 				830B1E1326A819CE00D38AE9 /* Repositories */,
@@ -75,7 +81,6 @@
 				830B1DF426A8149E00D38AE9 /* ContentView.swift */,
 				830B1DF626A8149F00D38AE9 /* Assets.xcassets */,
 				830B1DFB26A8149F00D38AE9 /* Persistence.swift */,
-				830B1E0026A8149F00D38AE9 /* Info.plist */,
 				830B1DFD26A8149F00D38AE9 /* monitool.xcdatamodeld */,
 			);
 			path = monitool;
@@ -155,6 +160,23 @@
 				83ECAF6226AA115B0069CF25 /* Localizable.strings */,
 			);
 			path = Locales;
+			sourceTree = "<group>";
+		};
+		83ECAF6726AA13640069CF25 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				830B1E0026A8149F00D38AE9 /* Info.plist */,
+				83ECAF6826AA13C30069CF25 /* monitool.entitlements */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		83ECAF6926AA13CC0069CF25 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				83ECAF6A26AA13CC0069CF25 /* CloudKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,17 +395,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = monitool/App/monitool.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"monitool/Preview Content\"";
 				DEVELOPMENT_TEAM = 8KKWD6QU49;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = monitool/Info.plist;
+				INFOPLIST_FILE = monitool/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.budisaputra.monitool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wip.monitool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -395,17 +418,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = monitool/App/monitool.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"monitool/Preview Content\"";
 				DEVELOPMENT_TEAM = 8KKWD6QU49;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = monitool/Info.plist;
+				INFOPLIST_FILE = monitool/App/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.budisaputra.monitool;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wip.monitool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
