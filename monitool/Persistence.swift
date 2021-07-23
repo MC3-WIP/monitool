@@ -31,7 +31,7 @@ struct PersistenceController {
     let container: NSPersistentContainer
 
     init(inMemory: Bool = false) {
-        container = NSPersistentContainer(name: "monitool")
+        container = NSPersistentCloudKitContainer(name: "monitool")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
@@ -51,5 +51,8 @@ struct PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+
+		container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+		container.viewContext.automaticallyMergesChangesFromParent = true
     }
 }
