@@ -32,6 +32,7 @@ struct ContentView: View {
                 Label("Add Item", systemImage: "plus")
             }
         }
+        Text("Hello world")
     }
 
     private func addItem() {

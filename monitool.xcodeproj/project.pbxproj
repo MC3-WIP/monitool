@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		451881067891BAAC4BD8922A /* Pods_monitool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F335342D53E4540C34C3D459 /* Pods_monitool.framework */; };
 		830B1DF326A8149E00D38AE9 /* monitoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DF226A8149E00D38AE9 /* monitoolApp.swift */; };
 		830B1DF526A8149E00D38AE9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DF426A8149E00D38AE9 /* ContentView.swift */; };
 		830B1DF726A8149F00D38AE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830B1DF626A8149F00D38AE9 /* Assets.xcassets */; };
@@ -31,6 +32,9 @@
 		83ECAF6126AA115B0069CF25 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		83ECAF6326AA115B0069CF25 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		83ECAF6426AA115B0069CF25 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
+		89BFB039E39A5ABB2477EAEE /* Pods-monitool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monitool.debug.xcconfig"; path = "Target Support Files/Pods-monitool/Pods-monitool.debug.xcconfig"; sourceTree = "<group>"; };
+		ADB96F69B4F62B81EF090F6E /* Pods-monitool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monitool.release.xcconfig"; path = "Target Support Files/Pods-monitool/Pods-monitool.release.xcconfig"; sourceTree = "<group>"; };
+		F335342D53E4540C34C3D459 /* Pods_monitool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_monitool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				451881067891BAAC4BD8922A /* Pods_monitool.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +54,8 @@
 			children = (
 				830B1DF126A8149E00D38AE9 /* monitool */,
 				830B1DF026A8149E00D38AE9 /* Products */,
+				BE97FB7DC49FBB4DCF8E6A7C /* Pods */,
+				C895C137BDFEFC537776B1C3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,11 +72,6 @@
 			children = (
 				83ECAF6026AA115B0069CF25 /* Locales */,
 				830B1E1626A81A2000D38AE9 /* Services */,
-				830B1E1326A819CE00D38AE9 /* Repositories */,
-				830B1E1126A818C800D38AE9 /* Helper */,
-				830B1E1026A818C300D38AE9 /* Views */,
-				830B1E0F26A818B800D38AE9 /* ViewModels */,
-				830B1E0E26A818B400D38AE9 /* Models */,
 				830B1DF826A8149F00D38AE9 /* Preview Content */,
 				830B1DF226A8149E00D38AE9 /* monitoolApp.swift */,
 				830B1DF426A8149E00D38AE9 /* ContentView.swift */,
@@ -89,63 +91,12 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		830B1E0E26A818B400D38AE9 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		830B1E0F26A818B800D38AE9 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		830B1E1026A818C300D38AE9 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				830B1E1A26A81AC400D38AE9 /* Company */,
-				830B1E1926A81ABA00D38AE9 /* Task */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		830B1E1126A818C800D38AE9 /* Helper */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helper;
-			sourceTree = "<group>";
-		};
-		830B1E1326A819CE00D38AE9 /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Repositories;
-			sourceTree = "<group>";
-		};
 		830B1E1626A81A2000D38AE9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				830B1E1726A81A3900D38AE9 /* AuthenticationService.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		830B1E1926A81ABA00D38AE9 /* Task */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Task;
-			sourceTree = "<group>";
-		};
-		830B1E1A26A81AC400D38AE9 /* Company */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Company;
 			sourceTree = "<group>";
 		};
 		83ECAF6026AA115B0069CF25 /* Locales */ = {
@@ -157,6 +108,23 @@
 			path = Locales;
 			sourceTree = "<group>";
 		};
+		BE97FB7DC49FBB4DCF8E6A7C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				89BFB039E39A5ABB2477EAEE /* Pods-monitool.debug.xcconfig */,
+				ADB96F69B4F62B81EF090F6E /* Pods-monitool.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C895C137BDFEFC537776B1C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F335342D53E4540C34C3D459 /* Pods_monitool.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -164,9 +132,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 830B1E0326A8149F00D38AE9 /* Build configuration list for PBXNativeTarget "monitool" */;
 			buildPhases = (
+				4E3D61E1EBB5E5A3B2800C5C /* [CP] Check Pods Manifest.lock */,
 				830B1DEB26A8149E00D38AE9 /* Sources */,
 				830B1DEC26A8149E00D38AE9 /* Frameworks */,
 				830B1DED26A8149E00D38AE9 /* Resources */,
+				57197A934BED691BB48AF9AB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -222,6 +192,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4E3D61E1EBB5E5A3B2800C5C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-monitool-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		57197A934BED691BB48AF9AB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-monitool/Pods-monitool-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-monitool/Pods-monitool-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-monitool/Pods-monitool-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		830B1DEB26A8149E00D38AE9 /* Sources */ = {
@@ -370,6 +382,7 @@
 		};
 		830B1E0426A8149F00D38AE9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89BFB039E39A5ABB2477EAEE /* Pods-monitool.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -392,6 +405,7 @@
 		};
 		830B1E0526A8149F00D38AE9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = ADB96F69B4F62B81EF090F6E /* Pods-monitool.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
