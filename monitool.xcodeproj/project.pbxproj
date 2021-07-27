@@ -15,6 +15,8 @@
 		830B1DFC26A8149F00D38AE9 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DFB26A8149F00D38AE9 /* Persistence.swift */; };
 		830B1DFF26A8149F00D38AE9 /* monitool.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DFD26A8149F00D38AE9 /* monitool.xcdatamodeld */; };
 		830B1E1826A81A3900D38AE9 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1E1726A81A3900D38AE9 /* AuthenticationService.swift */; };
+		83E9492426AFC384003903FE /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E9492326AFC384003903FE /* Employee.swift */; };
+		83E9492826AFCA9D003903FE /* EmployeeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E9492726AFCA9D003903FE /* EmployeeHelper.swift */; };
 		83ECAF6526AA115B0069CF25 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECAF6126AA115B0069CF25 /* Strings.swift */; };
 		83ECAF6626AA115B0069CF25 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83ECAF6226AA115B0069CF25 /* Localizable.strings */; };
 /* End PBXBuildFile section */
@@ -29,6 +31,8 @@
 		830B1DFE26A8149F00D38AE9 /* monitool.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = monitool.xcdatamodel; sourceTree = "<group>"; };
 		830B1E0026A8149F00D38AE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		830B1E1726A81A3900D38AE9 /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		83E9492326AFC384003903FE /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
+		83E9492726AFCA9D003903FE /* EmployeeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeHelper.swift; sourceTree = "<group>"; };
 		83ECAF6126AA115B0069CF25 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		83ECAF6326AA115B0069CF25 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		83ECAF6426AA115B0069CF25 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 				830B1DFB26A8149F00D38AE9 /* Persistence.swift */,
 				830B1E0026A8149F00D38AE9 /* Info.plist */,
 				830B1DFD26A8149F00D38AE9 /* monitool.xcdatamodeld */,
+				83E9492326AFC384003903FE /* Employee.swift */,
+				83E9492726AFCA9D003903FE /* EmployeeHelper.swift */,
 			);
 			path = monitool;
 			sourceTree = "<group>";
@@ -243,9 +249,11 @@
 				830B1DFC26A8149F00D38AE9 /* Persistence.swift in Sources */,
 				830B1DF526A8149E00D38AE9 /* ContentView.swift in Sources */,
 				830B1DFF26A8149F00D38AE9 /* monitool.xcdatamodeld in Sources */,
+				83E9492426AFC384003903FE /* Employee.swift in Sources */,
 				830B1DF326A8149E00D38AE9 /* monitoolApp.swift in Sources */,
 				83ECAF6526AA115B0069CF25 /* Strings.swift in Sources */,
 				830B1E1826A81A3900D38AE9 /* AuthenticationService.swift in Sources */,
+				83E9492826AFCA9D003903FE /* EmployeeHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
