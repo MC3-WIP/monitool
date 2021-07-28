@@ -35,7 +35,7 @@ class CompanyRepository: ObservableObject{
     func addEmployee(name: String){
         // MARK: Unfinished
 //        store.collection(path).document().setData()
-        let newEmployee = Employee(name: name)
+//        let newEmployee = Employee(name: name)
     }
     
     func deleteEmployee(employee: Employee, name: String){

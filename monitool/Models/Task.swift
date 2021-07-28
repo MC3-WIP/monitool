@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 class Task:Codable {
     @DocumentID var id: String!
     var name: String
-    weak var status: TaskStatus?
+    var status: TaskStatus?
     var createdAt: Date
     var repeated: [Bool]
     var desc: String?
