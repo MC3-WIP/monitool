@@ -15,28 +15,3 @@ struct Employee: Codable {
 		pin = Helper.generatePIN()
 	}
 }
-
-// MARK: - Methods
-extension Employee {
-	func review(task: _Task) -> Self {
-		task.reviewer += 1
-		return self
-	}
-
-	func submit(task: _Task, notes: String = "") -> Self {
-		task.status = .waitingPeerReview
-		task.notes = notes
-		return self
-	}
-}
-
-enum TaskStatus {
-	case ongoing,
-		 waitingPeerReview
-}
-
-class _Task {
-	var status: TaskStatus = .ongoing
-	var reviewer = 0
-	var notes = ""
-}

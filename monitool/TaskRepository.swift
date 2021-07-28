@@ -11,11 +11,15 @@ import PhotosUI
 import FirebaseStorage
 
 class TaskRepository: ObservableObject {
-    private let path: String = "tasks"
+    private let path: String = "companies"
     private let store = Firestore.firestore()
     private let storage = Storage.storage()
     
     @Published var tasks: [Task] = []
+    
+    init(){
+        get()
+    }
     
     func get(){
         store.collection(path)
@@ -34,6 +38,20 @@ class TaskRepository: ObservableObject {
                     self.tasks = tasks
                 }
             }
+    }
+    
+    func add(_ task: Task){
+        do {
+            _ = try store.collection(path).addDocument(from: task)
+        } catch{
+            fatalError("Fail adding new task")
+        }
+    }
+    
+    // func delete
+    
+    func updatePIC(_ idCompany: String, _ idTask: String, _ employee: Employee){
+        store.collection(path).document(idCompany)
     }
     
     func updateNotes(id: String, notes: String) {

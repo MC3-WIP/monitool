@@ -10,6 +10,7 @@
 		451881067891BAAC4BD8922A /* Pods_monitool.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F335342D53E4540C34C3D459 /* Pods_monitool.framework */; };
 		6F0CC8E426AFCF4700D15B96 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CC8E326AFCF4700D15B96 /* Task.swift */; };
 		6F0CC8E626AFD86700D15B96 /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CC8E526AFD86700D15B96 /* TaskRepository.swift */; };
+		6F0CC8E826B137CB00D15B96 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CC8E726B137CB00D15B96 /* TaskListViewModel.swift */; };
 		830B1DF326A8149E00D38AE9 /* monitoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DF226A8149E00D38AE9 /* monitoolApp.swift */; };
 		830B1DF526A8149E00D38AE9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DF426A8149E00D38AE9 /* ContentView.swift */; };
 		830B1DF726A8149F00D38AE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830B1DF626A8149F00D38AE9 /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 /* Begin PBXFileReference section */
 		6F0CC8E326AFCF4700D15B96 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		6F0CC8E526AFD86700D15B96 /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
+		6F0CC8E726B137CB00D15B96 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		830B1DEF26A8149E00D38AE9 /* monitool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = monitool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		830B1DF226A8149E00D38AE9 /* monitoolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = monitoolApp.swift; sourceTree = "<group>"; };
 		830B1DF426A8149E00D38AE9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				83E9492726AFCA9D003903FE /* EmployeeHelper.swift */,
 				8E7A53BC26B13EC4007FA3A8 /* CompanyRepository.swift */,
 				8E7A53BE26B13F01007FA3A8 /* Company.swift */,
+				6F0CC8E726B137CB00D15B96 /* TaskListViewModel.swift */,
 			);
 			path = monitool;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F0CC8E826B137CB00D15B96 /* TaskListViewModel.swift in Sources */,
 				830B1DFC26A8149F00D38AE9 /* Persistence.swift in Sources */,
 				830B1DF526A8149E00D38AE9 /* ContentView.swift in Sources */,
 				6F0CC8E626AFD86700D15B96 /* TaskRepository.swift in Sources */,
