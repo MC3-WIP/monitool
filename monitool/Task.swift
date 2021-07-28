@@ -8,39 +8,32 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-class Task:Codable{
-    @DocumentID var id: String?
+class Task:Codable {
+    @DocumentID var id: String!
     var name: String
+    weak var status: TaskStatus?
+    var createdAt: Date
+    var repeated: [Bool]
     var desc: String?
-    var status: String
     var proof: Data?
     var notes: String?
-    var createdAt: Date
-    var repeated: [Int]
     
-//    var pic: Employee
-//    var reviewer: [Employee]
+    var pic: Employee?
+    var reviewer: [Employee]?
     
-    init(name: String, status: String, repeated: [Int]){
-        self.name = name
-        self.status = status
-        self.repeated = repeated
-        self.createdAt = Date()
-    }
-    
-    init(name: String, desc: String, status: String, repeated: [Int]){
+    init(name: String,desc: String? = nil, repeated: [Bool]){
         self.name = name
         self.desc = desc
-        self.status = status
+        self.status = .ongoing
         self.repeated = repeated
         self.createdAt = Date()
     }
-    
-    func updateStatus(status: String){
-        self.status = status
-    }
-    
-    func updateNotes(notes: String){
-        self.notes = notes
-    }
+}
+
+enum TaskStatus: Int, Codable{
+    case ongoing = 0
+    case waitingPeerReview = 1
+    case waitingOwnerReview = 2
+    case revised = 3
+    case completed = 4
 }
