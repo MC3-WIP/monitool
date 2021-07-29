@@ -14,7 +14,7 @@ struct LoginView: View {
 	var body: some View {
         if userAuth.isLoggedIn {
 //            CompanyOnboarding(userAuth: self.userAuth)
-			TaskListView()
+			EmployeeListView()
         } else {
 			SignIn(userAuth: userAuth)
         }

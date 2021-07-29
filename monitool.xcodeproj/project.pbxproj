@@ -11,6 +11,8 @@
 		6F0CC8E426AFCF4700D15B96 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CC8E326AFCF4700D15B96 /* Task.swift */; };
 		6F0CC8E626AFD86700D15B96 /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CC8E526AFD86700D15B96 /* TaskRepository.swift */; };
 		6F0CC8E826B137CB00D15B96 /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0CC8E726B137CB00D15B96 /* TaskListViewModel.swift */; };
+		6F137C8A26B2B57F00F79608 /* EmployeeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F137C8926B2B57F00F79608 /* EmployeeListViewModel.swift */; };
+		6F137C8C26B2B81B00F79608 /* EmployeeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F137C8B26B2B81B00F79608 /* EmployeeListView.swift */; };
 		830B1DF326A8149E00D38AE9 /* MonitoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DF226A8149E00D38AE9 /* MonitoolApp.swift */; };
 		830B1DF526A8149E00D38AE9 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DF426A8149E00D38AE9 /* LoginView.swift */; };
 		830B1DF726A8149F00D38AE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830B1DF626A8149F00D38AE9 /* Assets.xcassets */; };
@@ -35,6 +37,8 @@
 		6F0CC8E326AFCF4700D15B96 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		6F0CC8E526AFD86700D15B96 /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
 		6F0CC8E726B137CB00D15B96 /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
+		6F137C8926B2B57F00F79608 /* EmployeeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListViewModel.swift; sourceTree = "<group>"; };
+		6F137C8B26B2B81B00F79608 /* EmployeeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListView.swift; sourceTree = "<group>"; };
 		830B1DEF26A8149E00D38AE9 /* monitool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = monitool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		830B1DF226A8149E00D38AE9 /* MonitoolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitoolApp.swift; sourceTree = "<group>"; };
 		830B1DF426A8149E00D38AE9 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -120,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				6F0CC8E726B137CB00D15B96 /* TaskListViewModel.swift */,
+				6F137C8926B2B57F00F79608 /* EmployeeListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -161,6 +166,7 @@
 				830B1DF426A8149E00D38AE9 /* LoginView.swift */,
 				B850700A26B14B3000530CBA /* CompanyOnboarding.swift */,
 				83EF2A9226B29F1C00378602 /* TaskListView.swift */,
+				6F137C8B26B2B81B00F79608 /* EmployeeListView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -351,6 +357,8 @@
 				83EF2A8726B292C500378602 /* SignIn.swift in Sources */,
 				83E9492826AFCA9D003903FE /* EmployeeHelper.swift in Sources */,
 				83E8404026B2ADF300905143 /* EmployeeList.swift in Sources */,
+				6F137C8A26B2B57F00F79608 /* EmployeeListViewModel.swift in Sources */,
+				6F137C8C26B2B81B00F79608 /* EmployeeListView.swift in Sources */,
 				8E7A53BF26B13F01007FA3A8 /* Company.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

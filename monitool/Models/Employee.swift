@@ -6,7 +6,12 @@
 //
 
 // MARK: - Properties
-struct Employee: Codable {
+
+import FirebaseFirestoreSwift
+import Foundation
+
+class Employee: Codable, Identifiable {
+    @DocumentID var id: String!
 	var name: String
 	var pin: String
 
