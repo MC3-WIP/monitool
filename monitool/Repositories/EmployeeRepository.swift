@@ -15,18 +15,19 @@ struct _Company {
 class EmployeeRepository: ObservableObject {
 	private let company: _Company
 	@Published var employees = [Employee]()
+	private let paths = RepositoriesPath()
 
 	private let store = Firestore.firestore()
-	private let path: String
+	private let employeeRepository: CollectionReference
 
 	init(company: _Company) {
 		self.company = company
-		path = "companies/\(company.id)/employees"
+		employeeRepository = store.collection(paths.employee)
 		get()
 	}
 
 	func get() {
-		store.collection(path).addSnapshotListener { [self] querySnapshot, error in
+		employeeRepository.addSnapshotListener { [self] querySnapshot, error in
 			if let error = error {
 				fatalError("Unresolved error \(error.localizedDescription)")
 			}

@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-class AuthenticationService: ObservableObject {
-	static let shared = AuthenticationService()
+class AuthService: ObservableObject {
+	static let shared = AuthService()
 	
 	@Published var isLoggedIn: Bool {
 		didSet {

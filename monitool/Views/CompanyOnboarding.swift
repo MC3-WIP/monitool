@@ -9,7 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct CompanyOnboarding: View {
-    @ObservedObject var userAuth: AuthenticationService
+    @ObservedObject var userAuth: AuthService
        
     var body: some View {
         Text("Company Onboarding")

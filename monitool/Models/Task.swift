@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestoreSwift
 
-class Task:Codable {
+class Task: Codable, Identifiable {
     @DocumentID var id: String!
     var name: String
     var status: TaskStatus?

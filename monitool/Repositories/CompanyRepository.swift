@@ -6,10 +6,10 @@
 //
 
 import Foundation
-import Firebase
+import FirebaseFirestore
 
 class CompanyRepository: ObservableObject{
-    private let path: String = "Companies"
+    private let path = RepositoriesPath()
     private let store = Firestore.firestore()
     private let id: String = "id"
     
@@ -39,7 +39,7 @@ class CompanyRepository: ObservableObject{
     }
     
     func deleteEmployee(employee: Employee, name: String){
-        store.collection(path).document(id).delete { error in
+		store.collection(path.company).document(id).delete { error in
             if let error = error {
                 print("Unable to remove card: \(error.localizedDescription)")
             }  else {
