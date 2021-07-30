@@ -5,13 +5,22 @@
 //  Created by Mac-albert on 28/07/21.
 //
 
-import Foundation
 import FirebaseFirestore
+import Combine
+import FirebaseAuth
 
 class CompanyRepository: ObservableObject{
-    private let path = RepositoriesPath()
+//    @Published var company: Company
+    private let paths = RepositoriesPath()
     private let store = Firestore.firestore()
-    private let id: String = "id"
+    private var companyRepositories: DocumentReference? = nil
+    
+    init() {
+        if let user = Auth.auth().currentUser{
+            companyRepositories = store.collection(paths.company).document(user.uid)
+        }
+        
+    }
     
     func addTask(task: Task, name: String, description: String) -> Self {
         task.name = name
@@ -32,28 +41,15 @@ class CompanyRepository: ObservableObject{
 //        }
     }
     
-    func addEmployee(name: String){
-        // MARK: Unfinished
-//        store.collection(path).document().setData()
-//        let newEmployee = Employee(name: name)
+    func editCompanyName(name: String){
+        companyRepositories?.updateData(["name": name])
     }
     
-    func deleteEmployee(employee: Employee, name: String){
-		store.collection(path.company).document(id).delete { error in
-            if let error = error {
-                print("Unable to remove card: \(error.localizedDescription)")
-            }  else {
-                print("Successfully deleted  story text")
-            }
-        }
+    func editCompanyMinReview(minReview: Int){
+        companyRepositories?.updateData(["minReview": minReview])
     }
     
-    func editCompanyName(company: Company, name: String){
-        company.name = name
-        // MARK: Unfinished
-//        store.collection(path).document().setData()
-//        return self
-    }
+    // MARK: EDIT PHOTO BELOM
     
     func approveTask(status: String){
         

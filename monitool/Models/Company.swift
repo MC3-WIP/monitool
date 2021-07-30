@@ -6,8 +6,11 @@
 //
 
 import Foundation
+import FirebaseFirestoreSwift
 
-class Company{
+class Company: Codable{
+    @DocumentID var id: String!
+
     var name: String
     var minReview: Int
 
