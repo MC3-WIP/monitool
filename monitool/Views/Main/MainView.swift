@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct MainView: View {
-	@StateObject private var viewModel = MainViewModel()
+	private var device = UIDevice.current.userInterfaceIdiom
 
 	var body: some View {
-		viewModel.Layout()
+		Layout()
     }
+}
+
+// MARK: - View Builders
+extension MainView {
+	@ViewBuilder
+	func Layout() -> some View {
+		if device == .pad {
+			PadLayout()
+		} else if device == .phone {
+			PhoneLayout()
+		} else {
+			Text("Monitool's only available for iPhone and iPad, so how'd u get here?")
+		}
+	}
 }
 
 struct MainView_Previews: PreviewProvider {
