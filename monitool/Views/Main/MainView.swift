@@ -8,20 +8,11 @@
 import SwiftUI
 
 struct MainView: View {
-	var device = UIDevice.current.userInterfaceIdiom
+	@StateObject private var viewModel = MainViewModel()
 
-    var body: some View {
-		Main()
+	var body: some View {
+		viewModel.Layout()
     }
-
-	@ViewBuilder
-	func Main() -> some View {
-		if device == .pad {
-			PadMainView()
-		} else if device == .phone {
-			PhoneMainView()
-		}
-	}
 }
 
 struct MainView_Previews: PreviewProvider {
