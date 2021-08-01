@@ -8,12 +8,6 @@
 import Foundation
 
 class PadLayoutViewModel: ObservableObject {
-	@Published var currentTaskFilter: TaskStatus = .ongoing
-	@Published var currentDetailViewType: DetailViewType = .filteredTaskList
-}
-
-extension PadLayoutViewModel {
-	enum DetailViewType {
-		case filteredTaskList, ownerTaskList, profile
-	}
+	@Published var currentTaskFilter: TaskStatus? = .ongoing
+	@Published var currentDetailViewType: SidebarViewModel.MenuItem = .todayList
 }

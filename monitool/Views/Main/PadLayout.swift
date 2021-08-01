@@ -12,12 +12,14 @@ struct PadLayout: View {
 
 	var body: some View {
 		NavigationView {
-			SidebarView(
-				taskFilter: $viewModel.currentTaskFilter,
-				currentDetailViewType: $viewModel.currentDetailViewType
-			)
+			ZStack {
+				Color.secondary.edgesIgnoringSafeArea(.all)
+				SidebarView()
+					.environmentObject(viewModel)
+			}
 			DetailView()
 		}
+		.accentColor(.primary)
 	}
 }
 
@@ -26,10 +28,10 @@ extension PadLayout {
 	@ViewBuilder
 	func DetailView() -> some View {
 		switch viewModel.currentDetailViewType {
-		case .filteredTaskList:
+		case .todayList, .peerReview, .ownerReview, .revise, .taskManager:
 			TaskListView(filter: $viewModel.currentTaskFilter)
-		case .ownerTaskList:
-			TaskListAdminView()
+		case .history:
+			HistoryView()
 		case .profile:
 			ProfileView()
 		}
