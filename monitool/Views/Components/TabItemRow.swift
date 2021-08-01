@@ -7,27 +7,53 @@
 
 import SwiftUI
 
-struct TabItemRow: View {
+struct TaskNotification {
+	var isPriority: Bool
+	var count: Int
+}
 
+struct TabItemRow: View {
+	var notification: TaskNotification? = nil
+	@Binding var selection: String
 	let title: String
 	let icon: String
-
-	init(title: String, icon: String) {
-		self.title = title
-		self.icon = icon
+	var isActive: Bool {
+		selection == title
 	}
+	var onTap: ((Self) -> Void)? = nil
 
     var body: some View {
 		HStack {
 			Image(systemName: icon)
+				.foregroundColor(isActive ? .white : .primary)
 			Text(title)
+				.foregroundColor(isActive ? .white : .black)
+			Spacer()
+			if let notification = notification, notification.count > 0 {
+				Text("\(notification.count)")
+					.foregroundColor(notification.isPriority || isActive ? .white : .black)
+					.frame(width: 24, height: 24, alignment: .center)
+					.background(notification.isPriority ? Color.red : Color.clear)
+					.clipShape(Circle())
+			}
 		}
-		.padding()
+		.padding(12)
+		.background(isActive ?  Color.primary : Color.clear)
+		.cornerRadius(12)
+		.contentShape(Rectangle())
+		.onTapGesture {
+			onTap?(self)
+		}
     }
 }
 
 struct TabItemRow_Previews: PreviewProvider {
     static var previews: some View {
-        TabItemRow(title: "Task List", icon: "list.number")
+		TabItemRow(
+			notification: TaskNotification(isPriority: true, count: 4),
+			selection: .constant(TaskStatus.ongoing.title),
+			title: "Task List",
+			icon: "list.number"
+		)
     }
 }

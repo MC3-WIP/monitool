@@ -11,15 +11,13 @@ struct ProfileTabItem: View {
 	var body: some View {
 		Text("Profile View!")
 			.tabItem {
-				Label(
-					title: { Text("Profile") },
-					icon: { Image(systemName: "person.crop.circle") }
-				)
+				Image(systemName: "person.crop.circle")
+				Text("Profile")
 			}
 	}
 }
 
-struct ProfileView_Previews: PreviewProvider {
+struct ProfileTabItem_Previews: PreviewProvider {
 	static var previews: some View {
 		ProfileTabItem()
 	}

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PhoneMainView: View {
+struct PhoneLayout: View {
 	var body: some View {
 		TabView {
 			TaskListTabItem()

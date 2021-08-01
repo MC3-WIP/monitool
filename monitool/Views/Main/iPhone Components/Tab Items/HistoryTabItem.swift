@@ -11,15 +11,14 @@ struct HistoryTabItem: View {
     var body: some View {
         Text("History View!")
 			.tabItem {
-				Label(
-					title: { Text("History") },
-					icon: { Image(systemName: "clock") }
-				)
+				Image(systemName: "clock")
+				Text("History")
 			}
+			.navigationTitle("History")
     }
 }
 
-struct HistoryView_Previews: PreviewProvider {
+struct HistoryTabItem_Previews: PreviewProvider {
     static var previews: some View {
         HistoryTabItem()
     }
