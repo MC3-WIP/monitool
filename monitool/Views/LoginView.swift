@@ -19,6 +19,7 @@ struct LoginView: View {
             SignIn(userAuth: self.userAuth)
 //            CompanyOnboarding(userAuth: self.userAuth)
         }
+			// PhotoComponent()
     }
 }
 
