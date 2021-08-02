@@ -10,7 +10,7 @@ import Combine
 import FirebaseAuth
 
 class CompanyRepository: ObservableObject{
-//    @Published var company: Company
+    @Published var companies = [Company]()
     private let paths = RepositoriesPath()
     private let store = Firestore.firestore()
     private var companyRepositories: DocumentReference? = nil
@@ -19,26 +19,21 @@ class CompanyRepository: ObservableObject{
         if let user = Auth.auth().currentUser{
             companyRepositories = store.collection(paths.company).document(user.uid)
         }
-        
     }
     
-    func addTask(task: Task, name: String, description: String) -> Self {
-        task.name = name
-        task.desc = description
-        
-        // MARK: Unfinished again
-//        store.collection(path).document(id).setData()
-        return self
+    func add(_ company: Company){
+        companyRepositories?.setData(["name": company.name, "minReview": company.minReview])
     }
     
-    func deleteTask(task: Task, name: String) {
-//        store.collection(path).document(id).delete { error in
-//            if let error = error {
-//                print("Unable to remove card: \(error.localizedDescription)")
-//            }  else {
-//                print("Successfully deleted  story text")
-//            }
-//        }
+    func delete(_ company: Company) {
+        store.collection(paths.company).document(company.id).delete()
+        //        store.collection(path).document(id).delete { error in
+        //            if let error = error {
+        //                print("Unable to remove card: \(error.localizedDescription)")
+        //            }  else {
+        //                print("Successfully deleted  story text")
+        //            }
+        //        }
     }
     
     func editCompanyName(name: String){

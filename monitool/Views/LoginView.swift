@@ -13,10 +13,11 @@ struct LoginView: View {
 
 	var body: some View {
         if userAuth.isLoggedIn {
-//            CompanyOnboarding(userAuth: self.userAuth)
-			EmployeeListView()
+            CompanyOnboarding(userAuth: self.userAuth)
+//			EmployeeListView()
         } else {
-			SignIn(userAuth: userAuth)
+            SignIn(userAuth: self.userAuth)
+//            CompanyOnboarding(userAuth: self.userAuth)
         }
     }
 }

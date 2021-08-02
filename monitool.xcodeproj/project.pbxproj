@@ -29,8 +29,10 @@
 		83EF2A9326B29F1C00378602 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A9226B29F1C00378602 /* TaskListView.swift */; };
 		8E7A53BD26B13EC4007FA3A8 /* CompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A53BC26B13EC4007FA3A8 /* CompanyRepository.swift */; };
 		8E7A53BF26B13F01007FA3A8 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A53BE26B13F01007FA3A8 /* Company.swift */; };
+		B823A78926B7DEBA0035D9F4 /* AddEmployeeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A78826B7DEBA0035D9F4 /* AddEmployeeSheetView.swift */; };
 		B850700926B1461800530CBA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B850700826B1461800530CBA /* GoogleService-Info.plist */; };
 		B850700B26B14B3000530CBA /* CompanyOnboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850700A26B14B3000530CBA /* CompanyOnboarding.swift */; };
+		B8EFD9B426B8562E001E6086 /* CompanyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EFD9B326B8562E001E6086 /* CompanyViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,9 +62,11 @@
 		8E7A53BC26B13EC4007FA3A8 /* CompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyRepository.swift; sourceTree = "<group>"; };
 		8E7A53BE26B13F01007FA3A8 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		ADB96F69B4F62B81EF090F6E /* Pods-monitool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monitool.release.xcconfig"; path = "Target Support Files/Pods-monitool/Pods-monitool.release.xcconfig"; sourceTree = "<group>"; };
+		B823A78826B7DEBA0035D9F4 /* AddEmployeeSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmployeeSheetView.swift; sourceTree = "<group>"; };
 		B850700726B1435900530CBA /* monitool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = monitool.entitlements; sourceTree = "<group>"; };
 		B850700826B1461800530CBA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B850700A26B14B3000530CBA /* CompanyOnboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyOnboarding.swift; sourceTree = "<group>"; };
+		B8EFD9B326B8562E001E6086 /* CompanyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewModel.swift; sourceTree = "<group>"; };
 		F335342D53E4540C34C3D459 /* Pods_monitool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_monitool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -125,6 +129,7 @@
 			children = (
 				6F0CC8E726B137CB00D15B96 /* TaskListViewModel.swift */,
 				6F137C8926B2B57F00F79608 /* EmployeeListViewModel.swift */,
+				B8EFD9B326B8562E001E6086 /* CompanyViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 				B850700A26B14B3000530CBA /* CompanyOnboarding.swift */,
 				83EF2A9226B29F1C00378602 /* TaskListView.swift */,
 				6F137C8B26B2B81B00F79608 /* EmployeeListView.swift */,
+				B823A78826B7DEBA0035D9F4 /* AddEmployeeSheetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -343,9 +349,11 @@
 			files = (
 				6F0CC8E826B137CB00D15B96 /* TaskListViewModel.swift in Sources */,
 				830B1DF526A8149E00D38AE9 /* LoginView.swift in Sources */,
+				B823A78926B7DEBA0035D9F4 /* AddEmployeeSheetView.swift in Sources */,
 				6F0CC8E626AFD86700D15B96 /* TaskRepository.swift in Sources */,
 				83E9492426AFC384003903FE /* Employee.swift in Sources */,
 				830B1DF326A8149E00D38AE9 /* MonitoolApp.swift in Sources */,
+				B8EFD9B426B8562E001E6086 /* CompanyViewModel.swift in Sources */,
 				83ECAF6526AA115B0069CF25 /* Strings.swift in Sources */,
 				8E7A53BD26B13EC4007FA3A8 /* CompanyRepository.swift in Sources */,
 				83EF2A9326B29F1C00378602 /* TaskListView.swift in Sources */,
