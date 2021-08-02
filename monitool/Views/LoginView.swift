@@ -12,12 +12,12 @@ struct LoginView: View {
     @ObservedObject var userAuth: AuthService = .shared
 
 	var body: some View {
-        if userAuth.isLoggedIn {
+//        if userAuth.isLoggedIn {
 //            CompanyOnboarding(userAuth: self.userAuth)
-			EmployeeListView()
-        } else {
-			SignIn(userAuth: userAuth)
-        }
+			PhotoComponent()
+//        } else {
+//			SignIn(userAuth: userAuth)
+//        }
     }
 }
 

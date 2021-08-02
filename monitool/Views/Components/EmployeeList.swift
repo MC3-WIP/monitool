@@ -9,8 +9,6 @@ import SwiftUI
 
 class EmployeeViewModel: ObservableObject {
 	@Published var employees = [Employee]()
-
-
 }
 
 struct EmployeeList: View {
