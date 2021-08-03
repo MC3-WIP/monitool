@@ -10,13 +10,16 @@ import Firebase
 
 @main
 struct MonitoolApp: App {
+	@AppStorage("userHasBoarded") var userHasBoarded = false
+
     init() {
         FirebaseApp.configure()
     }
 
     var body: some Scene {
         WindowGroup {
-            OnboardingView()
+			OnboardingView(userHasBoarded: $userHasBoarded)
+				.accentColor(.AppColor.primary)
         }
     }
 }

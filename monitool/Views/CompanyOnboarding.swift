@@ -14,7 +14,8 @@ struct CompanyOnboarding: View {
     @State private var showingSheet = false
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
     @ObservedObject var companyViewModel = CompanyViewModel()
-    
+	@Binding var userHasBoarded: Bool
+
     var body: some View {
         NavigationView {
             VStack {
@@ -57,9 +58,10 @@ struct CompanyOnboarding: View {
                         Button("Save", action: {
                             let company = Company(name: companyName, minReview: minReviewers)
                             companyViewModel.add(company)
+							userHasBoarded = true
                         })
                         .padding()
-                        .background(Color.primary)
+						.background(Color.AppColor.primary)
                         .foregroundColor(.white)
                         .clipShape(Rectangle())
                         .cornerRadius(10)
@@ -104,6 +106,6 @@ struct CompanyOnboarding: View {
 
 struct CompanyOnboarding_Previews: PreviewProvider {
     static var previews: some View {
-        CompanyOnboarding()
+		CompanyOnboarding(userHasBoarded: .constant(true))
     }
 }

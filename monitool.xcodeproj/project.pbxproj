@@ -43,10 +43,9 @@
 		83ECAF6626AA115B0069CF25 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83ECAF6226AA115B0069CF25 /* Localizable.strings */; };
 		83EF2A8726B292C500378602 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A8626B292C500378602 /* SignIn.swift */; };
 		83EF2A8926B298F900378602 /* RepositoriesPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A8826B298F900378602 /* RepositoriesPath.swift */; };
-		83EF2A9326B29F1C00378602 /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A9226B29F1C00378602 /* TaskListView.swift */; };
+		83EF2A9326B29F1C00378602 /* TaskListTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A9226B29F1C00378602 /* TaskListTabItem.swift */; };
 		8E28E38E26B4352400093850 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28E38D26B4352400093850 /* LoginView.swift */; };
 		8E2A614E26B91C9300D82BBE /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A614D26B91C9300D82BBE /* DetailView.swift */; };
-		83EF2A9326B29F1C00378602 /* TaskListTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A9226B29F1C00378602 /* TaskListTabItem.swift */; };
 		8E7A53BD26B13EC4007FA3A8 /* CompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A53BC26B13EC4007FA3A8 /* CompanyRepository.swift */; };
 		8E7A53BF26B13F01007FA3A8 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A53BE26B13F01007FA3A8 /* Company.swift */; };
 		B823A78926B7DEBA0035D9F4 /* AddEmployeeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A78826B7DEBA0035D9F4 /* AddEmployeeSheetView.swift */; };
@@ -221,9 +220,7 @@
 			children = (
 				83A023F126B406FA002D24CC /* Main */,
 				83EF2A8326B2927C00378602 /* Components */,
-				830B1DF226A8149E00D38AE9 /* MonitoolApp.swift */,
 				830B1DF426A8149E00D38AE9 /* OnboardingView.swift */,
-				830B1DF426A8149E00D38AE9 /* LoginView.swift */,
 				B850700A26B14B3000530CBA /* CompanyOnboarding.swift */,
 				6F137C8B26B2B81B00F79608 /* EmployeeListView.swift */,
 				B823A78826B7DEBA0035D9F4 /* AddEmployeeSheetView.swift */,
@@ -451,7 +448,7 @@
 				83A023E626B3F0DC002D24CC /* TaskListView.swift in Sources */,
 				83A023EC26B402A0002D24CC /* MainView.swift in Sources */,
 				6F0CC8E826B137CB00D15B96 /* TaskListViewModel.swift in Sources */,
-				830B1DF526A8149E00D38AE9 /* LoginView.swift in Sources */,
+				830B1DF526A8149E00D38AE9 /* OnboardingView.swift in Sources */,
 				B823A78926B7DEBA0035D9F4 /* AddEmployeeSheetView.swift in Sources */,
 				830B1DF526A8149E00D38AE9 /* OnboardingView.swift in Sources */,
 				6F0CC8E626AFD86700D15B96 /* TaskRepository.swift in Sources */,
