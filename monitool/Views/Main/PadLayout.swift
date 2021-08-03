@@ -13,13 +13,13 @@ struct PadLayout: View {
 	var body: some View {
 		NavigationView {
 			ZStack {
-				Color.secondary.edgesIgnoringSafeArea(.all)
+				Color.AppColor.secondary.edgesIgnoringSafeArea(.all)
 				SidebarView()
 					.environmentObject(viewModel)
 			}
 			DetailView()
 		}
-		.accentColor(.primary)
+		.accentColor(.AppColor.primary)
 	}
 }
 

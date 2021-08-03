@@ -45,13 +45,13 @@ extension SidebarView {
 	func MenuItemView(type: SidebarViewModel.MenuItem) -> some View {
 		HStack {
 			Image(systemName: type.icon)
-				.foregroundColor(viewModel.selectedMenuItem == type ? .white : .primary)
+				.foregroundColor(viewModel.selectedMenuItem == type ? .white : .AppColor.primary)
 			Text(type.title)
 				.foregroundColor(viewModel.selectedMenuItem == type ? .white : .black)
 			Spacer()
 		}
 		.padding(12)
-		.background(viewModel.selectedMenuItem == type ? Color.primary : Color.clear)
+		.background(viewModel.selectedMenuItem == type ? Color.AppColor.primary : Color.clear)
 		.cornerRadius(12)
 		.contentShape(Rectangle())
 		.onTapGesture {
