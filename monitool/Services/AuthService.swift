@@ -18,7 +18,7 @@ class AuthService: ObservableObject {
 	}
 
 	init() {
-		self.isLoggedIn = UserDefaults.standard.object(forKey: "isLoggedIn") as? Bool ?? false
+        self.isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
 	}
 
 	func login() {

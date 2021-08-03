@@ -20,7 +20,7 @@ struct LoginView: View {
                 .padding(.bottom, 17.0)
             Text("Manage your Employee")
                 .padding(.bottom, 72.0)
-            SignIn(userAuth: userAuth)
+            SignIn()
         }
         
     }

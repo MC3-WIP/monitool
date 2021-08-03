@@ -14,7 +14,7 @@ struct OnboardingView: View {
 	var body: some View {
         NavigationView{
             if userAuth.isLoggedIn {
-                CompanyOnboarding(userAuth: self.userAuth)
+                CompanyOnboarding()
                 EmployeeListView()
             } else {
 //                SidebarView()
