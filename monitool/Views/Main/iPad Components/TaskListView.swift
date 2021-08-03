@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TaskListView: View {
-//	@StateObject var viewModel = TaskListViewModel()
+	@StateObject var viewModel = TaskListViewModel()
 	@Binding var filter: TaskStatus?
 	@ObservedObject var role: RoleService = .shared
 
@@ -35,13 +35,42 @@ struct TaskListView: View {
 	}
 
 	var body: some View {
-		List(filteredData) { task in
-			Text(task.name)
-			Spacer()
-			Text(task.status.title)
+		List {
+			ForEach(filteredData) { task in
+				NavigationLink(
+					destination: Text("Destination")) {
+					TaskListRow(task: task)
+				}
+			}
+			.onDelete(perform: { _ in
+				print("Hello there!")
+			})
 		}
 		.navigationTitle(filter?.title ?? "Task Manager")
 		.navigationBarTitleDisplayMode(.inline)
+		.toolbar {
+			if role.isOwner {
+				Button {
+					// PopOver
+				} label: {
+					Image(systemName: "plus.circle")
+				}
+			}
+		}
+	}
+
+	@ViewBuilder
+	func TaskListRow(task: Task) -> some View {
+		HStack {
+			VStack(alignment: .leading) {
+				Text(task.name)
+					.font(.headline)
+				Text(task.status.title)
+					.font(.subheadline)
+					.foregroundColor(.gray)
+			}
+		}
+		.padding(8)
 	}
 }
 

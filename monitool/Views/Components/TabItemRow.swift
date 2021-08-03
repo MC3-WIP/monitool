@@ -25,7 +25,7 @@ struct TabItemRow: View {
     var body: some View {
 		HStack {
 			Image(systemName: icon)
-				.foregroundColor(isActive ? .white : .primary)
+				.foregroundColor(isActive ? .white : .AppColor.primary)
 			Text(title)
 				.foregroundColor(isActive ? .white : .black)
 			Spacer()
@@ -38,7 +38,7 @@ struct TabItemRow: View {
 			}
 		}
 		.padding(12)
-		.background(isActive ?  Color.primary : Color.clear)
+		.background(isActive ?  Color.AppColor.primary : Color.clear)
 		.cornerRadius(12)
 		.contentShape(Rectangle())
 		.onTapGesture {
