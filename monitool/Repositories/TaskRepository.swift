@@ -25,8 +25,7 @@ final class TaskRepository: ObservableObject {
     }
     
     func get(){
-//		store.collection(path.task)
-		store.collection("companies/mBz4gtAwSyQA8JDWhePN/tasks")
+		store.collection(path.task)
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
                     print("Error getting stories: \(error.localizedDescription)")
@@ -45,14 +44,14 @@ final class TaskRepository: ObservableObject {
     
     func add(_ task: Task) {
         do {
-			_ = try store.collection("companies/mBz4gtAwSyQA8JDWhePN/tasks").addDocument(from: task)
+			_ = try store.collection(path.task).addDocument(from: task)
         } catch{
             fatalError("Fail adding new task")
         }
     }
 
 	func delete(_ task: Task) {
-		store.collection("companies/mBz4gtAwSyQA8JDWhePN/tasks").document(task.id).delete()
+		store.collection(path.task).document(task.id).delete()
 	}
     
 
