@@ -9,7 +9,6 @@ import SwiftUI
 import FirebaseAuth
 
 struct CompanyOnboarding: View {
-    @ObservedObject var userAuth: AuthService
     @State var minReviewers = 0
     @State var companyName: String = ""
     @State private var showingSheet = false
@@ -24,11 +23,16 @@ struct CompanyOnboarding: View {
                                 .frame(width: 0, height: 0)
                                 .accessibilityHidden(true)) {
                         HStack() {
+                            Spacer()
+                            PhotoComponent()
+                            Spacer()
+                        }
+                        HStack() {
                             Text("Company Name")
                             TextField("Company Name", text: $companyName).multilineTextAlignment(.trailing)
                         }
                         HStack() {
-                            Text("Task Reviewer")
+                            Text("Task Reviewer: ")
                             Spacer()
                             Stepper("\(minReviewers) Reviewer(s)", onIncrement: {
                                 minReviewers += 1
@@ -55,9 +59,10 @@ struct CompanyOnboarding: View {
                             companyViewModel.add(company)
                         })
                         .padding()
-                        .background(Color.black)
+                        .background(Color.primary)
                         .foregroundColor(.white)
-                        .clipShape(Capsule())
+                        .clipShape(Rectangle())
+                        .cornerRadius(10)
                         Spacer()
                     }
                     ) {
@@ -99,6 +104,6 @@ struct CompanyOnboarding: View {
 
 struct CompanyOnboarding_Previews: PreviewProvider {
     static var previews: some View {
-        CompanyOnboarding(userAuth: .shared)
+        CompanyOnboarding()
     }
 }

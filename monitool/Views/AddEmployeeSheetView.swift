@@ -10,7 +10,7 @@ import SwiftUI
 struct AddEmployeeSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var employeeName: String = ""
-    @State var employeePin: String = ""
+    @State var employeePin = Employee.Helper.generatePIN()
     @ObservedObject var viewModel = EmployeeListViewModel()
     
     var body: some View {
@@ -26,18 +26,18 @@ struct AddEmployeeSheetView: View {
                         }
                         HStack() {
                             Text("Pin")
-                            TextField("", text: $employeePin).multilineTextAlignment(.trailing)
+                            Spacer()
+                            Text(employeePin)
                         }
                     }
                 }.listStyle(GroupedListStyle())
             }.navigationTitle("Add Employee").navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(leading: Button("Cancel", action: {presentationMode.wrappedValue.dismiss()}), trailing: Button("Add", action: {
-                if employeeName != "" {
+                if employeeName.count != 0{
                     presentationMode.wrappedValue.dismiss()
-                    let employee = Employee(name: employeeName)
+                    let employee = Employee(name: employeeName, pin: employeePin)
                     viewModel.add(employee)
                 }
-                presentationMode.wrappedValue.dismiss()
             }))
         }.navigationViewStyle(StackNavigationViewStyle())
     }
