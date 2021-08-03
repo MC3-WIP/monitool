@@ -18,11 +18,14 @@ final class TaskRepository: ObservableObject {
     @Published var tasks: [Task] = []
 
     init(){
+		let dummyTask = Task(name: "beli kopi")
+		add(dummyTask)
         get()
     }
     
     func get(){
-		store.collection(path.task)
+//		store.collection(path.task)
+		store.collection("companies/mBz4gtAwSyQA8JDWhePN/tasks")
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
                     print("Error getting stories: \(error.localizedDescription)")
@@ -30,7 +33,6 @@ final class TaskRepository: ObservableObject {
                 }
                 
                 let tasks = querySnapshot?.documents.compactMap {document in
-//                    Map every document as a Story using data(as:decoder:). You can do this thanks to FirebaseFirestoreSwift,because Story conforms to Codable.
                     try? document.data(as: Task.self)
                 } ?? []
                 
@@ -42,31 +44,14 @@ final class TaskRepository: ObservableObject {
     
     func add(_ task: Task) {
         do {
-			_ = try store.collection(path.task).addDocument(from: task)
+			_ = try store.collection("companies/mBz4gtAwSyQA8JDWhePN/tasks").addDocument(from: task)
         } catch{
             fatalError("Fail adding new task")
         }
     }
 
 	func delete(_ task: Task) {
-		store.collection(path.task).document(task.id).delete()
-//		guard let storyId = story.storyId else { return }
-//		guard let docId = story.id else { return}
-//
-//		store.collection(path).document(docId).delete { error in
-//			if let error = error {
-//				print("Unable to remove card: \(error.localizedDescription)")
-//			}  else {
-//				print("Successfully deleted  story text")
-//			}
-//		}
-//		storage.reference().child("stories/\(storyId)/1").delete { error in
-//			if let error = error {
-//				print("Unable to delete story image: \(error.localizedDescription)")
-//			} else {
-//				print("Successfully deleted  story image")
-//			}
-//		}
+		store.collection("companies/mBz4gtAwSyQA8JDWhePN/tasks").document(task.id).delete()
 	}
     
 

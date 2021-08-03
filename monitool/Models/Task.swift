@@ -5,50 +5,40 @@
 //  Created by Devin Winardi on 27/07/21.
 //
 
-import Foundation
+import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 class Task: Codable, Identifiable {
 	@DocumentID var id: String!
-	var name: String
+	let name: String
+	let desc: String?
+	let createdAt: Date
+
 	var status: TaskStatus
-	var createdAt: Date
-	var repeated: [Bool] = [false]
-	var desc: String = ""
-	var proof: Data?
+	var repeated: [Bool]?
+	var proof: [String]?
 	var notes: String?
 
-	var pic: Employee?
-	var reviewer: [Employee]?
+	var pic: DocumentReference?
+	var reviewer: [DocumentReference]?
 
-	init(name: String, status: TaskStatus = .ongoing){
+	init(
+		name: String, 
+		description: String? = nil
+	) {
 		self.name = name
-		self.status = status
-		self.createdAt = Date()
+		desc = description
+		createdAt = Date()
+		status = .ongoing
 	}
 }
 
-enum TaskStatus: Int, Codable, CaseIterable {
-	case ongoing = 0
-	case waitingEmployeeReview = 1
-	case waitingOwnerReview = 2
-	case revise = 3
-	case completed = 4
-
-	var title: String {
-		switch self {
-		case .ongoing:
-			return "Today List"
-		case .waitingEmployeeReview:
-			return "Waiting Employee Review"
-		case .waitingOwnerReview:
-			return "Waiting Owner Review"
-		case .revise:
-			return "Revise"
-		case .completed:
-			return "Completed"
-		}
-	}
+enum TaskStatus: String, Codable, CaseIterable {
+	case ongoing = "Ongoing"
+	case waitingEmployeeReview = "Waiting Employee Review"
+	case waitingOwnerReview = "Waiting Owner Review"
+	case revise = "Revise"
+	case completed = "Completed"
 
 	var icon: String {
 		switch self {
@@ -62,21 +52,6 @@ enum TaskStatus: Int, Codable, CaseIterable {
 			return "repeat"
 		case .completed:
 			return "checkmark.circle"
-		}
-	}
-
-	var notification: TaskNotification {
-		switch self {
-		case .ongoing:
-			return TaskNotification(isPriority: false, count: 12)
-		case .waitingEmployeeReview:
-			return TaskNotification(isPriority: false, count: 4)
-		case .waitingOwnerReview:
-			return TaskNotification(isPriority: false, count: 3)
-		case .revise:
-			return TaskNotification(isPriority: true, count: 2)
-		case .completed:
-			return TaskNotification(isPriority: false, count: 3)
 		}
 	}
 }

@@ -23,8 +23,8 @@ class CompanyRepository: ObservableObject{
     }
     
     func addTask(task: Task, name: String, description: String) -> Self {
-        task.name = name
-        task.desc = description
+//        task.name = name
+//        task.desc = description
         
         // MARK: Unfinished again
 //        store.collection(path).document(id).setData()

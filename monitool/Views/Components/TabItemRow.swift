@@ -51,7 +51,7 @@ struct TabItemRow_Previews: PreviewProvider {
     static var previews: some View {
 		TabItemRow(
 			notification: TaskNotification(isPriority: true, count: 4),
-			selection: .constant(TaskStatus.ongoing.title),
+			selection: .constant(TaskStatus.ongoing.rawValue),
 			title: "Task List",
 			icon: "list.number"
 		)
