@@ -8,12 +8,6 @@
 import SwiftUI
 import AuthenticationServices
 
-struct SidebarView: View{
-    var body: some View{
-        Image("kucing2")
-    }
-}
-
 struct OnboardingView: View {
     @ObservedObject var userAuth: AuthService = .shared
     
