@@ -25,7 +25,7 @@ struct TabItemRow: View {
     var body: some View {
 		HStack {
 			Image(systemName: icon)
-				.foregroundColor(isActive ? .white : .primary)
+				.foregroundColor(isActive ? .white : .AppColor.primary)
 			Text(title)
 				.foregroundColor(isActive ? .white : .black)
 			Spacer()
@@ -38,7 +38,7 @@ struct TabItemRow: View {
 			}
 		}
 		.padding(12)
-		.background(isActive ?  Color.primary : Color.clear)
+		.background(isActive ?  Color.AppColor.primary : Color.clear)
 		.cornerRadius(12)
 		.contentShape(Rectangle())
 		.onTapGesture {
@@ -51,7 +51,7 @@ struct TabItemRow_Previews: PreviewProvider {
     static var previews: some View {
 		TabItemRow(
 			notification: TaskNotification(isPriority: true, count: 4),
-			selection: .constant(TaskStatus.ongoing.title),
+			selection: .constant(TaskStatus.ongoing.rawValue),
 			title: "Task List",
 			icon: "list.number"
 		)

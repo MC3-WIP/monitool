@@ -37,7 +37,7 @@ extension SidebarViewModel {
 			case .todayList:
 				return "Today List"
 			case .peerReview:
-				return "Waiting Peer Review"
+				return RoleService.shared.isOwner ? "Waiting Employee Review" : "Waiting Peer Review"
 			case .ownerReview:
 				return "Waiting Owner Review"
 			case .revise:
