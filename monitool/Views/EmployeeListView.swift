@@ -19,7 +19,7 @@ struct EmployeeListView: View {
             }
             Spacer()
             Button(action: {
-                let employee = Employee(name: "Test \(viewModel.employees.count)")
+                let employee = Employee(name: "Test \(viewModel.employees.count)", pin: "1111")
                 viewModel.add(employee)
             }, label: {
                 Text("Add Employee")
