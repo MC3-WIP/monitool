@@ -1,27 +1,32 @@
 //
-//  ContentView.swift
+//  LoginView.swift
 //  monitool
 //
-//  Created by Christianto Budisaputra on 21/07/21.
+//  Created by Mac-albert on 30/07/21.
 //
 
 import SwiftUI
-import AuthenticationServices
 
 struct LoginView: View {
     @ObservedObject var userAuth: AuthService = .shared
-
-	var body: some View {
-//        if userAuth.isLoggedIn {
-//            CompanyOnboarding(userAuth: self.userAuth)
-			PhotoComponent()
-//        } else {
-//			SignIn(userAuth: userAuth)
-//        }
+    var body: some View {
+        VStack(){
+            Image("kucing1")
+                .resizable()
+                .frame(width: 200, height: 200, alignment: .center)
+                .padding(.bottom, 70.0)
+            Text("Monitool")
+                .font(.system(size: 34, weight: .regular))
+                .padding(.bottom, 17.0)
+            Text("Manage your Employee")
+                .padding(.bottom, 72.0)
+            SignIn(userAuth: userAuth)
+        }
+        
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
+struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
     }
