@@ -9,6 +9,7 @@ import Firebase
 import Combine
 import PhotosUI
 import FirebaseStorage
+import FirebaseFirestore
 
 final class TaskRepository: ObservableObject {
 	private let path = RepositoriesPath()
