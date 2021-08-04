@@ -21,15 +21,22 @@ class Task: Codable, Identifiable {
 
 	var pic: DocumentReference?
 	var reviewer: [DocumentReference]?
+    
+    var isHistory: Bool
+    
+    var photoReference: [String]?
 
 	init(
 		name: String, 
-		description: String? = nil
+		description: String? = nil,
+        photoReference: [String]? = nil
 	) {
 		self.name = name
 		desc = description
 		createdAt = Date()
 		status = .ongoing
+        isHistory = false
+        self.photoReference = photoReference
 	}
 }
 
