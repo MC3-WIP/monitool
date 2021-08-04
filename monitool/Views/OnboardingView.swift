@@ -14,11 +14,11 @@ struct OnboardingView: View {
 	var body: some View {
         NavigationView{
             if userAuth.isLoggedIn {
-                CompanyOnboarding(userAuth: self.userAuth)
-                EmployeeListView()
+                CompanyOnboarding()
             } else {
 //                SidebarView()
-                DetailView()
+                CompanyOnboarding()
+//                DetailView()
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
