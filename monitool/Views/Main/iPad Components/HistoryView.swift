@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HistoryView: View {
-    var tasks = TaskListViewModel().tasks
+    var tasks = TaskViewModel().tasks
     
     var body: some View {
         List{
