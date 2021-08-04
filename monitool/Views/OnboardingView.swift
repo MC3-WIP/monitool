@@ -19,7 +19,7 @@ struct OnboardingView: View {
 					MainView()
 				} else {
 					CompanyOnboarding(userHasBoarded: $userHasBoarded)
-					EmployeeListView()
+					EmployeeListView(isPinHidden: .constant(false)) {}
 				}
             } else {
 //                SidebarView()

@@ -27,7 +27,6 @@
 		834C9E1126B6D88F0013335F /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C9E1026B6D88F0013335F /* Icon.swift */; };
 		835E357E26B15FC300DE542C /* EmployeeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835E357D26B15FC300DE542C /* EmployeeRepository.swift */; };
 		835F39D926B5DAE000EC3405 /* PadLayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835F39D826B5DAE000EC3405 /* PadLayoutViewModel.swift */; };
-		835F39DD26B5DCAF00EC3405 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835F39DC26B5DCAF00EC3405 /* ProfileView.swift */; };
 		83A023E626B3F0DC002D24CC /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023E526B3F0DC002D24CC /* TaskListView.swift */; };
 		83A023E826B3FF17002D24CC /* PadLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023E726B3FF17002D24CC /* PadLayout.swift */; };
 		83A023EA26B3FF22002D24CC /* PhoneLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023E926B3FF22002D24CC /* PhoneLayout.swift */; };
@@ -36,6 +35,7 @@
 		83A023F026B404EE002D24CC /* ProfileTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023EF26B404EE002D24CC /* ProfileTabItem.swift */; };
 		83A023F726B40910002D24CC /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023F626B40910002D24CC /* SidebarView.swift */; };
 		83A023F926B40B42002D24CC /* TabItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023F826B40B42002D24CC /* TabItemRow.swift */; };
+		83AFC69626B9B1C400550E58 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AFC69526B9B1C400550E58 /* ProfileView.swift */; };
 		83E8404026B2ADF300905143 /* EmployeeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E8403F26B2ADF300905143 /* EmployeeList.swift */; };
 		83E9492426AFC384003903FE /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E9492326AFC384003903FE /* Employee.swift */; };
 		83E9492826AFCA9D003903FE /* EmployeeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E9492726AFCA9D003903FE /* EmployeeHelper.swift */; };
@@ -76,7 +76,6 @@
 		834C9E1026B6D88F0013335F /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		835E357D26B15FC300DE542C /* EmployeeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeRepository.swift; sourceTree = "<group>"; };
 		835F39D826B5DAE000EC3405 /* PadLayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadLayoutViewModel.swift; sourceTree = "<group>"; };
-		835F39DC26B5DCAF00EC3405 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		83A023E526B3F0DC002D24CC /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		83A023E726B3FF17002D24CC /* PadLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadLayout.swift; sourceTree = "<group>"; };
 		83A023E926B3FF22002D24CC /* PhoneLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLayout.swift; sourceTree = "<group>"; };
@@ -85,6 +84,7 @@
 		83A023EF26B404EE002D24CC /* ProfileTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabItem.swift; sourceTree = "<group>"; };
 		83A023F626B40910002D24CC /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		83A023F826B40B42002D24CC /* TabItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemRow.swift; sourceTree = "<group>"; };
+		83AFC69526B9B1C400550E58 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = "Main/iPad Components/ProfileView.swift"; sourceTree = "<group>"; };
 		83E8403F26B2ADF300905143 /* EmployeeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeList.swift; sourceTree = "<group>"; };
 		83E9492326AFC384003903FE /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		83E9492726AFCA9D003903FE /* EmployeeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeHelper.swift; sourceTree = "<group>"; };
@@ -223,9 +223,9 @@
 				830B1DF426A8149E00D38AE9 /* OnboardingView.swift */,
 				B850700A26B14B3000530CBA /* CompanyOnboarding.swift */,
 				6F137C8B26B2B81B00F79608 /* EmployeeListView.swift */,
+				83AFC69526B9B1C400550E58 /* ProfileView.swift */,
 				B823A78826B7DEBA0035D9F4 /* AddEmployeeSheetView.swift */,
 				8E28E38D26B4352400093850 /* LoginView.swift */,
-				835F39DC26B5DCAF00EC3405 /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -450,7 +450,6 @@
 				6F0CC8E826B137CB00D15B96 /* TaskListViewModel.swift in Sources */,
 				830B1DF526A8149E00D38AE9 /* OnboardingView.swift in Sources */,
 				B823A78926B7DEBA0035D9F4 /* AddEmployeeSheetView.swift in Sources */,
-				830B1DF526A8149E00D38AE9 /* OnboardingView.swift in Sources */,
 				6F0CC8E626AFD86700D15B96 /* TaskRepository.swift in Sources */,
 				833CCA9D26B67DCC00BA67CA /* Color.swift in Sources */,
 				83A023F926B40B42002D24CC /* TabItemRow.swift in Sources */,
@@ -470,7 +469,6 @@
 				83A023F026B404EE002D24CC /* ProfileTabItem.swift in Sources */,
 				833CCAA126B683C400BA67CA /* RoleService.swift in Sources */,
 				83A023F726B40910002D24CC /* SidebarView.swift in Sources */,
-				835F39DD26B5DCAF00EC3405 /* ProfileView.swift in Sources */,
 				835E357E26B15FC300DE542C /* EmployeeRepository.swift in Sources */,
 				830B1E1826A81A3900D38AE9 /* AuthService.swift in Sources */,
 				83EF2A8926B298F900378602 /* RepositoriesPath.swift in Sources */,
@@ -484,6 +482,7 @@
 				6F137C8C26B2B81B00F79608 /* EmployeeListView.swift in Sources */,
 				8E28E38E26B4352400093850 /* LoginView.swift in Sources */,
 				835F39D926B5DAE000EC3405 /* PadLayoutViewModel.swift in Sources */,
+				83AFC69626B9B1C400550E58 /* ProfileView.swift in Sources */,
 				8E7A53BF26B13F01007FA3A8 /* Company.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -507,6 +506,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -554,7 +554,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -568,6 +568,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -609,7 +610,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -637,6 +638,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.budisaputra.monitool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -663,6 +665,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.budisaputra.monitool;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

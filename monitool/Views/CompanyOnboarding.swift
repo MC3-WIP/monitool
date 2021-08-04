@@ -25,7 +25,7 @@ struct CompanyOnboarding: View {
                                 .accessibilityHidden(true)) {
                         HStack() {
                             Spacer()
-                            PhotoComponent()
+							PhotoComponent(editMode: .constant(.inactive))
                             Spacer()
                         }
                         HStack() {
