@@ -12,10 +12,12 @@ import AuthenticationServices
 
 struct SignIn: View {
 	@ObservedObject var userAuth: AuthService
+    @ObservedObject var roleAuth: RoleService
 	@State var currentNonce: String?
 
-	init(userAuth: AuthService) {
-		self.userAuth = userAuth
+	init() {
+        self.userAuth = .shared
+        self.roleAuth = .shared
 	}
 
 	//Hashing function using CryptoKit
@@ -99,7 +101,8 @@ struct SignIn: View {
                                 }
                                 print("signed in")
                                 userAuth.login()
-
+                                roleAuth.switchRole()
+                                print(roleAuth.isOwner)
                             }
 
                             print("\(String(describing: Auth.auth().currentUser?.uid))")
@@ -121,6 +124,6 @@ struct SignIn: View {
 
 struct SignIn_Previews: PreviewProvider {
     static var previews: some View {
-        SignIn(userAuth: .shared)
+        SignIn()
     }
 }

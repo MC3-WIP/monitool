@@ -16,10 +16,9 @@ class CompanyRepository: ObservableObject{
     private var companyRepositories: DocumentReference? = nil
     
     init() {
-//        if let user = Auth.auth().currentUser{
-//            companyRepositories = store.collection(paths.company).document(user.uid)
-//        }
-        companyRepositories = store.collection(paths.company).document("w7zd8Hi13yaQEJdVea79105p5aU2")
+        if let user = Auth.auth().currentUser{
+            companyRepositories = store.collection(paths.company).document(user.uid)
+        }
     }
     
     func add(_ company: Company){

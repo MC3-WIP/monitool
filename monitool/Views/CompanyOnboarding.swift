@@ -12,8 +12,10 @@ struct CompanyOnboarding: View {
     @State var minReviewers = 0
     @State var companyName: String = ""
     @State private var showingSheet = false
+    @State var isLinkActive = false
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
     @ObservedObject var companyViewModel = CompanyViewModel()
+    @ObservedObject var storageService = StorageService()
     
     var body: some View {
         NavigationView {
@@ -54,15 +56,17 @@ struct CompanyOnboarding: View {
                         }
                     }, footer: HStack() {
                         Spacer()
-                        Button("Save", action: {
-                            let company = Company(name: companyName, minReview: minReviewers)
-                            companyViewModel.add(company)
-                        })
-                        .padding()
-                        .background(Color.AppColor.primary)
-                        .foregroundColor(.white)
-                        .clipShape(Rectangle())
-                        .cornerRadius(10)
+                        NavigationLink(destination: MainView(), isActive: $isLinkActive) {
+                            Button("Save", action: {
+                                self.isLinkActive = true
+                                let company = Company(name: companyName, minReview: minReviewers)
+                            })
+                            .padding()
+                            .background(Color.AppColor.primary)
+                            .foregroundColor(.white)
+                            .clipShape(Rectangle())
+                            .cornerRadius(10)
+                        }
                         Spacer()
                     }
                     ) {

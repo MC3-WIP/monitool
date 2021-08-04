@@ -14,6 +14,7 @@ struct PhotoComponent: View {
     @State private var showActionSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
+    @ObservedObject var storageService = StorageService()
     
     var body: some View{
         VStack{
@@ -37,7 +38,10 @@ struct PhotoComponent: View {
             .sheet(isPresented: $showImagePicker) {
                 ImagePicker(sourceType: self.sourceType) { image in
                     self.image = image
+                    print("upload image")
+                    storageService.upload(image: self.image!, category: "profile")
                 }
+                
             }
             .actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
                 ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your profile image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {

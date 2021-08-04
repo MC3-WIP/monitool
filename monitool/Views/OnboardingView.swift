@@ -17,7 +17,7 @@ struct OnboardingView: View {
                 CompanyOnboarding()
             } else {
 //                SidebarView()
-                CompanyOnboarding()
+                LoginView()
 //                DetailView()
             }
         }
