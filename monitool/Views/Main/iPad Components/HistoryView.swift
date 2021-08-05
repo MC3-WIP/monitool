@@ -49,10 +49,6 @@ struct HistoryView: View {
 
         }
         .listStyle(PlainListStyle())
-        .onAppear(){
-            print("Tasks")
-            print(taskViewModel.tasks.count)
-        }
     }
 }
 

@@ -27,13 +27,6 @@ class CompanyRepository: ObservableObject{
     
     func delete(_ company: Company) {
         store.collection(paths.company).document(company.id).delete()
-        //        store.collection(path).document(id).delete { error in
-        //            if let error = error {
-        //                print("Unable to remove card: \(error.localizedDescription)")
-        //            }  else {
-        //                print("Successfully deleted  story text")
-        //            }
-        //        }
     }
     
     func editCompanyName(name: String){

@@ -21,8 +21,6 @@ final class TaskRepository: ObservableObject {
 
     init(){
         get()
-        print("Tasks Repo")
-        print(tasks.count)
     }
     
     func get(){

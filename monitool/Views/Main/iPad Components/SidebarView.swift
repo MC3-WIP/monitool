@@ -20,7 +20,7 @@ struct SidebarView: View {
 				MenuItemView(type: .history)
 				Divider()
 				if role.isOwner {
-					MenuItemView(type: .taskManager)
+					MenuItemView(type: .taskList)
 				}
 				MenuItemView(type: .profile)
 			}

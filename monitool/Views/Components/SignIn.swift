@@ -99,14 +99,9 @@ struct SignIn: View {
                                     print(error?.localizedDescription as Any)
                                     return
                                 }
-                                print("signed in")
                                 userAuth.login()
                                 roleAuth.switchRole()
-                                print(roleAuth.isOwner)
                             }
-
-                            print("\(String(describing: Auth.auth().currentUser?.uid))")
-
                         default:
                             break
 

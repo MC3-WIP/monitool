@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProfileView: View {
-	@StateObject var viewModel = ProfileViewModel(company: Company(name: "Jake", minReview: 2, ownerPin: "2244"))
+	@StateObject var viewModel = ProfileViewModel(company: Company(name: "Jake", minReview: 2, ownerPin: "2244", hasLoggedIn: true))
 
 	@State var editMode: EditMode = .inactive {
 		didSet {
