@@ -13,9 +13,11 @@ class Company: Codable{
 
     var name: String
     var minReview: Int
+    var hasLoggedIn: Bool?
 
-    init(name: String, minReview: Int) {
+    init(name: String, minReview: Int, hasLoggedIn: Bool?) {
         self.name = name
         self.minReview = minReview
+        self.hasLoggedIn = hasLoggedIn ?? true
     }
 }

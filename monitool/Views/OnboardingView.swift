@@ -11,17 +11,19 @@ import AuthenticationServices
 struct OnboardingView: View {
     @ObservedObject var userAuth: AuthService = .shared
     
-	var body: some View {
-        NavigationView{
-            if userAuth.isLoggedIn {
-                CompanyOnboarding()
+    var body: some View {
+        if userAuth.isLoggedIn {
+            if userAuth.hasLoggedIn {
+                MainView()
             } else {
-//                SidebarView()
-                LoginView()
-//                DetailView()
+                CompanyOnboarding()
             }
+            
+        } else {
+            //                SidebarView()
+            LoginView()
+            //                DetailView()
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
@@ -32,7 +34,7 @@ struct ContentView_Previews: PreviewProvider {
             .previewDevice("iPad Pro (12.9-inch) (5th generation)")
             .previewLayout(.fixed(width: 1112, height: 834))
     }
-
+    
 }
 
 struct pageControl: UIViewRepresentable{

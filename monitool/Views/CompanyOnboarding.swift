@@ -16,6 +16,11 @@ struct CompanyOnboarding: View {
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
     @ObservedObject var companyViewModel = CompanyViewModel()
     @ObservedObject var storageService = StorageService()
+    @ObservedObject var userAuth: AuthService
+    
+    init() {
+        self.userAuth = .shared
+    }
     
     var body: some View {
         NavigationView {
@@ -56,17 +61,17 @@ struct CompanyOnboarding: View {
                         }
                     }, footer: HStack() {
                         Spacer()
-                        NavigationLink(destination: MainView(), isActive: $isLinkActive) {
-                            Button("Save", action: {
-                                self.isLinkActive = true
-                                let company = Company(name: companyName, minReview: minReviewers)
-                            })
-                            .padding()
-                            .background(Color.AppColor.primary)
-                            .foregroundColor(.white)
-                            .clipShape(Rectangle())
-                            .cornerRadius(10)
-                        }
+                        Button("Save", action: {
+                            self.isLinkActive = true
+                            let company = Company(name: companyName, minReview: minReviewers, hasLoggedIn: true)
+                            companyViewModel.add(company)
+                            userAuth.hasLogin()
+                        })
+                        .padding()
+                        .background(Color.AppColor.primary)
+                        .foregroundColor(.white)
+                        .clipShape(Rectangle())
+                        .cornerRadius(10)
                         Spacer()
                     }
                     ) {
