@@ -16,9 +16,16 @@ class AuthService: ObservableObject {
 			UserDefaults.standard.set(isLoggedIn, forKey: "isLoggedIn")
 		}
 	}
-
+    
+    @Published var hasLoggedIn: Bool {
+        didSet {
+            UserDefaults.standard.set(hasLoggedIn, forKey: "hasLoggedIn")
+        }
+    }
+    
 	init() {
         self.isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        self.hasLoggedIn = UserDefaults.standard.bool(forKey: "hasLoggedIn")
 	}
 
 	func login() {
@@ -32,4 +39,9 @@ class AuthService: ObservableObject {
 		UserDefaults.standard.set(false, forKey: "isLoggedIn")
 		isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
 	}
+    
+    func hasLogin() {
+        UserDefaults.standard.set(true, forKey: "hasLoggedIn")
+        hasLoggedIn = UserDefaults.standard.bool(forKey: "hasLoggedIn")
+    }
 }
