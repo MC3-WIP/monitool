@@ -14,7 +14,7 @@ struct CompanyOnboarding: View {
     @State private var showingSheet = false
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
     @ObservedObject var companyViewModel = CompanyViewModel()
-    
+
     var body: some View {
         NavigationView {
             VStack {
@@ -59,7 +59,7 @@ struct CompanyOnboarding: View {
                             companyViewModel.add(company)
                         })
                         .padding()
-                        .background(Color.primary)
+						.background(Color.AppColor.primary)
                         .foregroundColor(.white)
                         .clipShape(Rectangle())
                         .cornerRadius(10)

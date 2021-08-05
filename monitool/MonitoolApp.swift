@@ -10,6 +10,7 @@ import Firebase
 
 @main
 struct MonitoolApp: App {
+
     init() {
         FirebaseApp.configure()
     }

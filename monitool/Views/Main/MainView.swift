@@ -22,7 +22,7 @@ extension MainView {
 		if device == .pad {
 			PadLayout()
 		} else if device == .phone {
-			CompanyOnboarding()
+			PhoneLayout()
 		} else {
 			Text("Monitool's only available for iPhone and iPad, so how'd u get here?")
 		}
