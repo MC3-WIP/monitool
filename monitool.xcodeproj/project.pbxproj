@@ -468,6 +468,7 @@
 				83A023E626B3F0DC002D24CC /* TaskListView.swift in Sources */,
 				83A023EC26B402A0002D24CC /* MainView.swift in Sources */,
 				6F0CC8E826B137CB00D15B96 /* TaskListViewModel.swift in Sources */,
+				6F0CC8E826B137CB00D15B96 /* TaskViewModel.swift in Sources */,
 				830B1DF526A8149E00D38AE9 /* OnboardingView.swift in Sources */,
 				B823A78926B7DEBA0035D9F4 /* AddEmployeeSheetView.swift in Sources */,
 				830B1DF526A8149E00D38AE9 /* OnboardingView.swift in Sources */,
