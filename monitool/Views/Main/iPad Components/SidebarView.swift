@@ -18,9 +18,9 @@ struct SidebarView: View {
 				Divider()
 				MenuItemView(type: .history)
 				Divider()
-				if viewModel.role.isOwner {
-					MenuItemView(type: .taskManager)
-				}
+//				if viewModel.role.isOwner {
+					MenuItemView(type: .taskList)
+//				}
 				MenuItemView(type: .profile)
 			}
 			.padding()
@@ -44,6 +44,7 @@ extension SidebarView {
 	@ViewBuilder
 	func MenuItemView(type: SidebarViewModel.MenuItem) -> some View {
 		HStack {
+            
 			Image(systemName: type.icon)
 				.foregroundColor(viewModel.selectedMenuItem == type ? .white : .AppColor.primary)
 			Text(type.title)
@@ -66,7 +67,7 @@ extension SidebarView {
 				padLayout.currentTaskFilter = .waitingOwnerReview
 			case .revise:
 				padLayout.currentTaskFilter = .revise
-			case .taskManager:
+			case .taskList:
 				padLayout.currentTaskFilter = nil
 			default: break
 			}
