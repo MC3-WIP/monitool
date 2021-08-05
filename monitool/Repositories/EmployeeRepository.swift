@@ -18,6 +18,8 @@ class EmployeeRepository: ObservableObject {
     init() {
 		employeeRepository = store.collection(paths.employee)
 		get()
+        print("employees")
+        print(employees.count)
 	}
 
 	func get() {
