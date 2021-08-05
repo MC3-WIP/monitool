@@ -10,35 +10,32 @@ import AuthenticationServices
 
 struct OnboardingView: View {
     @ObservedObject var userAuth: AuthService = .shared
-	@Binding var userHasBoarded: Bool
+    @Binding var userHasBoarded: Bool
     
-	var body: some View {
-        NavigationView{
-            if userAuth.isLoggedIn {
-				if userHasBoarded {
-					MainView()
-				} else {
-					CompanyOnboarding(userHasBoarded: $userHasBoarded)
-					EmployeeListView()
-				}
+    var body: some View {
+        if userAuth.isLoggedIn {
+            if userHasBoarded {
+                MainView()
             } else {
-//                SidebarView()
-//                DetailView()
-				LoginView()
+                CompanyOnboarding(userHasBoarded: $userHasBoarded)
+                EmployeeListView()
             }
+        } else {
+            //                SidebarView()
+            //                DetailView()
+            LoginView()
         }
-        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-		OnboardingView(userHasBoarded: .constant(true)).previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
+        OnboardingView(userHasBoarded: .constant(true)).previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
         OnboardingView(userHasBoarded: .constant(true))
             .previewDevice("iPad Pro (12.9-inch) (5th generation)")
             .previewLayout(.fixed(width: 1112, height: 834))
     }
-
+    
 }
 
 struct pageControl: UIViewRepresentable{
