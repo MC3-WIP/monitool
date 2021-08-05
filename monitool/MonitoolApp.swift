@@ -18,8 +18,8 @@ struct MonitoolApp: App {
 
     var body: some Scene {
         WindowGroup {
-			OnboardingView(userHasBoarded: $userHasBoarded)
-				.accentColor(.AppColor.primary)
+
+            MainView()
         }
     }
 }

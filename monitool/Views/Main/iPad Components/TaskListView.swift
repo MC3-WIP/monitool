@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TaskListView: View {
-	@StateObject var viewModel = TaskListViewModel()
+	@StateObject var viewModel = TaskViewModel()
 	@Binding var filter: TaskStatus?
 	@ObservedObject var role: RoleService = .shared
 
