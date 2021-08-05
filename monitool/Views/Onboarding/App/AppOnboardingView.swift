@@ -1,5 +1,5 @@
 //
-//  DetailView.swift
+//  OnboardingDetailView.swift
 //  monitool
 //
 //  Created by Mac-albert on 03/08/21.
@@ -8,8 +8,9 @@
 import Foundation
 import SwiftUI
 
-struct DetailView: View{
+struct AppOnboardingView: View{
     @State var Currentpage = 0
+
     var body: some View{
         VStack(alignment: .center){
             ZStack{
@@ -28,7 +29,6 @@ struct DetailView: View{
                     DetailOnboarding(image: "kucing6", titleText: "Monitool", descText: "Test1")
                 default:
                     Text("Error")
-                    
                 }
             }
             pageControl(current: Currentpage)

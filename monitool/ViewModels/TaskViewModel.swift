@@ -11,7 +11,6 @@ import SwiftUI
 class TaskViewModel: ObservableObject {
 	@ObservedObject private var repository = TaskRepository()
     @Published var tasks = [Task]()
-	@Published var device = UIDevice.current.userInterfaceIdiom
     
     private var cancellables = Set<AnyCancellable>()
 

@@ -8,7 +8,7 @@
 import SwiftUI
 import FirebaseAuth
 
-struct CompanyOnboarding: View {
+struct CompanyOnboardingView: View {
     @State var minReviewers = 0
     @State var companyName: String = ""
     @State private var showingSheet = false
@@ -64,7 +64,7 @@ struct CompanyOnboarding: View {
                         Button("Save", action: {
                             self.isLinkActive = true
                             let company = Company(name: companyName, minReview: minReviewers, ownerPin: "3344", hasLoggedIn: true)
-                            companyViewModel.add(company)
+                            companyViewModel.create(company)
                             userAuth.hasLogin()
                         })
                         .padding()
@@ -102,6 +102,6 @@ struct CompanyOnboarding: View {
 
 struct CompanyOnboarding_Previews: PreviewProvider {
     static var previews: some View {
-        CompanyOnboarding()
+        CompanyOnboardingView()
     }
 }

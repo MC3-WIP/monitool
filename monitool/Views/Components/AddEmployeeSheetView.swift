@@ -11,7 +11,7 @@ struct AddEmployeeSheetView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var employeeName: String = ""
     @State var employeePin = Employee.Helper.generatePIN()
-    @ObservedObject var viewModel = EmployeeListViewModel()
+    @ObservedObject var employeeViewModel = EmployeeListViewModel()
     
     var body: some View {
         NavigationView {
@@ -36,7 +36,7 @@ struct AddEmployeeSheetView: View {
                 if employeeName.count != 0{
                     presentationMode.wrappedValue.dismiss()
                     let employee = Employee(name: employeeName, pin: employeePin)
-                    viewModel.add(employee)
+                    employeeViewModel.add(employee)
                 }
             }))
         }.navigationViewStyle(StackNavigationViewStyle())

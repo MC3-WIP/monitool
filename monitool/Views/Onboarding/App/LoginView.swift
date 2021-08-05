@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @ObservedObject var userAuth: AuthService = .shared
+	
     var body: some View {
         VStack(){
             Image("kucing1")

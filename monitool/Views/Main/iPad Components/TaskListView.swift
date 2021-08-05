@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct TaskListView: View {
-	@StateObject var viewModel = TaskViewModel()
+	@StateObject var taskViewModel = TaskViewModel()
 	@Binding var filter: TaskStatus?
 	@ObservedObject var role: RoleService = .shared
 
 	var filteredData: [Task] {
 		if let filter = filter {
-			return viewModel.tasks.filter { task in
+			return taskViewModel.tasks.filter { task in
 				task.status == filter
 			}
 		}
-		return viewModel.tasks
+		return taskViewModel.tasks
 	}
 
 	var body: some View {
@@ -29,7 +29,7 @@ struct TaskListView: View {
 					TaskListRow(task: task)
 				}
 			}
-			.onDelete(perform: viewModel.delete)
+			.onDelete(perform: taskViewModel.delete)
 		}
 		.navigationTitle(filter?.rawValue ?? "Task List")
 		.navigationBarTitleDisplayMode(.inline)
