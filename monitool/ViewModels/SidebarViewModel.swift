@@ -9,7 +9,6 @@ import Foundation
 
 class SidebarViewModel: ObservableObject {
 	@Published var taskFilterByStatus: TaskStatus?
-	@Published var role: RoleService
 	@Published var selectedMenuItem: MenuItem
 
 	init(
@@ -17,7 +16,6 @@ class SidebarViewModel: ObservableObject {
 		selectedMenu: MenuItem = .todayList
 	) {
 		taskFilterByStatus = taskFilter
-		role = .shared
 		selectedMenuItem = selectedMenu
 	}
 }

@@ -56,7 +56,7 @@ struct CompanyOnboarding: View {
                     }, footer: HStack() {
                         Spacer()
                         Button("Save", action: {
-                            let company = Company(name: companyName, minReview: minReviewers)
+							let company = Company(name: companyName, minReview: minReviewers, ownerPin: "3344")
                             companyViewModel.add(company)
 							userHasBoarded = true
                         })

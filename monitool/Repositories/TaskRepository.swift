@@ -19,8 +19,6 @@ final class TaskRepository: ObservableObject {
     @Published var tasks: [Task] = []
 
     init(){
-		let dummyTask = Task(name: "beli kopi")
-		add(dummyTask)
         get()
     }
     

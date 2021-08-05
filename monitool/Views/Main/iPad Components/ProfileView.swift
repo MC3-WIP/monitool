@@ -8,40 +8,16 @@
 import SwiftUI
 
 struct ProfileView: View {
-	@State var isPinHidden = true
+	@StateObject var viewModel = ProfileViewModel(company: Company(name: "Jake", minReview: 2, ownerPin: "2244"))
+
 	@State var editMode: EditMode = .inactive {
 		didSet {
-			if editMode.isEditing { isPinHidden = false }
-			else { isPinHidden = true }
+			if editMode.isEditing { viewModel.isPinHidden = false }
+			else { viewModel.isPinHidden = true }
 		}
 	}
-	@State var companyName = "Kopi Kulo"
-	@State var ownerPin = ""
-	@State var minReviewer = 0
 
-	@State var employees = [
-		Employee(name: "Alpha"),
-		Employee(name: "Bravo"),
-		Employee(name: "Charlie"),
-		Employee(name: "Delta"),
-		Employee(name: "Echo"),
-		Employee(name: "Alpha"),
-		Employee(name: "Bravo"),
-		Employee(name: "Charlie"),
-		Employee(name: "Delta"),
-		Employee(name: "Echo"),
-		Employee(name: "Foxtrot")
-	]
-
-	func add(_ employee: Employee){
-		employees.append(employee)
-	}
-
-	func delete(_ offsets: IndexSet) {
-		offsets.forEach { index in
-			employees.remove(at: index)
-		}
-	}
+	@ObservedObject var role: RoleService = .shared
 
 	init() {
 		UITableViewHeaderFooterView.appearance().backgroundView = .init()
@@ -50,135 +26,100 @@ struct ProfileView: View {
 	var body: some View {
 		VStack {
 			List {
-				// MARK: Company Profile
-				Section(header:
-							VStack {
-								HStack {
-									Spacer()
-									PhotoComponent(editMode: $editMode)
-									Spacer()
-								}
-								if !editMode.isEditing {
-									HStack {
-										Spacer()
-										Text(companyName)
-											.font(.title)
-										Spacer()
-									}
-								}
-							}
-							.background(Color.white)
-							.textCase(.none)
-				) {
-					CompanyInfo()
-						.padding(.vertical, 8)
+				// MARK: - Company Profile
+				Section(header: CompanyProfileHeader()) {
+					if editMode.isEditing {
+						CompanyInfoTextField(
+							title: "Company Name",
+							placeholder: "Company Inc.",
+							text: $viewModel.company.name
+						)
+						CompanyInfoTextField(
+							title: "Owner PIN",
+							placeholder: "1234",
+							text: $viewModel.company.ownerPin
+						)
+					}
 					ReviewPolicy()
 				}
 
 				// MARK: - Employee List
-				Section(header:
-							VStack(spacing: 24) {
-								HStack {
-									Text("Employee")
-										.font(.title3)
-										.bold()
-									Spacer()
-									Button {
-										isPinHidden.toggle()
-									} label: {
-										if editMode.isEditing {
-											Button("Add Employee") {
-
-											}
-										} else if isPinHidden {
-											Image(systemName: "eye")
-										} else {
-											Image(systemName: "eye.slash")
-										}
-									}
-								}
-								VStack {
-									HStack {
-										Text("Name")
-										Spacer()
-										Text("Pin")
-									}
-									Divider()
-										.padding(.trailing, -16)
-								}
-								.font(.headline)
-								.foregroundColor(.gray)
-							}
-							.background(Color.white)
-							.padding(.top)
-							.textCase(.none)
-
-				) {
-					ForEach(employees) { employee in
-						HStack {
-							Text(employee.name)
-							Spacer()
-							if editMode.isEditing {
-								Text(employee.pin)
-							} else {
-								Text(isPinHidden ? "****" : employee.pin)
-							}
-						}
+				Section(header: EmployeeListHeader()) {
+					ForEach(viewModel.employees) { employee in
+						EmployeeRow(employee: employee)
 					}
-					.onDelete(perform: delete)
-					.foregroundColor(.gray)
+					.onDelete(perform: viewModel.delete)
 				}
 			}
 			.listStyle(PlainListStyle())
-			// MARK: Employee List -
 
 			Spacer()
-			Button("Switch to Employee role") {
 
-			}
-			.padding(.horizontal, 48)
-			.padding(.vertical, 12)
-			.foregroundColor(.white)
-			.background(Color.AppColor.primary)
-			.cornerRadius(8)
+			SwitchRoleButton()
 		}
 		.padding(.vertical, 36)
 		.navigationTitle("Company Profile")
 		.navigationBarTitleDisplayMode(.inline)
 		.toolbar {
-			EditButton()
+			if role.isOwner {
+				EditButton()
+			}
+		}
+		.sheet(isPresented: $viewModel.isPinPresenting, onDismiss: {
+			role.switchRole()
+		}) {
+			NavigationView {
+
+			}
+			.toolbar {
+				Button("Cancle") {
+					viewModel.isPinPresenting = false
+				}
+			}
+			.navigationBarTitle("Insert PIN", displayMode: .inline)
 		}
 		.environment(\.editMode, $editMode)
 	}
+}
 
-	@ViewBuilder
-	func CompanyInfo() -> some View {
-		if editMode.isEditing {
-			GeometryReader { metrics in
-				HStack {
-					HStack {
-						Text("Company Name")
-						Spacer()
-					}
-					.frame(width: metrics.size.width * 0.2)
-					TextField("Company Inc.", text: $companyName)
-				}
+// MARK: - View Builders
+extension ProfileView {
+	@ViewBuilder func CompanyProfileHeader() -> some View {
+		VStack {
+			HStack {
+				Spacer()
+				PhotoComponent(editMode: $editMode)
+				Spacer()
 			}
-			GeometryReader { metrics in
+			if !editMode.isEditing {
 				HStack {
-					HStack {
-						Text("Owner Pin")
-						Spacer()
-					}
-					.frame(width: metrics.size.width * 0.2)
-					TextField("1234", text: $ownerPin)
+					Spacer()
+					Text(viewModel.company.name)
+						.font(.title)
+					Spacer()
 				}
 			}
 		}
+		.background(Color.white)
+		.textCase(.none)
 	}
-	
-	@ViewBuilder
-	func ReviewPolicy() -> some View {
+
+	@ViewBuilder func CompanyInfoTextField(title: String, placeholder: String, text: Binding<String>) -> some View {
+		GeometryReader { metrics in
+			HStack {
+				HStack {
+					Text(title)
+					Spacer()
+				}
+				.frame(width: metrics.size.width * 0.2)
+				TextField(placeholder, text: text)
+			}
+		}
+		.padding(.top, 4)
+		.padding(.bottom, 6)
+	}
+
+	@ViewBuilder func ReviewPolicy() -> some View {
 		GeometryReader { metrics in
 			VStack {
 				HStack {
@@ -189,28 +130,106 @@ struct ProfileView: View {
 					.frame(width: metrics.size.width * 0.7)
 					if editMode.isEditing {
 						HStack {
-							Stepper("\(minReviewer) Reviewer\(minReviewer > 1 ? "s" : "")") {
-								minReviewer += 1
-								if minReviewer > employees.count { minReviewer = employees.count }
+							Stepper(viewModel.reviewerString) {
+								viewModel.incrementReviewer()
 							} onDecrement: {
-								minReviewer -= 1
-								if minReviewer < 0 { minReviewer = 0 }
+								viewModel.decrementReviewer()
 							}
 						}
 					} else {
 						HStack {
 							Spacer()
-							Text("\(minReviewer) Reviewer\(minReviewer > 1 ? "s" : "")")
+							Text(viewModel.reviewerString)
 						}
 					}
 				}
 				Divider()
 					.padding(.trailing, -16)
 			}
+			.padding(.top, 6)
 		}
+	}
+
+	@ViewBuilder func EmployeeListHeader() -> some View {
+		VStack(spacing: 24) {
+			HStack {
+				Text("Employee")
+					.font(.title3)
+					.bold()
+				Spacer()
+				if role.isOwner {
+					Button {
+						viewModel.isPinHidden.toggle()
+					} label: {
+						if editMode.isEditing {
+							Button("Add Employee") {
+								viewModel.isAddEmployeePresenting = true
+							}
+						} else if viewModel.isPinHidden {
+							Image(systemName: "eye")
+						} else {
+							Image(systemName: "eye.slash")
+						}
+					}
+					.popover(isPresented: $viewModel.isAddEmployeePresenting) {
+						AddEmployeeSheetView()
+							.frame(width: 400, height: 400)
+							.accentColor(.AppColor.primary)
+					}
+				}
+			}
+			VStack {
+				HStack {
+					Text("Name")
+					Spacer()
+					if role.isOwner {
+						Text("Pin")
+					}
+				}
+				Divider()
+					.padding(.trailing, -16)
+			}
+			.font(.headline)
+			.foregroundColor(.gray)
+		}
+		.background(Color.white)
+		.padding(.top, 28)
+		.textCase(.none)
+	}
+
+	@ViewBuilder func EmployeeRow(employee: Employee) -> some View {
+		HStack {
+			Text(employee.name)
+			Spacer()
+			if role.isOwner {
+				if editMode.isEditing {
+					Text(employee.pin)
+				} else {
+					Text(viewModel.isPinHidden ? "****" : employee.pin)
+				}
+			}
+		}
+		.foregroundColor(.gray)
+	}
+
+	@ViewBuilder func SwitchRoleButton() -> some View {
+		Button("Switch to \(role.isOwner ? "Employee" : "Owner") role") {
+			if role.isOwner {
+				RoleService.shared.switchRole()
+			} else {
+				viewModel.isPinPresenting = true
+			}
+		}
+		.padding(.horizontal, 48)
+		.padding(.vertical, 12)
+		.foregroundColor(.white)
+		.background(editMode.isEditing ? Color.AppColor.primary.opacity(0.5) : Color.AppColor.primary)
+		.cornerRadius(8)
+		.disabled(editMode.isEditing)
 	}
 }
 
+// MARK: - Preview
 struct ProfileView_Previews: PreviewProvider {
 	static var previews: some View {
 		PadLayout(detailView: .profile)
