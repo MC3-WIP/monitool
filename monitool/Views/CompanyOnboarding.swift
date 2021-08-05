@@ -12,10 +12,16 @@ struct CompanyOnboarding: View {
     @State var minReviewers = 0
     @State var companyName: String = ""
     @State private var showingSheet = false
+    @State var isLinkActive = false
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
     @ObservedObject var companyViewModel = CompanyViewModel()
-	@Binding var userHasBoarded: Bool
-
+    @ObservedObject var storageService = StorageService()
+    @ObservedObject var userAuth: AuthService
+    
+    init() {
+        self.userAuth = .shared
+    }
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -51,17 +57,18 @@ struct CompanyOnboarding: View {
                             showingSheet = true
                         }
                         .popover(isPresented: $showingSheet) {
-                            AddEmployeeSheetView()
+                            AddEmployeeSheetView().frame(width: 400, height: 400)
                         }
                     }, footer: HStack() {
                         Spacer()
                         Button("Save", action: {
-							let company = Company(name: companyName, minReview: minReviewers, ownerPin: "3344")
+                            self.isLinkActive = true
+                            let company = Company(name: companyName, minReview: minReviewers, ownerPin: "3344", hasLoggedIn: true)
                             companyViewModel.add(company)
-							userHasBoarded = true
+                            userAuth.hasLogin()
                         })
                         .padding()
-						.background(Color.AppColor.primary)
+                        .background(Color.AppColor.primary)
                         .foregroundColor(.white)
                         .clipShape(Rectangle())
                         .cornerRadius(10)
@@ -86,26 +93,15 @@ struct CompanyOnboarding: View {
                 }.listStyle(GroupedListStyle())
             }.navigationTitle("Profile").navigationBarTitleDisplayMode(.inline)
         }.navigationViewStyle(StackNavigationViewStyle())
+    }
+    
+    func saveCompanyData(company: Company) {
         
-        
-        //        Text("Company Onboarding")
-        //        Button(action: {
-        //            let firebaseAuth = Auth.auth()
-        //            do {
-        //                try firebaseAuth.signOut()
-        //                userAuth.logout()
-        //
-        //            } catch let signOutError as NSError {
-        //                print("Error signing out: %@", signOutError)
-        //            }
-        //        }) {
-        //            Text("Sign Out")
-        //        }
     }
 }
 
 struct CompanyOnboarding_Previews: PreviewProvider {
     static var previews: some View {
-		CompanyOnboarding(userHasBoarded: .constant(true))
+        CompanyOnboarding()
     }
 }

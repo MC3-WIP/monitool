@@ -14,10 +14,13 @@ struct PhotoComponent: View {
     @State private var showActionSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
-	@Binding var editMode: EditMode
-
-	var body: some View {
-        VStack {
+	  
+    @Binding var editMode: EditMode
+  
+    @ObservedObject var storageService = StorageService()
+    
+    var body: some View{
+        VStack{
             if image == nil {
                 Image("profile")
                     .resizable()
@@ -31,10 +34,9 @@ struct PhotoComponent: View {
                     .clipShape(Circle())
                     .padding(.bottom, 10.0)
             }
-
-			if editMode.isEditing {
-				UploadButton()
-			}
+            if editMode.isEditing {
+              UploadButton()
+            }
         }
     }
 
@@ -46,6 +48,7 @@ struct PhotoComponent: View {
 		.sheet(isPresented: $showImagePicker) {
 			ImagePicker(sourceType: self.sourceType) { image in
 				self.image = image
+        storageService.upload(image: self.image!, category: "profile")
 			}
 		}
 		.actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in

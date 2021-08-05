@@ -45,6 +45,7 @@ extension SidebarView {
 	@ViewBuilder
 	func MenuItemView(type: SidebarViewModel.MenuItem) -> some View {
 		HStack {
+            
 			Image(systemName: type.icon)
 				.foregroundColor(viewModel.selectedMenuItem == type ? .white : .AppColor.primary)
 			Text(type.title)
@@ -67,7 +68,7 @@ extension SidebarView {
 				padLayout.currentTaskFilter = .waitingOwnerReview
 			case .revise:
 				padLayout.currentTaskFilter = .revise
-			case .taskManager:
+			case .taskList:
 				padLayout.currentTaskFilter = nil
 			default: break
 			}

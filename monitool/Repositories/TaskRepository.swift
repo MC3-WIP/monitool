@@ -17,9 +17,12 @@ final class TaskRepository: ObservableObject {
     private let storage = Storage.storage()
     
     @Published var tasks: [Task] = []
+    @Published var completedTasks: [Task] = []
 
     init(){
         get()
+        print("Tasks Repo")
+        print(tasks.count)
     }
     
     func get(){
@@ -33,9 +36,27 @@ final class TaskRepository: ObservableObject {
                 let tasks = querySnapshot?.documents.compactMap {document in
                     try? document.data(as: Task.self)
                 } ?? []
-                
+
                 DispatchQueue.main.async {
                     self.tasks = tasks
+                }
+            }
+    }
+    
+    func getComplete(){
+        store.collection(path.task).whereField("status", isEqualTo: "Completed")
+            .addSnapshotListener { querySnapshot, error in
+                if let error = error {
+                    print("Error getting stories: \(error.localizedDescription)")
+                    return
+                }
+                
+                let completedTasks = querySnapshot?.documents.compactMap {document in
+                    try? document.data(as: Task.self)
+                } ?? []
+                
+                DispatchQueue.main.async {
+                    self.completedTasks = completedTasks
                 }
             }
     }
