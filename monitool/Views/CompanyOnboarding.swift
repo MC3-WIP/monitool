@@ -31,7 +31,7 @@ struct CompanyOnboarding: View {
                                 .accessibilityHidden(true)) {
                         HStack() {
                             Spacer()
-                            PhotoComponent()
+							PhotoComponent(editMode: .constant(.inactive))
                             Spacer()
                         }
                         HStack() {
@@ -63,7 +63,7 @@ struct CompanyOnboarding: View {
                         Spacer()
                         Button("Save", action: {
                             self.isLinkActive = true
-                            let company = Company(name: companyName, minReview: minReviewers, hasLoggedIn: true)
+                            let company = Company(name: companyName, minReview: minReviewers, ownerPin: "3344", hasLoggedIn: true)
                             companyViewModel.add(company)
                             userAuth.hasLogin()
                         })

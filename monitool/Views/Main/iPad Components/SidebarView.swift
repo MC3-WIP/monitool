@@ -10,6 +10,7 @@ import SwiftUI
 struct SidebarView: View {
 	@EnvironmentObject var padLayout: PadLayoutViewModel
 	@StateObject var viewModel = SidebarViewModel()
+	@ObservedObject var role: RoleService = .shared
 
 	var body: some View {
 		ScrollView {
@@ -18,9 +19,9 @@ struct SidebarView: View {
 				Divider()
 				MenuItemView(type: .history)
 				Divider()
-//				if viewModel.role.isOwner {
-					MenuItemView(type: .taskList)
-//				}
+				if role.isOwner {
+					MenuItemView(type: .taskManager)
+				}
 				MenuItemView(type: .profile)
 			}
 			.padding()

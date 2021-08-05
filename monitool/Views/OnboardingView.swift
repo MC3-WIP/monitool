@@ -18,11 +18,8 @@ struct OnboardingView: View {
             } else {
                 CompanyOnboarding()
             }
-            
         } else {
-            //                SidebarView()
             LoginView()
-            //                DetailView()
         }
     }
 }

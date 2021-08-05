@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct PadLayout: View {
-	@StateObject private var viewModel = PadLayoutViewModel()
+	@StateObject private var viewModel: PadLayoutViewModel
+
+	init(detailView: SidebarViewModel.MenuItem? = nil) {
+		_viewModel = StateObject(wrappedValue: PadLayoutViewModel(detailView: detailView))
+	}
 
 	var body: some View {
 		NavigationView {
