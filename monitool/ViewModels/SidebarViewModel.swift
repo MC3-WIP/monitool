@@ -28,7 +28,7 @@ extension SidebarViewModel {
 			 peerReview,
 			 ownerReview,
 			 revise,
-			 taskManager,
+			 taskList,
 			 history,
 			 profile
 
@@ -42,8 +42,8 @@ extension SidebarViewModel {
 				return "Waiting Owner Review"
 			case .revise:
 				return "Revise"
-			case .taskManager:
-				return "Task Manager"
+			case .taskList:
+				return "Task List"
 			case .history:
 				return "History"
 			case .profile:
@@ -61,8 +61,8 @@ extension SidebarViewModel {
 				return Icon.ownerReview
 			case .revise:
 				return Icon.revise
-			case .taskManager:
-				return Icon.taskManager
+			case .taskList:
+				return Icon.taskList
 			case .history:
 				return Icon.history
 			case .profile:
