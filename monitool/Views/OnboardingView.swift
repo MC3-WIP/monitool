@@ -41,16 +41,28 @@ struct pageControl: UIViewRepresentable{
     
     var current  = 0
     
-    func makeUIView(context: UIViewRepresentableContext<pageControl>) -> UIPageControl {
-        let page = UIPageControl()
-        page.currentPageIndicatorTintColor = .black
-        page.numberOfPages = 6
-        page.pageIndicatorTintColor = .gray
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            OnboardingView().previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
+        }
         
-        return page
     }
     
-    func updateUIView(_ uiView: UIPageControl, context: UIViewRepresentableContext<pageControl>) {
-        uiView.currentPage = current
+    struct pageControl: UIViewRepresentable{
+        
+        var current  = 0
+        
+        func makeUIView(context: UIViewRepresentableContext<pageControl>) -> UIPageControl {
+            let page = UIPageControl()
+            page.currentPageIndicatorTintColor = .black
+            page.numberOfPages = 6
+            page.pageIndicatorTintColor = .gray
+            
+            return page
+        }
+        
+        func updateUIView(_ uiView: UIPageControl, context: UIViewRepresentableContext<pageControl>) {
+            uiView.currentPage = current
+        }
     }
 }
