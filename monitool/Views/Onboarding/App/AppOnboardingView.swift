@@ -16,71 +16,80 @@ struct AppOnboardingView: View{
             ZStack{
                 switch Currentpage{
                 case 0:
-                    DetailOnboarding(image: "kucing1", titleText: "Monitool", descText: "Test1")
+                    DetailOnboarding(image: "Assignillustration", titleText: "Assign", descText: "Assign tasks to make sure your business keep running")
                 case 1:
-                    DetailOnboarding(image: "kucing2", titleText: "Monitool", descText: "Test1")
+                    DetailOnboarding(image: "MonitorIllustration", titleText: "Monitor", descText: "Monitor your employee works result with ease")
                 case 2:
-                    DetailOnboarding(image: "kucing3", titleText: "Monitool", descText: "Test1")
-                case 3:
-                    DetailOnboarding(image: "kucing4", titleText: "Monitool", descText: "Test1")
-                case 4:
-                    DetailOnboarding(image: "kucing5", titleText: "Monitool", descText: "Test1")
-                case 5:
-                    DetailOnboarding(image: "kucing6", titleText: "Monitool", descText: "Test1")
+                    DetailOnboarding(image: "ReviewIllustration", titleText: "Review", descText: "You can review and let your employee validates their peer works result on site")
+//                case 3:
+//                    DetailOnboarding(image: "kucing4", titleText: "Monitool", descText: "Test1")
+//                case 4:
+//                    DetailOnboarding(image: "kucing5", titleText: "Monitool", descText: "Test1")
+//                case 5:
+//                    DetailOnboarding(image: "kucing6", titleText: "Monitool", descText: "Test1")
                 default:
                     Text("Error")
                 }
             }
             pageControl(current: Currentpage)
                 .padding(.bottom, 36.0)
-            if Currentpage == 5{
+            VStack{
+                if Currentpage == 2{
+                    Button(action: {
+                        
+                    }){
+                        NavigationLink(destination: LoginView()){
+                            Text("Get Started")
+                                .frame(minWidth: 0, maxWidth: 330)
+                                .font(.system(size: 28))
+                                .padding()
+                                .foregroundColor(.white)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 40)
+                                        .stroke(Color(hex: "#4FB0AB"), lineWidth: 2)
+                                ).background(RoundedRectangle(cornerRadius: 40).fill(Color(hex: "#4FB0AB")))
+                        }
+                    }
+                }
+                else if Currentpage < 2{
+                    Button (action: {
+                        if Currentpage < 2{
+                            Currentpage += 1
+                        }
+                    }){
+                        if Currentpage < 2{
+                            HStack{
+                                Text("Continue")
+                                Image(systemName: "arrow.right")
+                            }
+                            .frame(minWidth: 0, maxWidth: 330)
+                            .font(.system(size: 28))
+                            .padding()
+                            .foregroundColor(Color(hex: "#4FB0AB"))
+                            .background(
+                                RoundedRectangle(cornerRadius: 40)
+                                    .stroke(Color(hex: "#4FB0AB"), lineWidth: 2)
+                                            )
+                        }
+                    }
+                }
                 Button(action: {
-                    
+                    Currentpage = 2
                 }){
-                    NavigationLink(destination: LoginView()){
-                        Text("Get Started")
-                            .frame(minWidth: 0, maxWidth: 330)
-                            .font(.system(size: 28))
-                            .padding()
-                            .foregroundColor(.blue)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 25)
-                                    .stroke(Color.green, lineWidth: 2)
-                            )
+                    if Currentpage < 2{
+                        Text("Skip")
+                            .foregroundColor(Color.black)
+                            .font(.system(size:20))
+                            .padding(.top, 28.0)
+                    }
+                    else if Currentpage == 2{
+                        Text(" ")
+                            .font(.system(size:20))
+                            .padding(.top, 28.0)
                     }
                 }
             }
-            else if Currentpage < 5{
-                Button (action: {
-                    if Currentpage < 5{
-                        Currentpage += 1
-                    }
-                }){
-                    if Currentpage < 5{
-                        Text("Continue 􀄫")
-                            .frame(minWidth: 0, maxWidth: 330)
-                            .font(.system(size: 28))
-                            .padding()
-                            .foregroundColor(.green)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 25)
-                                    .stroke(Color.green, lineWidth: 2)
-                            )
-                    }
-                }
-            }
-            Button(action: {
-                Currentpage = 5
-            }){
-                if Currentpage < 5{
-                    Text("Skip")
-                        .font(.system(size:20))
-                        .padding(.top, 28.0)
-                }
-                else if Currentpage == 6{
-                    
-                }
-            }
+            
         }.highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
             .onEnded { value in
                 if abs(value.translation.height) < abs(value.translation.width) {
@@ -95,7 +104,7 @@ struct AppOnboardingView: View{
                             
                         }
                         else if value.translation.width < 0 {
-                            if Currentpage == 5 {
+                            if Currentpage == 2 {
                                 
                             }
                             else{
