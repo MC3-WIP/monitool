@@ -15,7 +15,7 @@ class Task: Codable, Identifiable {
 	let createdAt: Date
 
 	var status: TaskStatus
-	var repeated: [Bool]?
+	var repeated: [Bool]
 	var proof: [String]?
 	var notes: String?
 
@@ -29,7 +29,8 @@ class Task: Codable, Identifiable {
 	init(
 		name: String, 
 		description: String? = nil,
-        photoReference: [String]? = nil
+        photoReference: [String]? = nil,
+        repeated: [Bool]
 	) {
 		self.name = name
 		desc = description
@@ -37,6 +38,7 @@ class Task: Codable, Identifiable {
 		status = .ongoing
         isHistory = false
         self.photoReference = photoReference
+        self.repeated = repeated
 	}
 }
 

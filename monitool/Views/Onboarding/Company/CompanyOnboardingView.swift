@@ -57,7 +57,7 @@ struct CompanyOnboardingView: View {
                             showingSheet = true
                         }
                         .popover(isPresented: $showingSheet) {
-                            AddEmployeeSheetView(sheetType: "Employee").frame(width: 400, height: 400)
+                            AddDataPopOver(sheetType: "Employee").frame(width: 400, height: 400)
                         }
                     }, footer: HStack() {
                         Spacer()
