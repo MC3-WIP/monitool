@@ -14,7 +14,7 @@ struct MainOnboardingView: View {
 	var body: some View {
 		if userAuth.isLoggedIn {
 			if userAuth.hasLoggedIn {
-				MainView()
+				TaskListDetailView()
 			} else {
 				CompanyOnboardingView()
 			}
