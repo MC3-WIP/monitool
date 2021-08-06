@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct RepeatSheetView: View {
-    @State var days = ["Every Sunday","Every Monday","Every Tuesday","Every Wednesday","Every Thursday","Every Friday","Every Saturday"]
+    @State var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
     var body: some View {
         NavigationView {
             VStack {
                 List(days, id: \.self) { day in
-                    Text(day)
+                    Button(action: {
+                        print("Button clicked")
+                    }) {
+                        Text("Every \(day)")
+                    }
                 }
             }.navigationTitle("Task List").navigationBarTitleDisplayMode(.inline)
         }.navigationViewStyle(StackNavigationViewStyle())
