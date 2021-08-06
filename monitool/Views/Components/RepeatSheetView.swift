@@ -29,7 +29,7 @@ struct RepeatSheetView: View {
                             Text("Every \(days[i])").foregroundColor(Color.black)
                             Spacer()
                             if repeated[i] {
-                                Image(systemName: "checkmark").foregroundColor(Color.AppColor.primary)
+                                Image(systemName: "checkmark").foregroundColor(AppColor.accent)
                             }
                         }
                         

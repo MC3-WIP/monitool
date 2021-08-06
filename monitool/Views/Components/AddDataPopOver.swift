@@ -97,7 +97,7 @@ struct AddDataPopOver: View {
                         let task = Task(name: taskName, description: taskDesc, photoReference: taskPhotoReference, repeated: taskRepeated)
                         taskViewModel.add(task)
                     }
-                }).foregroundColor(Color.AppColor.primary))
+                }).foregroundColor(AppColor.accent))
             }
         }.navigationViewStyle(StackNavigationViewStyle())
     }
