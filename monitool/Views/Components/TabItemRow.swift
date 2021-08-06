@@ -25,20 +25,20 @@ struct TabItemRow: View {
     var body: some View {
 		HStack {
 			Image(systemName: icon)
-				.foregroundColor(isActive ? .white : .AppColor.primary)
+				.foregroundColor(isActive ? AppColor.primaryForeground : AppColor.accent)
 			Text(title)
-				.foregroundColor(isActive ? .white : .black)
+				.foregroundColor(isActive ? AppColor.primaryForeground : AppColor.secondary)
 			Spacer()
 			if let notification = notification, notification.count > 0 {
 				Text("\(notification.count)")
-					.foregroundColor(notification.isPriority || isActive ? .white : .black)
+					.foregroundColor(notification.isPriority || isActive ? AppColor.primaryForeground : AppColor.secondary)
 					.frame(width: 24, height: 24, alignment: .center)
 					.background(notification.isPriority ? Color.red : Color.clear)
 					.clipShape(Circle())
 			}
 		}
 		.padding(12)
-		.background(isActive ?  Color.AppColor.primary : Color.clear)
+		.background(isActive ?  AppColor.accent : Color.clear)
 		.cornerRadius(12)
 		.contentShape(Rectangle())
 		.onTapGesture {

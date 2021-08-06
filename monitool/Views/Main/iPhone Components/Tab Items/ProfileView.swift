@@ -58,7 +58,7 @@ struct ProfileView: View {
 			SwitchRoleButton()
 		}
 		.padding(.vertical, 36)
-		.navigationTitle("Company Profile")
+		.navigationTitle("Profile")
 		.navigationBarTitleDisplayMode(.inline)
 		.toolbar {
 			if role.isOwner {
@@ -66,7 +66,7 @@ struct ProfileView: View {
 			}
 		}
 		.sheet(isPresented: $viewModel.isPinPresenting, onDismiss: {
-			role.switchRole()
+			role.switchRole(to: .owner)
 		}) {
 			NavigationView {
 
@@ -100,7 +100,7 @@ extension ProfileView {
 				}
 			}
 		}
-		.background(Color.white)
+		.background(AppColor.primaryForeground)
 		.textCase(.none)
 	}
 
@@ -174,7 +174,7 @@ extension ProfileView {
 					.popover(isPresented: $viewModel.isAddEmployeePresenting) {
                         AddDataPopOver(sheetType: "Employee")
 							.frame(width: 400, height: 400)
-							.accentColor(.AppColor.primary)
+							.accentColor(AppColor.accent)
 					}
 				}
 			}
@@ -192,7 +192,7 @@ extension ProfileView {
 			.font(.headline)
 			.foregroundColor(.gray)
 		}
-		.background(Color.white)
+		.background(AppColor.primaryForeground)
 		.padding(.top, 28)
 		.textCase(.none)
 	}
@@ -215,15 +215,15 @@ extension ProfileView {
 	@ViewBuilder func SwitchRoleButton() -> some View {
 		Button("Switch to \(role.isOwner ? "Employee" : "Owner") role") {
 			if role.isOwner {
-				RoleService.shared.switchRole()
+				RoleService.shared.switchRole(to: .employee)
 			} else {
 				viewModel.isPinPresenting = true
 			}
 		}
 		.padding(.horizontal, 48)
 		.padding(.vertical, 12)
-		.foregroundColor(.white)
-		.background(editMode.isEditing ? Color.AppColor.primary.opacity(0.5) : Color.AppColor.primary)
+		.foregroundColor(AppColor.primaryForeground)
+		.background(editMode.isEditing ? AppColor.accent.opacity(0.5) : AppColor.accent)
 		.cornerRadius(8)
 		.disabled(editMode.isEditing)
 	}
