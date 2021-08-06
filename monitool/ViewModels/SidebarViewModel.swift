@@ -52,19 +52,19 @@ extension SidebarViewModel {
 		var icon: String {
 			switch self {
 			case .todayList:
-				return Icon.todayList
+				return AppIcon.todayList
 			case .peerReview:
-				return Icon.employeeReview
+				return AppIcon.employeeReview
 			case .ownerReview:
-				return Icon.ownerReview
+				return AppIcon.ownerReview
 			case .revise:
-				return Icon.revise
+				return AppIcon.revise
 			case .taskList:
-				return Icon.taskList
+				return AppIcon.taskList
 			case .history:
-				return Icon.history
+				return AppIcon.history
 			case .profile:
-				return Icon.profile
+				return AppIcon.profile
 			}
 		}
 	}

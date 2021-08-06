@@ -41,7 +41,7 @@ class Task: Codable, Identifiable {
 }
 
 enum TaskStatus: String, Codable, CaseIterable {
-	case ongoing = "Ongoing"
+	case ongoing = "Today List"
 	case waitingEmployeeReview = "Waiting Employee Review"
 	case waitingOwnerReview = "Waiting Owner Review"
 	case revise = "Revise"

@@ -100,7 +100,7 @@ struct SignIn: View {
                                     return
                                 }
                                 userAuth.login()
-                                roleAuth.switchRole()
+								roleAuth.switchRole(to: .owner)
                             }
                         default:
                             break

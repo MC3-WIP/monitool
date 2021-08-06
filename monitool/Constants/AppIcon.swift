@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Icon {
+struct AppIcon {
 	static let todayList 		= "list.bullet.below.rectangle"
 	static let taskList		    = "text.badge.plus"
 	static let employeeReview 	= "person.2"
