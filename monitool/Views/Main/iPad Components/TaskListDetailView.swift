@@ -34,7 +34,7 @@ struct TaskListDetailView: View {
                             repeatPopover = true
                         }
                         .popover(isPresented: $repeatPopover) {
-                                AddEmployeeSheetView().frame(width: 400, height: 400)
+                            AddEmployeeSheetView(sheetType: "Task").frame(width: 400, height: 400)
                             }
                         Spacer()
                         Button(action: {
