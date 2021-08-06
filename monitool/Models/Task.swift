@@ -47,18 +47,18 @@ enum TaskStatus: String, Codable, CaseIterable {
 	case revise = "Revise"
 	case completed = "Completed"
 
-	var icon: String {
+	var title: String {
 		switch self {
 		case .ongoing:
-			return "largecircle.fill.circle"
+			return "Today List"
 		case .waitingEmployeeReview:
-			return "person.2"
+			return RoleService.shared.isOwner ? "Waiting Employee Review" : "Waiting Peer Review"
 		case .waitingOwnerReview:
-			return "person.crop.circle.badge.checkmark"
+			return "Waiting Owner Review"
 		case .revise:
-			return "repeat"
+			return "Revise"
 		case .completed:
-			return "checkmark.circle"
+			return "Completed"
 		}
 	}
 }

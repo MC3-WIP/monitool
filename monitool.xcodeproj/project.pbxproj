@@ -163,7 +163,6 @@
 				830B1DF226A8149E00D38AE9 /* MonitoolApp.swift */,
 				835E358526B16CA800DE542C /* Configs */,
 				833CCA9B26B67DB800BA67CA /* Constants */,
-				835E358426B16AD900DE542C /* Resources */,
 				835E358226B16A8300DE542C /* Helpers */,
 				835E358026B169D000DE542C /* Models */,
 				835E358326B16A9000DE542C /* Views */,
@@ -171,6 +170,7 @@
 				835E358126B169D700DE542C /* Repositories */,
 				83ECAF6026AA115B0069CF25 /* Locales */,
 				830B1E1626A81A2000D38AE9 /* Services */,
+				835E358426B16AD900DE542C /* Resources */,
 			);
 			path = monitool;
 			sourceTree = "<group>";

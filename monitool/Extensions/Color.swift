@@ -5,6 +5,8 @@
 //  Created by Christianto Budisaputra on 06/08/21.
 //
 
+import SwiftUI
+
 extension Color {
 	init(hex: String) {
 		let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)

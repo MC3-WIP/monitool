@@ -31,7 +31,7 @@ struct TaskListView: View {
 			}
 			.onDelete(perform: taskViewModel.delete)
 		}
-		.navigationBarTitle(filter?.rawValue ?? "Task List", displayMode: .inline)
+		.navigationBarTitle(filter?.title ?? "Task List", displayMode: .inline)
 		.toolbar {
 			if role.isOwner {
 				Button {
@@ -49,7 +49,7 @@ struct TaskListView: View {
 			VStack(alignment: .leading) {
 				Text(task.name)
 					.font(.headline)
-				Text(task.status.rawValue)
+				Text(task.status.title)
 					.font(.subheadline)
 					.foregroundColor(.gray)
 			}
