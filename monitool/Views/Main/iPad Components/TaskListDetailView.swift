@@ -27,14 +27,12 @@ struct TaskListDetailView: View {
                             Text("Description")
                             TextField("Input description here", text: $description)
                         }
-                        
-                        
                     HStack {
                         Button("Repeat") {
                             repeatPopover = true
                         }
                         .popover(isPresented: $repeatPopover) {
-                            AddEmployeeSheetView(sheetType: "Task").frame(width: 400, height: 400)
+                                RepeatSheetView().frame(width: 400, height: 400)
                             }
                         Spacer()
                         Button(action: {
@@ -44,16 +42,6 @@ struct TaskListDetailView: View {
                         }
                     }
                     .padding(.top, 30.0)
-                    
-
-                    
-                    
-                    
-                   
-//                    Section(header: HStack() {
-//                        Text("Photo Reference").font(.title2).foregroundColor(.black).fontWeight(.semibold).frame(maxWidth: .infinity, alignment: .leading)
-//                    }
-                    
                 }.listStyle(DefaultListStyle())
                 .frame(height: 200.0)
                 NoSeparatorList{
@@ -76,7 +64,6 @@ struct TaskListDetailView: View {
                                 self.image = image
                             }
                         }
-                        
                     }
                 }
             }.navigationTitle("Task List").navigationBarTitleDisplayMode(.inline)
