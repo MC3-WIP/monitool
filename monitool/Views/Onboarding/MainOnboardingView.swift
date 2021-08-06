@@ -12,20 +12,18 @@ struct MainOnboardingView: View {
 	@ObservedObject var userAuth: AuthService = .shared
 
 	var body: some View {
-//		if userAuth.isLoggedIn {
-//			if userAuth.hasLoggedIn {
-//				MainView()
-//			} else {
-//				CompanyOnboardingView()
-//			}
-//		} else {
-//			NavigationView {
-//				AppOnboardingView()
-//			}.navigationViewStyle(StackNavigationViewStyle())
-//		}
-        AppOnboardingView()
+		if userAuth.isLoggedIn {
+			if userAuth.hasLoggedIn {
+				MainView()
+			} else {
+				CompanyOnboardingView()
+			}
+		} else {
+			NavigationView {
+				AppOnboardingView()
+			}.navigationViewStyle(StackNavigationViewStyle())
+		}
 	}
-    
 }
 
 struct OnboardingView_Previews: PreviewProvider {
@@ -45,7 +43,7 @@ struct pageControl: UIViewRepresentable {
 	func makeUIView(context: UIViewRepresentableContext<pageControl>) -> UIPageControl {
 		let page = UIPageControl()
 		page.currentPageIndicatorTintColor = .black
-		page.numberOfPages = 3
+		page.numberOfPages = 6
 		page.pageIndicatorTintColor = .gray
 
 		return page

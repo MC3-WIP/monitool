@@ -16,11 +16,11 @@ struct AppOnboardingView: View{
             ZStack{
                 switch Currentpage{
                 case 0:
-                    DetailOnboarding(image: "kucing1", titleText: "Assign", descText: "Assign tasks to make sure your business keep running")
+                    DetailOnboarding(image: "Assignillustration", titleText: "Assign", descText: "Assign tasks to make sure your business keep running")
                 case 1:
-                    DetailOnboarding(image: "kucing2", titleText: "Monitor", descText: "Monitor your employee works result with ease")
+                    DetailOnboarding(image: "MonitorIllustration", titleText: "Monitor", descText: "Monitor your employee works result with ease")
                 case 2:
-                    DetailOnboarding(image: "kucing3", titleText: "Review", descText: "You can review and let your employee validates their peer works result on site")
+                    DetailOnboarding(image: "ReviewIllustration", titleText: "Review", descText: "You can review and let your employee validates their peer works result on site")
 //                case 3:
 //                    DetailOnboarding(image: "kucing4", titleText: "Monitool", descText: "Test1")
 //                case 4:
