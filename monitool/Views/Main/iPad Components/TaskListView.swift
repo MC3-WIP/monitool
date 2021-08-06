@@ -31,8 +31,7 @@ struct TaskListView: View {
 			}
 			.onDelete(perform: taskViewModel.delete)
 		}
-		.navigationTitle(filter?.rawValue ?? "Task List")
-		.navigationBarTitleDisplayMode(.inline)
+		.navigationBarTitle(filter?.rawValue ?? "Task List", displayMode: .inline)
 		.toolbar {
 			if role.isOwner {
 				Button {

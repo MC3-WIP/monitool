@@ -21,10 +21,18 @@ struct LoginView: View {
                 .padding(.bottom, 17.0)
             Text("Manage your Employee")
                 .padding(.bottom, 72.0)
-            SignIn()
+//            SignIn()
+			MockSignIn()
         }
         
     }
+
+	@ViewBuilder func MockSignIn() -> some View {
+		Button("Sign In") {
+			userAuth.login()
+			RoleService.shared.switchRole(to: .owner)
+		}
+	}
 }
 
 struct LoginView_Previews: PreviewProvider {
