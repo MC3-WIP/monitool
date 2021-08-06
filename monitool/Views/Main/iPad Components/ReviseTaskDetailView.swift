@@ -1,17 +1,17 @@
 //
-//  TaskDetailView.swift
+//  ReviseTaskDetailView.swift
 //  monitool
 //
-//  Created by Mac-albert on 03/08/21.
+//  Created by Mac-albert on 07/08/21.
 //
 
 import SwiftUI
 
-struct TaskDetailView: View {
-    private let pic: String = "Mawar"
-    private let notes: String = "Sudah Pak Bos"
-    // MARK: INITIALIZE TOTAL PAGE
+struct ReviseTaskDetailView: View {
     private let totalPage: Int = 3
+    private let notes = "Sudah Pak Bos"
+    private let pic = "Mawar"
+    private let comment: String = "Kursi yang panjang kurang rapi, lalu lantai depan masih kurang bersih."
     
     @State var proofPage = 0
     
@@ -19,7 +19,7 @@ struct TaskDetailView: View {
         NoSeparatorList{
             HStack{
                 GeometryReader{ metric in
-                    VStack{
+                    VStack(){
                         Text("Buka Gerbang Toko!")
                             .font(.system(size: 28, weight: .bold))
                             .padding(.vertical, 24.0)
@@ -31,6 +31,23 @@ struct TaskDetailView: View {
                             .fixedSize(horizontal: false, vertical: true)
                             .font(.system(size: 17))
                             .multilineTextAlignment(.leading)
+                        Spacer()
+                        Button(action: {
+                            // MARK: ACTION BUTTON REVISE
+                        }){
+                            HStack{
+                                Image(systemName: "repeat")
+                                Text("Revise")
+                            }
+                            .frame(minWidth: 0, maxWidth: metric.size.width * 0.85, minHeight: 50, maxHeight: 50)
+                            .font(.system(size: 28))
+                            .padding()
+                            .foregroundColor(Color(hex: "#4FB0AB"))
+                            .background(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color(hex: "#4FB0AB"), lineWidth: 2)
+                                            )
+                        }
                     }
                     .padding(.leading, 18.0)
                 }
@@ -79,6 +96,7 @@ struct TaskDetailView: View {
                                 }
                             )
                             PageControl(totalPage: totalPage, current: proofPage)
+                            
                         }
                         .frame(width: matric.size.width * 0.75)
                         .padding(.top, 10)
@@ -100,12 +118,44 @@ struct TaskDetailView: View {
                                 .font(.system(size: 17, weight: .bold))
                             Text(notes)
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
-                        .padding(.top, 20)
+                        .padding(.vertical, 20)
+                        Spacer()
+                        VStack{
+                            Text("Comment: ")
+                                .foregroundColor(Color(hex: "6C6C6C"))
+                                .font(.system(size: 20, weight: .bold))
+                                .frame(width: matric.size.width * 0.9, height: 25, alignment: .leading)
+                                .padding(.bottom, 2)
+                            Text(comment)
+                                .padding([.top, .leading, .trailing], 3)
+                                .multilineTextAlignment(.leading)
+                                .frame(width: matric.size.width * 0.90, height: 110, alignment: .topLeading)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+                                )
+                        }
+                        Spacer()
+                        Button(action: {
+                            // MARK: ACTION BUTTON REVISE
+                        }){
+                            HStack{
+                                Image(systemName: "checkmark")
+                                Text("Approve")
+                            }
+                            .frame(minWidth: 0, maxWidth: matric.size.width * 0.85, minHeight: 50, maxHeight: 50)
+                            .font(.system(size: 28))
+                            .padding()
+                            .foregroundColor(Color.white)
+                            .background(
+                                RoundedRectangle(cornerRadius: 8)
+                                    .stroke(Color(hex: "#4FB0AB"), lineWidth: 2)
+                            ).background(RoundedRectangle(cornerRadius: 8).fill(Color(hex: "#4FB0AB")))
+                        }
                         
-                    }.frame(alignment: .leading)
+                    }
+                    .frame(width: matric.size.width * 0.9)
                 }
-                
-                
             }
         }
     }
@@ -122,34 +172,8 @@ struct TaskDetailView: View {
     }
 }
 
-struct TaskDetailView_Previews: PreviewProvider {
+struct ReviseTaskDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskDetailView()
-            .previewDevice("iPad Pro (12.9-inch) (5th generation)")
-            .previewLayout(.fixed(width: 1112, height: 834))
-        //        TaskDetailView()
-        //
-        //            .previewDevice("iPad Air (4th generation)")
-        //            .environment(\.horizontalSizeClass, .regular)
+        ReviseTaskDetailView()
     }
 }
-
-//struct PageControllProofOfWork: UIViewRepresentable{
-//    
-//    var totalPage = 0
-//    var current  = 0
-//    
-//    func makeUIView(context: UIViewRepresentableContext<PageControllProofOfWork>) -> UIPageControl {
-//        let page = UIPageControl()
-//        page.currentPageIndicatorTintColor = UIColor(Color(hex: "4EB0AB"))
-//        page.numberOfPages = totalPage
-//        page.pageIndicatorTintColor = .gray
-//        
-//        return page
-//    }
-//    
-//    func updateUIView(_ uiView: UIPageControl, context: UIViewRepresentableContext<PageControllProofOfWork>) {
-//        uiView.currentPage = current
-//    }
-//}
-
