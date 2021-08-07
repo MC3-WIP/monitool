@@ -18,7 +18,7 @@ struct HistoryView: View {
     }
     
     var body: some View {
-        List{
+        List {
             Section(header: Text("Today").font(.title).foregroundColor(.black).fontWeight(.bold)){
                 ForEach(taskViewModel.tasks, id: \.id){ task in
                     if(dateHelper.getNumDays(first: Date(), second: task.createdAt) == 0 && task.status.rawValue == "Completed"){
@@ -27,7 +27,7 @@ struct HistoryView: View {
                 }
             }
             .textCase(nil)
-            .listRowBackground(Color.white)
+            .listRowBackground(AppColor.primaryForeground)
             
             Section(header: Text("Yesterday").font(.title).foregroundColor(.black).fontWeight(.bold)){
                 ForEach(taskViewModel.tasks, id: \.id){ task in
@@ -46,9 +46,9 @@ struct HistoryView: View {
                 }
             }
             .textCase(nil)
-
         }
         .listStyle(PlainListStyle())
+		.navigationTitle("History")
     }
 }
 

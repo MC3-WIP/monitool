@@ -45,15 +45,21 @@ extension SidebarView {
 	@ViewBuilder
 	func MenuItemView(type: SidebarViewModel.MenuItem) -> some View {
 		HStack {
-            
 			Image(systemName: type.icon)
-				.foregroundColor(viewModel.selectedMenuItem == type ? .white : .AppColor.primary)
+				.foregroundColor(viewModel.selectedMenuItem == type ? AppColor.primaryForeground : AppColor.accent)
 			Text(type.title)
-				.foregroundColor(viewModel.selectedMenuItem == type ? .white : .black)
+				.foregroundColor(viewModel.selectedMenuItem == type ? AppColor.primaryForeground : AppColor.primaryBackground)
 			Spacer()
+//			if let notification = notification, notification.count > 0 {
+//				Text("\(notification.count)")
+//					.foregroundColor(notification.isPriority || isActive ? AppColor.primaryForeground : AppColor.secondary)
+//					.frame(width: 24, height: 24, alignment: .center)
+//					.background(notification.isPriority ? Color.red : Color.clear)
+//					.clipShape(Circle())
+//			}
 		}
 		.padding(12)
-		.background(viewModel.selectedMenuItem == type ? Color.AppColor.primary : Color.clear)
+		.background(viewModel.selectedMenuItem == type ? AppColor.accent : Color.clear)
 		.cornerRadius(12)
 		.contentShape(Rectangle())
 		.onTapGesture {
