@@ -8,14 +8,16 @@
 import FirebaseFirestore
 import Combine
 
-class EmployeeRepository: ObservableObject {
+final class EmployeeRepository: ObservableObject {
 	@Published var employees = [Employee]()
 	private let paths = RepositoriesPath()
 
 	private let store = Firestore.firestore()
 	private let employeeRepository: CollectionReference
 
-    init() {
+	static let shared = EmployeeRepository()
+
+    private init() {
 		employeeRepository = store.collection(paths.employee)
 		get()
 	}

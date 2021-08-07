@@ -8,30 +8,40 @@
 import SwiftUI
 
 struct TodayListView: View {
-	@StateObject var taskDetailViewModel: TaskDetailViewModel
+	@StateObject var todayListViewModel: TodayListViewModel
 	@ObservedObject var role: RoleService = .shared
+	@ObservedObject var employeeRepository: EmployeeRepository = .shared
+	@State var isEmployeePickerPresenting = false
+
+	let employeeDummy = [
+		Employee(name: "Alpha"),
+		Employee(name: "Bravo"),
+		Employee(name: "Charlie"),
+		Employee(name: "Delta")
+	]
 
 	init(task: Task) {
-		_taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
+		_todayListViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
 	}
 
 	var body: some View {
 		VStack {
 			ScrollView {
-				HStack {
+				HStack(spacing: 24) {
 					LeftCollumn()
 					RightCollumn()
 				}
 			}
-			HStack {
+			HStack(spacing: 24) {
 				Spacer()
 					.frame(minWidth: 0, maxWidth: .infinity)
 				Button("Submit") {
 					// Submit Task
 				}.buttonStyle(PrimaryButtonStyle())
 			}
-			.padding(36)
+			.padding(.top)
 		}
+		.padding(36)
 		.navigationTitle("Today List")
 	}
 }

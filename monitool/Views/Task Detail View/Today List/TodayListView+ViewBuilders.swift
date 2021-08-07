@@ -10,16 +10,16 @@ import SwiftUI
 // MARK: - View Builders
 extension TodayListView {
 	@ViewBuilder func LeftCollumn() -> some View {
-		GeometryReader{ metric in
-			VStack{
-				Text(taskDetailViewModel.task.name)
+		GeometryReader { metric in
+			VStack {
+				Text(todayListViewModel.task.name)
 					.font(.system(size: 28, weight: .bold))
 					.padding(.vertical, 24.0)
 					.frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
 				Image("kucing1")
 					.resizable()
 					.frame(width: metric.size.width * 0.75, height: metric.size.width * 0.75, alignment: .leading)
-				if let desc = taskDetailViewModel.task.desc {
+				if let desc = todayListViewModel.task.desc {
 					Text(desc)
 						.fixedSize(horizontal: false, vertical: true)
 						.font(.system(size: 17))
@@ -32,50 +32,110 @@ extension TodayListView {
 
 	@ViewBuilder func RightCollumn() -> some View {
 		GeometryReader { matric in
-			VStack(spacing: 8){
+			VStack(spacing: 24) {
 				Text("Proof of Work")
 					.padding(.bottom, 8)
 					.font(.system(size: 20, weight: .bold))
 					.frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
 					.foregroundColor(Color(hex: "898989"))
-				VStack{
-					ProofOfWork(image: "kucing2", date: "p", metricSize: matric)
-				}
-				.frame(width: matric.size.width * 0.75, height: matric.size.width * 0.75)
-				.padding(.vertical, 10)
-				.background(Color(hex: "F0F9F8"))
-				.overlay(
-					RoundedRectangle(cornerRadius: 5)
-						.stroke(Color(hex: "4EB0AB"), lineWidth: 1)
-				)
 
-				HStack{
-					Text("PIC: ")
-						.foregroundColor(Color(hex: "6C6C6C"))
-						.font(.system(size: 17, weight: .bold))
-					Text(taskDetailViewModel.pic?.name ?? "-")
-				}
-				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
-				.padding(.top, 27)
+				ProofOfWork(image: "kucing2", date: "p", metricSize: matric)
+					.frame(width: matric.size.width * 0.75, height: matric.size.width * 0.75)
+					.padding(.vertical, 10)
+					.background(Color(hex: "F0F9F8"))
+					.overlay(
+						RoundedRectangle(cornerRadius: 5)
+							.stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+					)
 
-				HStack{
-					Text("Notes: ")
-						.foregroundColor(Color(hex: "6C6C6C"))
-						.font(.system(size: 17, weight: .bold))
-					Text(taskDetailViewModel.task.notes ?? "-")
+				if role.isOwner {
+					CustomText(title: "PIC: ", content: todayListViewModel.pic?.name)
+					CustomText(title: "Notes: ", content: todayListViewModel.task.notes)
+				} else {
+					PICSelector()
+					NotesTextField()
 				}
-				.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
-				.padding(.top, 20)
-
-			}.frame(alignment: .leading)
+			}
 		}
 	}
 
-	//	@ViewBuilder func OwnerRightCollumn() -> some View {
-	//		VStack {
-	//
-	//		}
-	//	}
+	@ViewBuilder func EmployeePicker() -> some View {
+		VStack(spacing: -36) {
+			HStack {
+				Button("Cancle") {
+					isEmployeePickerPresenting = false
+				}
+				.foregroundColor(AppColor.accent)
+				Spacer()
+				Text("PIC")
+				Spacer()
+				Button {
+					isEmployeePickerPresenting = false
+				} label: {
+					Text("Done")
+						.bold()
+				}
+				.foregroundColor(AppColor.accent)
+			}
+			.padding()
+			.zIndex(1)
+			Picker("PIC", selection: $todayListViewModel.picSelection) {
+				ForEach(0..<employeeDummy.count) { index in
+					Text(employeeDummy[index].name)
+						.tag(index)
+				}
+			}
+		}
+	}
+
+	@ViewBuilder func PICSelector() -> some View {
+		VStack(alignment: .leading) {
+			Text("PIC")
+				.font(.title2)
+				.foregroundColor(.secondary)
+				.bold()
+			HStack {
+				Text(employeeDummy[todayListViewModel.picSelection].name)
+				Spacer()
+				Button {
+					isEmployeePickerPresenting = true
+				} label: {
+					Image(systemName: "chevron.down")
+				}
+				.foregroundColor(.secondary)
+				.popover(isPresented: $isEmployeePickerPresenting) {
+					EmployeePicker()
+				}
+			}
+			.padding()
+			.background(AppColor.accent.brightness(0.65))
+			.modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
+		}
+	}
+
+	@ViewBuilder func NotesTextField() -> some View {
+		VStack(alignment: .leading) {
+			Text("Notes")
+				.font(.title2)
+				.foregroundColor(.secondary)
+				.bold()
+			TextField("Add notes here", text: $todayListViewModel.notesText)
+				.padding()
+				.frame(height: 120, alignment: .top)
+				.background(AppColor.accent.brightness(0.65))
+				.modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
+		}
+	}
+
+	@ViewBuilder func CustomText(title: String, content: String?) -> some View {
+		HStack{
+			Text(title)
+				.foregroundColor(Color(hex: "6C6C6C"))
+				.font(.system(size: 17, weight: .bold))
+			Text(content ?? "-")
+		}
+		.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+	}
 
 	@ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View{
 		VStack{

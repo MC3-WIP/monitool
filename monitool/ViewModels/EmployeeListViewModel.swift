@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 class EmployeeListViewModel: ObservableObject {
-    @ObservedObject private var repository = EmployeeRepository()
+	@ObservedObject private var repository: EmployeeRepository = .shared
     @Published var employees = [Employee]()
     
     private var cancellables = Set<AnyCancellable>()
