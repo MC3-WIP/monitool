@@ -11,6 +11,7 @@ struct TaskListView: View {
 	@StateObject var taskViewModel = TaskViewModel()
 	@Binding var filter: TaskStatus?
 	@ObservedObject var role: RoleService = .shared
+    
 
 	var filteredData: [Task] {
 		if let filter = filter {

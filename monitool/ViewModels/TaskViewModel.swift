@@ -37,11 +37,11 @@ class TaskViewModel: ObservableObject {
 			case .ongoing:
 				TodayListView(task: task)
 			case .waitingEmployeeReview:
-				EmployeeReviewView()
+                EmployeeReviewView(task: task)
 			case .waitingOwnerReview:
-				OwnerReviewView()
+                OwnerReviewView(task: task)
 			case .revise:
-				ReviseView()
+                ReviseView(task: task)
 			default:
 				EmptyView()
 			}
