@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ReviseTaskDetailView: View {
+struct ReviseView: View {
     private let totalPage: Int = 3
     private let notes = "Sudah Pak Bos"
     private let pic = "Mawar"
@@ -174,6 +174,6 @@ struct ReviseTaskDetailView: View {
 
 struct ReviseTaskDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ReviseTaskDetailView()
+        ReviseView()
     }
 }

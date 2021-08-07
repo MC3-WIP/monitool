@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct TodayListView: View {
-    private let pic: String = "-"
+
+	@StateObject var taskDetailViewModel: TaskDetailViewModel
+
+	init(task: Task) {
+		_taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
+	}
+
     private let notes: String = "-"
     // MARK: INITIALIZE TOTAL PAGE
     private let totalPage: Int = 3
@@ -20,17 +26,19 @@ struct TodayListView: View {
             HStack{
                 GeometryReader{ metric in
                     VStack{
-                        Text("Buka Gerbang Toko!")
+						Text(taskDetailViewModel.task.name)
                             .font(.system(size: 28, weight: .bold))
                             .padding(.vertical, 24.0)
                             .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
                         Image("kucing1")
                             .resizable()
                             .frame(width: metric.size.width * 0.75, height: metric.size.width * 0.75, alignment: .leading)
-                        Text("Masukkan saja kawat ke lubang kunci dan gerak-gerakkan searah dengan jarum jam. Jika digerakkan berlawanan dengan arah jarum jam sama saja anda menguncinya dan berujung sia-sia. Walaupun demikian, jangan terlalu bergantung pada cara ini, karena bisa saja kualitas kunci yang baik tidak mudah jika dilakukan hal-hal yang tidak sesuai ketentuan dalam proses membuka pintu yang terkunci")
-                            .fixedSize(horizontal: false, vertical: true)
-                            .font(.system(size: 17))
-                            .multilineTextAlignment(.leading)
+						if let desc = taskDetailViewModel.task.desc {
+							Text(desc)
+								.fixedSize(horizontal: false, vertical: true)
+								.font(.system(size: 17))
+								.multilineTextAlignment(.leading)
+						}
                     }
                     .padding(.leading, 18.0)
                 }
@@ -51,19 +59,23 @@ struct TodayListView: View {
                             RoundedRectangle(cornerRadius: 5)
                                 .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
                         )
-                        HStack{
+
+						HStack{
                             Text("PIC: ")
                                 .foregroundColor(Color(hex: "6C6C6C"))
                                 .font(.system(size: 17, weight: .bold))
-                            Text(pic)
-                        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
+							Text(taskDetailViewModel.pic?.name ?? "-")
+                        }
+						.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
                         .padding(.top, 27)
-                        HStack{
+
+						HStack{
                             Text("Notes: ")
                                 .foregroundColor(Color(hex: "6C6C6C"))
                                 .font(.system(size: 17, weight: .bold))
-                            Text(notes)
-                        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
+							Text(taskDetailViewModel.task.notes ?? "-")
+                        }
+						.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
                         .padding(.top, 20)
                         
                     }.frame(alignment: .leading)
@@ -88,7 +100,7 @@ struct TodayListView: View {
 
 struct TodayListView_Previews: PreviewProvider {
     static var previews: some View {
-        TodayListView()
+		TodayListView(task: Task(name: "Hehe"))
             .previewDevice("iPad Pro (12.9-inch) (5th generation)")
             .previewLayout(.fixed(width: 1112, height: 834))
     }

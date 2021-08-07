@@ -29,4 +29,24 @@ class TaskViewModel: ObservableObject {
 			repository.delete(tasks[index])
 		}
 	}
+
+	@ViewBuilder
+	func route(_ filter: TaskStatus?, task: Task) -> some View {
+		if let filter = filter {
+			switch filter {
+			case .ongoing:
+				TodayListView(task: task)
+			case .waitingEmployeeReview:
+				EmployeeReviewView()
+			case .waitingOwnerReview:
+				OwnerReviewView()
+			case .revise:
+				ReviseView()
+			default:
+				EmptyView()
+			}
+		} else {
+			TaskListDetailView()
+		}
+	}
 }

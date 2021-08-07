@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TaskDetailView: View {
+struct EmployeeReviewView: View {
     private let pic: String = "Mawar"
     private let notes: String = "Sudah Pak Bos"
     // MARK: INITIALIZE TOTAL PAGE
@@ -124,7 +124,7 @@ struct TaskDetailView: View {
 
 struct TaskDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskDetailView()
+        EmployeeReviewView()
             .previewDevice("iPad Pro (12.9-inch) (5th generation)")
             .previewLayout(.fixed(width: 1112, height: 834))
         //        TaskDetailView()

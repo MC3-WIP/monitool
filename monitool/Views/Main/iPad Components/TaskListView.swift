@@ -25,7 +25,7 @@ struct TaskListView: View {
 		List {
 			ForEach(filteredData) { task in
 				NavigationLink(
-					destination: TaskDetailWaitingOwenerReviewView()) {
+					destination: taskViewModel.route(filter, task: task)) {
 					TaskListRow(task: task)
 				}
 			}

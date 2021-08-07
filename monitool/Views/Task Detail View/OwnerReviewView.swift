@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TaskDetailWaitingOwenerReviewView: View {
+struct OwnerReviewView: View {
     private let totalPage: Int = 3
     private let notes = "Sudah Pak Bos"
     private let pic = "Mawar"
@@ -172,7 +172,7 @@ struct TaskDetailWaitingOwenerReviewView: View {
 
 struct TaskDetailWaitingOwenerReviewView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskDetailWaitingOwenerReviewView()
+        OwnerReviewView()
             .previewDevice("iPad Pro (12.9-inch) (5th generation)")
             .previewLayout(.fixed(width: 1112, height: 834))
     }
