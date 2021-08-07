@@ -172,7 +172,7 @@ extension ProfileView {
 						}
 					}
 					.popover(isPresented: $viewModel.isAddEmployeePresenting) {
-						AddEmployeeSheetView()
+                        AddDataPopOver(sheetType: "Employee", showingPopOver: $viewModel.isAddEmployeePresenting)
 							.frame(width: 400, height: 400)
 							.accentColor(AppColor.accent)
 					}

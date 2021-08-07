@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct TaskListView: View {
+    @State var taskName = ""
+    @State var taskDesc = ""
+    @State var taskRepeated = []
+    @State var taskPhotoReference = []
+    @State private var showingPopover = false
 	@StateObject var taskViewModel = TaskViewModel()
 	@Binding var filter: TaskStatus?
 	@ObservedObject var role: RoleService = .shared
@@ -34,11 +39,12 @@ struct TaskListView: View {
 		.navigationBarTitle(filter?.title ?? "Task List", displayMode: .inline)
 		.toolbar {
 			if role.isOwner {
-				Button {
-					// PopOver
-				} label: {
-					Image(systemName: "plus.circle")
-				}
+				Button("Add task") {
+					showingPopover = true
+                }.popover(isPresented: $showingPopover) {
+                    AddDataPopOver(sheetType: "Task", showingPopOver: $showingPopover).frame(width: 400, height: 400)
+                }
+                
 			}
 		}
 	}

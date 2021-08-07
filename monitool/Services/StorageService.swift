@@ -11,11 +11,12 @@ import Firebase
 class StorageService: ObservableObject {
     let storage = Storage.storage()
     var storageRef: StorageReference? = nil
+    @ObservedObject var companyViewModel = CompanyViewModel()
 
     func upload(image: UIImage, category: String) {
         // Create a storage reference
         if let id = Auth.auth().currentUser?.uid {
-            storageRef = storage.reference().child("images/\(category)/\(id).jpg")
+            storageRef = storage.reference().child("images/\(id)/\(category).jpg")
         }
         
         
@@ -56,9 +57,11 @@ class StorageService: ObservableObject {
         }
     }
     
-    func listItem() {
+    func listItem(category: String) {
         // Create a reference
-        let storageRef = storage.reference().child("images")
+        if let id = Auth.auth().currentUser?.uid {
+            storageRef = storage.reference().child("images/\(id)/\(category)")
+        }
         
         // Create a completion handler - aka what the function should do after it listed all the items
         let handler: (StorageListResult, Error?) -> Void = { (result, error) in
@@ -71,7 +74,24 @@ class StorageService: ObservableObject {
         }
         
         // List the items
-        storageRef.list(withMaxResults: 1, completion: handler)
+        storageRef?.list(withMaxResults: 1, completion: handler)
+    }
+    
+    func updateImageURL(category: String) {
+        // Create a reference
+        if let id = Auth.auth().currentUser?.uid {
+            storageRef = storage.reference().child("images/\(id)/\(category).jpg")
+        }
+        storageRef?.downloadURL { url, error in
+            if let error = error {
+              // Handle any errors
+            } else {
+                self.companyViewModel.addImage(imageURL: url?.absoluteString ?? "profile")
+            }
+        }
+        
+//        return result
+        
     }
     
     // You can use the listItem() function above to get the StorageReference of the item you want to delete

@@ -31,7 +31,7 @@ struct CompanyOnboardingView: View {
                                 .accessibilityHidden(true)) {
                         HStack() {
                             Spacer()
-							PhotoComponent(editMode: .constant(.inactive))
+							PhotoComponent(editMode: .constant(.active))
                             Spacer()
                         }
                         HStack() {
@@ -57,7 +57,7 @@ struct CompanyOnboardingView: View {
                             showingSheet = true
                         }
                         .popover(isPresented: $showingSheet) {
-                            AddEmployeeSheetView().frame(width: 400, height: 400)
+                            AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet).frame(width: 400, height: 400)
                         }
                     }, footer: HStack() {
                         Spacer()

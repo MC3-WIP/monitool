@@ -22,7 +22,11 @@ class CompanyRepository: ObservableObject{
     }
     
     func add(_ company: Company){
-        companyRepositories?.setData(["name": company.name, "minReview": company.minReview])
+        companyRepositories?.setData(["name": company.name, "minReview": company.minReview, "profileImage": "profile"])
+    }
+    
+    func addImage(imageURL: String) {
+        companyRepositories?.updateData(["profileImage": imageURL])
     }
     
     func delete(_ company: Company) {
