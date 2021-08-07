@@ -27,6 +27,8 @@
 		834C9E1126B6D88F0013335F /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C9E1026B6D88F0013335F /* AppIcon.swift */; };
 		835E357E26B15FC300DE542C /* EmployeeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835E357D26B15FC300DE542C /* EmployeeRepository.swift */; };
 		835F39D926B5DAE000EC3405 /* PadLayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835F39D826B5DAE000EC3405 /* PadLayoutViewModel.swift */; };
+		838B23F726BE922C004979A4 /* TodayListView+ViewBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23F626BE922C004979A4 /* TodayListView+ViewBuilders.swift */; };
+		838B23F926BE943D004979A4 /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23F826BE943D004979A4 /* PrimaryButtonStyle.swift */; };
 		83A023E626B3F0DC002D24CC /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023E526B3F0DC002D24CC /* TaskListView.swift */; };
 		83A023E826B3FF17002D24CC /* PadLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023E726B3FF17002D24CC /* PadLayout.swift */; };
 		83A023EA26B3FF22002D24CC /* PhoneLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023E926B3FF22002D24CC /* PhoneLayout.swift */; };
@@ -91,6 +93,8 @@
 		834C9E1026B6D88F0013335F /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
 		835E357D26B15FC300DE542C /* EmployeeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeRepository.swift; sourceTree = "<group>"; };
 		835F39D826B5DAE000EC3405 /* PadLayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadLayoutViewModel.swift; sourceTree = "<group>"; };
+		838B23F626BE922C004979A4 /* TodayListView+ViewBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodayListView+ViewBuilders.swift"; sourceTree = "<group>"; };
+		838B23F826BE943D004979A4 /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		83A023E526B3F0DC002D24CC /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		83A023E726B3FF17002D24CC /* PadLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadLayout.swift; sourceTree = "<group>"; };
 		83A023E926B3FF22002D24CC /* PhoneLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLayout.swift; sourceTree = "<group>"; };
@@ -209,11 +213,11 @@
 		8348BCE226BE4CA4000777EA /* Task Detail View */ = {
 			isa = PBXGroup;
 			children = (
+				838B23F526BE908D004979A4 /* Today List */,
 				8348BCE326BE4DEC000777EA /* TaskDetailViewModel.swift */,
 				8E47F5FE26B9754B00B96004 /* EmployeeReviewView.swift */,
 				8E97703526BD7AA100A4F341 /* OwnerReviewView.swift */,
 				8E97703F26BDBAEF00A4F341 /* ReviseView.swift */,
-				8EB4FA7E26BE4620009AABAF /* TodayListView.swift */,
 			);
 			path = "Task Detail View";
 			sourceTree = "<group>";
@@ -291,6 +295,15 @@
 				B850700726B1435900530CBA /* monitool.entitlements */,
 			);
 			path = Configs;
+			sourceTree = "<group>";
+		};
+		838B23F526BE908D004979A4 /* Today List */ = {
+			isa = PBXGroup;
+			children = (
+				8EB4FA7E26BE4620009AABAF /* TodayListView.swift */,
+				838B23F626BE922C004979A4 /* TodayListView+ViewBuilders.swift */,
+			);
+			path = "Today List";
 			sourceTree = "<group>";
 		};
 		83A023F126B406FA002D24CC /* Main */ = {
@@ -392,6 +405,7 @@
 				6F6C13AA26B3F377000BBD26 /* ImagePicker.swift */,
 				B823A78826B7DEBA0035D9F4 /* AddEmployeeSheetView.swift */,
 				F83184C926BD328000354AFD /* RepeatSheetView.swift */,
+				838B23F826BE943D004979A4 /* PrimaryButtonStyle.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -555,6 +569,7 @@
 				834C9E1126B6D88F0013335F /* AppIcon.swift in Sources */,
 				B8B44EE926BACDF0001379AA /* StorageService.swift in Sources */,
 				830B1DF326A8149E00D38AE9 /* MonitoolApp.swift in Sources */,
+				838B23F726BE922C004979A4 /* TodayListView+ViewBuilders.swift in Sources */,
 				8E47F5FF26B9754B00B96004 /* EmployeeReviewView.swift in Sources */,
 				B8EFD9B426B8562E001E6086 /* CompanyViewModel.swift in Sources */,
 				83A023EE26B40480002D24CC /* HistoryTabItem.swift in Sources */,
@@ -566,6 +581,7 @@
 				B850700B26B14B3000530CBA /* CompanyOnboardingView.swift in Sources */,
 				8E2A614E26B91C9300D82BBE /* AppOnboardingView.swift in Sources */,
 				8E97703826BD7DC300A4F341 /* PageControl.swift in Sources */,
+				838B23F926BE943D004979A4 /* PrimaryButtonStyle.swift in Sources */,
 				83A023F026B404EE002D24CC /* ProfileTabItem.swift in Sources */,
 				83B664B926BBE30200F64364 /* ProfileViewModel.swift in Sources */,
 				833CCAA126B683C400BA67CA /* RoleService.swift in Sources */,
