@@ -71,6 +71,7 @@ struct ReviseView: View {
                         VStack{
                             ZStack{
                                 switch proofPage{
+//                                ForEach(taskDetailViewModel.task.proof)
                                 case 0:
                                     ProofOfWork(image: "kucing2", date: "21 Jul 2021 at 15:57", metricSize: matric)
                                 case 1:
