@@ -53,6 +53,7 @@
 		8E97703826BD7DC300A4F341 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E97703726BD7DC300A4F341 /* PageControl.swift */; };
 		8E97703E26BDAE5C00A4F341 /* HistoryTaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E97703D26BDAE5C00A4F341 /* HistoryTaskDetailView.swift */; };
 		8E97704026BDBAEF00A4F341 /* ReviseTaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E97703F26BDBAEF00A4F341 /* ReviseTaskDetailView.swift */; };
+		8EB4FA7F26BE4620009AABAF /* TodayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4FA7E26BE4620009AABAF /* TodayListView.swift */; };
 		B823A78926B7DEBA0035D9F4 /* AddEmployeeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A78826B7DEBA0035D9F4 /* AddEmployeeSheetView.swift */; };
 		B850700926B1461800530CBA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B850700826B1461800530CBA /* GoogleService-Info.plist */; };
 		B850700B26B14B3000530CBA /* CompanyOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850700A26B14B3000530CBA /* CompanyOnboardingView.swift */; };
@@ -115,6 +116,7 @@
 		8E97703726BD7DC300A4F341 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		8E97703D26BDAE5C00A4F341 /* HistoryTaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTaskDetailView.swift; sourceTree = "<group>"; };
 		8E97703F26BDBAEF00A4F341 /* ReviseTaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviseTaskDetailView.swift; sourceTree = "<group>"; };
+		8EB4FA7E26BE4620009AABAF /* TodayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayListView.swift; sourceTree = "<group>"; };
 		ADB96F69B4F62B81EF090F6E /* Pods-monitool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monitool.release.xcconfig"; path = "Target Support Files/Pods-monitool/Pods-monitool.release.xcconfig"; sourceTree = "<group>"; };
 		B823A78826B7DEBA0035D9F4 /* AddEmployeeSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEmployeeSheetView.swift; sourceTree = "<group>"; };
 		B850700726B1435900530CBA /* monitool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = monitool.entitlements; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				8E97703526BD7AA100A4F341 /* TaskDetailWaitingOwenerReviewView.swift */,
 				8E97703D26BDAE5C00A4F341 /* HistoryTaskDetailView.swift */,
 				8E97703F26BDBAEF00A4F341 /* ReviseTaskDetailView.swift */,
+				8EB4FA7E26BE4620009AABAF /* TodayListView.swift */,
 			);
 			path = "iPad Components";
 			sourceTree = "<group>";
@@ -555,6 +558,7 @@
 				835F39D926B5DAE000EC3405 /* PadLayoutViewModel.swift in Sources */,
 				8E97703E26BDAE5C00A4F341 /* HistoryTaskDetailView.swift in Sources */,
 				83AFC69626B9B1C400550E58 /* ProfileView.swift in Sources */,
+				8EB4FA7F26BE4620009AABAF /* TodayListView.swift in Sources */,
 				8E7A53BF26B13F01007FA3A8 /* Company.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
