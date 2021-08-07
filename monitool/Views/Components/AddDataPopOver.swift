@@ -21,6 +21,7 @@ struct AddDataPopOver: View {
     @State var selectedDays: [String] = []
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
     @ObservedObject var taskViewModel = TaskViewModel()
+    @Binding var showingPopOver: Bool
     
     var body: some View {
         NavigationView {
@@ -42,9 +43,11 @@ struct AddDataPopOver: View {
                         }
                     }.listStyle(GroupedListStyle())
                 }.navigationTitle("Add Employee").navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(leading: Button("Cancel", action: {presentationMode.wrappedValue.dismiss()}), trailing: Button("Add", action: {
-                    if employeeName.count != 0{
-                        presentationMode.wrappedValue.dismiss()
+                .navigationBarItems(leading: Button("Cancel", action: {
+                    showingPopOver = false
+                }), trailing: Button("Add", action: {
+                    if employeeName.count != 0 {
+                        showingPopOver = false
                         let employee = Employee(name: employeeName, pin: employeePin)
                         employeeViewModel.add(employee)
                     }
@@ -63,37 +66,37 @@ struct AddDataPopOver: View {
                                 Text("Description")
                                 TextEditor(text: $taskDesc).multilineTextAlignment(.trailing)
                             }
-                            HStack() {
-                                Button("Repeat") {
-                                    repeatPopover = true
-                                }
-                                .popover(isPresented: $repeatPopover) {
-                                    RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays).frame(width: 400, height: 400)
-                                }
-                                Spacer()
-                                Button(action: {
-                                    repeatPopover = true
-                                }) {
-                                    HStack() {
-                                        if selectedDays.count != 0 {
-                                            if selectedDays.count == 7 {
-                                                Text("Everyday")
-                                            } else {
-                                                ForEach(selectedDays, id:\.self) { day in
-                                                    Text(day)
-                                                }
-                                            }
-                                        }
-                                        Image(systemName: "chevron.right").foregroundColor(.gray)
-                                    }
-                                }
-                            }.foregroundColor(Color.black)
+                           HStack() {
+                               Button("Repeat") {
+                                   repeatPopover = true
+                               }
+                               .popover(isPresented: $repeatPopover) {
+                                   RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays).frame(width: 400, height: 400)
+                               }
+                               Spacer()
+                               Button(action: {
+                                   repeatPopover = true
+                               }) {
+                                   HStack() {
+                                       if selectedDays.count != 0 {
+                                           if selectedDays.count == 7 {
+                                               Text("Everyday")
+                                           } else {
+                                               ForEach(selectedDays, id:\.self) { day in
+                                                   Text(day)
+                                               }
+                                           }
+                                       }
+                                       Image(systemName: "chevron.right").foregroundColor(.gray)
+                                   }
+                               }
+                           }.foregroundColor(Color.black)
                         }
                     }.listStyle(GroupedListStyle())
                 }.navigationTitle("Add Task").navigationBarTitleDisplayMode(.inline)
                 .navigationBarItems(trailing: Button("Add", action: {
-                    if taskName.count != 0{
-                        self.presentationMode.wrappedValue.dismiss()
+                    if taskName.count != 0 {
+                        showingPopOver = false
                         let task = Task(name: taskName, description: taskDesc, photoReference: taskPhotoReference, repeated: taskRepeated)
                         taskViewModel.add(task)
                     }
@@ -102,9 +105,9 @@ struct AddDataPopOver: View {
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
-
-struct AddEmployeeSheetView_Previews: PreviewProvider {
-    static var previews: some View {
-        AddDataPopOver(sheetType: "")
-    }
-}
+//
+//struct AddEmployeeSheetView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        AddDataPopOver(sheetType: "")
+//    }
+//}

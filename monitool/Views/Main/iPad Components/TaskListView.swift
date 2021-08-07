@@ -42,7 +42,7 @@ struct TaskListView: View {
 				Button("Add task") {
 					showingPopover = true
                 }.popover(isPresented: $showingPopover) {
-                    AddDataPopOver(sheetType: "Task").frame(width: 400, height: 400)
+                    AddDataPopOver(sheetType: "Task", showingPopOver: $showingPopover).frame(width: 400, height: 400)
                 }
                 
 			}
