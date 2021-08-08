@@ -31,6 +31,7 @@ struct TodayListView: View {
 					LeftCollumn()
 					RightCollumn()
 				}
+                .frame(height: 680)
 			}
 			HStack(spacing: 24) {
 				Spacer()
@@ -39,9 +40,8 @@ struct TodayListView: View {
 					// Submit Task
 				}.buttonStyle(PrimaryButtonStyle())
 			}
-			.padding(.top)
+			.padding()
 		}
-		.padding(36)
 		.navigationTitle("Today List")
 	}
 }
