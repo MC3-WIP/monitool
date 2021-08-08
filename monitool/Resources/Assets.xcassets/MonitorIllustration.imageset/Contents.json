@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "MonitorIllustration.png",
+      "filename" : "Monitool.MonitorIllustration.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Monitool.MonitorIllustration@2x.pdf",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "Monitool.MonitorIllustration@3x.pdf",
       "idiom" : "universal",
       "scale" : "3x"
     }
