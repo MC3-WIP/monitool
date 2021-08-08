@@ -10,6 +10,8 @@ import SwiftUI
 struct ReviseView: View {
     @StateObject var reviseViewModel: TodayListViewModel
     @StateObject var taskDetailViewModel: TaskDetailViewModel
+    @ObservedObject var taskViewModel = TaskViewModel()
+    @Environment(\.presentationMode) var presentationMode
     
     init (task: Task){
         _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))

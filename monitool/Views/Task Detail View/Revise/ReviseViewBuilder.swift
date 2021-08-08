@@ -136,6 +136,8 @@ extension ReviseView{
     func reviseButton() -> some View{
         Button(action: {
             // MARK: ACTION BUTTON REVISE
+            taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
+            self.presentationMode.wrappedValue.dismiss()
         }){
             HStack{
                 Image(systemName: "repeat")
@@ -154,6 +156,8 @@ extension ReviseView{
     func approveButton() -> some View{
         Button(action: {
             // MARK: ACTION BUTTON APPROVE
+            taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
+            self.presentationMode.wrappedValue.dismiss()
         }){
             HStack{
                 Image(systemName: "checkmark")
