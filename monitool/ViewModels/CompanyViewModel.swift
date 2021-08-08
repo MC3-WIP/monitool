@@ -14,4 +14,8 @@ class CompanyViewModel: ObservableObject {
     func create(_ company: Company){
         repository.add(company)
     }
+    
+    func addImage(imageURL: String) {
+        repository.addImage(imageURL: imageURL)
+    }
 }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Monitool.Assignillustration.pdf",
+      "filename" : "MonitoolLogo.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Monitool.Assignillustration@2x.pdf",
+      "filename" : "MonitoolLogo@2x.pdf",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Monitool.Assignillustration@3x.pdf",
+      "filename" : "MonitoolLogo@3x.pdf",
       "idiom" : "universal",
       "scale" : "3x"
     }
