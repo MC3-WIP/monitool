@@ -48,7 +48,7 @@ struct EmployeeReviewView: View {
 
 struct TaskDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        EmployeeReviewView(task: (Task(name: "EmployeeReview")))
+        EmployeeReviewView(task: (Task(name: "EmployeeReview", repeated: [])))
             .previewDevice("iPad Pro (12.9-inch) (5th generation)")
             .previewLayout(.fixed(width: 1112, height: 834))
         //        TaskDetailView()
