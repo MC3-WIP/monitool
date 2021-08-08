@@ -65,6 +65,7 @@ struct CompanyOnboardingView: View {
                             self.isLinkActive = true
                             let company = Company(name: companyName, minReview: minReviewers, ownerPin: "3344", hasLoggedIn: true)
                             companyViewModel.create(company)
+                            storageService.updateImageURL(category: "profile")
                             userAuth.hasLogin()
                         })
                         .padding()
