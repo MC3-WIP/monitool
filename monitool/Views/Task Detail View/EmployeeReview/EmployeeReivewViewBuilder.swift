@@ -122,4 +122,46 @@ extension EmployeeReviewView{
                 .frame(width: metricSize.size.width * 0.7, height: 12, alignment: .leading)
         }
     }
+    @ViewBuilder
+    func approveButton() -> some View{
+        Button(action: {
+            // MARK: ACTION BUTTON APPROVE
+            taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.waitingOwnerReview.title)
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            HStack{
+                Image(systemName: "checkmark")
+                Text("Approve")
+            }
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .font(.system(size: 17, weight: .semibold))
+            .padding()
+            .foregroundColor(Color.white)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color(hex: "#4FB0AB"), lineWidth: 2)
+            ).background(RoundedRectangle(cornerRadius: 8).fill(Color(hex: "#4FB0AB")))
+        }
+    }
+    
+    func dissaprroveButton() -> some View{
+        Button(action: {
+            // MARK: ACTION BUTTON DISSAPPROVE
+            taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            HStack{
+                Image(systemName: "xmark")
+                Text("Revise")
+            }
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .font(.system(size: 17, weight: .semibold))
+            .padding()
+            .foregroundColor(Color(hex: "#4FB0AB"))
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color(hex: "#4FB0AB"), lineWidth: 2)
+                            )
+        }
+    }
 }

@@ -10,6 +10,8 @@ import SwiftUI
 struct EmployeeReviewView: View {
     
     @StateObject var taskDetailViewModel: TaskDetailViewModel
+    @ObservedObject var taskViewModel = TaskViewModel()
+    @Environment(\.presentationMode) var presentationMode
     
     init (task: Task){
         _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
@@ -31,7 +33,13 @@ struct EmployeeReviewView: View {
                     RightColumn()
                 }
             }
+            HStack(spacing: 24){
+                dissaprroveButton()
+                approveButton()
+            }
         }
+        .padding()
+        
     }
     @ViewBuilder
     func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View{
