@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 class TaskViewModel: ObservableObject {
-	@ObservedObject private var repository = TaskRepository()
+	@ObservedObject private var repository: TaskRepository = .shared
     @Published var tasks = [Task]()
     
     private var cancellables = Set<AnyCancellable>()

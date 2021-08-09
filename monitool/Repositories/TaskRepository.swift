@@ -19,7 +19,9 @@ final class TaskRepository: ObservableObject {
     @Published var tasks: [Task] = []
     @Published var completedTasks: [Task] = []
 
-    init(){
+	static let shared = TaskRepository()
+
+    private init(){
         get()
     }
     
@@ -72,19 +74,17 @@ final class TaskRepository: ObservableObject {
 	}
     
 
-    func updatePIC(_ idCompany: String, _ idTask: String, _ employee: Employee){
-		store.collection(path.task).document(idCompany)
+    func updatePIC(id: String, employee: Employee){
+		let ref = store.collection(path.employee).document(employee.id)
+
+		store.collection(path.task).document(id).setData(["pic" : ref], merge: true)
     }
-    
+
     func updateNotes(id: String, notes: String) {
-		store.collection(path.task).document(id).updateData([
-            "notes" : notes
-        ])
+		store.collection(path.task).document(id).setData(["notes" : notes], merge: true)
     }
     
     func updateStatus(id: String, status: String) {
-		store.collection(path.task).document(id).updateData([
-            "status" : status
-        ])
+		store.collection(path.task).document(id).updateData(["status" : status])
     }
 }

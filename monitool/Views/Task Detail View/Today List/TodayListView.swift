@@ -11,14 +11,7 @@ struct TodayListView: View {
 	@StateObject var todayListViewModel: TodayListViewModel
 	@ObservedObject var role: RoleService = .shared
 	@ObservedObject var employeeRepository: EmployeeRepository = .shared
-	@State var isEmployeePickerPresenting = false
-
-	let employeeDummy = [
-		Employee(name: "Alpha"),
-		Employee(name: "Bravo"),
-		Employee(name: "Charlie"),
-		Employee(name: "Delta")
-	]
+	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
 	init(task: Task) {
 		_todayListViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
@@ -26,22 +19,29 @@ struct TodayListView: View {
 
 	var body: some View {
 		VStack {
-			ScrollView {
+//			ScrollView {
 				HStack(spacing: 24) {
-					LeftCollumn()
-					RightCollumn()
+					LeftColumn()
+					RightColumn()
 				}
-                .frame(height: 680)
-			}
-			HStack(spacing: 24) {
-				Spacer()
-					.frame(minWidth: 0, maxWidth: .infinity)
-				Button("Submit") {
-					// Submit Task
-				}.buttonStyle(PrimaryButtonStyle())
+				.padding(.top)
+//			}
+			if !role.isOwner {
+				HStack(spacing: 24) {
+					Spacer()
+						.frame(minWidth: 0, maxWidth: .infinity)
+					Button("Submit") {
+						todayListViewModel.submitTask(
+							pic: employeeRepository.employees[todayListViewModel.picSelection],
+							notes: todayListViewModel.notesText
+						)
+						presentationMode.wrappedValue.dismiss()
+					}.buttonStyle(PrimaryButtonStyle())
+				}
+				.padding(.top)
 			}
 		}
-        .padding()
+		.padding([.leading, .trailing, .bottom], 24)
 		.navigationTitle("Today List")
 	}
 }
