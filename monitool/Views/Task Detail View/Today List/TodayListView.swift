@@ -11,6 +11,7 @@ struct TodayListView: View {
 	@StateObject var todayListViewModel: TodayListViewModel
 	@ObservedObject var role: RoleService = .shared
 	@ObservedObject var employeeRepository: EmployeeRepository = .shared
+	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
 	init(task: Task) {
 		_todayListViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
@@ -25,14 +26,20 @@ struct TodayListView: View {
 				}
 				.padding(.top)
 //			}
-			HStack(spacing: 24) {
-				Spacer()
-					.frame(minWidth: 0, maxWidth: .infinity)
-				Button("Submit") {
-					// Submit Task
-				}.buttonStyle(PrimaryButtonStyle())
+			if !role.isOwner {
+				HStack(spacing: 24) {
+					Spacer()
+						.frame(minWidth: 0, maxWidth: .infinity)
+					Button("Submit") {
+						todayListViewModel.submitTask(
+							pic: employeeRepository.employees[todayListViewModel.picSelection],
+							notes: todayListViewModel.notesText
+						)
+						presentationMode.wrappedValue.dismiss()
+					}.buttonStyle(PrimaryButtonStyle())
+				}
+				.padding(.top)
 			}
-			.padding(.top)
 		}
 		.padding([.leading, .trailing, .bottom], 24)
 		.navigationTitle("Today List")
