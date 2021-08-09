@@ -57,23 +57,3 @@ struct TaskDetailView_Previews: PreviewProvider {
         //            .environment(\.horizontalSizeClass, .regular)
     }
 }
-
-//struct PageControllProofOfWork: UIViewRepresentable{
-//    
-//    var totalPage = 0
-//    var current  = 0
-//    
-//    func makeUIView(context: UIViewRepresentableContext<PageControllProofOfWork>) -> UIPageControl {
-//        let page = UIPageControl()
-//        page.currentPageIndicatorTintColor = UIColor(Color(hex: "4EB0AB"))
-//        page.numberOfPages = totalPage
-//        page.pageIndicatorTintColor = .gray
-//        
-//        return page
-//    }
-//    
-//    func updateUIView(_ uiView: UIPageControl, context: UIViewRepresentableContext<PageControllProofOfWork>) {
-//        uiView.currentPage = current
-//    }
-//}
-
