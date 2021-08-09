@@ -74,17 +74,21 @@ final class TaskRepository: ObservableObject {
 	}
     
 
-    func updatePIC(id: String, employee: Employee){
+    func updatePIC(taskID: String, employee: Employee){
 		let ref = store.collection(path.employee).document(employee.id)
-
-		store.collection(path.task).document(id).setData(["pic" : ref], merge: true)
+		store.collection(path.task).document(taskID).setData(["pic" : ref], merge: true)
     }
 
-    func updateNotes(id: String, notes: String) {
-		store.collection(path.task).document(id).setData(["notes" : notes], merge: true)
+    func updateNotes(taskID: String, notes: String) {
+		store.collection(path.task).document(taskID).setData(["notes" : notes], merge: true)
     }
     
-    func updateStatus(id: String, status: String) {
-		store.collection(path.task).document(id).updateData(["status" : status])
+    func updateStatus(taskID: String, status: String) {
+		store.collection(path.task).document(taskID).updateData(["status" : status])
     }
+
+	func appendReviewer(taskID: String, employee: Employee) {
+		let employeeRef: DocumentReference = store.collection(path.employee).document(employee.id)
+		store.collection(path.task).document(taskID).setData(["reviewer" : FieldValue.arrayUnion([employeeRef])], merge: true)
+	}
 }

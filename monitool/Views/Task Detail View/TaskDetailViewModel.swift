@@ -16,7 +16,7 @@ class TaskDetailViewModel: ObservableObject {
 		getPIC()
 	}
 
-	private func getPIC() {
+	func getPIC() {
 		task.pic?.getDocument(completion: { doc, err in
 			if let err = err {
 				fatalError("Unresolved error: \(err)")

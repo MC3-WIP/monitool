@@ -14,12 +14,12 @@ class TodayListViewModel: TaskDetailViewModel {
 	private var taskRepository = TaskRepository.shared
 
 	func submitTask(pic: Employee, notes: String? = nil) {
-		taskRepository.updatePIC(id: task.id, employee: pic)
+		taskRepository.updatePIC(taskID: task.id, employee: pic)
 		
 		if let notes = notes, notes != "" {
-			taskRepository.updateNotes(id: task.id, notes: notes)
+			taskRepository.updateNotes(taskID: task.id, notes: notes)
 		}
 
-		taskRepository.updateStatus(id: task.id, status: TaskStatus.waitingEmployeeReview.rawValue)
+		taskRepository.updateStatus(taskID: task.id, status: TaskStatus.waitingEmployeeReview.rawValue)
 	}
 }

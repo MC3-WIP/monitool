@@ -31,7 +31,7 @@ class TaskViewModel: ObservableObject {
 	}
     
     func updateStatus(id: String, status: String) {
-        repository.updateStatus(id: id, status: status)
+		repository.updateStatus(taskID: id, status: status)
     }
 
 	@ViewBuilder
