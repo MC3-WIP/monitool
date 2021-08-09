@@ -16,7 +16,6 @@
 		6F6C13AB26B3F377000BBD26 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C13AA26B3F377000BBD26 /* ImagePicker.swift */; };
 		830B1DF326A8149E00D38AE9 /* MonitoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DF226A8149E00D38AE9 /* MonitoolApp.swift */; };
 		830B1DF526A8149E00D38AE9 /* MainOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DF426A8149E00D38AE9 /* MainOnboardingView.swift */; };
-		830B1DF726A8149F00D38AE9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830B1DF626A8149F00D38AE9 /* Assets.xcassets */; };
 		830B1DFA26A8149F00D38AE9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830B1DF926A8149F00D38AE9 /* Preview Assets.xcassets */; };
 		830B1E1826A81A3900D38AE9 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1E1726A81A3900D38AE9 /* AuthService.swift */; };
 		833CCA9D26B67DCC00BA67CA /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833CCA9C26B67DCC00BA67CA /* AppColor.swift */; };
@@ -31,6 +30,9 @@
 		838B23F926BE943D004979A4 /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23F826BE943D004979A4 /* PrimaryButtonStyle.swift */; };
 		838B23FB26BE97A5004979A4 /* TodayListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23FA26BE97A5004979A4 /* TodayListViewModel.swift */; };
 		838B23FD26BE9B76004979A4 /* RoundedEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23FC26BE9B76004979A4 /* RoundedEdge.swift */; };
+		839C025E26C15C3700F69773 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 839C025D26C15C3700F69773 /* Images.xcassets */; };
+		839C026026C15C7900F69773 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 839C025F26C15C7900F69773 /* Colors.xcassets */; };
+		839C026226C15CA500F69773 /* Misc.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 839C026126C15CA500F69773 /* Misc.xcassets */; };
 		83A023E626B3F0DC002D24CC /* TaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023E526B3F0DC002D24CC /* TaskListView.swift */; };
 		83A023E826B3FF17002D24CC /* PadLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023E726B3FF17002D24CC /* PadLayout.swift */; };
 		83A023EA26B3FF22002D24CC /* PhoneLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023E926B3FF22002D24CC /* PhoneLayout.swift */; };
@@ -64,7 +66,6 @@
 		8EA5EEE226BFC9B2009C534F /* EmployeeReivewViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE126BFC9B2009C534F /* EmployeeReivewViewBuilder.swift */; };
 		8EA5EEE526BFCF07009C534F /* ReviseViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */; };
 		8EB4FA7F26BE4620009AABAF /* TodayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4FA7E26BE4620009AABAF /* TodayListView.swift */; };
-		B823A78926B7DEBA0035D9F4 /* AddEmployeeSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A78826B7DEBA0035D9F4 /* AddEmployeeSheetView.swift */; };
 		B823A78926B7DEBA0035D9F4 /* AddDataPopOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A78826B7DEBA0035D9F4 /* AddDataPopOver.swift */; };
 		B850700926B1461800530CBA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B850700826B1461800530CBA /* GoogleService-Info.plist */; };
 		B850700B26B14B3000530CBA /* CompanyOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850700A26B14B3000530CBA /* CompanyOnboardingView.swift */; };
@@ -87,7 +88,6 @@
 		830B1DEF26A8149E00D38AE9 /* monitool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = monitool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		830B1DF226A8149E00D38AE9 /* MonitoolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitoolApp.swift; sourceTree = "<group>"; };
 		830B1DF426A8149E00D38AE9 /* MainOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOnboardingView.swift; sourceTree = "<group>"; };
-		830B1DF626A8149F00D38AE9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		830B1DF926A8149F00D38AE9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		830B1E0026A8149F00D38AE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		830B1E1726A81A3900D38AE9 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
@@ -103,6 +103,9 @@
 		838B23F826BE943D004979A4 /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		838B23FA26BE97A5004979A4 /* TodayListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayListViewModel.swift; sourceTree = "<group>"; };
 		838B23FC26BE9B76004979A4 /* RoundedEdge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedEdge.swift; sourceTree = "<group>"; };
+		839C025D26C15C3700F69773 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		839C025F26C15C7900F69773 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		839C026126C15CA500F69773 /* Misc.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Misc.xcassets; sourceTree = "<group>"; };
 		83A023E526B3F0DC002D24CC /* TaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListView.swift; sourceTree = "<group>"; };
 		83A023E726B3FF17002D24CC /* PadLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadLayout.swift; sourceTree = "<group>"; };
 		83A023E926B3FF22002D24CC /* PhoneLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLayout.swift; sourceTree = "<group>"; };
@@ -186,8 +189,8 @@
 		830B1DF126A8149E00D38AE9 /* monitool */ = {
 			isa = PBXGroup;
 			children = (
-				83A7209B26BD7E57007A30D3 /* Extensions */,
 				830B1DF226A8149E00D38AE9 /* MonitoolApp.swift */,
+				83A7209B26BD7E57007A30D3 /* Extensions */,
 				835E358526B16CA800DE542C /* Configs */,
 				833CCA9B26B67DB800BA67CA /* Constants */,
 				835E358226B16A8300DE542C /* Helpers */,
@@ -292,8 +295,10 @@
 		835E358426B16AD900DE542C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				830B1DF926A8149F00D38AE9 /* Preview Assets.xcassets */,
-				830B1DF626A8149F00D38AE9 /* Assets.xcassets */,
+				839C026326C15DD100F69773 /* dev */,
+				839C025D26C15C3700F69773 /* Images.xcassets */,
+				839C025F26C15C7900F69773 /* Colors.xcassets */,
+				839C026126C15CA500F69773 /* Misc.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -301,8 +306,8 @@
 		835E358526B16CA800DE542C /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				B850700826B1461800530CBA /* GoogleService-Info.plist */,
 				830B1E0026A8149F00D38AE9 /* Info.plist */,
+				B850700826B1461800530CBA /* GoogleService-Info.plist */,
 				B850700726B1435900530CBA /* monitool.entitlements */,
 			);
 			path = Configs;
@@ -316,6 +321,14 @@
 				838B23FA26BE97A5004979A4 /* TodayListViewModel.swift */,
 			);
 			path = "Today List";
+			sourceTree = "<group>";
+		};
+		839C026326C15DD100F69773 /* dev */ = {
+			isa = PBXGroup;
+			children = (
+				830B1DF926A8149F00D38AE9 /* Preview Assets.xcassets */,
+			);
+			path = dev;
 			sourceTree = "<group>";
 		};
 		83A023F126B406FA002D24CC /* Main */ = {
@@ -409,13 +422,11 @@
 		83EF2A8326B2927C00378602 /* Components */ = {
 			isa = PBXGroup;
 			children = (
-				8E35AC5826BA8B00007613E9 /* NoSeparatorList.swift */,
 				8E97703726BD7DC300A4F341 /* PageControl.swift */,
 				83EF2A8626B292C500378602 /* SignIn.swift */,
 				83A023F826B40B42002D24CC /* TabItemRow.swift */,
 				6F6C13A826B3EB40000BBD26 /* PhotoComponent.swift */,
 				6F6C13AA26B3F377000BBD26 /* ImagePicker.swift */,
-				B823A78826B7DEBA0035D9F4 /* AddEmployeeSheetView.swift */,
 				8E35AC5826BA8B00007613E9 /* NoSeparatorList.swift */,
 				B823A78826B7DEBA0035D9F4 /* AddDataPopOver.swift */,
 				F83184C926BD328000354AFD /* RepeatSheetView.swift */,
@@ -530,9 +541,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				830B1DFA26A8149F00D38AE9 /* Preview Assets.xcassets in Resources */,
+				839C026226C15CA500F69773 /* Misc.xcassets in Resources */,
+				839C025E26C15C3700F69773 /* Images.xcassets in Resources */,
 				B850700926B1461800530CBA /* GoogleService-Info.plist in Resources */,
+				839C026026C15C7900F69773 /* Colors.xcassets in Resources */,
 				83ECAF6626AA115B0069CF25 /* Localizable.strings in Resources */,
-				830B1DF726A8149F00D38AE9 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,7 +809,8 @@
 				CODE_SIGN_ENTITLEMENTS = monitool/Configs/monitool.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"monitool/Resources/\"";
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_ASSET_PATHS = "\"monitool/Resources/dev\"";
 				DEVELOPMENT_TEAM = 8KKWD6QU49;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = monitool/Configs/Info.plist;
@@ -823,7 +837,8 @@
 				CODE_SIGN_ENTITLEMENTS = monitool/Configs/monitool.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"monitool/Resources/\"";
+				CURRENT_PROJECT_VERSION = 9;
+				DEVELOPMENT_ASSET_PATHS = "\"monitool/Resources/dev\"";
 				DEVELOPMENT_TEAM = 8KKWD6QU49;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = monitool/Configs/Info.plist;
