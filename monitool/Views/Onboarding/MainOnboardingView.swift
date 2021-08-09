@@ -34,22 +34,4 @@ struct OnboardingView_Previews: PreviewProvider {
 			.previewDevice("iPad Pro (12.9-inch) (5th generation)")
 			.previewLayout(.fixed(width: 1112, height: 834))
 	}
-
-}
-
-struct pageControl: UIViewRepresentable {
-	var current  = 0
-
-	func makeUIView(context: UIViewRepresentableContext<pageControl>) -> UIPageControl {
-		let page = UIPageControl()
-		page.currentPageIndicatorTintColor = .black
-		page.numberOfPages = 6
-		page.pageIndicatorTintColor = .gray
-
-		return page
-	}
-
-	func updateUIView(_ uiView: UIPageControl, context: UIViewRepresentableContext<pageControl>) {
-		uiView.currentPage = current
-	}
 }

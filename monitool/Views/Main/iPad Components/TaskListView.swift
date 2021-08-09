@@ -16,6 +16,7 @@ struct TaskListView: View {
 	@StateObject var taskViewModel = TaskViewModel()
 	@Binding var filter: TaskStatus?
 	@ObservedObject var role: RoleService = .shared
+    
 
 	var filteredData: [Task] {
 		if let filter = filter {
@@ -30,7 +31,7 @@ struct TaskListView: View {
 		List {
 			ForEach(filteredData) { task in
 				NavigationLink(
-					destination: TaskDetailView()) {
+					destination: taskViewModel.route(filter, task: task)) {
 					TaskListRow(task: task)
 				}
 			}

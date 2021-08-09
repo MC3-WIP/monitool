@@ -10,6 +10,7 @@ import SwiftUI
 
 struct AppOnboardingView: View{
     @State var Currentpage = 0
+    @State var totalPage = 3
 
     var body: some View{
         VStack(alignment: .center){
@@ -21,17 +22,11 @@ struct AppOnboardingView: View{
                     DetailOnboarding(image: "MonitorIllustration", titleText: "Monitor", descText: "Monitor your employee works result with ease")
                 case 2:
                     DetailOnboarding(image: "ReviewIllustration", titleText: "Review", descText: "You can review and let your employee validates their peer works result on site")
-//                case 3:
-//                    DetailOnboarding(image: "kucing4", titleText: "Monitool", descText: "Test1")
-//                case 4:
-//                    DetailOnboarding(image: "kucing5", titleText: "Monitool", descText: "Test1")
-//                case 5:
-//                    DetailOnboarding(image: "kucing6", titleText: "Monitool", descText: "Test1")
                 default:
                     Text("Error")
                 }
             }
-            pageControl(current: Currentpage)
+            PageControl(totalPage: totalPage, current: Currentpage)
                 .padding(.bottom, 36.0)
             VStack{
                 if Currentpage == 2{
@@ -130,5 +125,15 @@ struct AppOnboardingView: View{
                 .font(.system(size: 20))
                 .multilineTextAlignment(.center)
         }
+    }
+}
+
+struct AppOnboardingView_Preview: PreviewProvider {
+    static var previews: some View {
+        AppOnboardingView()
+            .previewDevice("iPad Pro (12.9-inch) (5th generation)")
+            .previewLayout(.fixed(width: 1112, height: 834))
+        AppOnboardingView()
+            .previewDevice("iPhone 12")
     }
 }

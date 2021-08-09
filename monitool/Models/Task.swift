@@ -18,6 +18,7 @@ class Task: Codable, Identifiable {
 	var repeated: [Bool]
 	var proof: [String]?
 	var notes: String?
+    var comment: String?
 
 	var pic: DocumentReference?
 	var reviewer: [DocumentReference]?

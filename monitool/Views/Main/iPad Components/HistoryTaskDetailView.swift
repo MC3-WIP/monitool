@@ -1,17 +1,18 @@
 //
-//  TaskDetailView.swift
+//  HistoryTaskDetailView.swift
 //  monitool
 //
-//  Created by Mac-albert on 03/08/21.
+//  Created by Mac-albert on 07/08/21.
 //
 
 import SwiftUI
 
-struct TaskDetailView: View {
+struct HistoryTaskDetailView: View {
     private let pic: String = "Mawar"
     private let notes: String = "Sudah Pak Bos"
     // MARK: INITIALIZE TOTAL PAGE
     private let totalPage: Int = 3
+    private let comment: String = "Kursi yang panjang kurang rapi, lalu lantai depan masih kurang bersih."
     
     @State var proofPage = 0
     
@@ -78,8 +79,7 @@ struct TaskDetailView: View {
                                     }
                                 }
                             )
-                            PageControllProofOfWork(totalPage: totalPage, current: proofPage)
-                            
+                            PageControl(totalPage: totalPage, current: proofPage)
                         }
                         .frame(width: matric.size.width * 0.75)
                         .padding(.top, 10)
@@ -95,6 +95,7 @@ struct TaskDetailView: View {
                             Text(pic)
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
                         .padding(.top, 27)
+                        
                         HStack{
                             Text("Notes: ")
                                 .foregroundColor(Color(hex: "6C6C6C"))
@@ -102,11 +103,42 @@ struct TaskDetailView: View {
                             Text(notes)
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
                         .padding(.top, 20)
-                        
-                    }.frame(alignment: .leading)
+                        Spacer()
+                        HStack{
+                            Text("Comment: ")
+                                .font(.system(size: 17, weight: .bold))
+                                .foregroundColor(Color(hex: "6C6C6C"))
+                                .frame(alignment: .topLeading)
+                            Text(comment)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        .padding(.top, 20)
+                        Spacer()
+                        VStack{
+                            Text("Log")
+                                .font(.system(size: 22, weight: .bold))
+                                .foregroundColor(Color(hex: "6C6C6C"))
+                                .frame(alignment: .topLeading)
+                        }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        ScrollView(.vertical){
+                            List{
+                                ForEach(0..<10){number in
+                                    HStack{
+                                        Text("Aku kiri")
+                                        Spacer()
+                                        Text("Aku kanan")
+                                    }.padding(.horizontal)
+                                }
+                            }
+                        }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 100, maxHeight: 105, alignment: .topLeading)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 5)
+                                .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+                        )
+                        .background(RoundedRectangle(cornerRadius: 5).fill(Color(hex: "#F0F9F8")))
+                    }
+                    .frame(width: matric.size.width * 0.9)
                 }
-                
-                
             }
         }
     }
@@ -123,34 +155,10 @@ struct TaskDetailView: View {
     }
 }
 
-struct TaskDetailView_Previews: PreviewProvider {
+struct HistoryTaskDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        TaskDetailView()
+        HistoryTaskDetailView()
             .previewDevice("iPad Pro (12.9-inch) (5th generation)")
             .previewLayout(.fixed(width: 1112, height: 834))
-        //        TaskDetailView()
-        //
-        //            .previewDevice("iPad Air (4th generation)")
-        //            .environment(\.horizontalSizeClass, .regular)
     }
 }
-
-struct PageControllProofOfWork: UIViewRepresentable{
-    
-    var totalPage = 0
-    var current  = 0
-    
-    func makeUIView(context: UIViewRepresentableContext<PageControllProofOfWork>) -> UIPageControl {
-        let page = UIPageControl()
-        page.currentPageIndicatorTintColor = UIColor(Color(hex: "4EB0AB"))
-        page.numberOfPages = totalPage
-        page.pageIndicatorTintColor = .gray
-        
-        return page
-    }
-    
-    func updateUIView(_ uiView: UIPageControl, context: UIViewRepresentableContext<PageControllProofOfWork>) {
-        uiView.currentPage = current
-    }
-}
-
