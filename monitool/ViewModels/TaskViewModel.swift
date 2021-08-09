@@ -29,4 +29,31 @@ class TaskViewModel: ObservableObject {
 			repository.delete(tasks[index])
 		}
 	}
+<<<<<<< Updated upstream
+=======
+    
+    func updateStatus(_ task: Task, _ status: String){
+        repository.updateStatus(id: task.id, status: status)
+    }
+
+	@ViewBuilder
+	func route(_ filter: TaskStatus?, task: Task) -> some View {
+		if let filter = filter {
+			switch filter {
+			case .ongoing:
+				TodayListView(task: task)
+			case .waitingEmployeeReview:
+                EmployeeReviewView(task: task)
+			case .waitingOwnerReview:
+                OwnerReviewView(task: task)
+			case .revise:
+                ReviseView(task: task)
+			default:
+				EmptyView()
+			}
+		} else {
+			TaskListDetailView()
+		}
+	}
+>>>>>>> Stashed changes
 }
