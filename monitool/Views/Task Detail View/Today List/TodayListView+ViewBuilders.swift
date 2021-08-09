@@ -9,9 +9,10 @@ import SwiftUI
 
 // MARK: - View Builders
 extension TodayListView {
-	@ViewBuilder func LeftCollumn() -> some View {
+	@ViewBuilder func LeftColumn() -> some View {
 		GeometryReader { metric in
 			VStack {
+				//			ScrollView {
 				Text(todayListViewModel.task.name)
 					.font(.system(size: 28, weight: .bold))
 					.padding(.vertical, 24.0)
@@ -26,13 +27,13 @@ extension TodayListView {
 						.multilineTextAlignment(.leading)
 				}
 			}
-			.padding(.leading, 18.0)
 		}
 	}
 
-	@ViewBuilder func RightCollumn() -> some View {
+	@ViewBuilder func RightColumn() -> some View {
 		GeometryReader { matric in
-			VStack(spacing: 24) {
+			//			VStack(spacing: 24) {
+			ScrollView {
 				Text("Proof of Work")
 					.padding(.bottom, 8)
 					.font(.system(size: 20, weight: .bold))
@@ -63,26 +64,23 @@ extension TodayListView {
 		VStack(spacing: -36) {
 			HStack {
 				Button("Cancle") {
-					isEmployeePickerPresenting = false
-				}
-				.foregroundColor(AppColor.accent)
+					todayListViewModel.isEmployeePickerPresenting = false
+				}.foregroundColor(AppColor.accent)
 				Spacer()
 				Text("PIC")
 				Spacer()
 				Button {
-					isEmployeePickerPresenting = false
+					todayListViewModel.isEmployeePickerPresenting = false
 				} label: {
-					Text("Done")
-						.bold()
-				}
-				.foregroundColor(AppColor.accent)
+					Text("Done").bold()
+				}.foregroundColor(AppColor.accent)
 			}
 			.padding()
 			.zIndex(1)
+
 			Picker("PIC", selection: $todayListViewModel.picSelection) {
-				ForEach(0..<employeeDummy.count) { index in
-					Text(employeeDummy[index].name)
-						.tag(index)
+				ForEach(0..<employeeRepository.employees.count) { index in
+					Text(employeeRepository.employees[index].name).tag(index)
 				}
 			}
 		}
@@ -95,15 +93,15 @@ extension TodayListView {
 				.foregroundColor(.secondary)
 				.bold()
 			HStack {
-				Text(employeeDummy[todayListViewModel.picSelection].name)
+				Text(employeeRepository.employees[todayListViewModel.picSelection].name)
 				Spacer()
 				Button {
-					isEmployeePickerPresenting = true
+					todayListViewModel.isEmployeePickerPresenting = true
 				} label: {
 					Image(systemName: "chevron.down")
 				}
 				.foregroundColor(.secondary)
-				.popover(isPresented: $isEmployeePickerPresenting) {
+				.popover(isPresented: $todayListViewModel.isEmployeePickerPresenting) {
 					EmployeePicker()
 				}
 			}
@@ -133,8 +131,7 @@ extension TodayListView {
 				.foregroundColor(Color(hex: "6C6C6C"))
 				.font(.system(size: 17, weight: .bold))
 			Text(content ?? "-")
-		}
-		.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+		}.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
 	}
 
 	@ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View{
