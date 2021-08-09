@@ -114,7 +114,8 @@ struct AppOnboardingView: View{
     @ViewBuilder
     func DetailOnboarding(image: String, titleText: String, descText: String) -> some View{
         VStack(alignment: .center){
-            Image(image).resizable().frame(width: 400, height: 400, alignment: .center)
+            Image(image).resizable()
+                .scaledToFit()
                 .padding(.bottom, 20.0)
             Text(titleText)
                 .padding(.bottom, 15.0)
@@ -122,6 +123,17 @@ struct AppOnboardingView: View{
             Text(descText)
                 .padding(.bottom, 12.0)
                 .font(.system(size: 20))
+                .multilineTextAlignment(.center)
         }
+    }
+}
+
+struct AppOnboardingView_Preview: PreviewProvider {
+    static var previews: some View {
+        AppOnboardingView()
+            .previewDevice("iPad Pro (12.9-inch) (5th generation)")
+            .previewLayout(.fixed(width: 1112, height: 834))
+        AppOnboardingView()
+            .previewDevice("iPhone 12")
     }
 }

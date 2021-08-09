@@ -31,5 +31,5 @@ class TaskDetailViewModel: ObservableObject {
 			}
 		})
 	}
-
+    
 }

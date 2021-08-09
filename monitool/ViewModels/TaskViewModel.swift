@@ -29,6 +29,10 @@ class TaskViewModel: ObservableObject {
 			repository.delete(tasks[index])
 		}
 	}
+    
+    func updateStatus(id: String, status: String) {
+        repository.updateStatus(id: id, status: status)
+    }
 
 	@ViewBuilder
 	func route(_ filter: TaskStatus?, task: Task) -> some View {

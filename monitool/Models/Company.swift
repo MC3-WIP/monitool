@@ -14,6 +14,7 @@ class Company: Codable{
     var minReview: Int
     var ownerPin: String
     var hasLoggedIn: Bool?
+    var profileImage: String?
 
     init(name: String, minReview: Int, ownerPin: String, hasLoggedIn: Bool?) {
         self.name = name

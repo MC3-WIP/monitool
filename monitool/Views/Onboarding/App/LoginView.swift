@@ -21,8 +21,9 @@ struct LoginView: View {
                 .padding(.bottom, 17.0)
             Text("Manage your Employee")
                 .padding(.bottom, 72.0)
-//            SignIn()
-			MockSignIn()
+            SignIn()
+            //yang MockSignIn() cuman buat tes2 aja. setelah ngetes balikin lagi ke SignIn()
+//			MockSignIn()
         }
         
     }

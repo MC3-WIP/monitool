@@ -15,14 +15,13 @@ extension TodayListView {
 				//			ScrollView {
 				Text(todayListViewModel.task.name)
 					.font(.system(size: 28, weight: .bold))
-					.padding(.vertical, 24.0)
 					.frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
 				Image("kucing1")
 					.resizable()
-					.frame(width: metric.size.width * 0.75, height: metric.size.width * 0.75, alignment: .leading)
+					.frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
 				if let desc = todayListViewModel.task.desc {
 					Text(desc)
-						.fixedSize(horizontal: false, vertical: true)
+                        .frame(width: metric.size.width * 0.8, alignment: .topLeading)
 						.font(.system(size: 17))
 						.multilineTextAlignment(.leading)
 				}
@@ -39,7 +38,7 @@ extension TodayListView {
 					.font(.system(size: 20, weight: .bold))
 					.frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
 					.foregroundColor(Color(hex: "898989"))
-
+                
 				ProofOfWork(image: "kucing2", date: "p", metricSize: matric)
 					.frame(width: matric.size.width * 0.75, height: matric.size.width * 0.75)
 					.padding(.vertical, 10)
@@ -48,8 +47,8 @@ extension TodayListView {
 						RoundedRectangle(cornerRadius: 5)
 							.stroke(Color(hex: "4EB0AB"), lineWidth: 1)
 					)
-
-				if role.isOwner {
+				
+                if role.isOwner {
 					CustomText(title: "PIC: ", content: todayListViewModel.pic?.name)
 					CustomText(title: "Notes: ", content: todayListViewModel.task.notes)
 				} else {
@@ -120,7 +119,7 @@ extension TodayListView {
 			TextField("Add notes here", text: $todayListViewModel.notesText)
 				.padding()
 				.frame(height: 120, alignment: .top)
-				.background(AppColor.accent.brightness(0.65))
+				.background(Color(hex: "F0F9F8"))
 				.modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
 		}
 	}
