@@ -19,17 +19,16 @@ class TaskDetailViewModel: ObservableObject {
 	func getPIC() {
 		task.pic?.getDocument(completion: { doc, err in
 			if let err = err {
-				fatalError("Unresolved error: \(err)")
-			} else {
-				if let doc = doc {
-					do {
-						self.pic = try doc.data(as: Employee.self)
-					} catch {
-						print("Unresolved error: \(error.localizedDescription)")
-					}
+				fatalError("Unresolved error: \(err.localizedDescription)")
+			}
+
+			if let doc = doc {
+				do {
+					self.pic = try doc.data(as: Employee.self)
+				} catch {
+					print("Unresolved error: \(error.localizedDescription)")
 				}
 			}
 		})
 	}
-    
 }
