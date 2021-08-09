@@ -12,6 +12,8 @@ struct OwnerReviewView: View {
     @StateObject var taskDetailViewModel: TaskDetailViewModel
     @ObservedObject var role: RoleService = .shared
     @ObservedObject var employeeRepository: EmployeeRepository = .shared
+    @ObservedObject var taskViewModel = TaskViewModel()
+    @Environment(\.presentationMode) var presentationMode
     
     
     init (task: Task){
@@ -46,10 +48,10 @@ struct OwnerReviewView: View {
         }
     }
 }
-//struct OwnerReviewView_Preview: PreviewProvider {
-//    static var previews: some View {
-//        OwnerReviewView(task: Task(name: "OwnerReview"))
-//            .previewDevice("iPad Pro (12.9-inch) (5th generation)")
-//            .previewLayout(.fixed(width: 1112, height: 834))
-//    }
-//}
+struct OwnerReviewView_Preview: PreviewProvider {
+    static var previews: some View {
+        OwnerReviewView(task: Task(name: "OwnerReview", repeated: []))
+            .previewDevice("iPad Pro (12.9-inch) (5th generation)")
+            .previewLayout(.fixed(width: 1112, height: 834))
+    }
+}

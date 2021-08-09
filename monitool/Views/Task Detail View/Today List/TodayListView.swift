@@ -47,10 +47,10 @@ struct TodayListView: View {
 }
 
 // MARK: - Previews
-//struct TodayListView_Previews: PreviewProvider {
-//	static var previews: some View {
-//		TodayListView(task: Task(name: "Hehe"))
-//			.previewDevice("iPad Pro (12.9-inch) (5th generation)")
-//			.previewLayout(.fixed(width: 1112, height: 834))
-//	}
-//}
+struct TodayListView_Previews: PreviewProvider {
+	static var previews: some View {
+		TodayListView(task: Task(name: "Hehe", repeated: []))
+			.previewDevice("iPad Pro (12.9-inch) (5th generation)")
+			.previewLayout(.fixed(width: 1112, height: 834))
+	}
+}
