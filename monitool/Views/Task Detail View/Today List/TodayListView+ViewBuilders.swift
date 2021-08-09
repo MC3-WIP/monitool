@@ -14,19 +14,18 @@ extension TodayListView {
 			VStack {
 				Text(todayListViewModel.task.name)
 					.font(.system(size: 28, weight: .bold))
-					.padding(.vertical, 24.0)
 					.frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
 				Image("kucing1")
 					.resizable()
-					.frame(width: metric.size.width * 0.75, height: metric.size.width * 0.75, alignment: .leading)
+					.frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
 				if let desc = todayListViewModel.task.desc {
 					Text(desc)
-						.fixedSize(horizontal: false, vertical: true)
+                        .frame(width: metric.size.width * 0.8, alignment: .topLeading)
 						.font(.system(size: 17))
 						.multilineTextAlignment(.leading)
 				}
 			}
-			.padding(.leading, 18.0)
+			.padding()
 		}
 	}
 

@@ -5,7 +5,6 @@
 //  Created by Mac-albert on 08/08/21.
 //
 
-import Foundation
 import SwiftUI
 
 extension OwnerReviewView{
