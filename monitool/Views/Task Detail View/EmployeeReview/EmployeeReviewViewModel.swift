@@ -10,32 +10,6 @@ import SwiftUI
 
 class EmployeeReviewViewModel: TaskDetailViewModel {
 	private let employeeRepository: EmployeeRepository = .shared
-	private let taskRepository: TaskRepository = .shared
-	private var companyRepository: CompanyRepository = .shared
-
-	@Published var company: Company?
-
-	override init(task: Task) {
-		super.init(task: task)
-
-		if let ref = companyRepository.companyRef {
-			ref.getDocument(completion: { doc, err in
-				if let err = err {
-					fatalError("Unresolved error: \(err)")
-				}
-
-				if let doc = doc {
-					do {
-						self.company = try doc.data(as: Company.self)
-					} catch {
-						print("Unresolved error: \(error.localizedDescription)")
-					}
-				}
-			})
-		} else {
-			// Resolve kalo gaada
-		}
-	}
 
 	private func findEmployeeBy(pin: String) -> Employee? {
 		var match: Employee?
@@ -49,44 +23,75 @@ class EmployeeReviewViewModel: TaskDetailViewModel {
 		return match
 	}
 
-	private func validateApproval(pin: String) -> TaskErrorType? {
-		if findEmployeeBy(pin: pin) == nil { return .pinNotFound }
-		if let pic = pic, pic.pin == pin { return .pinEqualsPIC }
+	private func validateApproval(pin: String) -> Result<Employee, TaskError> {
+		if let pic = pic, pic.pin == pin { return .failure(.pinEqualsPIC) }
 
-		return nil
+		if reviewer.map({ $0.pin }).contains(pin) {
+			return .failure(.sameReviewerFound)
+		}
+
+		if let employee = findEmployeeBy(pin: pin) {
+			return .success(employee)
+		} else {
+			return .failure(.pinNotFound)
+		}
+	}
+
+	func handleReviewCompletion(_ err: Error?, approving: Bool = true) {
+		if let err = err {
+			print("Error appending new reviewer", err.localizedDescription)
+			return
+		}
+
+		taskRepository.get(id: task.id) { [self] task in
+//			if let task = task, let company = company {
+
+				getReviewer()
+
+//				DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//
+//				}
+//			}
+		}
 	}
 
 	//	func approveTask(pin: String, isAlert: Binding<Bool>, errorType: Binding<TaskErrorType>) {
 	func approveTask(pin: String) {
-		if let error = validateApproval(pin: pin) {
+		switch validateApproval(pin: pin) {
+		case .success(let employee):
+			taskRepository.appendReviewer(
+				taskID: task.id,
+				employee: employee
+			) { self.handleReviewCompletion($0) }
+		case .failure(let error):
 			//			isAlert.wrappedValue = true
 			//			errorType.wrappedValue = error
-			print("Validation Error:", error.rawValue)
-		} else if let employee = findEmployeeBy(pin: pin) {
-			taskRepository.appendReviewer(taskID: task.id, employee: employee) { [self] err in
-				if let err = err {
-					print("Error Appending \(employee.name)", err.localizedDescription)
-					return
-				}
+			print("Validation Error:", error.localizedDescription)
+		}
+	}
 
-				taskRepository.get(id: task.id) { task in
-					if let task = task,
-					   let reviewer = task.reviewer,
-					   let company = company,
-					   reviewer.count == company.minReview {
-						taskRepository
-							.updateStatus(
-								taskID: task.id,
-								status: TaskStatus.waitingOwnerReview.rawValue
-							)
-					}
-				}
-			}
+	func disapproveTask(pin: String) {
+		switch validateApproval(pin: pin) {
+		case .success(let employee):
+			taskRepository.appendReviewer(
+				approving: false,
+				taskID: task.id,
+				employee: employee
+			) { self.handleReviewCompletion($0, approving: false) }
+		case .failure(let error):
+			print("Validation Error:", error.localizedDescription)
 		}
 	}
 }
 
-enum TaskErrorType: String {
-	case pinNotFound = "PIN Not Found."
-	case pinEqualsPIC = "PIC should not review his own task."
+enum TaskError: Error {
+	case pinNotFound, pinEqualsPIC, sameReviewerFound
+
+	var localizedDescription: String {
+		switch self {
+		case .pinNotFound: return "PIN Not Found."
+		case .pinEqualsPIC: return "PIC should not review his own task."
+		case .sameReviewerFound: return "No duplicate reviewer shall exists."
+		}
+	}
 }

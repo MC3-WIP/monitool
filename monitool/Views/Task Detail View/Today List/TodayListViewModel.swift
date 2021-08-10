@@ -11,7 +11,6 @@ class TodayListViewModel: TaskDetailViewModel {
 	@Published var notesText = ""
 	@Published var picSelection = 0
 	@Published var isEmployeePickerPresenting = false
-	private var taskRepository = TaskRepository.shared
 
 	func submitTask(pic: Employee, notes: String? = nil) {
 		taskRepository.updatePIC(taskID: task.id, employee: pic)
