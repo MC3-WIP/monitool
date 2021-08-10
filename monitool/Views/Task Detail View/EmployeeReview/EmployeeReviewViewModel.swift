@@ -63,31 +63,22 @@ class EmployeeReviewViewModel: TaskDetailViewModel {
 			//			errorType.wrappedValue = error
 			print("Validation Error:", error.rawValue)
 		} else if let employee = findEmployeeBy(pin: pin) {
-			print("Employee:", employee.name)
-			taskRepository.appendReviewer(taskID: task.id, employee: employee) { err in
+			taskRepository.appendReviewer(taskID: task.id, employee: employee) { [self] err in
 				if let err = err {
-					print(err.localizedDescription)
-				} else {
-					DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-						print("\(employee.name) Appended Successfully!")
+					print("Error Appending \(employee.name)", err.localizedDescription)
+					return
+				}
 
-						print("\(self.task.reviewer?.count ?? -1) || \(self.company?.name ?? "Company is nil")!")
-						if let reviewer = self.task.reviewer,
-						   let company = self.company,
-						   reviewer.count == company.minReview {
-							self
-								.taskRepository
-								.updateStatus(
-									taskID: self.task.id,
-									status: TaskStatus.waitingOwnerReview.rawValue
-								) { err in
-									if let err = err {
-										print(err.localizedDescription)
-									} else {
-										print("Done!")
-									}
-								}
-						}
+				taskRepository.get(id: task.id) { task in
+					if let task = task,
+					   let reviewer = task.reviewer,
+					   let company = company,
+					   reviewer.count == company.minReview {
+						taskRepository
+							.updateStatus(
+								taskID: task.id,
+								status: TaskStatus.waitingOwnerReview.rawValue
+							)
 					}
 				}
 			}

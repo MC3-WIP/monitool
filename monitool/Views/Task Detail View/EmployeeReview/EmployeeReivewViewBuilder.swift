@@ -126,7 +126,7 @@ extension EmployeeReviewView{
     func approveButton() -> some View{
         Button(action: {
 			// 7488 jin || 6830 devin || 3932 albert || 9008 chris
-			employeeReviewViewModel.approveTask(pin: "9008")
+			employeeReviewViewModel.approveTask(pin: "7488")
 			presentationMode.wrappedValue.dismiss()
         }){
             HStack{
