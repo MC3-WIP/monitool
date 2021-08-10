@@ -31,14 +31,14 @@ class TaskViewModel: ObservableObject {
 	}
     
     func updateStatus(id: String, status: String) {
-        repository.updateStatus(id: id, status: status)
+		repository.updateStatus(taskID: id, status: status)
     }
 
 	@ViewBuilder
 	func route(_ filter: TaskStatus?, task: Task) -> some View {
 		if let filter = filter {
 			switch filter {
-			case .ongoing:
+			case .todayList:
 				TodayListView(task: task)
 			case .waitingEmployeeReview:
                 EmployeeReviewView(task: task)

@@ -18,33 +18,34 @@ class Task: Codable, Identifiable {
 	var repeated: [Bool]
 	var proof: [String]?
 	var notes: String?
-    var comment: String?
+	var comment: String?
 
 	var pic: DocumentReference?
-	var reviewer: [DocumentReference]?
-    
-    var isHistory: Bool
-    
-    var photoReference: [String]?
+	var approvingReviewer: [DocumentReference]?
+	var disapprovingReviewer: [DocumentReference]?
+
+	var isHistory: Bool
+
+	var photoReference: [String]?
 
 	init(
 		name: String, 
 		description: String? = nil,
-        photoReference: [String]? = nil,
-        repeated: [Bool]
+		photoReference: [String]? = nil,
+		repeated: [Bool]
 	) {
 		self.name = name
 		desc = description
 		createdAt = Date()
-		status = .ongoing
-        isHistory = false
-        self.photoReference = photoReference
-        self.repeated = repeated
+		status = .todayList
+		isHistory = false
+		self.photoReference = photoReference
+		self.repeated = repeated
 	}
 }
 
 enum TaskStatus: String, Codable, CaseIterable {
-	case ongoing = "Today List"
+	case todayList = "Today List"
 	case waitingEmployeeReview = "Waiting Employee Review"
 	case waitingOwnerReview = "Waiting Owner Review"
 	case revise = "Revise"
@@ -52,7 +53,7 @@ enum TaskStatus: String, Codable, CaseIterable {
 
 	var title: String {
 		switch self {
-		case .ongoing:
+		case .todayList:
 			return "Today List"
 		case .waitingEmployeeReview:
 			return RoleService.shared.isOwner ? "Waiting Employee Review" : "Waiting Peer Review"

@@ -42,6 +42,24 @@ final class TaskRepository: ObservableObject {
                 }
             }
     }
+
+	func get(id: String, completion: ((Task?) -> Void)? = nil) {
+		store.collection(path.task).document(id).getDocument { doc, err in
+			if let err = err {
+				print("Error getting document \(id)", err.localizedDescription)
+				return
+			}
+
+			if let doc = doc {
+				do {
+					let task = try doc.data(as: Task.self)
+					completion?(task)
+				} catch {
+					print("Error parsing data, \(error.localizedDescription)")
+				}
+			}
+		}
+	}
     
     func getComplete(){
         store.collection(path.task).whereField("status", isEqualTo: "Completed")
@@ -74,17 +92,39 @@ final class TaskRepository: ObservableObject {
 	}
     
 
-    func updatePIC(id: String, employee: Employee){
+    func updatePIC(taskID: String, employee: Employee){
 		let ref = store.collection(path.employee).document(employee.id)
-
-		store.collection(path.task).document(id).setData(["pic" : ref], merge: true)
+		store.collection(path.task).document(taskID).setData(["pic" : ref], merge: true)
     }
 
-    func updateNotes(id: String, notes: String) {
-		store.collection(path.task).document(id).setData(["notes" : notes], merge: true)
+    func updateNotes(taskID: String, notes: String) {
+		store.collection(path.task).document(taskID).setData(["notes" : notes], merge: true)
     }
     
-    func updateStatus(id: String, status: String) {
-		store.collection(path.task).document(id).updateData(["status" : status])
+	func updateStatus(taskID: String, status: String, completion: ((Error?) -> Void)? = nil) {
+		store.collection(path.task).document(taskID).updateData(["status" : status], completion: completion)
     }
+
+	func appendReviewer(approving: Bool = true, taskID: String, employee: Employee, completion: ((Error?) -> Void)? = nil) {
+		let employeeRef: DocumentReference = store.collection(path.employee).document(employee.id)
+		
+		store
+			.collection(path.task)
+			.document(taskID)
+			.setData(
+				[(approving ? "approvingReviewer" : "disapprovingReviewer") : FieldValue.arrayUnion([employeeRef])],
+				merge: true,
+				completion: completion
+			)
+	}
+
+	func dropDisapprovingReviewer(taskID: String) {
+		store
+			.collection(path.task)
+			.document(taskID)
+			.setData(
+				["disapprovingReviewer": FieldValue.delete()],
+				merge: true
+			)
+	}
 }

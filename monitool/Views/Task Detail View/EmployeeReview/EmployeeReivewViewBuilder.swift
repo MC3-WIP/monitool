@@ -12,13 +12,13 @@ extension EmployeeReviewView{
     @ViewBuilder func LeftColumn() -> some View {
         GeometryReader{ metric in
             VStack{
-                Text(taskDetailViewModel.task.name)
+                Text(employeeReviewViewModel.task.name)
                     .font(.system(size: 28, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
                 Image("kucing1")
                     .resizable()
                     .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
-                if let desc = taskDetailViewModel.task.desc{
+                if let desc = employeeReviewViewModel.task.desc{
                     Text(desc)
                         .frame(width: metric.size.width * 0.8, alignment: .topLeading)
                         .font(.system(size: 17))
@@ -44,14 +44,14 @@ extension EmployeeReviewView{
                         Text("PIC: ")
                             .foregroundColor(Color(hex: "6C6C6C"))
                             .fontWeight(.bold)
-                        Text(taskDetailViewModel.pic?.name ?? "-")
+                        Text(employeeReviewViewModel.pic?.name ?? "-")
                     }
                     .frame(width: matric.size.width * 0.9, alignment: .leading)
                     HStack{
                         Text("Notes: ")
                             .foregroundColor(Color(hex: "6C6C6C"))
                             .fontWeight(.bold)
-                        Text(taskDetailViewModel.task.notes ?? "-")
+                        Text(employeeReviewViewModel.task.notes ?? "-")
                     }
                     .frame(width: matric.size.width * 0.9, alignment: .leading)
                 }
@@ -125,9 +125,9 @@ extension EmployeeReviewView{
     @ViewBuilder
     func approveButton() -> some View{
         Button(action: {
-            // MARK: ACTION BUTTON APPROVE
-            taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.waitingOwnerReview.title)
-            self.presentationMode.wrappedValue.dismiss()
+			// 7488 jin || 6830 devin || 3932 albert || 9008 chris
+			employeeReviewViewModel.approveTask(pin: "6830")
+			presentationMode.wrappedValue.dismiss()
         }){
             HStack{
                 Image(systemName: "checkmark")
@@ -146,9 +146,8 @@ extension EmployeeReviewView{
     
     func dissaprroveButton() -> some View{
         Button(action: {
-            // MARK: ACTION BUTTON DISSAPPROVE
-            taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
-            self.presentationMode.wrappedValue.dismiss()
+			employeeReviewViewModel.disapproveTask(pin: "3932")
+			presentationMode.wrappedValue.dismiss()
         }){
             HStack{
                 Image(systemName: "xmark")

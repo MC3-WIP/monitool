@@ -24,9 +24,10 @@
 		833CCAA326B688CD00BA67CA /* SidebarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833CCAA226B688CD00BA67CA /* SidebarViewModel.swift */; };
 		8348BCE426BE4DEC000777EA /* TaskDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8348BCE326BE4DEC000777EA /* TaskDetailViewModel.swift */; };
 		834C9E1126B6D88F0013335F /* AppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834C9E1026B6D88F0013335F /* AppIcon.swift */; };
+		834FBB3A26C1743700ABAACF /* EmployeeReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834FBB3926C1743700ABAACF /* EmployeeReviewViewModel.swift */; };
 		835E357E26B15FC300DE542C /* EmployeeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835E357D26B15FC300DE542C /* EmployeeRepository.swift */; };
 		835F39D926B5DAE000EC3405 /* PadLayoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835F39D826B5DAE000EC3405 /* PadLayoutViewModel.swift */; };
-		838B23F726BE922C004979A4 /* TodayListView+ViewBuilders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23F626BE922C004979A4 /* TodayListView+ViewBuilders.swift */; };
+		838B23F726BE922C004979A4 /* TodayListViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23F626BE922C004979A4 /* TodayListViewBuilder.swift */; };
 		838B23F926BE943D004979A4 /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23F826BE943D004979A4 /* PrimaryButtonStyle.swift */; };
 		838B23FB26BE97A5004979A4 /* TodayListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23FA26BE97A5004979A4 /* TodayListViewModel.swift */; };
 		838B23FD26BE9B76004979A4 /* RoundedEdge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23FC26BE9B76004979A4 /* RoundedEdge.swift */; };
@@ -97,9 +98,10 @@
 		833CCAA226B688CD00BA67CA /* SidebarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewModel.swift; sourceTree = "<group>"; };
 		8348BCE326BE4DEC000777EA /* TaskDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewModel.swift; sourceTree = "<group>"; };
 		834C9E1026B6D88F0013335F /* AppIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIcon.swift; sourceTree = "<group>"; };
+		834FBB3926C1743700ABAACF /* EmployeeReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeReviewViewModel.swift; sourceTree = "<group>"; };
 		835E357D26B15FC300DE542C /* EmployeeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeRepository.swift; sourceTree = "<group>"; };
 		835F39D826B5DAE000EC3405 /* PadLayoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadLayoutViewModel.swift; sourceTree = "<group>"; };
-		838B23F626BE922C004979A4 /* TodayListView+ViewBuilders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodayListView+ViewBuilders.swift"; sourceTree = "<group>"; };
+		838B23F626BE922C004979A4 /* TodayListViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayListViewBuilder.swift; sourceTree = "<group>"; };
 		838B23F826BE943D004979A4 /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		838B23FA26BE97A5004979A4 /* TodayListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayListViewModel.swift; sourceTree = "<group>"; };
 		838B23FC26BE9B76004979A4 /* RoundedEdge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedEdge.swift; sourceTree = "<group>"; };
@@ -317,7 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				8EB4FA7E26BE4620009AABAF /* TodayListView.swift */,
-				838B23F626BE922C004979A4 /* TodayListView+ViewBuilders.swift */,
+				838B23F626BE922C004979A4 /* TodayListViewBuilder.swift */,
 				838B23FA26BE97A5004979A4 /* TodayListViewModel.swift */,
 			);
 			path = "Today List";
@@ -450,6 +452,7 @@
 			children = (
 				8E47F5FE26B9754B00B96004 /* EmployeeReviewView.swift */,
 				8EA5EEE126BFC9B2009C534F /* EmployeeReivewViewBuilder.swift */,
+				834FBB3926C1743700ABAACF /* EmployeeReviewViewModel.swift */,
 			);
 			path = EmployeeReview;
 			sourceTree = "<group>";
@@ -627,7 +630,7 @@
 				834C9E1126B6D88F0013335F /* AppIcon.swift in Sources */,
 				B8B44EE926BACDF0001379AA /* StorageService.swift in Sources */,
 				830B1DF326A8149E00D38AE9 /* MonitoolApp.swift in Sources */,
-				838B23F726BE922C004979A4 /* TodayListView+ViewBuilders.swift in Sources */,
+				838B23F726BE922C004979A4 /* TodayListViewBuilder.swift in Sources */,
 				8E47F5FF26B9754B00B96004 /* EmployeeReviewView.swift in Sources */,
 				B8EFD9B426B8562E001E6086 /* CompanyViewModel.swift in Sources */,
 				8EA5EEE226BFC9B2009C534F /* EmployeeReivewViewBuilder.swift in Sources */,
@@ -640,6 +643,7 @@
 				B850700B26B14B3000530CBA /* CompanyOnboardingView.swift in Sources */,
 				8E2A614E26B91C9300D82BBE /* AppOnboardingView.swift in Sources */,
 				8E97703826BD7DC300A4F341 /* PageControl.swift in Sources */,
+				834FBB3A26C1743700ABAACF /* EmployeeReviewViewModel.swift in Sources */,
 				838B23F926BE943D004979A4 /* PrimaryButtonStyle.swift in Sources */,
 				83A023F026B404EE002D24CC /* ProfileTabItem.swift in Sources */,
 				83B664B926BBE30200F64364 /* ProfileViewModel.swift in Sources */,

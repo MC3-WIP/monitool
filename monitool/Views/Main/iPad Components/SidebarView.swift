@@ -67,7 +67,7 @@ extension SidebarView {
 			padLayout.currentDetailViewType = type
 			switch type {
 			case .todayList:
-				padLayout.currentTaskFilter = .ongoing
+				padLayout.currentTaskFilter = .todayList
 			case .peerReview:
 				padLayout.currentTaskFilter = .waitingEmployeeReview
 			case .ownerReview:
