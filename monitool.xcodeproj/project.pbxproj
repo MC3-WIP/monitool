@@ -66,6 +66,9 @@
 		8EA5EEE226BFC9B2009C534F /* EmployeeReivewViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE126BFC9B2009C534F /* EmployeeReivewViewBuilder.swift */; };
 		8EA5EEE526BFCF07009C534F /* ReviseViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */; };
 		8EB4FA7F26BE4620009AABAF /* TodayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4FA7E26BE4620009AABAF /* TodayListView.swift */; };
+		8EC984E526C2F5F2000961E1 /* IphoneTodayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984E426C2F5F2000961E1 /* IphoneTodayListView.swift */; };
+		8EC984E826C30045000961E1 /* IphoneEmployeeReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984E726C30045000961E1 /* IphoneEmployeeReview.swift */; };
+		8EC984EB26C30578000961E1 /* IphoneOwnerReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984EA26C30578000961E1 /* IphoneOwnerReview.swift */; };
 		B823A78926B7DEBA0035D9F4 /* AddDataPopOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A78826B7DEBA0035D9F4 /* AddDataPopOver.swift */; };
 		B850700926B1461800530CBA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B850700826B1461800530CBA /* GoogleService-Info.plist */; };
 		B850700B26B14B3000530CBA /* CompanyOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850700A26B14B3000530CBA /* CompanyOnboardingView.swift */; };
@@ -141,6 +144,9 @@
 		8EA5EEE126BFC9B2009C534F /* EmployeeReivewViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeReivewViewBuilder.swift; sourceTree = "<group>"; };
 		8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviseViewBuilder.swift; sourceTree = "<group>"; };
 		8EB4FA7E26BE4620009AABAF /* TodayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayListView.swift; sourceTree = "<group>"; };
+		8EC984E426C2F5F2000961E1 /* IphoneTodayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneTodayListView.swift; sourceTree = "<group>"; };
+		8EC984E726C30045000961E1 /* IphoneEmployeeReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneEmployeeReview.swift; sourceTree = "<group>"; };
+		8EC984EA26C30578000961E1 /* IphoneOwnerReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneOwnerReview.swift; sourceTree = "<group>"; };
 		ADB96F69B4F62B81EF090F6E /* Pods-monitool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monitool.release.xcconfig"; path = "Target Support Files/Pods-monitool/Pods-monitool.release.xcconfig"; sourceTree = "<group>"; };
 		B823A78826B7DEBA0035D9F4 /* AddDataPopOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataPopOver.swift; sourceTree = "<group>"; };
 		B850700726B1435900530CBA /* monitool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = monitool.entitlements; sourceTree = "<group>"; };
@@ -227,6 +233,7 @@
 		8348BCE226BE4CA4000777EA /* Task Detail View */ = {
 			isa = PBXGroup;
 			children = (
+				8EC984E226C2F569000961E1 /* Iphone */,
 				8EA5EEE326BFCDEE009C534F /* Revise */,
 				8EA5EEE026BFC46C009C534F /* EmployeeReview */,
 				8EA5EEDD26BFBE8A009C534F /* OwnerList */,
@@ -463,6 +470,40 @@
 			path = Revise;
 			sourceTree = "<group>";
 		};
+		8EC984E226C2F569000961E1 /* Iphone */ = {
+			isa = PBXGroup;
+			children = (
+				8EC984E926C30566000961E1 /* OwnerReview */,
+				8EC984E626C3001C000961E1 /* EmployeeReview */,
+				8EC984E326C2F5DD000961E1 /* TodayList */,
+			);
+			path = Iphone;
+			sourceTree = "<group>";
+		};
+		8EC984E326C2F5DD000961E1 /* TodayList */ = {
+			isa = PBXGroup;
+			children = (
+				8EC984E426C2F5F2000961E1 /* IphoneTodayListView.swift */,
+			);
+			path = TodayList;
+			sourceTree = "<group>";
+		};
+		8EC984E626C3001C000961E1 /* EmployeeReview */ = {
+			isa = PBXGroup;
+			children = (
+				8EC984E726C30045000961E1 /* IphoneEmployeeReview.swift */,
+			);
+			path = EmployeeReview;
+			sourceTree = "<group>";
+		};
+		8EC984E926C30566000961E1 /* OwnerReview */ = {
+			isa = PBXGroup;
+			children = (
+				8EC984EA26C30578000961E1 /* IphoneOwnerReview.swift */,
+			);
+			path = OwnerReview;
+			sourceTree = "<group>";
+		};
 		BE97FB7DC49FBB4DCF8E6A7C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -629,6 +670,7 @@
 				830B1DF326A8149E00D38AE9 /* MonitoolApp.swift in Sources */,
 				838B23F726BE922C004979A4 /* TodayListView+ViewBuilders.swift in Sources */,
 				8E47F5FF26B9754B00B96004 /* EmployeeReviewView.swift in Sources */,
+				8EC984E526C2F5F2000961E1 /* IphoneTodayListView.swift in Sources */,
 				B8EFD9B426B8562E001E6086 /* CompanyViewModel.swift in Sources */,
 				8EA5EEE226BFC9B2009C534F /* EmployeeReivewViewBuilder.swift in Sources */,
 				83A023EE26B40480002D24CC /* HistoryTabItem.swift in Sources */,
@@ -647,8 +689,10 @@
 				83A023F726B40910002D24CC /* SidebarView.swift in Sources */,
 				8E97704026BDBAEF00A4F341 /* ReviseView.swift in Sources */,
 				835E357E26B15FC300DE542C /* EmployeeRepository.swift in Sources */,
+				8EC984E826C30045000961E1 /* IphoneEmployeeReview.swift in Sources */,
 				83A7209D26BD7E6E007A30D3 /* Color.swift in Sources */,
 				830B1E1826A81A3900D38AE9 /* AuthService.swift in Sources */,
+				8EC984EB26C30578000961E1 /* IphoneOwnerReview.swift in Sources */,
 				83EF2A8926B298F900378602 /* RepositoriesPath.swift in Sources */,
 				838B23FB26BE97A5004979A4 /* TodayListViewModel.swift in Sources */,
 				83A023EA26B3FF22002D24CC /* PhoneLayout.swift in Sources */,
