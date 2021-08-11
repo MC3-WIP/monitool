@@ -67,6 +67,11 @@
 		8EA5EEE226BFC9B2009C534F /* EmployeeReivewViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE126BFC9B2009C534F /* EmployeeReivewViewBuilder.swift */; };
 		8EA5EEE526BFCF07009C534F /* ReviseViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */; };
 		8EB4FA7F26BE4620009AABAF /* TodayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4FA7E26BE4620009AABAF /* TodayListView.swift */; };
+		8EC984ED26C3962A000961E1 /* OnboardingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984EC26C3962A000961E1 /* OnboardingDataModel.swift */; };
+		8EC984EF26C398E4000961E1 /* OnboardingViewPure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984EE26C398E4000961E1 /* OnboardingViewPure.swift */; };
+		8EC984F126C3994E000961E1 /* OnboardingStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984F026C3994E000961E1 /* OnboardingStepView.swift */; };
+		8EC984F326C3BF20000961E1 /* OnboardingFirstPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984F226C3BF20000961E1 /* OnboardingFirstPage.swift */; };
+		8EC984F726C3C518000961E1 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8EC984F626C3C518000961E1 /* Montserrat-SemiBold.ttf */; };
 		B823A78926B7DEBA0035D9F4 /* AddDataPopOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A78826B7DEBA0035D9F4 /* AddDataPopOver.swift */; };
 		B850700926B1461800530CBA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B850700826B1461800530CBA /* GoogleService-Info.plist */; };
 		B850700B26B14B3000530CBA /* CompanyOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850700A26B14B3000530CBA /* CompanyOnboardingView.swift */; };
@@ -143,6 +148,11 @@
 		8EA5EEE126BFC9B2009C534F /* EmployeeReivewViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeReivewViewBuilder.swift; sourceTree = "<group>"; };
 		8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviseViewBuilder.swift; sourceTree = "<group>"; };
 		8EB4FA7E26BE4620009AABAF /* TodayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayListView.swift; sourceTree = "<group>"; };
+		8EC984EC26C3962A000961E1 /* OnboardingDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDataModel.swift; sourceTree = "<group>"; };
+		8EC984EE26C398E4000961E1 /* OnboardingViewPure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewPure.swift; sourceTree = "<group>"; };
+		8EC984F026C3994E000961E1 /* OnboardingStepView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingStepView.swift; sourceTree = "<group>"; };
+		8EC984F226C3BF20000961E1 /* OnboardingFirstPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstPage.swift; sourceTree = "<group>"; };
+		8EC984F626C3C518000961E1 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-SemiBold.ttf"; path = "../../../../Downloads/Montserrat (1)/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		ADB96F69B4F62B81EF090F6E /* Pods-monitool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monitool.release.xcconfig"; path = "Target Support Files/Pods-monitool/Pods-monitool.release.xcconfig"; sourceTree = "<group>"; };
 		B823A78826B7DEBA0035D9F4 /* AddDataPopOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataPopOver.swift; sourceTree = "<group>"; };
 		B850700726B1435900530CBA /* monitool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = monitool.entitlements; sourceTree = "<group>"; };
@@ -191,6 +201,7 @@
 		830B1DF126A8149E00D38AE9 /* monitool */ = {
 			isa = PBXGroup;
 			children = (
+				8EC984F426C3C4AA000961E1 /* Fonts */,
 				830B1DF226A8149E00D38AE9 /* MonitoolApp.swift */,
 				83A7209B26BD7E57007A30D3 /* Extensions */,
 				835E358526B16CA800DE542C /* Configs */,
@@ -259,6 +270,7 @@
 				83E9492326AFC384003903FE /* Employee.swift */,
 				8E7A53BE26B13F01007FA3A8 /* Company.swift */,
 				B8B44EEC26BAE8D4001379AA /* TaskList.swift */,
+				8EC984EC26C3962A000961E1 /* OnboardingDataModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -398,6 +410,7 @@
 		83D8F25D26BC2483007491ED /* App */ = {
 			isa = PBXGroup;
 			children = (
+				8EC984EE26C398E4000961E1 /* OnboardingViewPure.swift */,
 				8E2A614D26B91C9300D82BBE /* AppOnboardingView.swift */,
 				8E28E38D26B4352400093850 /* LoginView.swift */,
 			);
@@ -424,6 +437,7 @@
 		83EF2A8326B2927C00378602 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8EC984F026C3994E000961E1 /* OnboardingStepView.swift */,
 				8E97703726BD7DC300A4F341 /* PageControl.swift */,
 				83EF2A8626B292C500378602 /* SignIn.swift */,
 				83A023F826B40B42002D24CC /* TabItemRow.swift */,
@@ -434,6 +448,7 @@
 				F83184C926BD328000354AFD /* RepeatSheetView.swift */,
 				838B23F826BE943D004979A4 /* PrimaryButtonStyle.swift */,
 				838B23FC26BE9B76004979A4 /* RoundedEdge.swift */,
+				8EC984F226C3BF20000961E1 /* OnboardingFirstPage.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -464,6 +479,14 @@
 				8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */,
 			);
 			path = Revise;
+			sourceTree = "<group>";
+		};
+		8EC984F426C3C4AA000961E1 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8EC984F626C3C518000961E1 /* Montserrat-SemiBold.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		BE97FB7DC49FBB4DCF8E6A7C /* Pods */ = {
@@ -546,6 +569,7 @@
 				830B1DFA26A8149F00D38AE9 /* Preview Assets.xcassets in Resources */,
 				839C026226C15CA500F69773 /* Misc.xcassets in Resources */,
 				839C025E26C15C3700F69773 /* Images.xcassets in Resources */,
+				8EC984F726C3C518000961E1 /* Montserrat-SemiBold.ttf in Resources */,
 				B850700926B1461800530CBA /* GoogleService-Info.plist in Resources */,
 				839C026026C15C7900F69773 /* Colors.xcassets in Resources */,
 				83ECAF6626AA115B0069CF25 /* Localizable.strings in Resources */,
@@ -610,6 +634,7 @@
 				83A7209A26BD4B96007A30D3 /* NavigationBarModifier.swift in Sources */,
 				6F0CC8E826B137CB00D15B96 /* TaskViewModel.swift in Sources */,
 				6F0CC8E826B137CB00D15B96 /* TaskViewModel.swift in Sources */,
+				8EC984F126C3994E000961E1 /* OnboardingStepView.swift in Sources */,
 				838B23FD26BE9B76004979A4 /* RoundedEdge.swift in Sources */,
 				830B1DF526A8149E00D38AE9 /* MainOnboardingView.swift in Sources */,
 				B823A78926B7DEBA0035D9F4 /* AddDataPopOver.swift in Sources */,
@@ -638,14 +663,17 @@
 				83A023E826B3FF17002D24CC /* PadLayout.swift in Sources */,
 				83ECAF6526AA115B0069CF25 /* Strings.swift in Sources */,
 				8E7A53BD26B13EC4007FA3A8 /* CompanyRepository.swift in Sources */,
+				8EC984F326C3BF20000961E1 /* OnboardingFirstPage.swift in Sources */,
 				83EF2A9326B29F1C00378602 /* TaskListTabItem.swift in Sources */,
 				6F0CC8E426AFCF4700D15B96 /* Task.swift in Sources */,
 				B850700B26B14B3000530CBA /* CompanyOnboardingView.swift in Sources */,
+				8EC984ED26C3962A000961E1 /* OnboardingDataModel.swift in Sources */,
 				8E2A614E26B91C9300D82BBE /* AppOnboardingView.swift in Sources */,
 				8E97703826BD7DC300A4F341 /* PageControl.swift in Sources */,
 				834FBB3A26C1743700ABAACF /* EmployeeReviewViewModel.swift in Sources */,
 				838B23F926BE943D004979A4 /* PrimaryButtonStyle.swift in Sources */,
 				83A023F026B404EE002D24CC /* ProfileTabItem.swift in Sources */,
+				8EC984EF26C398E4000961E1 /* OnboardingViewPure.swift in Sources */,
 				83B664B926BBE30200F64364 /* ProfileViewModel.swift in Sources */,
 				833CCAA126B683C400BA67CA /* RoleService.swift in Sources */,
 				83A023F726B40910002D24CC /* SidebarView.swift in Sources */,
