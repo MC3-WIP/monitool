@@ -14,6 +14,8 @@ struct TaskListDetailView: View {
     @State var showImagePicker: Bool = false
     @State var sourceType: UIImagePickerController.SourceType = .camera
     @State var image: UIImage?
+    @State var selectedDays: [String] = []
+    @State var taskRepeated = [false, false, false, false, false, false, false]
     
     var body: some View {
         NavigationView {
@@ -31,17 +33,27 @@ struct TaskListDetailView: View {
                         Button("Repeat") {
                             repeatPopover = true
                         }
-//                        .popover(isPresented: $repeatPopover) {
-//                                RepeatSheetView().frame(width: 400, height: 400)
-//                            }
+                        .popover(isPresented: $repeatPopover) {
+                            RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays).frame(width: 400, height: 400)
+                        }
                         Spacer()
                         Button(action: {
                             repeatPopover = true
                         }) {
-                            Image(systemName: "chevron.right").foregroundColor(.gray)
+                            HStack() {
+                                if selectedDays.count != 0 {
+                                    if selectedDays.count == 7 {
+                                        Text("Everyday")
+                                    } else {
+                                        ForEach(selectedDays, id:\.self) { day in
+                                            Text(day)
+                                        }
+                                    }
+                                }
+                                Image(systemName: "chevron.right").foregroundColor(.gray)
+                            }
                         }
                     }
-                    .padding(.top, 30.0)
                 }.listStyle(DefaultListStyle())
                 .frame(height: 200.0)
                 NoSeparatorList{
