@@ -11,6 +11,7 @@ import FirebaseAuth
 struct CompanyOnboardingView: View {
     @State var minReviewers = 0
     @State var companyName: String = ""
+    @State var ownerPin: String = ""
     @State private var showingSheet = false
     @State var isLinkActive = false
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
@@ -39,6 +40,10 @@ struct CompanyOnboardingView: View {
                             TextField("Company Name", text: $companyName).multilineTextAlignment(.trailing)
                         }
                         HStack() {
+                            Text("Owner Pin")
+                            TextField("Owner Pin", text: $ownerPin).multilineTextAlignment(.trailing).keyboardType(.numberPad)
+                        }
+                        HStack() {
                             Text("Task Reviewer: ")
                             Spacer()
                             Stepper("\(minReviewers) Reviewer(s)", onIncrement: {
@@ -63,7 +68,7 @@ struct CompanyOnboardingView: View {
                         Spacer()
                         Button("Save", action: {
                             self.isLinkActive = true
-                            let company = Company(name: companyName, minReview: minReviewers, ownerPin: "3344", hasLoggedIn: true)
+                            let company = Company(name: companyName, minReview: minReviewers, ownerPin: ownerPin, hasLoggedIn: true)
                             companyViewModel.create(company)
                             storageService.updateImageURL(category: "profile")
                             userAuth.hasLogin()
