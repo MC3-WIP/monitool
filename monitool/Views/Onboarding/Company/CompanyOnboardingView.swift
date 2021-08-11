@@ -11,7 +11,6 @@ import FirebaseAuth
 struct CompanyOnboardingView: View {
     @State var minReviewers = 0
     @State var companyName: String = ""
-//    @State var ownerPin: String = ""
     @State private var showingSheet = false
     @State var isLinkActive = false
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
