@@ -8,16 +8,21 @@
 import SwiftUI
 
 struct IphoneEmployeeReview: View {
+    @StateObject var taskDetailViewModel: TaskDetailViewModel
+    @ObservedObject var taskViewModel = TaskViewModel()
     @State var totalPage: Int = 3
     @State var datePhoto = "21 Juli 2021 at 15.57"
     @State var proofPage = 0
     
+    init (task: Task){
+        _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
+    }
     
     var body: some View {
         VStack{
             GeometryReader{ proxy in
                 NoSeparatorList{
-                    Text("Buka Gerbang Toko")
+                    Text(taskDetailViewModel.task.name)
                         .font(.system(size: 28, weight: .bold))
                         .frame(width: proxy.size.width, alignment: .leading)
                     Text("Proof of Work")
@@ -32,14 +37,14 @@ struct IphoneEmployeeReview: View {
                             Text("PIC: ")
                                 .foregroundColor(Color(hex: "6C6C6C"))
                                 .fontWeight(.bold)
-                            Text("-")
+                            Text(taskDetailViewModel.pic?.name ?? "-")
                         }
                         .frame(width: proxy.size.width, alignment: .leading)
                         HStack{
                             Text("Notes: ")
                                 .foregroundColor(Color(hex: "6C6C6C"))
                                 .fontWeight(.bold)
-                            Text("-")
+                            Text(taskDetailViewModel.task.notes ?? "-")
                         }
                         .frame(width: proxy.size.width, alignment: .leading)
                     }
@@ -49,10 +54,11 @@ struct IphoneEmployeeReview: View {
                     Image("kucing1")
                         .resizable()
                         .frame(width: proxy.size.width, height: proxy.size.width)
-                    Text("masukkan saja kawat ke lubang kunci dan gerak-gerakkan searah dengan jarum jam. Jika digerakkan berlawanan dengan arah jarum jam sama saja anda menguncinya dan berujung sia-sia. Walaupun demikian, jangan terlalu bergantung pada cara ini, karena bisa saja kualitas kunci yang baik tidak mudah jika dilakukan hal-hal yang tidak sesuai ketentuan dalam proses membuka pintu yang terkunci")
-                        .font(.system(size: 17))
-                        .multilineTextAlignment(.leading)
-                    
+                    if let desc = taskDetailViewModel.task.desc{
+                        Text(desc)
+                            .font(.system(size: 17))
+                            .multilineTextAlignment(.leading)
+                    }
                 }
             }
         }
@@ -121,6 +127,6 @@ struct IphoneEmployeeReview: View {
 
 struct IphoneEmployeeReview_Previews: PreviewProvider {
     static var previews: some View {
-        IphoneEmployeeReview()
+        IphoneEmployeeReview(task: Task(name: "Employee Task 1", repeated: []))
     }
 }

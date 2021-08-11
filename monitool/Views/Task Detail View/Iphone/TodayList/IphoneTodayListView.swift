@@ -8,11 +8,18 @@
 import SwiftUI
 
 struct IphoneTodayListView: View {
+    @StateObject var todayListViewModel: TodayListViewModel
+    
+    
+    init(task: Task) {
+        _todayListViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
+    }
+    
     var body: some View {
         VStack{
             GeometryReader{proxy in
                 NoSeparatorList{
-                    Text("Buka Gerbang Toko")
+                    Text(todayListViewModel.task.name)
                         .font(.system(size: 28, weight: .bold))
                         .frame(width: proxy.size.width, alignment: .leading)
                     Text("Proof of Work")
@@ -32,14 +39,14 @@ struct IphoneTodayListView: View {
                             Text("PIC: ")
                                 .foregroundColor(Color(hex: "6C6C6C"))
                                 .fontWeight(.bold)
-                            Text("-")
+                            Text(todayListViewModel.task.notes ?? "-")
                         }
                         .frame(width: proxy.size.width, alignment: .leading)
                         HStack{
                             Text("Notes: ")
                                 .foregroundColor(Color(hex: "6C6C6C"))
                                 .fontWeight(.bold)
-                            Text("-")
+                            Text(todayListViewModel.task.notes ?? "-")
                         }
                         .frame(width: proxy.size.width, alignment: .leading)
                     }
@@ -49,16 +56,14 @@ struct IphoneTodayListView: View {
                     Image("kucing1")
                         .resizable()
                         .frame(width: proxy.size.width, height: proxy.size.width)
-                    Text("masukkan saja kawat ke lubang kunci dan gerak-gerakkan searah dengan jarum jam. Jika digerakkan berlawanan dengan arah jarum jam sama saja anda menguncinya dan berujung sia-sia. Walaupun demikian, jangan terlalu bergantung pada cara ini, karena bisa saja kualitas kunci yang baik tidak mudah jika dilakukan hal-hal yang tidak sesuai ketentuan dalam proses membuka pintu yang terkunci")
-                        .font(.system(size: 17))
-                        .multilineTextAlignment(.leading)
+                    if let desc = todayListViewModel.task.desc{
+                        Text(desc)
+                            .font(.system(size: 17))
+                            .multilineTextAlignment(.leading)
+                    }
                 }
                 .frame(width: proxy.size.width, height: proxy.size.height, alignment: .topLeading)
-                
-
             }
-                            
-            
         }
         .padding()
     }
@@ -76,7 +81,7 @@ struct IphoneTodayListView: View {
 
 struct IphoneTodayListView_Previews: PreviewProvider {
     static var previews: some View {
-        IphoneTodayListView()
+        IphoneTodayListView(task: Task(name: "Task1", repeated: []))
             .previewDevice("Iphone 12")
     }
 }
