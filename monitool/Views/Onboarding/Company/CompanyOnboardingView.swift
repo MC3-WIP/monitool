@@ -17,6 +17,7 @@ struct CompanyOnboardingView: View {
     @ObservedObject var companyViewModel = CompanyViewModel()
     @ObservedObject var storageService = StorageService()
     @ObservedObject var userAuth: AuthService
+    @ObservedObject var ownerPin = TextBindingHelper(limit: 4)
     
     init() {
         self.userAuth = .shared
@@ -37,6 +38,10 @@ struct CompanyOnboardingView: View {
                         HStack() {
                             Text("Company Name")
                             TextField("Company Name", text: $companyName).multilineTextAlignment(.trailing)
+                        }
+                        HStack() {
+                            Text("Owner Pin")
+                            TextField("Owner Pin", text: $ownerPin.text).multilineTextAlignment(.trailing).keyboardType(.numberPad)
                         }
                         HStack() {
                             Text("Task Reviewer: ")
@@ -63,7 +68,7 @@ struct CompanyOnboardingView: View {
                         Spacer()
                         Button("Save", action: {
                             self.isLinkActive = true
-                            let company = Company(name: companyName, minReview: minReviewers, ownerPin: "3344", hasLoggedIn: true)
+                            let company = Company(name: companyName, minReview: minReviewers, ownerPin: ownerPin.text, hasLoggedIn: true)
                             companyViewModel.create(company)
                             storageService.updateImageURL(category: "profile")
                             userAuth.hasLogin()
