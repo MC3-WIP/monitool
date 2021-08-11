@@ -14,21 +14,9 @@ struct OnboardingViewPure: View {
     
     @State var slideGesture: CGSize = CGSize.zero
     @State var curSlideIndex = 0
+    @State var index: Int = 0
+    
     var distance: CGFloat = UIScreen.main.bounds.size.width
-    
-    
-    func nextButton() {
-        if self.curSlideIndex == self.data.count - 1 {
-            doneFunction()
-            return
-        }
-        
-        if self.curSlideIndex < self.data.count - 1 {
-            withAnimation {
-                self.curSlideIndex += 1
-            }
-        }
-    }
     
     var body: some View {
         ZStack {
@@ -44,26 +32,6 @@ struct OnboardingViewPure: View {
                                     .offset(x: CGFloat(i) * self.distance)
                                     .offset(x: self.slideGesture.width - CGFloat(self.curSlideIndex) * self.distance)
                                     .animation(.spring())
-                                    .gesture(DragGesture().onChanged{ value in
-                                        self.slideGesture = value.translation
-                                    }
-                                    .onEnded{ value in
-                                        if self.slideGesture.width < -50 {
-                                            if self.curSlideIndex < self.data.count - 1 {
-                                                withAnimation {
-                                                    self.curSlideIndex += 1
-                                                }
-                                            }
-                                        }
-                                        if self.slideGesture.width > 50 {
-                                            if self.curSlideIndex > 0 {
-                                                withAnimation {
-                                                    self.curSlideIndex -= 1
-                                                }
-                                            }
-                                        }
-                                        self.slideGesture = .zero
-                                    })
                             }
                             else{
                                 OnboardingStepView(data: self.data[i])
@@ -71,57 +39,47 @@ struct OnboardingViewPure: View {
                                     .offset(x: CGFloat(i) * self.distance)
                                     .offset(x: self.slideGesture.width - CGFloat(self.curSlideIndex) * self.distance)
                                     .animation(.spring())
-                                    .gesture(DragGesture().onChanged{ value in
-                                        self.slideGesture = value.translation
-                                    }
-                                    .onEnded{ value in
-                                        if self.slideGesture.width < -50 {
-                                            if self.curSlideIndex < self.data.count - 1 {
-                                                withAnimation {
-                                                    self.curSlideIndex += 1
-                                                }
-                                            }
-                                        }
-                                        if self.slideGesture.width > 50 {
-                                            if self.curSlideIndex > 0 {
-                                                withAnimation {
-                                                    self.curSlideIndex -= 1
-                                                }
-                                            }
-                                        }
-                                        self.slideGesture = .zero
-                                    })
                             }
                         }
+                        
                     }
                     self.progressView()
                     SignIn()
                 }
-            }
-        }
-    }
-    
-    func arrowView() -> some View {
-        Group {
-            if self.curSlideIndex == self.data.count - 1 {
-                HStack {
-                    Text("Done")
-                        .font(.system(size: 27, weight: .medium, design: .rounded))
-                        .foregroundColor(Color(.systemBackground))
+                .contentShape(Rectangle())
+                .gesture(DragGesture().onChanged{ value in
+                    self.slideGesture = value.translation
                 }
-                .frame(width: 120, height: 50)
-                .background(Color(.label))
-                .cornerRadius(25)
-            } else {
-                Image(systemName: "arrow.right.circle.fill")
-                    .resizable()
-                    .foregroundColor(Color(.label))
-                    .scaledToFit()
-                    .frame(width: 50)
+                .onEnded { value in
+                    if abs(value.translation.height) < abs(value.translation.width){
+                        if abs(value.translation.width) > 50{
+                            if value .translation.width > 0 {
+                                if curSlideIndex == 0 {
+                                    
+                                }
+                                else{
+                                    withAnimation { self.curSlideIndex -= 1
+                                    }
+                                }
+                            }
+                            if value.translation.width < 0 {
+                                if curSlideIndex == data.count - 1{
+                                    
+                                }
+                                else{
+                                    withAnimation {     self.curSlideIndex += 1
+                                    }
+                                }
+                            }
+                            self.slideGesture = .zero
+                        }
+                    }
+                }
+                )
             }
         }
     }
-    
+
     func progressView() -> some View {
         HStack {
             ForEach(0..<data.count) { i in
