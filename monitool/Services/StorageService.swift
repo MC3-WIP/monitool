@@ -7,13 +7,16 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFirestoreSwift
 
 class StorageService: ObservableObject {
     let storage = Storage.storage()
     var storageRef: StorageReference? = nil
     @ObservedObject var companyViewModel = CompanyViewModel()
-
-    func upload(image: UIImage, category: String) {
+    
+    static let shared = StorageService()
+    
+    func upload(image: UIImage, category: String, completion: ((StorageMetadata?, Error?) -> Void)? = nil) {
         // Create a storage reference
         if let id = Auth.auth().currentUser?.uid {
             storageRef = storage.reference().child("images/\(id)/\(category).jpg")
@@ -29,15 +32,7 @@ class StorageService: ObservableObject {
         
         // Upload the image
         if let data = data {
-            storageRef?.putData(data, metadata: metadata) { (metadata, error) in
-                if let error = error {
-                    print("Error while uploading file: ", error)
-                }
-                
-                if let metadata = metadata {
-                    print("Metadata: ", metadata)
-                }
-            }
+            storageRef?.putData(data, metadata: metadata, completion: completion)
         }
     }
     
@@ -84,13 +79,11 @@ class StorageService: ObservableObject {
         }
         storageRef?.downloadURL { url, error in
             if let error = error {
-              // Handle any errors
+                // Handle any errors
             } else {
                 self.companyViewModel.addImage(imageURL: url?.absoluteString ?? "profile")
             }
         }
-        
-//        return result
         
     }
     
