@@ -10,7 +10,7 @@ import SwiftUI
 struct PhoneLayout: View {
 	var body: some View {
 		TabView {
-			TaskListTabItem()
+			TaskListiPhoneView()
 			HistoryTabItem()
 			ProfileTabItem()
 		}
