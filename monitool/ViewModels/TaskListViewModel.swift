@@ -8,29 +8,29 @@
 import Combine
 import SwiftUI
 
-class TaskListViewModel: ObservableObject {
+final class TaskListViewModel: ObservableObject {
     @ObservedObject private var repository = TaskListRepository()
     @Published var taskLists = [TaskList]()
-    @Published var device = UIDevice.current.userInterfaceIdiom
-    
     private var cancellables = Set<AnyCancellable>()
 
-    init(){
+    static let shared = TaskListViewModel()
+
+    private init(){
         repository.$taskLists
             .assign(to: \.taskLists, on: self)
             .store(in: &cancellables)
     }
 
-    func add(_ taskList: TaskList){
+    func add( taskList: TaskList){
         repository.add(taskList)
     }
 
-    func delete(_ offsets: IndexSet) {
+    func delete( offsets: IndexSet) {
         offsets.forEach { index in
             repository.delete(taskLists[index])
         }
     }
-    
+
     func update(id: String, name: String, desc: String, repeated: [Bool]) {
         repository.updateTask(id: id, name: name, desc: desc, repeated: repeated)
     }
