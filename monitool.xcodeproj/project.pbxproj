@@ -14,6 +14,7 @@
 		6F137C8A26B2B57F00F79608 /* EmployeeListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F137C8926B2B57F00F79608 /* EmployeeListViewModel.swift */; };
 		6F6C13A926B3EB40000BBD26 /* PhotoComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C13A826B3EB40000BBD26 /* PhotoComponent.swift */; };
 		6F6C13AB26B3F377000BBD26 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C13AA26B3F377000BBD26 /* ImagePicker.swift */; };
+		6F90ECC826C3BE5E008EB2D1 /* TaskListiPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F90ECC726C3BE5E008EB2D1 /* TaskListiPhoneView.swift */; };
 		830B1DF326A8149E00D38AE9 /* MonitoolApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DF226A8149E00D38AE9 /* MonitoolApp.swift */; };
 		830B1DF526A8149E00D38AE9 /* MainOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DF426A8149E00D38AE9 /* MainOnboardingView.swift */; };
 		830B1DFA26A8149F00D38AE9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830B1DF926A8149F00D38AE9 /* Preview Assets.xcassets */; };
@@ -96,6 +97,7 @@
 		6F137C8926B2B57F00F79608 /* EmployeeListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeListViewModel.swift; sourceTree = "<group>"; };
 		6F6C13A826B3EB40000BBD26 /* PhotoComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoComponent.swift; sourceTree = "<group>"; };
 		6F6C13AA26B3F377000BBD26 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		6F90ECC726C3BE5E008EB2D1 /* TaskListiPhoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListiPhoneView.swift; sourceTree = "<group>"; };
 		830B1DEF26A8149E00D38AE9 /* monitool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = monitool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		830B1DF226A8149E00D38AE9 /* MonitoolApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonitoolApp.swift; sourceTree = "<group>"; };
 		830B1DF426A8149E00D38AE9 /* MainOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainOnboardingView.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 			children = (
 				83A023F526B408EC002D24CC /* Tab Items */,
 				F81FDBCC26C4485F0039C37D /* AddTaskView.swift */,
+				6F90ECC726C3BE5E008EB2D1 /* TaskListiPhoneView.swift */,
 			);
 			path = "iPhone Components";
 			sourceTree = "<group>";
@@ -694,6 +697,7 @@
 				6F0CC8E626AFD86700D15B96 /* TaskRepository.swift in Sources */,
 				B8B44EEF26BAE977001379AA /* TaskListRepository.swift in Sources */,
 				833CCA9D26B67DCC00BA67CA /* AppColor.swift in Sources */,
+				6F90ECC826C3BE5E008EB2D1 /* TaskListiPhoneView.swift in Sources */,
 				8EA5EEE526BFCF07009C534F /* ReviseViewBuilder.swift in Sources */,
 				83A023F926B40B42002D24CC /* TabItemRow.swift in Sources */,
 				6F6C13AB26B3F377000BBD26 /* ImagePicker.swift in Sources */,
