@@ -39,9 +39,7 @@ extension TaskListTabItem {
 	}
 
 	@ViewBuilder func AddTaskButton() -> some View {
-		Button {
-
-		} label: {
+		NavigationLink(destination: AddTaskView()) {
 			Image(systemName: "plus.circle")
 		}
 	}
