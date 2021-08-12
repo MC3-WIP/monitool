@@ -25,16 +25,13 @@ struct AddTaskView: View {
 				TextField("Task Description", text: $description)
 				Divider()
 				HStack {
-					Button("Repeat") {
-						repeatPopover = true
-					}
+					Text("Repeat")
 					Spacer()
-					Button {
-						repeatPopover = true
-					} label: {
-						Image(systemName: "chevron.right")
-							.foregroundColor(.gray)
-					}
+					Image(systemName: "chevron.right")
+						.foregroundColor(.gray)
+				}
+				.onTapGesture {
+					repeatPopover = true
 				}
 				.padding(.top, 36.0)
 				Divider()
@@ -55,7 +52,8 @@ struct AddTaskView: View {
 
 						}
 						Spacer()
-					}.sheet(isPresented: $showImagePicker) {
+					}
+					.sheet(isPresented: $showImagePicker) {
 						ImagePicker(sourceType: self.sourceType) { image in
 							self.image = image
 						}
