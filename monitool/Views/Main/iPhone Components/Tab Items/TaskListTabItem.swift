@@ -19,12 +19,12 @@ struct TaskListTabItem: View {
 								Text("To Do List")
 							}
 				) {
-					ForEach(1..<5) { index in
-						Text("Menu \(index)")
-					}
-//                    NavigationLink(destination: IphoneOwnerReview(task: Task(name: "Owner Review", repeated: []))){
-//                        Text("Waiting Owner Review")
-//                    }
+//					ForEach(1..<5) { index in
+//						Text("Menu \(index)")
+//					}
+                    NavigationLink(destination: IphoneReviseView(task: Task(name: "Revise", repeated: []))){
+                        Text("Revise")
+                    }
 				}
 			}
 			.toolbar(content: {

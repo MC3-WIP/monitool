@@ -1,25 +1,26 @@
 //
-//  IphoneOwnerReview.swift
+//  IphoneReviseView.swift
 //  monitool
 //
-//  Created by Mac-albert on 11/08/21.
+//  Created by Mac-albert on 12/08/21.
 //
 
 import SwiftUI
 
-struct IphoneOwnerReview: View {
-    @StateObject var OwnerViewModel: TodayListViewModel
+struct IphoneReviseView: View {
     @StateObject var taskDetailViewModel: TaskDetailViewModel
+    @StateObject var reviseViewModel: TodayListViewModel
     @ObservedObject var taskViewModel = TaskViewModel()
     
     @State var totalPage: Int = 3
     @State var datePhoto = "21 Juli 2021 at 15.57"
     @State var proofPage = 0
-    @State var notes: String = ""
+    
+    @Environment(\.presentationMode) var presentationMode
     
     init (task: Task){
         _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
-        _OwnerViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
+        _reviseViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
     }
     
     var body: some View {
@@ -54,18 +55,6 @@ struct IphoneOwnerReview: View {
                     }
                     .font(.system(size: 17))
                     .padding(.vertical, 18)
-                    
-                    VStack{
-                        Text("Comment: ")
-                            .foregroundColor(Color(hex: "6C6C6C"))
-                            .font(.system(size: 20, weight: .bold))
-                            .frame(width: proxy.size.width * 0.97, height: 25, alignment: .leading)
-                        TextField("Add notes here", text: $notes)
-                            .padding()
-                            .frame(width: proxy.size.width * 0.97, height: 120, alignment: .top)
-                            .background(Color(hex: "F0F9F8"))
-                            .modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
-                    }
                     
                     Image("kucing1")
                         .resizable()
@@ -135,6 +124,7 @@ struct IphoneOwnerReview: View {
                     .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
             )
     }
+    
     @ViewBuilder
     func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View{
         VStack{
@@ -146,10 +136,13 @@ struct IphoneOwnerReview: View {
                 .frame(width: metricSize.size.width * 0.85, height: 12, alignment: .leading)
         }
     }
+    
+    @ViewBuilder
     func reviseButton() -> some View{
         Button(action: {
             // MARK: ACTION BUTTON REVISE
-            
+            taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
+            self.presentationMode.wrappedValue.dismiss()
         }){
             HStack{
                 Image(systemName: "repeat")
@@ -165,6 +158,8 @@ struct IphoneOwnerReview: View {
                             )
         }
     }
+    
+    @ViewBuilder
     func approveButton() -> some View{
         Button(action: {
             // MARK: ACTION BUTTON APPROVE
@@ -186,8 +181,8 @@ struct IphoneOwnerReview: View {
     }
 }
 
-struct IphoneOwnerReview_Previews: PreviewProvider {
+struct IphoneReviseView_Previews: PreviewProvider {
     static var previews: some View {
-        IphoneOwnerReview(task: Task(name: "Task", repeated: []))
+        IphoneReviseView(task: Task(name: "Revise Iphone", repeated: []))
     }
 }

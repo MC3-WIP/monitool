@@ -36,7 +36,6 @@ struct ReviseView: View {
                 .frame(height: 680)
             }
             HStack(spacing: 24){
-                
                 reviseButton()
                 approveButton()
             }.padding()
