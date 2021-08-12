@@ -27,12 +27,12 @@ class Task: Codable, Identifiable, Hashable {
 
 	var isHistory: Bool
 
-	var photoReference: [String]?
+	var photoReference: String?
 
 	init(
 		name: String, 
 		description: String? = nil,
-		photoReference: [String]? = nil,
+		photoReference: String? = nil,
 		repeated: [Bool]
 	) {
 		self.name = name

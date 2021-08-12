@@ -20,8 +20,8 @@ class TaskViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    func add(_ task: Task){
-        repository.add(task)
+    func add(_ task: Task, photo: UIImage, id: String){
+        repository.submitTask(task: task, photo: photo, id: id)
     }
 
 	func delete(_ offsets: IndexSet) {
