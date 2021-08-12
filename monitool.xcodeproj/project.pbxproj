@@ -53,6 +53,7 @@
 		83EF2A8726B292C500378602 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A8626B292C500378602 /* SignIn.swift */; };
 		83EF2A8926B298F900378602 /* RepositoriesPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A8826B298F900378602 /* RepositoriesPath.swift */; };
 		83EF2A9326B29F1C00378602 /* TodoListTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A9226B29F1C00378602 /* TodoListTabItem.swift */; };
+		83F9BE3826C4FB3700B957F2 /* EditTaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F9BE3726C4FB3700B957F2 /* EditTaskListView.swift */; };
 		8E28E38E26B4352400093850 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28E38D26B4352400093850 /* LoginView.swift */; };
 		8E2A614E26B91C9300D82BBE /* AppOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A614D26B91C9300D82BBE /* AppOnboardingView.swift */; };
 		8E35AC5926BA8B00007613E9 /* NoSeparatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E35AC5826BA8B00007613E9 /* NoSeparatorList.swift */; };
@@ -138,6 +139,7 @@
 		83EF2A8626B292C500378602 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		83EF2A8826B298F900378602 /* RepositoriesPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesPath.swift; sourceTree = "<group>"; };
 		83EF2A9226B29F1C00378602 /* TodoListTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTabItem.swift; sourceTree = "<group>"; };
+		83F9BE3726C4FB3700B957F2 /* EditTaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskListView.swift; sourceTree = "<group>"; };
 		89BFB039E39A5ABB2477EAEE /* Pods-monitool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monitool.debug.xcconfig"; path = "Target Support Files/Pods-monitool/Pods-monitool.debug.xcconfig"; sourceTree = "<group>"; };
 		8E28E38D26B4352400093850 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8E2A614D26B91C9300D82BBE /* AppOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnboardingView.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 			children = (
 				83A023F526B408EC002D24CC /* Tab Items */,
 				F81FDBCC26C4485F0039C37D /* AddTaskView.swift */,
+				83F9BE3726C4FB3700B957F2 /* EditTaskListView.swift */,
 			);
 			path = "iPhone Components";
 			sourceTree = "<group>";
@@ -699,6 +702,7 @@
 				6F6C13AB26B3F377000BBD26 /* ImagePicker.swift in Sources */,
 				8EA5EEDF26BFBEB5009C534F /* OwnerReviewViewBuilder.swift in Sources */,
 				83E9492426AFC384003903FE /* Employee.swift in Sources */,
+				83F9BE3826C4FB3700B957F2 /* EditTaskListView.swift in Sources */,
 				8E97703626BD7AA100A4F341 /* OwnerReviewView.swift in Sources */,
 				834C9E1126B6D88F0013335F /* AppIcon.swift in Sources */,
 				B8B44EE926BACDF0001379AA /* StorageService.swift in Sources */,

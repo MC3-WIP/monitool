@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct TaskListTabItem: View {
-	@State var tasks: [TaskList] = [
-		TaskList(name: "Alpha"),
-		TaskList(name: "Bravo"),
-		TaskList(name: "Charlie"),
-		TaskList(name: "Delta")
-	]
+	@StateObject var taskListViewModel: TaskListViewModel = .shared
 
 	var body: some View {
 		NavigationView {
-			List(tasks) { task in
-				TaskListRow(task: task)
+			List {
+				ForEach(taskListViewModel.taskLists, id: \.id) { task in
+					NavigationLink(destination: EditTaskListView(task: task)) {
+						TaskListRow(task: task)
+					}
+				}
+				.onDelete(perform: taskListViewModel.delete)
 			}
 			.navigationBarTitle("Task List", displayMode: .inline)
 			.toolbar {

@@ -1,29 +1,37 @@
 //
-//  AddTaskView.swift
+//  EditTaskListView.swift
 //  monitool
 //
-//  Created by Scaltiel Gloria on 12/08/21.
+//  Created by Christianto Budisaputra on 12/08/21.
 //
 
 import SwiftUI
 
-struct AddTaskView: View {
+struct EditTaskListView: View {
 	@Environment(\.presentationMode) var presentationMode
 
-	@State var taskTitle: String = ""
-	@State var description: String = ""
+	let taskID: String
+	@State var title: String
+	@State var description: String
 
 	@State private var repeatPopover = false
 	@State var showImagePicker = false
+
 	@State var sourceType: UIImagePickerController.SourceType = .camera
 	@State var image: UIImage?
 
 	@ObservedObject var taskListViewModel: TaskListViewModel = .shared
 
-	var body: some View {
+	init(task: TaskList) {
+		taskID 			= task.id
+		_title 			= State(wrappedValue: task.name)
+		_description 	= State(wrappedValue: task.desc ?? "")
+	}
+
+    var body: some View {
 		VStack {
 			VStack {
-				TextField("Task Title", text: $taskTitle)
+				TextField("Task Title", text: $title)
 				Divider()
 				TextField("Task Description", text: $description)
 				Divider()
@@ -51,8 +59,8 @@ struct AddTaskView: View {
 							self.sourceType = .camera
 
 						}) {
-							Image(systemName: "camera").foregroundColor(Color(hex: "4EB0AB"))
-
+							Image(systemName: "camera")
+								.foregroundColor(AppColor.accent)
 						}
 					}
 					.padding()
@@ -64,20 +72,24 @@ struct AddTaskView: View {
 				}
 			}
 		}
-		.navigationBarTitle("Add Task List", displayMode: .inline)
+		.navigationBarTitle("Edit Task List", displayMode: .inline)
 		.toolbar {
-			Button("Add") {
-				let task = TaskList(name: taskTitle)
-				taskListViewModel.add(task)
+			Button("Done") {
+				taskListViewModel.update(
+					id: taskID,
+					name: title,
+					desc: description,
+					repeated: [true]
+				)
 				presentationMode.wrappedValue.dismiss()
 			}
 		}
 		.accentColor(AppColor.accent)
-	}
+    }
 }
 
-struct AddTaskView_Previews: PreviewProvider {
-	static var previews: some View {
-		AddTaskView()
-	}
+struct EditTaskListView_Previews: PreviewProvider {
+    static var previews: some View {
+		EditTaskListView(task: TaskList(name: "Test"))
+    }
 }
