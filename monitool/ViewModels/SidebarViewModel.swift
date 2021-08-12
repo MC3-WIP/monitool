@@ -12,7 +12,7 @@ class SidebarViewModel: ObservableObject {
 	@Published var selectedMenuItem: MenuItem
 
 	init(
-		taskFilter: TaskStatus = .ongoing,
+		taskFilter: TaskStatus = .todayList,
 		selectedMenu: MenuItem = .todayList
 	) {
 		taskFilterByStatus = taskFilter

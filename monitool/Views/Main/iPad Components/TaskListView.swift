@@ -67,6 +67,6 @@ struct TaskListView: View {
 
 struct TaskList_Previews: PreviewProvider {
 	static var previews: some View {
-		TaskListView(filter: .constant(.ongoing ))
+		TaskListView(filter: .constant(.todayList ))
 	}
 }
