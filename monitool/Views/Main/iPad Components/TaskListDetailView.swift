@@ -18,7 +18,7 @@ struct TaskListDetailView: View {
     @State var taskRepeated = [false, false, false, false, false, false, false]
     
     var body: some View {
-        NavigationView {
+        //NavigationView {
             VStack {
                 List() {
                         HStack(spacing: 70) {
@@ -79,7 +79,7 @@ struct TaskListDetailView: View {
                     }
                 }
             }.navigationTitle("Task List").navigationBarTitleDisplayMode(.inline)
-        }.navigationViewStyle(StackNavigationViewStyle())
+        //}.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

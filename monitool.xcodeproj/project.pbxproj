@@ -81,6 +81,7 @@
 		B8B44EEF26BAE977001379AA /* TaskListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B44EEE26BAE977001379AA /* TaskListRepository.swift */; };
 		B8B44EF126BAEC95001379AA /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B44EF026BAEC95001379AA /* TaskListViewModel.swift */; };
 		B8EFD9B426B8562E001E6086 /* CompanyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EFD9B326B8562E001E6086 /* CompanyViewModel.swift */; };
+		F81FDBCD26C4485F0039C37D /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81FDBCC26C4485F0039C37D /* AddTaskView.swift */; };
 		F83184C426BCF56900354AFD /* TaskListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83184C326BCF56900354AFD /* TaskListDetailView.swift */; };
 		F83184CA26BD328000354AFD /* RepeatSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83184C926BD328000354AFD /* RepeatSheetView.swift */; };
 /* End PBXBuildFile section */
@@ -166,6 +167,7 @@
 		B8B44EF026BAEC95001379AA /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		B8EFD9B326B8562E001E6086 /* CompanyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewModel.swift; sourceTree = "<group>"; };
 		F335342D53E4540C34C3D459 /* Pods_monitool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_monitool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F81FDBCC26C4485F0039C37D /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 		F83184C326BCF56900354AFD /* TaskListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListDetailView.swift; sourceTree = "<group>"; };
 		F83184C926BD328000354AFD /* RepeatSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -364,6 +366,7 @@
 			isa = PBXGroup;
 			children = (
 				83A023F526B408EC002D24CC /* Tab Items */,
+				F81FDBCC26C4485F0039C37D /* AddTaskView.swift */,
 			);
 			path = "iPhone Components";
 			sourceTree = "<group>";
@@ -679,6 +682,7 @@
 				8EC984EF26C398E4000961E1 /* OnboardingViewPure.swift in Sources */,
 				83B664B926BBE30200F64364 /* ProfileViewModel.swift in Sources */,
 				833CCAA126B683C400BA67CA /* RoleService.swift in Sources */,
+				F81FDBCD26C4485F0039C37D /* AddTaskView.swift in Sources */,
 				83A023F726B40910002D24CC /* SidebarView.swift in Sources */,
 				8E97704026BDBAEF00A4F341 /* ReviseView.swift in Sources */,
 				835E357E26B15FC300DE542C /* EmployeeRepository.swift in Sources */,

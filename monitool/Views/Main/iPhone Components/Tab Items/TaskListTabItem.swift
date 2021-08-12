@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaskListTabItem: View {
 	//	@ObservedObject var viewModel = TaskListViewModel()
-
+    @State var isLinkActive = false
 	var body: some View {
 		NavigationView {
 			List {
@@ -27,13 +27,30 @@ struct TaskListTabItem: View {
 			.toolbar(content: {
 				Button(action: {
 					print("Add Task")
+                    self.isLinkActive = true
 				}, label: {
 					Image(systemName: "plus.circle")
 				})
 			})
 			.listStyle(InsetGroupedListStyle())
 			.navigationTitle("Task List")
-		}
+            .background(
+                            NavigationLink(destination: AddTaskView(), isActive: $isLinkActive) {
+                                //AddTaskView()
+                            }
+                            //.hidden()
+                        )
+		}.navigationBarItems(leading: Button("Cancel", action: {
+            //            //showingPopOver = false
+                       print("cancel")
+                   }), trailing: Button("Add", action: {
+                        print("add")
+                        //if employeeName.count != 0 {
+                            //showingPopOver = false
+            //                let employee = Employee(name: employeeName, pin: employeePin)
+            //                employeeViewModel.add(employee)
+            //
+                   }))
 		.tabItem {
 			Image(systemName: "list.number")
 			Text("Task List")
