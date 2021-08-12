@@ -9,12 +9,14 @@ import SwiftUI
 
 struct HistoryTabItem: View {
     var body: some View {
-        Text("History View!")
-			.tabItem {
-				Image(systemName: "clock")
-				Text("History")
-			}
-			.navigationTitle("History")
+        NavigationView {
+            HistoryViewIphone()
+            .navigationTitle("History")
+        }
+        .tabItem {
+            Image(systemName: "clock")
+            Text("History")
+        }
     }
 }
 
