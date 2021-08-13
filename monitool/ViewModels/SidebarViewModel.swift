@@ -9,15 +9,13 @@ import Foundation
 
 class SidebarViewModel: ObservableObject {
 	@Published var taskFilterByStatus: TaskStatus?
-	@Published var role: RoleService
 	@Published var selectedMenuItem: MenuItem
 
 	init(
-		taskFilter: TaskStatus = .ongoing,
+		taskFilter: TaskStatus = .todayList,
 		selectedMenu: MenuItem = .todayList
 	) {
 		taskFilterByStatus = taskFilter
-		role = .shared
 		selectedMenuItem = selectedMenu
 	}
 }
@@ -28,7 +26,7 @@ extension SidebarViewModel {
 			 peerReview,
 			 ownerReview,
 			 revise,
-			 taskManager,
+			 taskList,
 			 history,
 			 profile
 
@@ -42,8 +40,8 @@ extension SidebarViewModel {
 				return "Waiting Owner Review"
 			case .revise:
 				return "Revise"
-			case .taskManager:
-				return "Task Manager"
+			case .taskList:
+				return "Task List"
 			case .history:
 				return "History"
 			case .profile:
@@ -54,19 +52,19 @@ extension SidebarViewModel {
 		var icon: String {
 			switch self {
 			case .todayList:
-				return Icon.todayList
+				return AppIcon.todayList
 			case .peerReview:
-				return Icon.employeeReview
+				return AppIcon.employeeReview
 			case .ownerReview:
-				return Icon.ownerReview
+				return AppIcon.ownerReview
 			case .revise:
-				return Icon.revise
-			case .taskManager:
-				return Icon.taskManager
+				return AppIcon.revise
+			case .taskList:
+				return AppIcon.taskList
 			case .history:
-				return Icon.history
+				return AppIcon.history
 			case .profile:
-				return Icon.profile
+				return AppIcon.profile
 			}
 		}
 	}

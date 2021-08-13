@@ -12,10 +12,12 @@ import AuthenticationServices
 
 struct SignIn: View {
 	@ObservedObject var userAuth: AuthService
+    @ObservedObject var roleAuth: RoleService
 	@State var currentNonce: String?
 
-	init(userAuth: AuthService) {
-		self.userAuth = userAuth
+	init() {
+        self.userAuth = .shared
+        self.roleAuth = .shared
 	}
 
 	//Hashing function using CryptoKit
@@ -63,60 +65,60 @@ struct SignIn: View {
 	}
 
     var body: some View {
-		SignInWithAppleButton(
-			onRequest: { request in
-				let nonce = randomNonceString()
-				currentNonce = nonce
-				request.requestedScopes = [.fullName, .email]
-				request.nonce = sha256(nonce)
-			},
-			onCompletion: { result in
-				switch result {
-				case .success(let authResults):
-					switch authResults.credential {
-					case let appleIDCredential as ASAuthorizationAppleIDCredential:
+        
+            SignInWithAppleButton(
+                onRequest: { request in
+                    let nonce = randomNonceString()
+                    currentNonce = nonce
+                    request.requestedScopes = [.fullName, .email]
+                    request.nonce = sha256(nonce)
+                },
+                onCompletion: { result in
+                    switch result {
+                    case .success(let authResults):
+                        switch authResults.credential {
+                        case let appleIDCredential as ASAuthorizationAppleIDCredential:
 
-						guard let nonce = currentNonce else {
-							fatalError("Invalid state: A login callback was received, but no login request was sent.")
-						}
-						guard let appleIDToken = appleIDCredential.identityToken else {
-							fatalError("Invalid state: A login callback was received, but no login request was sent.")
-						}
-						guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-							print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
-							return
-						}
+                            guard let nonce = currentNonce else {
+                                fatalError("Invalid state: A login callback was received, but no login request was sent.")
+                            }
+                            guard let appleIDToken = appleIDCredential.identityToken else {
+                                fatalError("Invalid state: A login callback was received, but no login request was sent.")
+                            }
+                            guard let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
+                                print("Unable to serialize token string from data: \(appleIDToken.debugDescription)")
+                                return
+                            }
 
-						let credential = OAuthProvider.credential(withProviderID: "apple.com",idToken: idTokenString,rawNonce: nonce)
-						Auth.auth().signIn(with: credential) { (authResult, error) in
-							if (error != nil) {
-								// Error. If error.code == .MissingOrInvalidNonce, make sure
-								// you're sending the SHA256-hashed nonce as a hex string with
-								// your request to Apple.
-								print(error?.localizedDescription as Any)
-								return
-							}
-							print("signed in")
-							userAuth.login()
+                            let credential = OAuthProvider.credential(withProviderID: "apple.com",idToken: idTokenString,rawNonce: nonce)
+                            Auth.auth().signIn(with: credential) { (authResult, error) in
+                                if (error != nil) {
+                                    // Error. If error.code == .MissingOrInvalidNonce, make sure
+                                    // you're sending the SHA256-hashed nonce as a hex string with
+                                    // your request to Apple.
+                                    print(error?.localizedDescription as Any)
+                                    return
+                                }
+                                userAuth.login()
+								roleAuth.switchRole(to: .owner)
+                            }
+                        default:
+                            break
 
-						}
-
-						print("\(String(describing: Auth.auth().currentUser?.uid))")
-
-					default:
-						break
-
-					}
-				default:
-					break
-				}
-			}
-		).frame(width: 280, height: 45, alignment: .center)
-    }
+                        }
+                    default:
+                        break
+                    }
+                }
+            ).frame(width: 280, height: 45, alignment: .center)
+        }
+            
+        
+    
 }
 
 struct SignIn_Previews: PreviewProvider {
     static var previews: some View {
-		SignIn(userAuth: .shared)
+        SignIn()
     }
 }

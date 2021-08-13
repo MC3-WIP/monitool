@@ -13,12 +13,7 @@ struct TaskListTabItem: View {
 	var body: some View {
 		NavigationView {
 			List {
-				Section(header:
-							HStack {
-								Image(systemName: "largecircle.fill.circle")
-								Text("To Do List")
-							}
-				) {
+				Section {
 					ForEach(1..<5) { index in
 						Text("Menu \(index)")
 					}
@@ -43,7 +38,7 @@ struct TaskListTabItem: View {
 
 struct TaskListView_Previews: PreviewProvider {
 	static var previews: some View {
-		ForEach(["iPhone 12", "iPad Air (4th generation)"], id: \.self) { device in
+		ForEach(["iPhone 12"], id: \.self) { device in
 			TaskListTabItem()
 				.previewDevice(PreviewDevice(rawValue: device))
 				.previewDisplayName(device)

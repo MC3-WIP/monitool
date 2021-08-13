@@ -86,8 +86,8 @@ struct HistoriesSection: View{
                 HistoryRow(task: history)
             }
         }
-        .listStyle(GroupedListStyle())
-        .background(Color.white)
+        .listStyle(PlainListStyle())
+		.navigationTitle("History")
     }
 }
 

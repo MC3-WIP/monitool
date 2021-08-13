@@ -8,27 +8,32 @@
 import SwiftUI
 
 struct PadLayout: View {
-	@StateObject private var viewModel = PadLayoutViewModel()
+	@StateObject private var viewModel: PadLayoutViewModel
+
+	init(detailView: SidebarViewModel.MenuItem? = nil) {
+		_viewModel = StateObject(wrappedValue: PadLayoutViewModel(detailView: detailView))
+	}
 
 	var body: some View {
 		NavigationView {
 			ZStack {
-				Color.AppColor.secondary.edgesIgnoringSafeArea(.all)
+				AppColor.secondary.edgesIgnoringSafeArea(.all)
 				SidebarView()
 					.environmentObject(viewModel)
 			}
-			DetailView()
+			LayoutDetailView()
 		}
-		.accentColor(.AppColor.primary)
+		.styleNavigationBar()
+		.accentColor(AppColor.accent)
 	}
 }
 
 // MARK: - View Builders
 extension PadLayout {
 	@ViewBuilder
-	func DetailView() -> some View {
+	func LayoutDetailView() -> some View {
 		switch viewModel.currentDetailViewType {
-		case .todayList, .peerReview, .ownerReview, .revise, .taskManager:
+		case .todayList, .peerReview, .ownerReview, .revise, .taskList:
 			TaskListView(filter: $viewModel.currentTaskFilter)
 		case .history:
 			HistoryView()

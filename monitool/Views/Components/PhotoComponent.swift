@@ -14,6 +14,10 @@ struct PhotoComponent: View {
     @State private var showActionSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
+	  
+    @Binding var editMode: EditMode
+  
+    @ObservedObject var storageService = StorageService()
     
     var body: some View{
         VStack{
@@ -23,39 +27,46 @@ struct PhotoComponent: View {
                     .frame(width: 100, height: 100, alignment: .center)
                     .clipShape(Circle())
                     .padding(.bottom, 10.0)
-            }
-            else{
+            } else {
                 Image(uiImage: image!)
                     .resizable()
                     .frame(width: 100, height: 100, alignment: .center)
                     .clipShape(Circle())
                     .padding(.bottom, 10.0)
             }
-            Button("Upload photo") {
-                self.showActionSheet.toggle()
-            }
-            .sheet(isPresented: $showImagePicker) {
-                ImagePicker(sourceType: self.sourceType) { image in
-                    self.image = image
-                }
-            }
-            .actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
-                ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your profile image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
-                    self.showImagePicker.toggle()
-                    self.sourceType = .camera
-                }), ActionSheet.Button.default(Text("Photo Library"), action: {
-                    self.showImagePicker.toggle()
-                    self.sourceType = .photoLibrary
-                }), ActionSheet.Button.cancel()])
-                
+            if editMode.isEditing {
+              UploadButton()
             }
         }
     }
+
+	@ViewBuilder
+	func UploadButton() -> some View {
+		Button("Upload photo") {
+			self.showActionSheet.toggle()
+		}
+		.sheet(isPresented: $showImagePicker) {
+			ImagePicker(sourceType: self.sourceType) { image in
+				self.image = image
+        storageService.upload(image: self.image!, category: "profile")
+			}
+		}
+		.actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
+			ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your profile image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
+				self.showImagePicker.toggle()
+				self.sourceType = .camera
+			}), ActionSheet.Button.default(Text("Photo Library"), action: {
+				self.showImagePicker.toggle()
+				self.sourceType = .photoLibrary
+			}), ActionSheet.Button.cancel()])
+
+		}
+	}
 }
 
 struct PhotoComponent_Previews: PreviewProvider {
     static var previews: some View {
-        PhotoComponent()
+		PhotoComponent(editMode: .constant(EditMode.active))
     }
 }
 

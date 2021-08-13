@@ -38,6 +38,10 @@ class TaskViewModel: ObservableObject {
         repository.add(task)
     }
 
+    func add(_ task: Task, photo: UIImage, id: String){
+        repository.submitTask(task: task, photo: photo, id: id)
+    }
+
 	func delete(_ offsets: IndexSet) {
 		offsets.forEach { index in
 			repository.delete(tasks[index])

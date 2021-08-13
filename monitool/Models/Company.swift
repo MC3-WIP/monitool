@@ -9,13 +9,17 @@ import Foundation
 import FirebaseFirestoreSwift
 
 class Company: Codable{
-    @DocumentID var id: String!
+	@DocumentID var id: String!
+	var name: String
+	var minReview: Int
+	var ownerPin: String
+	var hasLoggedIn: Bool?
+	var profileImage: String?
 
-    var name: String
-    var minReview: Int
-
-    init(name: String, minReview: Int) {
-        self.name = name
-        self.minReview = minReview
-    }
+	init(name: String, minReview: Int, ownerPin: String, hasLoggedIn: Bool?) {
+		self.name = name
+		self.minReview = minReview
+		self.ownerPin = ownerPin
+		self.hasLoggedIn = hasLoggedIn ?? true
+	}
 }

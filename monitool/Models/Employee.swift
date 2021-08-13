@@ -15,8 +15,8 @@ class Employee: Codable, Identifiable {
 	var name: String
 	var pin: String
 
-	init(name: String) {
+    init(name: String, pin: String? = nil) {
 		self.name = name
-		pin = Helper.generatePIN()
+		self.pin = pin ?? Helper.generatePIN()
 	}
 }

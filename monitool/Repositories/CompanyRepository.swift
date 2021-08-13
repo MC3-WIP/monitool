@@ -9,47 +9,38 @@ import FirebaseFirestore
 import Combine
 import FirebaseAuth
 
-class CompanyRepository: ObservableObject{
-//    @Published var company: Company
+final class CompanyRepository: ObservableObject{
+    @Published var companies = [Company]()
     private let paths = RepositoriesPath()
     private let store = Firestore.firestore()
-    private var companyRepositories: DocumentReference? = nil
-    
-    init() {
-//        if let user = Auth.auth().currentUser{
-        companyRepositories = store.collection(paths.company).document("w7zd8Hi13yaQEJdVea79105p5aU2")
-//        }
-//        else{
-//
-//        }
-        
+	var companyRef: DocumentReference?
+
+	static let shared = CompanyRepository()
+
+    private init() {
+        if let user = Auth.auth().currentUser{
+            companyRef = store.collection(paths.company).document(user.uid)
+        }
     }
     
-    func addTask(task: Task, name: String, description: String) -> Self {
-//        task.name = name
-//        task.desc = description
-        
-        // MARK: Unfinished again
-//        store.collection(path).document(id).setData()
-        return self
+    func add(_ company: Company){
+        companyRef?.setData(["name": company.name, "minReview": company.minReview, "profileImage": "profile"])
     }
     
-    func deleteTask(task: Task, name: String) {
-//        store.collection(path).document(id).delete { error in
-//            if let error = error {
-//                print("Unable to remove card: \(error.localizedDescription)")
-//            }  else {
-//                print("Successfully deleted  story text")
-//            }
-//        }
+    func addImage(imageURL: String) {
+        companyRef?.updateData(["profileImage": imageURL])
+    }
+    
+    func delete(_ company: Company) {
+        store.collection(paths.company).document(company.id).delete()
     }
     
     func editCompanyName(name: String){
-        companyRepositories?.updateData(["name": name])
+        companyRef?.updateData(["name": name])
     }
     
     func editCompanyMinReview(minReview: Int){
-        companyRepositories?.updateData(["minReview": minReview])
+        companyRef?.updateData(["minReview": minReview])
     }
     
     // MARK: EDIT PHOTO BELOM

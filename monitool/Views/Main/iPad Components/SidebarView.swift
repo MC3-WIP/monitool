@@ -10,6 +10,7 @@ import SwiftUI
 struct SidebarView: View {
 	@EnvironmentObject var padLayout: PadLayoutViewModel
 	@StateObject var viewModel = SidebarViewModel()
+	@ObservedObject var role: RoleService = .shared
 
 	var body: some View {
 		ScrollView {
@@ -18,8 +19,8 @@ struct SidebarView: View {
 				Divider()
 				MenuItemView(type: .history)
 				Divider()
-				if viewModel.role.isOwner {
-					MenuItemView(type: .taskManager)
+				if role.isOwner {
+					MenuItemView(type: .taskList)
 				}
 				MenuItemView(type: .profile)
 			}
@@ -45,13 +46,20 @@ extension SidebarView {
 	func MenuItemView(type: SidebarViewModel.MenuItem) -> some View {
 		HStack {
 			Image(systemName: type.icon)
-				.foregroundColor(viewModel.selectedMenuItem == type ? .white : .AppColor.primary)
+				.foregroundColor(viewModel.selectedMenuItem == type ? AppColor.primaryForeground : AppColor.accent)
 			Text(type.title)
-				.foregroundColor(viewModel.selectedMenuItem == type ? .white : .black)
+				.foregroundColor(viewModel.selectedMenuItem == type ? AppColor.primaryForeground : AppColor.primaryBackground)
 			Spacer()
+//			if let notification = notification, notification.count > 0 {
+//				Text("\(notification.count)")
+//					.foregroundColor(notification.isPriority || isActive ? AppColor.primaryForeground : AppColor.secondary)
+//					.frame(width: 24, height: 24, alignment: .center)
+//					.background(notification.isPriority ? Color.red : Color.clear)
+//					.clipShape(Circle())
+//			}
 		}
 		.padding(12)
-		.background(viewModel.selectedMenuItem == type ? Color.AppColor.primary : Color.clear)
+		.background(viewModel.selectedMenuItem == type ? AppColor.accent : Color.clear)
 		.cornerRadius(12)
 		.contentShape(Rectangle())
 		.onTapGesture {
@@ -59,14 +67,14 @@ extension SidebarView {
 			padLayout.currentDetailViewType = type
 			switch type {
 			case .todayList:
-				padLayout.currentTaskFilter = .ongoing
+				padLayout.currentTaskFilter = .todayList
 			case .peerReview:
 				padLayout.currentTaskFilter = .waitingEmployeeReview
 			case .ownerReview:
 				padLayout.currentTaskFilter = .waitingOwnerReview
 			case .revise:
 				padLayout.currentTaskFilter = .revise
-			case .taskManager:
+			case .taskList:
 				padLayout.currentTaskFilter = nil
 			default: break
 			}

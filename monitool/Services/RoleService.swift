@@ -8,12 +8,25 @@
 import Foundation
 
 final class RoleService: ObservableObject {
+	enum Role {
+		case owner,
+			 employee
+	}
 	// Singleton Configuration
 	static let shared = RoleService()
-	private init() {}
-
-	var isOwner: Bool {
-		true
-	}
-
+    
+    @Published var isOwner: Bool = true {
+        didSet {
+            UserDefaults.standard.set(isOwner, forKey: "isOwner")
+        }
+    }
+    
+    init() {
+        self.isOwner = UserDefaults.standard.bool(forKey: "isOwner")
+    }
+    
+	func switchRole(to role: Role) {
+		isOwner = role == .owner
+    }
+    
 }

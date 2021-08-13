@@ -11,6 +11,7 @@ struct RepositoriesPath {
 	var company = "companies"
 	var employee = ""
 	var task = ""
+    var taskList = ""
 
 	init() {
 		if let id = Auth.auth().currentUser?.uid {

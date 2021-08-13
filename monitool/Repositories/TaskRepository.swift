@@ -20,9 +20,9 @@ final class TaskRepository: ObservableObject {
     @Published var histories: [Task] = []
     @Published var completedTasks: [Task] = []
 
-    init(){
-		let dummyTask = Task(name: "beli kopi")
-		add(dummyTask)
+	static let shared = TaskRepository()
+
+    private init(){
         get()
         getHistory()
     }
@@ -56,39 +56,121 @@ final class TaskRepository: ObservableObject {
                 let tasks = querySnapshot?.documents.compactMap {document in
                     try? document.data(as: Task.self)
                 } ?? []
-                
+
                 DispatchQueue.main.async {
                     self.tasks = tasks
                 }
             }
     }
+
+	func get(id: String, completion: ((Task?) -> Void)? = nil) {
+		store.collection(path.task).document(id).getDocument { doc, err in
+			if let err = err {
+				print("Error getting document \(id)", err.localizedDescription)
+				return
+			}
+
+			if let doc = doc {
+				do {
+					let task = try doc.data(as: Task.self)
+					completion?(task)
+				} catch {
+					print("Error parsing data, \(error.localizedDescription)")
+				}
+			}
+		}
+	}
     
-    func add(_ task: Task) {
-        do {
-			_ = try store.collection("companies/mBz4gtAwSyQA8JDWhePN/tasks").addDocument(from: task)
-        } catch{
-            fatalError("Fail adding new task")
-        }
+    func getComplete(){
+        store.collection(path.task).whereField("status", isEqualTo: "Completed")
+            .addSnapshotListener { querySnapshot, error in
+                if let error = error {
+                    print("Error getting stories: \(error.localizedDescription)")
+                    return
+                }
+                
+                let completedTasks = querySnapshot?.documents.compactMap {document in
+                    try? document.data(as: Task.self)
+                } ?? []
+                
+                DispatchQueue.main.async {
+                    self.completedTasks = completedTasks
+                }
+            }
     }
+    
+    func add(_ task: Task, _ id: String, completion: ((Error?) -> Void)? = nil) {
+            do {
+                _ = try store.collection(path.task).document(id).setData(from: task, completion: completion)
+            } catch{
+                fatalError("Fail adding new task")
+            }
+        }
 
 	func delete(_ task: Task) {
-		store.collection("companies/mBz4gtAwSyQA8JDWhePN/tasks").document(task.id).delete()
+		store.collection(path.task).document(task.id).delete()
 	}
     
 
-    func updatePIC(_ idCompany: String, _ idTask: String, _ employee: Employee){
-		store.collection(path.task).document(idCompany)
+    func updatePIC(taskID: String, employee: Employee){
+		let ref = store.collection(path.employee).document(employee.id)
+		store.collection(path.task).document(taskID).setData(["pic" : ref], merge: true)
+    }
+
+    func updateNotes(taskID: String, notes: String) {
+		store.collection(path.task).document(taskID).setData(["notes" : notes], merge: true)
     }
     
-    func updateNotes(id: String, notes: String) {
-		store.collection(path.task).document(id).updateData([
-            "notes" : notes
-        ])
+	func updateStatus(taskID: String, status: String, completion: ((Error?) -> Void)? = nil) {
+		store.collection(path.task).document(taskID).updateData(["status" : status], completion: completion)
     }
+
+	func appendReviewer(approving: Bool = true, taskID: String, employee: Employee, completion: ((Error?) -> Void)? = nil) {
+		let employeeRef: DocumentReference = store.collection(path.employee).document(employee.id)
+		
+		store
+			.collection(path.task)
+			.document(taskID)
+			.setData(
+				[(approving ? "approvingReviewer" : "disapprovingReviewer") : FieldValue.arrayUnion([employeeRef])],
+				merge: true,
+				completion: completion
+			)
+	}
     
-    func updateStatus(id: String, status: String) {
-		store.collection(path.task).document(id).updateData([
-            "status" : status
-        ])
+    func updatePhotoReference(taskID: String, photoRef: String, completion: ((Error?) -> Void)? = nil) {
+        storage.reference().child(photoRef).downloadURL {[self] url, error in
+            if let error = error {
+                // Handle any errors
+            } else if let url = url {
+                store
+                    .collection(path.task)
+                    .document(taskID)
+                    .setData(["photoReference" : url.absoluteString], merge: true, completion: completion)
+            }
+        }
     }
+
+    func submitTask(task: Task, photo: UIImage, id: String) {
+        self.add(task, id) { _ in
+            // Setelah task ada di firebase, baru upload photo
+            StorageService.shared.upload(image: photo, category: "taskPhotoReference/\(id)/\(UUID().uuidString)") { metadata, err in
+                // Setelah photo di upload, update field photo ref task tadi
+                if let metadata = metadata,
+                   let path = metadata.path {
+                    self.updatePhotoReference(taskID: id, photoRef: path)
+                }
+            }
+        }
+    }
+
+	func dropDisapprovingReviewer(taskID: String) {
+		store
+			.collection(path.task)
+			.document(taskID)
+			.setData(
+				["disapprovingReviewer": FieldValue.delete()],
+				merge: true
+			)
+	}
 }
