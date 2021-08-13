@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct PhotoComponent: View {
     
@@ -14,26 +15,38 @@ struct PhotoComponent: View {
     @State private var showActionSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
-	  
+    
+    @ObservedObject var profileViewModel = ProfileViewModel()
+
+    var imageURL: String
     @Binding var editMode: EditMode
   
     @ObservedObject var storageService = StorageService()
     
     var body: some View{
         VStack{
-            if image == nil {
-                Image("profile")
+            if imageURL != ""{
+                WebImage(url: URL(string: imageURL))
                     .resizable()
                     .frame(width: 100, height: 100, alignment: .center)
                     .clipShape(Circle())
                     .padding(.bottom, 10.0)
-            } else {
-                if let image = image {
-                    Image(uiImage: image)
+            }
+            else{
+                if image == nil {
+                    Image("profile")
                         .resizable()
                         .frame(width: 100, height: 100, alignment: .center)
                         .clipShape(Circle())
                         .padding(.bottom, 10.0)
+                } else {
+                    if let image = image {
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 100, height: 100, alignment: .center)
+                            .clipShape(Circle())
+                            .padding(.bottom, 10.0)
+                    }
                 }
             }
             if editMode.isEditing {
@@ -68,10 +81,10 @@ struct PhotoComponent: View {
 		}
 	}
 }
-
-struct PhotoComponent_Previews: PreviewProvider {
-    static var previews: some View {
-		PhotoComponent(editMode: .constant(EditMode.active))
-    }
-}
+//
+//struct PhotoComponent_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PhotoComponent(imageURL: "", editMode: .constant(EditMode.active))
+//    }
+//}
 

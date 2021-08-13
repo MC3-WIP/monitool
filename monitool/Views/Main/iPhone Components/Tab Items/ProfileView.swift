@@ -11,6 +11,8 @@ struct ProfileView: View {
 	@StateObject var companyViewModel = CompanyViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
     
+    @ObservedObject var employeeListViewModel = EmployeeListViewModel()
+    
     
     var company: Company?
     
@@ -30,6 +32,7 @@ struct ProfileView: View {
 		VStack {
 			List {
 				// MARK: - Company Profile
+//                CompanyProfileHeader()
 				Section(header: CompanyProfileHeader()) {
 					if editMode.isEditing {
 						CompanyInfoTextField(
@@ -45,16 +48,16 @@ struct ProfileView: View {
 					}
 					ReviewPolicy()
 				}
+                
 
 				// MARK: - Employee List
 				Section(header: EmployeeListHeader()) {
-					ForEach(profileViewModel.employees) { employee in
+					ForEach(employeeListViewModel.employees) { employee in
 						EmployeeRow(employee: employee)
 					}
-					.onDelete(perform: profileViewModel.delete)
+					.onDelete(perform: employeeListViewModel.delete)
 				}
 			}
-			.listStyle(PlainListStyle())
 
 			Spacer()
 
@@ -90,19 +93,15 @@ extension ProfileView {
 	@ViewBuilder func CompanyProfileHeader() -> some View {
 		VStack {
 			HStack {
-				Spacer()
-				PhotoComponent(editMode: $editMode)
-				Spacer()
+                Spacer()
+                PhotoComponent(imageURL: profileViewModel.company.profileImage ?? "", editMode: $editMode)
+                Spacer()
 			}
 			if !editMode.isEditing {
 				HStack {
-					Spacer()
-                    if let company = company{
-                        Text(profileViewModel.company.name)
-                            .font(.title)
-                    }
-                    
-					Spacer()
+                    Text(profileViewModel.company.name)
+                        .font(.title)
+					
 				}
 			}
 		}
@@ -238,9 +237,8 @@ extension ProfileView {
 // MARK: - Preview
 struct ProfileView_Previews: PreviewProvider {
 	static var previews: some View {
-		PadLayout(detailView: .profile)
+		ProfileView()
 			.previewDevice("iPad Air (4th generation)")
-			.modifier(LandscapeModifier())
 	}
 }
 

@@ -32,7 +32,7 @@ struct CompanyOnboardingView: View {
                                 .accessibilityHidden(true)) {
                         HStack() {
                             Spacer()
-							PhotoComponent(editMode: .constant(.active))
+                            PhotoComponent(imageURL: "", editMode: .constant(.active))
                             Spacer()
                         }
                         HStack() {
@@ -68,7 +68,7 @@ struct CompanyOnboardingView: View {
                         Spacer()
                         Button("Save", action: {
                             self.isLinkActive = true
-                            let company = Company(name: companyName, minReview: minReviewers, ownerPin: ownerPin.text, hasLoggedIn: true)
+                            let company = Company(name: companyName, minReview: minReviewers, ownerPin: ownerPin.text, hasLoggedIn: true, profileImage: "")
                             companyViewModel.create(company)
                             storageService.updateImageURL(category: "profile")
                             userAuth.hasLogin()

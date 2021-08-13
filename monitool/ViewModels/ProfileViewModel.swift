@@ -8,11 +8,12 @@
 import FirebaseFirestore
 import Foundation
 import FirebaseAuth
+import FirebaseStorage
 
 class ProfileViewModel: ObservableObject {
 	
 	@Published var employees = [Employee]()
-
+    @Published var company: Company
     
 	// UI State
 	@Published var isPinHidden = true
@@ -21,10 +22,10 @@ class ProfileViewModel: ObservableObject {
 
     private let companyRepository: CompanyRepository = .shared
     
-    var company: Company
+    
     
     init() {
-        company = Company(name: "", minReview: 0, ownerPin: "", hasLoggedIn: true)
+        company = Company(name: "", minReview: 0, ownerPin: "", hasLoggedIn: true, profileImage: "")
         getCompany()
     }
 
@@ -56,7 +57,7 @@ class ProfileViewModel: ObservableObject {
                 }
                 if let doc = doc, doc.exists {
                     do {
-                        self.company = Company(name: doc.get("name") as! String, minReview: doc.get("minReview") as! Int, ownerPin: doc.get("ownerPin") as! String, hasLoggedIn: true)
+                        self.company = Company(name: doc.get("name") as! String, minReview: doc.get("minReview") as! Int, ownerPin: doc.get("ownerPin") as! String, hasLoggedIn: true, profileImage: doc.get("profileImage") as! String)
                     } catch {
                         print("Unresolved error: \(error.localizedDescription)")
                     }
