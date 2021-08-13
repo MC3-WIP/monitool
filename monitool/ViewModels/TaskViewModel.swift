@@ -11,6 +11,8 @@ import SwiftUI
 class TaskViewModel: ObservableObject {
 	@ObservedObject private var repository: TaskRepository = .shared
     @Published var tasks = [Task]()
+    @Published var histories = [Task]()
+    @Published var historiesPerDay = [[Task]]()
     
     private var cancellables = Set<AnyCancellable>()
 
@@ -18,6 +20,22 @@ class TaskViewModel: ObservableObject {
         repository.$tasks
             .assign(to: \.tasks, on: self)
             .store(in: &cancellables)
+        repository.$histories
+            .assign(to: \.histories, on: self)
+            .store(in: &cancellables)
+        separateHistories()
+    }
+    
+    func separateHistories(){
+        let dateHelper = DateHelper()
+        for index in 0...6 {
+            let historyOfDay = histories.filter{ history in return dateHelper.getNumDays(first: history.createdAt, second: Date()) == index}
+            historiesPerDay.append(historyOfDay)
+        }
+    }
+
+    func add(_ task: Task){
+        repository.add(task)
     }
 
     func add(_ task: Task, photo: UIImage, id: String){
