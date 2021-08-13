@@ -17,16 +17,36 @@ final class TaskRepository: ObservableObject {
     private let storage = Storage.storage()
     
     @Published var tasks: [Task] = []
+    @Published var histories: [Task] = []
     @Published var completedTasks: [Task] = []
 
 	static let shared = TaskRepository()
 
     private init(){
         get()
+        getHistory()
+    }
+    
+    func getHistory(){
+        store.collection(path.task).whereField("isHistory", isEqualTo: true)
+            .addSnapshotListener { querySnapshot, error in
+                if let error = error {
+                    print("Error getting stories: \(error.localizedDescription)")
+                    return
+                }
+                
+                let histories = querySnapshot?.documents.compactMap {document in
+                    try? document.data(as: Task.self)
+                } ?? []
+
+                DispatchQueue.main.async {
+                    self.histories = histories
+                }
+            }
     }
     
     func get(){
-		store.collection(path.task)
+        store.collection(path.task).whereField("isHistory", isEqualTo: false)
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
                     print("Error getting stories: \(error.localizedDescription)")
@@ -79,9 +99,10 @@ final class TaskRepository: ObservableObject {
             }
     }
     
-    func add(_ task: Task, _ id: String, completion: ((Error?) -> Void)? = nil) {
+    func add(_ task: Task, _ taskList: TaskList, _ id: String, completion: ((Error?) -> Void)? = nil) {
             do {
-                _ = try store.collection(path.task).document(id).setData(from: task, completion: completion)
+                try store.collection(path.task).document(id).setData(from: task, completion: completion)
+                try store.collection(path.taskList).document(id).setData(from: taskList, completion: completion)
             } catch{
                 fatalError("Fail adding new task")
             }
@@ -90,7 +111,6 @@ final class TaskRepository: ObservableObject {
 	func delete(_ task: Task) {
 		store.collection(path.task).document(task.id).delete()
 	}
-    
 
     func updatePIC(taskID: String, employee: Employee){
 		let ref = store.collection(path.employee).document(employee.id)
@@ -119,10 +139,8 @@ final class TaskRepository: ObservableObject {
 	}
     
     func updatePhotoReference(taskID: String, photoRef: String, completion: ((Error?) -> Void)? = nil) {
-        storage.reference().child(photoRef).downloadURL {[self] url, error in
-            if let error = error {
-                // Handle any errors
-            } else if let url = url {
+        storage.reference().child(photoRef).downloadURL {[self] url, _ in
+            if let url = url {
                 store
                     .collection(path.task)
                     .document(taskID)
@@ -131,10 +149,10 @@ final class TaskRepository: ObservableObject {
         }
     }
 
-    func submitTask(task: Task, photo: UIImage, id: String) {
-        self.add(task, id) { _ in
+    func submitTask(task: Task, taskList: TaskList, photo: UIImage, id: String) {
+        self.add(task, taskList, id) { _ in
             // Setelah task ada di firebase, baru upload photo
-            StorageService.shared.upload(image: photo, category: "taskPhotoReference/\(id)/\(UUID().uuidString)") { metadata, err in
+            StorageService.shared.upload(image: photo, path: "taskPhotoReference/\(id)/\(UUID().uuidString)") { metadata, _ in
                 // Setelah photo di upload, update field photo ref task tadi
                 if let metadata = metadata,
                    let path = metadata.path {
@@ -142,6 +160,10 @@ final class TaskRepository: ObservableObject {
                 }
             }
         }
+    }
+    
+    func submitTask(task: Task, taskList: TaskList, id: String) {
+        self.add(task, taskList, id)
     }
 
 	func dropDisapprovingReviewer(taskID: String) {

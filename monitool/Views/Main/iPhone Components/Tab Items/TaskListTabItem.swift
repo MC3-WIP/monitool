@@ -10,34 +10,28 @@ import SwiftUI
 struct TaskListTabItem: View {
     @StateObject var taskListViewModel: TaskListViewModel = .shared
     @State var showSheetView = false
+  
     var body: some View {
         NavigationView {
             List {
-                ForEach(taskListViewModel.taskLists) { task in
+               ForEach(taskListViewModel.taskLists, id: \.id) { task in
+                  NavigationLink(destination: EditTaskListView(task: task)) {
                     TaskListRow(task: task)
-                }
-                .onDelete(perform: taskListViewModel.delete)
+                  }
+                }.onDelete(perform: taskListViewModel.delete)
             }
             .navigationBarTitle("Task List", displayMode: .inline)
-            .navigationBarItems(trailing:
-                                    Button(action: {
-                                        self.showSheetView.toggle()
-                                    }) {
-                                        Image(systemName: "plus.circle")
-                                    }
-            )
-            //            .toolbar {
-            //                AddTaskButton()
-            //            }
+            .toolbar {
+                AddTaskButton()
+            }
         }
         .sheet(isPresented: $showSheetView) {
-            AddTaskView(showSheetView: self.$showSheetView)
+            AddTaskView(showSheetView: $showSheetView)
         }
         .tabItem {
             Image(systemName: "text.badge.plus")
             Text("Task List")
         }
-        
     }
 }
 
@@ -47,11 +41,13 @@ extension TaskListTabItem {
             .padding(.vertical, 12)
     }
     
-    //    @ViewBuilder func AddTaskButton() -> some View {
-    //        NavigationLink(destination: AddTaskView()) {
-    //            Image(systemName: "plus.circle")
-    //        }
-    //    }
+     @ViewBuilder func AddTaskButton() -> some View {
+         Button {
+            showSheetView.toggle()
+        } label: {
+            Image(systemName: "plus.circle")
+        }
+     }
 }
 
 struct TaskListTabItem_Previews: PreviewProvider {

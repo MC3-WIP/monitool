@@ -9,11 +9,12 @@ import Combine
 import SwiftUI
 
 final class TaskListViewModel: ObservableObject {
-    @ObservedObject private var repository = TaskListRepository()
-    @Published var taskLists = [TaskList]()
-    private var cancellables = Set<AnyCancellable>()
+	@ObservedObject private var repository: TaskListRepository = .shared
+  @Published var taskLists = [TaskList]()
 
-    static let shared = TaskListViewModel()
+	private var cancellables = Set<AnyCancellable>()
+
+	static let shared = TaskListViewModel()
 
     private init(){
         repository.$taskLists
@@ -32,6 +33,11 @@ final class TaskListViewModel: ObservableObject {
     }
 
     func update(id: String, name: String, desc: String, repeated: [Bool]) {
-        repository.updateTask(id: id, name: name, desc: desc, repeated: repeated)
+		repository.updateTask(
+			taskID: id,
+			name: name,
+			desc: desc,
+			repeated: repeated
+		)
     }
 }
