@@ -24,7 +24,7 @@ class ProfileViewModel: ObservableObject {
     var company: Company
     
     init() {
-        company = Company(name: "Devin Test", minReview: 2, ownerPin: "1234", hasLoggedIn: true)
+        company = Company(name: "", minReview: 0, ownerPin: "", hasLoggedIn: true)
         getCompany()
     }
 
@@ -54,10 +54,8 @@ class ProfileViewModel: ObservableObject {
                 if let err = err {
                     fatalError("Unresolved error: \(err)")
                 }
-
                 if let doc = doc, doc.exists {
                     do {
-//                        self.company = try doc.data(as: Company.self) ?? Company(name: "Devin Test", minReview: 2, ownerPin: "1234", hasLoggedIn: true)
                         self.company = Company(name: doc.get("name") as! String, minReview: doc.get("minReview") as! Int, ownerPin: doc.get("ownerPin") as! String, hasLoggedIn: true)
                     } catch {
                         print("Unresolved error: \(error.localizedDescription)")
@@ -66,22 +64,4 @@ class ProfileViewModel: ObservableObject {
             })
         }
     }
-    
-    func fetchCompany(){
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        Firestore.firestore().collection("companies").document(userID).getDocument { (document, error) in
-            if let document = document, document.exists {
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(dataDescription)")
-                print("document id sini", userID)
-                print("disini", document.get("name") as Any)
-//                let fieldValue = document.get("myFieldName") as? Int
-//                let fieldValueType2 = document.data()?["myFieldName"] as? Int
-            } else {
-                print("Document does not exist")
-            }
-        }
-    }
 }
-
-// qXsHg1SBWwTkD3cXvO7SJ3JSAOD2
