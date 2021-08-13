@@ -52,8 +52,8 @@ final class TaskListRepository: ObservableObject {
         store.collection(path.taskList).document(taskList.id).delete()
     }
     
-    func updateTask(id: String, name: String, desc: String, repeated: [Bool]) {
-        store.collection(path.taskList).document(id).updateData([
+    func updateTask(taskID: String, name: String, desc: String, repeated: [Bool]) {
+        store.collection(path.taskList).document(taskID).updateData([
             "name": name,
             "desc": desc,
             "repeated": repeated
