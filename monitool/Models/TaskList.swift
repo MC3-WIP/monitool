@@ -13,10 +13,10 @@ class TaskList: Codable, Identifiable {
     let name: String
     let desc: String?
     var repeated: [Bool]?
-    var photoReference: [String]?
+    var photoReference: String?
     
     
-    init(name: String, desc: String? = nil, repeated: [Bool]? = nil, photoReference: [String]? = nil) {
+    init(name: String, desc: String? = nil, repeated: [Bool]? = nil, photoReference: String? = nil) {
         self.name = name
         self.desc = desc
         self.repeated = repeated

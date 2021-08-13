@@ -99,9 +99,10 @@ final class TaskRepository: ObservableObject {
             }
     }
     
-    func add(_ task: Task, _ id: String, completion: ((Error?) -> Void)? = nil) {
+    func add(_ task: Task, _ taskList: TaskList, _ id: String, completion: ((Error?) -> Void)? = nil) {
             do {
                 try store.collection(path.task).document(id).setData(from: task, completion: completion)
+                try store.collection(path.taskList).document(id).setData(from: taskList, completion: completion)
             } catch{
                 fatalError("Fail adding new task")
             }
@@ -110,7 +111,6 @@ final class TaskRepository: ObservableObject {
 	func delete(_ task: Task) {
 		store.collection(path.task).document(task.id).delete()
 	}
-    
 
     func updatePIC(taskID: String, employee: Employee){
 		let ref = store.collection(path.employee).document(employee.id)
@@ -149,8 +149,8 @@ final class TaskRepository: ObservableObject {
         }
     }
 
-    func submitTask(task: Task, photo: UIImage, id: String) {
-        self.add(task, id) { _ in
+    func submitTask(task: Task, taskList: TaskList, photo: UIImage, id: String) {
+        self.add(task, taskList, id) { _ in
             // Setelah task ada di firebase, baru upload photo
             StorageService.shared.upload(image: photo, path: "taskPhotoReference/\(id)/\(UUID().uuidString)") { metadata, _ in
                 // Setelah photo di upload, update field photo ref task tadi
@@ -160,6 +160,10 @@ final class TaskRepository: ObservableObject {
                 }
             }
         }
+    }
+    
+    func submitTask(task: Task, taskList: TaskList, id: String) {
+        self.add(task, taskList, id)
     }
 
 	func dropDisapprovingReviewer(taskID: String) {

@@ -34,12 +34,12 @@ class TaskViewModel: ObservableObject {
         }
     }
 
-    func add(_ task: Task){
-        repository.add(task)
+    func add(_ task: Task, _ taskList: TaskList, photo: UIImage, id: String){
+        repository.submitTask(task: task, taskList: taskList, photo: photo, id: id)
     }
-
-    func add(_ task: Task, photo: UIImage, id: String){
-        repository.submitTask(task: task, photo: photo, id: id)
+    
+    func add(_ task: Task, _ taskList: TaskList, id: String){
+        repository.submitTask(task: task, taskList: taskList, id: id)
     }
 
 	func delete(_ offsets: IndexSet) {
