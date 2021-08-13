@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SDWebImageSwiftUI
 
 extension ReviseView{
     @ViewBuilder func LeftColumn() -> some View {
@@ -15,7 +16,7 @@ extension ReviseView{
                 Text(taskDetailViewModel.task.name)
                     .font(.system(size: 28, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-                Image("kucing1")
+                WebImage(url: URL(string: reviseViewModel.task.photoReference ?? ""))
                     .resizable()
                     .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
                 if let desc = taskDetailViewModel.task.desc{
