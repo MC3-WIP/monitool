@@ -28,11 +28,13 @@ struct PhotoComponent: View {
                     .clipShape(Circle())
                     .padding(.bottom, 10.0)
             } else {
-                Image(uiImage: image!)
-                    .resizable()
-                    .frame(width: 100, height: 100, alignment: .center)
-                    .clipShape(Circle())
-                    .padding(.bottom, 10.0)
+                if let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: 100, height: 100, alignment: .center)
+                        .clipShape(Circle())
+                        .padding(.bottom, 10.0)
+                }
             }
             if editMode.isEditing {
               UploadButton()
@@ -48,7 +50,10 @@ struct PhotoComponent: View {
 		.sheet(isPresented: $showImagePicker) {
 			ImagePicker(sourceType: self.sourceType) { image in
 				self.image = image
-        storageService.upload(image: self.image!, path: "profile")
+                if let image = self.image {
+                    storageService.upload(image: image, path: "profile")
+                }
+        
 			}
 		}
 		.actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
