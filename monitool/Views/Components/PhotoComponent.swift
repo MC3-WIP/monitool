@@ -48,7 +48,7 @@ struct PhotoComponent: View {
 		.sheet(isPresented: $showImagePicker) {
 			ImagePicker(sourceType: self.sourceType) { image in
 				self.image = image
-        storageService.upload(image: self.image!, category: "profile")
+        storageService.upload(image: self.image!, path: "profile")
 			}
 		}
 		.actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in

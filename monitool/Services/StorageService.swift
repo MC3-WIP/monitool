@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import Firebase
+import FirebaseAuth
+import FirebaseStorage
 import FirebaseFirestoreSwift
 
 class StorageService: ObservableObject {
@@ -16,10 +17,10 @@ class StorageService: ObservableObject {
     
     static let shared = StorageService()
     
-    func upload(image: UIImage, category: String, completion: ((StorageMetadata?, Error?) -> Void)? = nil) {
+    func upload(image: UIImage, path: String, completion: ((StorageMetadata?, Error?) -> Void)? = nil) {
         // Create a storage reference
         if let id = Auth.auth().currentUser?.uid {
-            storageRef = storage.reference().child("images/\(id)/\(category).jpg")
+            storageRef = storage.reference().child("images/\(id)/\(path).jpg")
         }
         
         
@@ -31,8 +32,8 @@ class StorageService: ObservableObject {
         metadata.contentType = "image/jpg"
         
         // Upload the image
-        if let data = data {
-            storageRef?.putData(data, metadata: metadata, completion: completion)
+        if let data = data, let storage = storageRef {
+            storage.putData(data, metadata: metadata, completion: completion)
         }
     }
     
@@ -77,14 +78,9 @@ class StorageService: ObservableObject {
         if let id = Auth.auth().currentUser?.uid {
             storageRef = storage.reference().child("images/\(id)/\(category).jpg")
         }
-        storageRef?.downloadURL { url, error in
-            if let error = error {
-                // Handle any errors
-            } else {
-                self.companyViewModel.addImage(imageURL: url?.absoluteString ?? "profile")
-            }
+        storageRef?.downloadURL { url, _ in
+            self.companyViewModel.addImage(imageURL: url?.absoluteString ?? "profile")
         }
-        
     }
     
     // You can use the listItem() function above to get the StorageReference of the item you want to delete
