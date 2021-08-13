@@ -8,12 +8,26 @@
 import SwiftUI
 
 struct PhoneLayout: View {
+	enum PhoneTabItem {
+		case todoList, taskList, profile
+	}
+
+	@State var selectedTab: PhoneTabItem
+
+	init(selectedTab: PhoneTabItem = .todoList) {
+		self.selectedTab = selectedTab
+	}
+
 	var body: some View {
-		TabView {
-			TaskListiPhoneView()
-			HistoryTabItem()
+		TabView(selection: $selectedTab) {
+			TodoListTabItem()
+				.tag(PhoneTabItem.todoList)
+			TaskListTabItem()
+				.tag(PhoneTabItem.taskList)
 			ProfileTabItem()
+				.tag(PhoneTabItem.profile)
 		}
+		.accentColor(AppColor.accent)
 	}
 }
 

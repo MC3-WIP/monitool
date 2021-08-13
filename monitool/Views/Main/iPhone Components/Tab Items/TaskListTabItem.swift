@@ -1,47 +1,52 @@
 //
-//  TaskListView.swift
+//  TaskListTabItem.swift
 //  monitool
 //
-//  Created by Christianto Budisaputra on 29/07/21.
+//  Created by Christianto Budisaputra on 12/08/21.
 //
 
 import SwiftUI
 
 struct TaskListTabItem: View {
-	//	@ObservedObject var viewModel = TaskListViewModel()
+	@StateObject var taskListViewModel: TaskListViewModel = .shared
 
 	var body: some View {
 		NavigationView {
 			List {
-				Section {
-					ForEach(1..<5) { index in
-						Text("Menu \(index)")
+				ForEach(taskListViewModel.taskLists, id: \.id) { task in
+					NavigationLink(destination: EditTaskListView(task: task)) {
+						TaskListRow(task: task)
 					}
 				}
+				.onDelete(perform: taskListViewModel.delete)
 			}
-			.toolbar(content: {
-				Button(action: {
-					print("Add Task")
-				}, label: {
-					Image(systemName: "plus.circle")
-				})
-			})
-			.listStyle(InsetGroupedListStyle())
-			.navigationTitle("Task List")
+			.navigationBarTitle("Task List", displayMode: .inline)
+			.toolbar {
+				AddTaskButton()
+			}
 		}
 		.tabItem {
-			Image(systemName: "list.number")
+			Image(systemName: "text.badge.plus")
 			Text("Task List")
 		}
 	}
 }
 
-struct TaskListView_Previews: PreviewProvider {
-	static var previews: some View {
-		ForEach(["iPhone 12"], id: \.self) { device in
-			TaskListTabItem()
-				.previewDevice(PreviewDevice(rawValue: device))
-				.previewDisplayName(device)
+extension TaskListTabItem {
+	@ViewBuilder func TaskListRow(task: TaskList) -> some View {
+		Text(task.name)
+			.padding(.vertical, 12)
+	}
+
+	@ViewBuilder func AddTaskButton() -> some View {
+		NavigationLink(destination: AddTaskView()) {
+			Image(systemName: "plus.circle")
 		}
+	}
+}
+
+struct TaskListTabItem_Previews: PreviewProvider {
+	static var previews: some View {
+		PhoneLayout(selectedTab: .taskList)
 	}
 }
