@@ -1,23 +1,25 @@
 //
-//  IphoneEmployeeReview.swift
+//  IphoneReviseView.swift
 //  monitool
 //
-//  Created by Mac-albert on 11/08/21.
+//  Created by Mac-albert on 12/08/21.
 //
 import SwiftUI
-import SDWebImageSwiftUI
 
-struct IphoneEmployeeReview: View {
-    @StateObject var employeeReviewModel: TodayListViewModel
+struct IphoneReviseView: View {
     @StateObject var taskDetailViewModel: TaskDetailViewModel
+    @StateObject var reviseViewModel: TodayListViewModel
     @ObservedObject var taskViewModel = TaskViewModel()
+    
     @State var totalPage: Int = 3
     @State var datePhoto = "21 Juli 2021 at 15.57"
     @State var proofPage = 0
     
+    @Environment(\.presentationMode) var presentationMode
+    
     init (task: Task){
         _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
-        _employeeReviewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
+        _reviseViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
     }
     
     var body: some View {
@@ -53,7 +55,7 @@ struct IphoneEmployeeReview: View {
                     .font(.system(size: 17))
                     .padding(.vertical, 18)
                     
-                    WebImage(url: URL(string: employeeReviewModel.task.photoReference ?? ""))
+                    Image("kucing1")
                         .resizable()
                         .frame(width: proxy.size.width, height: proxy.size.width)
                     if let desc = taskDetailViewModel.task.desc{
@@ -61,6 +63,13 @@ struct IphoneEmployeeReview: View {
                             .font(.system(size: 17))
                             .multilineTextAlignment(.leading)
                     }
+                    
+                    VStack(spacing: 8){
+                        approveButton()
+                        reviseButton()
+                    }
+                    .padding(.vertical, 24)
+                    
                 }
             }
         }
@@ -114,6 +123,7 @@ struct IphoneEmployeeReview: View {
                     .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
             )
     }
+    
     @ViewBuilder
     func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View{
         VStack{
@@ -125,10 +135,53 @@ struct IphoneEmployeeReview: View {
                 .frame(width: metricSize.size.width * 0.85, height: 12, alignment: .leading)
         }
     }
+    
+    @ViewBuilder
+    func reviseButton() -> some View{
+        Button(action: {
+            // MARK: ACTION BUTTON REVISE
+            taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
+            self.presentationMode.wrappedValue.dismiss()
+        }){
+            HStack{
+                Image(systemName: "repeat")
+                Text("Revise")
+            }
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .font(.system(size: 17, weight: .semibold))
+            .padding()
+            .foregroundColor(Color(hex: "#4FB0AB"))
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color(hex: "#4FB0AB"), lineWidth: 2)
+                            )
+        }
+    }
+    
+    @ViewBuilder
+    func approveButton() -> some View{
+        Button(action: {
+            // MARK: ACTION BUTTON APPROVE
+            
+        }){
+            HStack{
+                Image(systemName: "checkmark")
+                Text("Approve")
+            }
+            .frame(minWidth: 0, maxWidth: .infinity)
+            .font(.system(size: 17, weight: .semibold))
+            .padding()
+            .foregroundColor(Color.white)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .stroke(Color(hex: "#4FB0AB"), lineWidth: 2)
+            ).background(RoundedRectangle(cornerRadius: 8).fill(Color(hex: "#4FB0AB")))
+        }
+    }
 }
 
-struct IphoneEmployeeReview_Previews: PreviewProvider {
+struct IphoneReviseView_Previews: PreviewProvider {
     static var previews: some View {
-        IphoneEmployeeReview(task: Task(name: "Employee Task 1", repeated: []))
+        IphoneReviseView(task: Task(name: "Revise Iphone", repeated: []))
     }
 }
