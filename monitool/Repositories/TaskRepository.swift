@@ -139,10 +139,8 @@ final class TaskRepository: ObservableObject {
 	}
     
     func updatePhotoReference(taskID: String, photoRef: String, completion: ((Error?) -> Void)? = nil) {
-        storage.reference().child(photoRef).downloadURL {[self] url, error in
-            if let error = error {
-                // Handle any errors
-            } else if let url = url {
+        storage.reference().child(photoRef).downloadURL {[self] url, _ in
+            if let url = url {
                 store
                     .collection(path.task)
                     .document(taskID)
@@ -154,7 +152,7 @@ final class TaskRepository: ObservableObject {
     func submitTask(task: Task, taskList: TaskList, photo: UIImage, id: String) {
         self.add(task, taskList, id) { _ in
             // Setelah task ada di firebase, baru upload photo
-            StorageService.shared.upload(image: photo, category: "taskPhotoReference/\(id)/\(UUID().uuidString)") { metadata, err in
+            StorageService.shared.upload(image: photo, path: "taskPhotoReference/\(id)/\(UUID().uuidString)") { metadata, _ in
                 // Setelah photo di upload, update field photo ref task tadi
                 if let metadata = metadata,
                    let path = metadata.path {
