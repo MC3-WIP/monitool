@@ -131,8 +131,12 @@ struct AddDataPopOver: View {
                     if taskName.count != 0 {
                         showingPopOver = false
                         let task = Task(name: taskName, description: taskDesc, photoReference: taskPhotoReference, repeated: taskRepeated)
+                        let taskList = TaskList(name: taskName, desc: taskDesc, repeated: taskRepeated, photoReference: taskPhotoReference)
                         if let image = image {
-                            taskViewModel.add(task, photo: image, id: UUID().uuidString)
+                            taskViewModel.add(task, taskList, photo: image, id: UUID().uuidString)
+                        }
+                        else{
+                            taskViewModel.add(task, taskList, id: UUID().uuidString)
                         }
                     }
                 }).foregroundColor(AppColor.accent))

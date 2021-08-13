@@ -14,10 +14,11 @@ struct RepositoriesPath {
     var taskList = ""
 
 	init() {
-		if let id = Auth.auth().currentUser?.uid {
+//		if let id = Auth.auth().currentUser?.uid {
+            let id = "5Hs6LXW7wMgihcrCaZ3RjnOFAiz1"
             employee = "companies/\(id)/employees"
             task = "companies/\(id)/tasks"
             taskList = "companies/\(id)/taskList"
-        }
+//        }
     }
 }
