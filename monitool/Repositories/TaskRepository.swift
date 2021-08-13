@@ -17,16 +17,36 @@ final class TaskRepository: ObservableObject {
     private let storage = Storage.storage()
     
     @Published var tasks: [Task] = []
+    @Published var histories: [Task] = []
+    @Published var completedTasks: [Task] = []
 
     init(){
 		let dummyTask = Task(name: "beli kopi")
 		add(dummyTask)
         get()
+        getHistory()
+    }
+    
+    func getHistory(){
+        store.collection(path.task).whereField("isHistory", isEqualTo: true)
+            .addSnapshotListener { querySnapshot, error in
+                if let error = error {
+                    print("Error getting stories: \(error.localizedDescription)")
+                    return
+                }
+                
+                let histories = querySnapshot?.documents.compactMap {document in
+                    try? document.data(as: Task.self)
+                } ?? []
+
+                DispatchQueue.main.async {
+                    self.histories = histories
+                }
+            }
     }
     
     func get(){
-//		store.collection(path.task)
-		store.collection("companies/mBz4gtAwSyQA8JDWhePN/tasks")
+        store.collection(path.task).whereField("isHistory", isEqualTo: false)
             .addSnapshotListener { querySnapshot, error in
                 if let error = error {
                     print("Error getting stories: \(error.localizedDescription)")
