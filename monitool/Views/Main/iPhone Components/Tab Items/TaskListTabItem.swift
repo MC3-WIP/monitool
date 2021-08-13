@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TaskListTabItem: View {
     @StateObject var taskListViewModel: TaskListViewModel = .shared
-
+    @State var showSheetView = false
     var body: some View {
         NavigationView {
             List {
@@ -19,14 +19,25 @@ struct TaskListTabItem: View {
                 .onDelete(perform: taskListViewModel.delete)
             }
             .navigationBarTitle("Task List", displayMode: .inline)
-            .toolbar {
-                AddTaskButton()
-            }
+            .navigationBarItems(trailing:
+                                    Button(action: {
+                                        self.showSheetView.toggle()
+                                    }) {
+                                        Image(systemName: "plus.circle")
+                                    }
+            )
+            //            .toolbar {
+            //                AddTaskButton()
+            //            }
+        }
+        .sheet(isPresented: $showSheetView) {
+            AddTaskView(showSheetView: self.$showSheetView)
         }
         .tabItem {
             Image(systemName: "text.badge.plus")
             Text("Task List")
         }
+        
     }
 }
 
@@ -35,12 +46,12 @@ extension TaskListTabItem {
         Text(task.name)
             .padding(.vertical, 12)
     }
-
-    @ViewBuilder func AddTaskButton() -> some View {
-        NavigationLink(destination: AddTaskView()) {
-            Image(systemName: "plus.circle")
-        }
-    }
+    
+    //    @ViewBuilder func AddTaskButton() -> some View {
+    //        NavigationLink(destination: AddTaskView()) {
+    //            Image(systemName: "plus.circle")
+    //        }
+    //    }
 }
 
 struct TaskListTabItem_Previews: PreviewProvider {
