@@ -30,38 +30,6 @@ struct HistoryView: View {
         .listStyle(InsetGroupedListStyle())
         .background(Color.white)
     }
-//        List {
-//            Section(header: Text("Today").font(.title).foregroundColor(.black).fontWeight(.bold)){
-//                ForEach(taskViewModel.tasks, id: \.id){ task in
-//                    if(dateHelper.getNumDays(first: Date(), second: task.createdAt) == 0 && task.status.rawValue == "Completed"){
-//                        HistoryRow(task: task)
-//                    }
-//                }
-//            }
-//            .textCase(nil)
-//            .listRowBackground(AppColor.primaryForeground)
-//
-//            Section(header: Text("Yesterday").font(.title).foregroundColor(.black).fontWeight(.bold)){
-//                ForEach(taskViewModel.tasks, id: \.id){ task in
-//                    if(dateHelper.getNumDays(first: task.createdAt, second: Date()) == 1 && task.status.rawValue == "Completed"){
-//                        HistoryRow(task: task)
-//                    }
-//                }
-//            }
-//            .textCase(nil)
-//
-//            Section(header: Text(dateHelper.getStringFromDate(date: min2Day!)).font(.title).foregroundColor(.black).fontWeight(.bold)){
-//                ForEach(taskViewModel.tasks, id: \.id){ task in
-//                    if(dateHelper.getNumDays(first: task.createdAt, second: Date()) == 2 && task.status.rawValue == "Completed"){
-//                        HistoryRow(task: task)
-//                    }
-//                }
-//            }
-//            .textCase(nil)
-//        }
-//        .listStyle(PlainListStyle())
-//		.navigationTitle("History")
-//    }
         
 }
 
