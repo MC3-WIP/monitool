@@ -8,20 +8,23 @@
 import SwiftUI
 
 struct ProfileView: View {
-	@StateObject var viewModel = ProfileViewModel(company: Company(name: "Jake", minReview: 2, ownerPin: "2244", hasLoggedIn: true))
-
+	@StateObject var companyViewModel = CompanyViewModel()
+    @StateObject var profileViewModel = ProfileViewModel()
+    
+    
+    var company: Company?
+    
+    @State var companyName = ""
 	@State var editMode: EditMode = .inactive {
 		didSet {
-			if editMode.isEditing { viewModel.isPinHidden = false }
-			else { viewModel.isPinHidden = true }
+			if editMode.isEditing { profileViewModel.isPinHidden = false }
+			else { profileViewModel.isPinHidden = true }
 		}
 	}
-
+    
+    
 	@ObservedObject var role: RoleService = .shared
 
-	init() {
-		UITableViewHeaderFooterView.appearance().backgroundView = .init()
-	}
 
 	var body: some View {
 		VStack {
@@ -32,12 +35,12 @@ struct ProfileView: View {
 						CompanyInfoTextField(
 							title: "Company Name",
 							placeholder: "Company Inc.",
-							text: $viewModel.company.name
+                            text: $profileViewModel.company.name
 						)
 						CompanyInfoTextField(
 							title: "Owner PIN",
 							placeholder: "1234",
-							text: $viewModel.company.ownerPin
+							text: $profileViewModel.company.ownerPin
 						)
 					}
 					ReviewPolicy()
@@ -45,10 +48,10 @@ struct ProfileView: View {
 
 				// MARK: - Employee List
 				Section(header: EmployeeListHeader()) {
-					ForEach(viewModel.employees) { employee in
+					ForEach(profileViewModel.employees) { employee in
 						EmployeeRow(employee: employee)
 					}
-					.onDelete(perform: viewModel.delete)
+					.onDelete(perform: profileViewModel.delete)
 				}
 			}
 			.listStyle(PlainListStyle())
@@ -65,7 +68,7 @@ struct ProfileView: View {
 				EditButton()
 			}
 		}
-		.sheet(isPresented: $viewModel.isPinPresenting, onDismiss: {
+		.sheet(isPresented: $profileViewModel.isPinPresenting, onDismiss: {
 			role.switchRole(to: .owner)
 		}) {
 			NavigationView {
@@ -73,7 +76,7 @@ struct ProfileView: View {
 			}
 			.toolbar {
 				Button("Cancle") {
-					viewModel.isPinPresenting = false
+                    profileViewModel.isPinPresenting = false
 				}
 			}
 			.navigationBarTitle("Insert PIN", displayMode: .inline)
@@ -94,8 +97,11 @@ extension ProfileView {
 			if !editMode.isEditing {
 				HStack {
 					Spacer()
-					Text(viewModel.company.name)
-						.font(.title)
+                    if let company = company{
+                        Text(profileViewModel.company.name)
+                            .font(.title)
+                    }
+                    
 					Spacer()
 				}
 			}
@@ -130,16 +136,16 @@ extension ProfileView {
 					.frame(width: metrics.size.width * 0.7)
 					if editMode.isEditing {
 						HStack {
-							Stepper(viewModel.reviewerString) {
-								viewModel.incrementReviewer()
+							Stepper(profileViewModel.reviewerString) {
+								profileViewModel.incrementReviewer()
 							} onDecrement: {
-								viewModel.decrementReviewer()
+								profileViewModel.decrementReviewer()
 							}
 						}
 					} else {
 						HStack {
 							Spacer()
-							Text(viewModel.reviewerString)
+							Text(profileViewModel.reviewerString)
 						}
 					}
 				}
@@ -159,20 +165,20 @@ extension ProfileView {
 				Spacer()
 				if role.isOwner {
 					Button {
-						viewModel.isPinHidden.toggle()
+						profileViewModel.isPinHidden.toggle()
 					} label: {
 						if editMode.isEditing {
 							Button("Add Employee") {
-								viewModel.isAddEmployeePresenting = true
+								profileViewModel.isAddEmployeePresenting = true
 							}
-						} else if viewModel.isPinHidden {
+						} else if profileViewModel.isPinHidden {
 							Image(systemName: "eye")
 						} else {
 							Image(systemName: "eye.slash")
 						}
 					}
-					.popover(isPresented: $viewModel.isAddEmployeePresenting) {
-                        AddDataPopOver(sheetType: "Employee", showingPopOver: $viewModel.isAddEmployeePresenting)
+					.popover(isPresented: $profileViewModel.isAddEmployeePresenting) {
+                        AddDataPopOver(sheetType: "Employee", showingPopOver: $profileViewModel.isAddEmployeePresenting)
 							.frame(width: 400, height: 400)
 							.accentColor(AppColor.accent)
 					}
@@ -205,7 +211,7 @@ extension ProfileView {
 				if editMode.isEditing {
 					Text(employee.pin)
 				} else {
-					Text(viewModel.isPinHidden ? "****" : employee.pin)
+					Text(profileViewModel.isPinHidden ? "****" : employee.pin)
 				}
 			}
 		}
@@ -217,7 +223,7 @@ extension ProfileView {
 			if role.isOwner {
 				RoleService.shared.switchRole(to: .employee)
 			} else {
-				viewModel.isPinPresenting = true
+				profileViewModel.isPinPresenting = true
 			}
 		}
 		.padding(.horizontal, 48)
