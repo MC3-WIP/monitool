@@ -15,7 +15,7 @@ extension OwnerReviewView{
                 Text(taskDetailViewModel.task.name)
                     .font(.system(size: 28, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-                WebImage(url: URL(string: OwnerViewModel.task.photoReference ?? ""))
+                Image("kucing1")
                     .resizable()
                     .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
                 if let desc = taskDetailViewModel.task.desc{

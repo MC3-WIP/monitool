@@ -60,7 +60,7 @@ struct IphoneOwnerReview: View {
                             .modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
                     }
                     
-                    WebImage(url: URL(string: todayListViewModel.task.photoReference ?? ""))
+                    Image("kucing1")
                         .resizable()
                         .frame(width: proxy.size.width, height: proxy.size.width)
                     Text("masukkan saja kawat ke lubang kunci dan gerak-gerakkan searah dengan jarum jam. Jika digerakkan berlawanan dengan arah jarum jam sama saja anda menguncinya dan berujung sia-sia. Walaupun demikian, jangan terlalu bergantung pada cara ini, karena bisa saja kualitas kunci yang baik tidak mudah jika dilakukan hal-hal yang tidak sesuai ketentuan dalam proses membuka pintu yang terkunci")
