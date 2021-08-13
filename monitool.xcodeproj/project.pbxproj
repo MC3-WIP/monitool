@@ -43,6 +43,8 @@
 		83A023F026B404EE002D24CC /* ProfileTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023EF26B404EE002D24CC /* ProfileTabItem.swift */; };
 		83A023F726B40910002D24CC /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023F626B40910002D24CC /* SidebarView.swift */; };
 		83A023F926B40B42002D24CC /* TabItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023F826B40B42002D24CC /* TabItemRow.swift */; };
+		83A06C8B26C58B740098863F /* TaskManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A06C8A26C58B740098863F /* TaskManagerView.swift */; };
+		83A06C8D26C58DFD0098863F /* TaskManagerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A06C8C26C58DFD0098863F /* TaskManagerDetailView.swift */; };
 		83A7209A26BD4B96007A30D3 /* NavigationBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A7209926BD4B96007A30D3 /* NavigationBarModifier.swift */; };
 		83A7209D26BD7E6E007A30D3 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A7209C26BD7E6E007A30D3 /* Color.swift */; };
 		83B664B926BBE30200F64364 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B664B826BBE30200F64364 /* ProfileViewModel.swift */; };
@@ -129,6 +131,8 @@
 		83A023EF26B404EE002D24CC /* ProfileTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabItem.swift; sourceTree = "<group>"; };
 		83A023F626B40910002D24CC /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		83A023F826B40B42002D24CC /* TabItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemRow.swift; sourceTree = "<group>"; };
+		83A06C8A26C58B740098863F /* TaskManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerView.swift; sourceTree = "<group>"; };
+		83A06C8C26C58DFD0098863F /* TaskManagerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerDetailView.swift; sourceTree = "<group>"; };
 		83A7209926BD4B96007A30D3 /* NavigationBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifier.swift; sourceTree = "<group>"; };
 		83A7209C26BD7E6E007A30D3 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		83B664B826BBE30200F64364 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
@@ -380,6 +384,8 @@
 				F81FDBCC26C4485F0039C37D /* AddTaskView.swift */,
 				83F9BE3726C4FB3700B957F2 /* EditTaskListView.swift */,
 				6F90ECC726C3BE5E008EB2D1 /* TaskListiPhoneView.swift */,
+				F81FDBCC26C4485F0039C37D /* AddTaskView.swift */,
+				83F9BE3726C4FB3700B957F2 /* EditTaskListView.swift */,
 			);
 			path = "iPhone Components";
 			sourceTree = "<group>";
@@ -393,6 +399,8 @@
 				83BB7B6426C4E44F008D4F06 /* ProfileView.swift */,
 				8E97703D26BDAE5C00A4F341 /* HistoryTaskDetailView.swift */,
 				F83184C326BCF56900354AFD /* TaskListDetailView.swift */,
+				83A06C8A26C58B740098863F /* TaskManagerView.swift */,
+				83A06C8C26C58DFD0098863F /* TaskManagerDetailView.swift */,
 			);
 			path = "iPad Components";
 			sourceTree = "<group>";
@@ -687,22 +695,19 @@
 				83A023EC26B402A0002D24CC /* MainView.swift in Sources */,
 				83A7209A26BD4B96007A30D3 /* NavigationBarModifier.swift in Sources */,
 				6F0CC8E826B137CB00D15B96 /* TaskViewModel.swift in Sources */,
-				6F0CC8E826B137CB00D15B96 /* TaskViewModel.swift in Sources */,
 				8EC984F126C3994E000961E1 /* OnboardingStepView.swift in Sources */,
 				838B23FD26BE9B76004979A4 /* RoundedEdge.swift in Sources */,
-				830B1DF526A8149E00D38AE9 /* MainOnboardingView.swift in Sources */,
 				B823A78926B7DEBA0035D9F4 /* AddDataPopOver.swift in Sources */,
 				830B1DF526A8149E00D38AE9 /* MainOnboardingView.swift in Sources */,
 				8E35AC5926BA8B00007613E9 /* NoSeparatorList.swift in Sources */,
-				6F0CC8E826B137CB00D15B96 /* TaskViewModel.swift in Sources */,
 				F83184C426BCF56900354AFD /* TaskListDetailView.swift in Sources */,
-				B823A78926B7DEBA0035D9F4 /* AddDataPopOver.swift in Sources */,
 				6F0CC8E626AFD86700D15B96 /* TaskRepository.swift in Sources */,
 				B8B44EEF26BAE977001379AA /* TaskListRepository.swift in Sources */,
 				833CCA9D26B67DCC00BA67CA /* AppColor.swift in Sources */,
 				6F90ECC826C3BE5E008EB2D1 /* TaskListiPhoneView.swift in Sources */,
 				8EA5EEE526BFCF07009C534F /* ReviseViewBuilder.swift in Sources */,
 				83A023F926B40B42002D24CC /* TabItemRow.swift in Sources */,
+				83A06C8D26C58DFD0098863F /* TaskManagerDetailView.swift in Sources */,
 				6F6C13AB26B3F377000BBD26 /* ImagePicker.swift in Sources */,
 				8EA5EEDF26BFBEB5009C534F /* OwnerReviewViewBuilder.swift in Sources */,
 				83E9492426AFC384003903FE /* Employee.swift in Sources */,
@@ -720,6 +725,7 @@
 				83ECAF6526AA115B0069CF25 /* Strings.swift in Sources */,
 				8E7A53BD26B13EC4007FA3A8 /* CompanyRepository.swift in Sources */,
 				8EC984F326C3BF20000961E1 /* OnboardingFirstPage.swift in Sources */,
+				83A06C8B26C58B740098863F /* TaskManagerView.swift in Sources */,
 				83EF2A9326B29F1C00378602 /* TodoListTabItem.swift in Sources */,
 				6F0CC8E426AFCF4700D15B96 /* Task.swift in Sources */,
 				B850700B26B14B3000530CBA /* CompanyOnboardingView.swift in Sources */,

@@ -17,8 +17,10 @@ final class TaskListRepository: ObservableObject {
     private let storage = Storage.storage()
     
     @Published var taskLists: [TaskList] = []
+
+	static let shared = TaskListRepository()
     
-    init() {
+    private init() {
         get()
     }
     
