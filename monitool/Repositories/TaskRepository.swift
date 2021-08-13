@@ -79,13 +79,13 @@ final class TaskRepository: ObservableObject {
             }
     }
     
-    func add(_ task: Task) {
-        do {
-			_ = try store.collection(path.task).addDocument(from: task)
-        } catch{
-            fatalError("Fail adding new task")
+    func add(_ task: Task, _ id: String, completion: ((Error?) -> Void)? = nil) {
+            do {
+                _ = try store.collection(path.task).document(id).setData(from: task, completion: completion)
+            } catch{
+                fatalError("Fail adding new task")
+            }
         }
-    }
 
 	func delete(_ task: Task) {
 		store.collection(path.task).document(task.id).delete()
@@ -117,6 +117,32 @@ final class TaskRepository: ObservableObject {
 				completion: completion
 			)
 	}
+    
+    func updatePhotoReference(taskID: String, photoRef: String, completion: ((Error?) -> Void)? = nil) {
+        storage.reference().child(photoRef).downloadURL {[self] url, error in
+            if let error = error {
+                // Handle any errors
+            } else if let url = url {
+                store
+                    .collection(path.task)
+                    .document(taskID)
+                    .setData(["photoReference" : url.absoluteString], merge: true, completion: completion)
+            }
+        }
+    }
+
+    func submitTask(task: Task, photo: UIImage, id: String) {
+        self.add(task, id) { _ in
+            // Setelah task ada di firebase, baru upload photo
+            StorageService.shared.upload(image: photo, category: "taskPhotoReference/\(id)/\(UUID().uuidString)") { metadata, err in
+                // Setelah photo di upload, update field photo ref task tadi
+                if let metadata = metadata,
+                   let path = metadata.path {
+                    self.updatePhotoReference(taskID: id, photoRef: path)
+                }
+            }
+        }
+    }
 
 	func dropDisapprovingReviewer(taskID: String) {
 		store
