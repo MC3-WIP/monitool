@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import SDWebImageSwiftUI
 
 extension EmployeeReviewView{
     @ViewBuilder func LeftColumn() -> some View {
