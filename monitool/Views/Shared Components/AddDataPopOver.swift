@@ -144,9 +144,3 @@ struct AddDataPopOver: View {
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
-//
-//struct AddEmployeeSheetView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddDataPopOver(sheetType: "")
-//    }
-//}

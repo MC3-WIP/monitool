@@ -16,9 +16,10 @@ struct TaskListDetailView: View {
     @State var image: UIImage?
     @State var selectedDays: [String] = []
     @State var taskRepeated = [false, false, false, false, false, false, false]
+    @State private var showActionSheet = false
     
     var body: some View {
-        NavigationView {
+        //NavigationView {
             VStack {
                 List() {
                         HStack(spacing: 70) {
@@ -43,10 +44,10 @@ struct TaskListDetailView: View {
                             HStack() {
                                 if selectedDays.count != 0 {
                                     if selectedDays.count == 7 {
-                                        Text("Everyday")
+                                        Text("Everyday").foregroundColor(.gray)
                                     } else {
                                         ForEach(selectedDays, id:\.self) { day in
-                                            Text(day)
+                                            Text(day).foregroundColor(.gray)
                                         }
                                     }
                                 }
@@ -61,10 +62,16 @@ struct TaskListDetailView: View {
                         Text("Photo Reference").font(.title2).foregroundColor(.black).fontWeight(.semibold).padding(.leading).frame(maxWidth: .infinity, alignment: .leading)
                         HStack{
                         Button(action: {
-                            self.showImagePicker.toggle()
-                            self.sourceType = .camera
+                            self.showActionSheet.toggle()
 
                         }) {
+                            if image != nil {
+                            Image(uiImage: image!)
+                                .resizable()
+                                .frame(width: 140, height: 140, alignment: .center)
+                                .clipShape(Rectangle())
+                                .padding(.leading, 10.0)
+                        }
                             Image("camera")
                             .renderingMode(Image.TemplateRenderingMode?.init(Image.TemplateRenderingMode.original))
                                 .padding(.leading)
@@ -76,10 +83,20 @@ struct TaskListDetailView: View {
                                 self.image = image
                             }
                         }
+                        .actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
+                            ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to add a photo reference"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
+                                self.showImagePicker.toggle()
+                                self.sourceType = .camera
+                            }), ActionSheet.Button.default(Text("Photo Library"), action: {
+                                self.showImagePicker.toggle()
+                                self.sourceType = .photoLibrary
+                            }), ActionSheet.Button.cancel()])
+                            
+                        }
                     }
                 }
             }.navigationTitle("Task List").navigationBarTitleDisplayMode(.inline)
-        }.navigationViewStyle(StackNavigationViewStyle())
+        //}.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

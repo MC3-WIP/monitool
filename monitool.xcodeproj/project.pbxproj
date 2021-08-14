@@ -378,9 +378,10 @@
 			isa = PBXGroup;
 			children = (
 				83A023F526B408EC002D24CC /* Tab Items */,
-				6F90ECC726C3BE5E008EB2D1 /* TaskListiPhoneView.swift */,
 				F81FDBCC26C4485F0039C37D /* AddTaskView.swift */,
+				6F90ECC726C3BE5E008EB2D1 /* TaskListiPhoneView.swift */,
 				83F9BE3726C4FB3700B957F2 /* EditTaskListView.swift */,
+				6F90ECC726C3BE5E008EB2D1 /* TaskListiPhoneView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
