@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import SDWebImageSwiftUI
 
 extension ReviseView{
     @ViewBuilder func LeftColumn() -> some View {
