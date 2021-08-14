@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 // MARK: - View Builders
 extension TodayListView {
