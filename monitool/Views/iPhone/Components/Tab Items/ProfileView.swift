@@ -32,7 +32,6 @@ struct ProfileView: View {
 		VStack {
 			List {
 				// MARK: - Company Profile
-//                CompanyProfileHeader()
 				Section(header: CompanyProfileHeader()) {
 					if editMode.isEditing {
 						CompanyInfoTextField(
