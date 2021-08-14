@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 extension OwnerReviewView{
     @ViewBuilder func LeftColumn() -> some View {
