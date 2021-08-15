@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 // MARK: - View Builders
 extension TodayListView {
 	@ViewBuilder func LeftColumn() -> some View {
@@ -16,7 +17,7 @@ extension TodayListView {
 				Text(todayListViewModel.task.name)
 					.font(.system(size: 28, weight: .bold))
 					.frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-				Image("kucing1")
+                Image("kucing1")
 					.resizable()
 					.frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
 				if let desc = todayListViewModel.task.desc {
