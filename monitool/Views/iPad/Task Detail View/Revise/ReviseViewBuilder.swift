@@ -95,7 +95,7 @@ extension ReviseView{
                     case 2:
                         ProofOfWork(image: "kucing4", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
                     default:
-                        Text("Error")
+                        Image("MonitoolAddPhotoIllustration")
                     }
                 }
                 .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)

@@ -40,7 +40,7 @@ extension TodayListView {
 					.frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
 					.foregroundColor(Color(hex: "898989"))
                 
-				ProofOfWork(image: "kucing2", date: "p", metricSize: matric)
+				ProofOfWork(image: "MonitoolAddPhotoIllustration", date: "p", metricSize: matric)
 					.frame(width: matric.size.width * 0.75, height: matric.size.width * 0.75)
 					.padding(.vertical, 10)
 					.background(Color(hex: "F0F9F8"))
@@ -136,12 +136,19 @@ extension TodayListView {
 
 	@ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View{
 		VStack{
-			Image(image)
-				.resizable()
-				.frame(width: metricSize.size.width * 0.5, height: metricSize.size.width * 0.5)
-			//            Text("21 Jul 2021 at 15:57")
-			//                .font(.system(size: 11))
-			//                .frame(width: metricSize.size.width * 0.7, height: 12, alignment: .leading)
+            if image == "" {
+                Image("MonitoolAddPhotoIllustration")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: metricSize.size.width * 0.5, height: metricSize.size.width * 0.5)
+            }
+            else{
+                Image(image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: metricSize.size.width * 0.5, height: metricSize.size.width * 0.5)
+            }
+			
 		}
 	}
 }

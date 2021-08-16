@@ -69,12 +69,16 @@ struct IphoneTodayListView: View {
     }
     @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View{
         VStack{
-            Image(image)
-                .resizable()
-                .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
-            //            Text("21 Jul 2021 at 15:57")
-            //                .font(.system(size: 11))
-            //                .frame(width: metricSize.size.width * 0.7, height: 12, alignment: .leading)
+            if image == ""{
+                Image("MonitoolAddPhotoIllustration")
+                    .resizable()
+                    .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
+            }
+            else{
+                Image(image)
+                    .resizable()
+                    .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
+            }
         }
     }
 }
