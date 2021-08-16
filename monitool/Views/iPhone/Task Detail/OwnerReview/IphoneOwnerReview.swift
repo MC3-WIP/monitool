@@ -69,9 +69,16 @@ struct IphoneOwnerReview: View {
                             .modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
                     }
                     
-                    WebImage(url: URL(string: OwnerViewModel.task.photoReference ?? "MonitoolEmptyReferenceIllus"))
-                        .resizable()
-                        .frame(width: proxy.size.width, height: proxy.size.width)
+                    if let image = OwnerViewModel.task.photoReference{
+                        WebImage(url: URL(string: image))
+                            .resizable()
+                            .frame(width: proxy.size.width, height: proxy.size.width)
+                    }
+                    else{
+                        Image("MonitoolEmptyReferenceIllus")
+                            .resizable()
+                            .frame(width: proxy.size.width, height: proxy.size.width)
+                    }
                     if let desc = taskDetailViewModel.task.desc{
                         Text(desc)
                             .font(.system(size: 17))

@@ -69,7 +69,7 @@
 		8E97703E26BDAE5C00A4F341 /* HistoryTaskDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E97703D26BDAE5C00A4F341 /* HistoryTaskDetailView.swift */; };
 		8E97704026BDBAEF00A4F341 /* ReviseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E97703F26BDBAEF00A4F341 /* ReviseView.swift */; };
 		8EA5EEDF26BFBEB5009C534F /* OwnerReviewViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEDE26BFBEB5009C534F /* OwnerReviewViewBuilder.swift */; };
-		8EA5EEE226BFC9B2009C534F /* EmployeeReivewViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE126BFC9B2009C534F /* EmployeeReivewViewBuilder.swift */; };
+		8EA5EEE226BFC9B2009C534F /* EmployeeReviewViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE126BFC9B2009C534F /* EmployeeReviewViewBuilder.swift */; };
 		8EA5EEE526BFCF07009C534F /* ReviseViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */; };
 		8EB4FA7F26BE4620009AABAF /* TodayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4FA7E26BE4620009AABAF /* TodayListView.swift */; };
 		8EC03EA826C680ED001245E5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC03EA726C680ED001245E5 /* ProfileView.swift */; };
@@ -162,7 +162,7 @@
 		8E97703D26BDAE5C00A4F341 /* HistoryTaskDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTaskDetailView.swift; sourceTree = "<group>"; };
 		8E97703F26BDBAEF00A4F341 /* ReviseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviseView.swift; sourceTree = "<group>"; };
 		8EA5EEDE26BFBEB5009C534F /* OwnerReviewViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerReviewViewBuilder.swift; sourceTree = "<group>"; };
-		8EA5EEE126BFC9B2009C534F /* EmployeeReivewViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeReivewViewBuilder.swift; sourceTree = "<group>"; };
+		8EA5EEE126BFC9B2009C534F /* EmployeeReviewViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeReviewViewBuilder.swift; sourceTree = "<group>"; };
 		8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviseViewBuilder.swift; sourceTree = "<group>"; };
 		8EB4FA7E26BE4620009AABAF /* TodayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayListView.swift; sourceTree = "<group>"; };
 		8EC03EA726C680ED001245E5 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = "monitool/Views/Iphone/Components/Tab Items/ProfileView.swift"; sourceTree = SOURCE_ROOT; };
@@ -498,7 +498,7 @@
 			isa = PBXGroup;
 			children = (
 				8E47F5FE26B9754B00B96004 /* EmployeeReviewView.swift */,
-				8EA5EEE126BFC9B2009C534F /* EmployeeReivewViewBuilder.swift */,
+				8EA5EEE126BFC9B2009C534F /* EmployeeReviewViewBuilder.swift */,
 			);
 			path = EmployeeReview;
 			sourceTree = "<group>";
@@ -755,7 +755,7 @@
 				8E47F5FF26B9754B00B96004 /* EmployeeReviewView.swift in Sources */,
 				8EC984E526C2F5F2000961E1 /* IphoneTodayListView.swift in Sources */,
 				B8EFD9B426B8562E001E6086 /* CompanyViewModel.swift in Sources */,
-				8EA5EEE226BFC9B2009C534F /* EmployeeReivewViewBuilder.swift in Sources */,
+				8EA5EEE226BFC9B2009C534F /* EmployeeReviewViewBuilder.swift in Sources */,
 				83A023E826B3FF17002D24CC /* PadLayout.swift in Sources */,
 				83ECAF6526AA115B0069CF25 /* Strings.swift in Sources */,
 				8E7A53BD26B13EC4007FA3A8 /* CompanyRepository.swift in Sources */,

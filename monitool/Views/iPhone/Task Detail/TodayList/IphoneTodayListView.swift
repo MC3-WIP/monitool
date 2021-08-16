@@ -53,9 +53,16 @@ struct IphoneTodayListView: View {
                     .font(.system(size: 17))
                     .padding(.vertical, 18)
                     
-                    WebImage(url: URL(string: todayListViewModel.task.photoReference ?? ""))
-                        .resizable()
-                        .frame(width: proxy.size.width, height: proxy.size.width)
+                    if let image = todayListViewModel.task.photoReference{
+                        WebImage(url: URL(string: image))
+                            .resizable()
+                            .frame(width: proxy.size.width, height: proxy.size.width)
+                    }
+                    else{
+                        Image("MonitoolEmptyReferenceIllus")
+                            .resizable()
+                            .frame(width: proxy.size.width, height: proxy.size.width)
+                    }
                     if let desc = todayListViewModel.task.desc{
                         Text(desc)
                             .font(.system(size: 17))

@@ -16,9 +16,16 @@ extension EmployeeReviewView{
                 Text(employeeReviewViewModel.task.name)
                     .font(.system(size: 28, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-                WebImage(url: URL(string: employeeReviewViewModel.task.photoReference ?? "MonitoolEmptyReferenceIllus"))
-                    .resizable()
-                    .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
+                if let image = employeeReviewViewModel.task.photoReference{
+                    WebImage(url: URL(string: image))
+                        .resizable()
+                        .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
+                }
+                else{
+                    Image("MonitoolEmptyReferenceIllus")
+                        .resizable()
+                        .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
+                }
                 if let desc = employeeReviewViewModel.task.desc{
                     Text(desc)
                         .frame(width: metric.size.width * 0.8, alignment: .topLeading)

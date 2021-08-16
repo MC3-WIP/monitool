@@ -25,6 +25,8 @@ extension TodayListView {
                 }
                 else{
                     Image("MonitoolEmptyReferenceIllus")
+                        .resizable()
+                        .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
                 }
                 if let desc = todayListViewModel.task.desc {
                     Text(desc)
