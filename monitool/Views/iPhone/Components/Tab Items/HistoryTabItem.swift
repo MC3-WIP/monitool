@@ -17,8 +17,8 @@ struct HistoryTabItem: View {
 		UITableViewHeaderFooterView.appearance().backgroundView = .init()
 	}
 
-    var body: some View {
-        NavigationView {
+	var body: some View {
+		NavigationView {
 			List {
 				Section(header: sectionHeader(title: "Today")){
 					ForEach(taskViewModel.tasks, id: \.id){ task in
@@ -47,13 +47,13 @@ struct HistoryTabItem: View {
 				}.textCase(.none)
 			}
 			.listStyle(PlainListStyle())
-            .navigationTitle("History")
-        }
-        .tabItem {
-            Image(systemName: "clock")
-            Text("History")
-        }
-    }
+			.navigationTitle("History")
+		}
+		.tabItem {
+			Image(systemName: "clock")
+			Text("History")
+		}
+	}
 
 	private func isToday(_ task: Task) -> Bool {
 		dateHelper.getNumDays(first: Date(), second: task.createdAt) == 0 && task.status.rawValue == "Completed"
@@ -80,7 +80,7 @@ extension HistoryTabItem {
 }
 
 struct HistoryTabItem_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryTabItem()
-    }
+	static var previews: some View {
+		HistoryTabItem()
+	}
 }
