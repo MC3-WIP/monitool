@@ -70,6 +70,7 @@
 		8EA5EEE526BFCF07009C534F /* ReviseViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */; };
 		8EB4FA7F26BE4620009AABAF /* TodayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4FA7E26BE4620009AABAF /* TodayListView.swift */; };
 		8EC03EA826C680ED001245E5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC03EA726C680ED001245E5 /* ProfileView.swift */; };
+		8EC03EAB26C6CD94001245E5 /* IphoneReviseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC03EAA26C6CD94001245E5 /* IphoneReviseView.swift */; };
 		8EC984E526C2F5F2000961E1 /* IphoneTodayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984E426C2F5F2000961E1 /* IphoneTodayListView.swift */; };
 		8EC984E826C30045000961E1 /* IphoneEmployeeReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984E726C30045000961E1 /* IphoneEmployeeReview.swift */; };
 		8EC984EB26C30578000961E1 /* IphoneOwnerReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984EA26C30578000961E1 /* IphoneOwnerReview.swift */; };
@@ -159,6 +160,7 @@
 		8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviseViewBuilder.swift; sourceTree = "<group>"; };
 		8EB4FA7E26BE4620009AABAF /* TodayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayListView.swift; sourceTree = "<group>"; };
 		8EC03EA726C680ED001245E5 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = "monitool/Views/Iphone/Components/Tab Items/ProfileView.swift"; sourceTree = SOURCE_ROOT; };
+		8EC03EAA26C6CD94001245E5 /* IphoneReviseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneReviseView.swift; sourceTree = "<group>"; };
 		8EC984E426C2F5F2000961E1 /* IphoneTodayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneTodayListView.swift; sourceTree = "<group>"; };
 		8EC984E726C30045000961E1 /* IphoneEmployeeReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneEmployeeReview.swift; sourceTree = "<group>"; };
 		8EC984EA26C30578000961E1 /* IphoneOwnerReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneOwnerReview.swift; sourceTree = "<group>"; };
@@ -520,9 +522,18 @@
 			path = iPad;
 			sourceTree = "<group>";
 		};
+		8EC03EA926C6CD73001245E5 /* Revise */ = {
+			isa = PBXGroup;
+			children = (
+				8EC03EAA26C6CD94001245E5 /* IphoneReviseView.swift */,
+			);
+			path = Revise;
+			sourceTree = "<group>";
+		};
 		8EC984E226C2F569000961E1 /* Task Detail */ = {
 			isa = PBXGroup;
 			children = (
+				8EC03EA926C6CD73001245E5 /* Revise */,
 				8EC984E926C30566000961E1 /* OwnerReview */,
 				8EC984E626C3001C000961E1 /* EmployeeReview */,
 				8EC984E326C2F5DD000961E1 /* TodayList */,
@@ -763,6 +774,7 @@
 				838B23FB26BE97A5004979A4 /* TodayListViewModel.swift in Sources */,
 				83A023EA26B3FF22002D24CC /* PhoneLayout.swift in Sources */,
 				83EF2A8726B292C500378602 /* SignIn.swift in Sources */,
+				8EC03EAB26C6CD94001245E5 /* IphoneReviseView.swift in Sources */,
 				833CCA9F26B6824300BA67CA /* HistoryView.swift in Sources */,
 				F83184CA26BD328000354AFD /* RepeatSheetView.swift in Sources */,
 				83E9492826AFCA9D003903FE /* EmployeeHelper.swift in Sources */,
