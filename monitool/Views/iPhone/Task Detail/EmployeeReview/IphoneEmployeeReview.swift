@@ -53,7 +53,7 @@ struct IphoneEmployeeReview: View {
                     .font(.system(size: 17))
                     .padding(.vertical, 18)
                     
-                    WebImage(url: URL(string: employeeReviewModel.task.photoReference ?? ""))
+                    WebImage(url: URL(string: employeeReviewModel.task.photoReference ?? "MonitoolEmptyReferenceIllus"))
                         .resizable()
                         .frame(width: proxy.size.width, height: proxy.size.width)
                     if let desc = taskDetailViewModel.task.desc{
@@ -117,7 +117,7 @@ struct IphoneEmployeeReview: View {
     @ViewBuilder
     func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View{
         VStack{
-            Image(image)
+            Image("MonitoolAddPhotoIllustration")
                 .resizable()
                 .frame(width: metricSize.size.width * 0.85, height: metricSize.size.width * 0.85)
             Text(datePhoto)

@@ -69,16 +69,9 @@ struct IphoneTodayListView: View {
     }
     @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View{
         VStack{
-            if image == ""{
-                Image("MonitoolAddPhotoIllustration")
-                    .resizable()
-                    .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
-            }
-            else{
-                Image(image)
-                    .resizable()
-                    .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
-            }
+            Image("MonitoolAddPhotoIllustration")
+                .resizable()
+                .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
         }
     }
 }

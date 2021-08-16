@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SDWebImageSwiftUI
 
 extension EmployeeReviewView{
     @ViewBuilder func LeftColumn() -> some View {
@@ -15,7 +16,7 @@ extension EmployeeReviewView{
                 Text(employeeReviewViewModel.task.name)
                     .font(.system(size: 28, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-                Image("DefaultRefference")
+                WebImage(url: URL(string: employeeReviewViewModel.task.photoReference ?? "MonitoolEmptyReferenceIllus"))
                     .resizable()
                     .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
                 if let desc = employeeReviewViewModel.task.desc{
@@ -114,7 +115,7 @@ extension EmployeeReviewView{
     @ViewBuilder
     func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View{
         VStack{
-            Image(image)
+            Image("MonitoolAddPhotoIllustration")
                 .resizable()
                 .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
             Text(datePhoto)

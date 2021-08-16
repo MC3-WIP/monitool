@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 extension OwnerReviewView{
     @ViewBuilder func LeftColumn() -> some View {
@@ -14,7 +15,7 @@ extension OwnerReviewView{
                 Text(taskDetailViewModel.task.name)
                     .font(.system(size: 28, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-                Image("DefaultRefference")
+                WebImage(url: URL(string: OwnerViewModel.task.photoReference ?? "MonitoolEmptyReferenceIllus"))
                     .resizable()
                     .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
                 if let desc = taskDetailViewModel.task.desc{
@@ -30,7 +31,7 @@ extension OwnerReviewView{
     @ViewBuilder
     func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View{
         VStack{
-            Image(image)
+            Image("MonitoolAddPhotoIllustration")
                 .resizable()
                 .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
             Text(datePhoto)
