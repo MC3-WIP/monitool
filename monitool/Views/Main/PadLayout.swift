@@ -33,8 +33,10 @@ extension PadLayout {
 	@ViewBuilder
 	func LayoutDetailView() -> some View {
 		switch viewModel.currentDetailViewType {
-		case .todayList, .peerReview, .ownerReview, .revise, .taskList:
+		case .todayList, .peerReview, .ownerReview, .revise:
 			TaskListView(filter: $viewModel.currentTaskFilter)
+		case .taskList:
+			TaskManagerView()
 		case .history:
 			HistoryView()
 		case .profile:

@@ -19,6 +19,7 @@
 		830B1DF526A8149E00D38AE9 /* MainOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1DF426A8149E00D38AE9 /* MainOnboardingView.swift */; };
 		830B1DFA26A8149F00D38AE9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 830B1DF926A8149F00D38AE9 /* Preview Assets.xcassets */; };
 		830B1E1826A81A3900D38AE9 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830B1E1726A81A3900D38AE9 /* AuthService.swift */; };
+		8322357D26C44A2800E74ABF /* TaskListTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8322357C26C44A2800E74ABF /* TaskListTabItem.swift */; };
 		833CCA9D26B67DCC00BA67CA /* AppColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833CCA9C26B67DCC00BA67CA /* AppColor.swift */; };
 		833CCA9F26B6824300BA67CA /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833CCA9E26B6824300BA67CA /* HistoryView.swift */; };
 		833CCAA126B683C400BA67CA /* RoleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833CCAA026B683C400BA67CA /* RoleService.swift */; };
@@ -41,13 +42,13 @@
 		83A023E826B3FF17002D24CC /* PadLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023E726B3FF17002D24CC /* PadLayout.swift */; };
 		83A023EA26B3FF22002D24CC /* PhoneLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023E926B3FF22002D24CC /* PhoneLayout.swift */; };
 		83A023EC26B402A0002D24CC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023EB26B402A0002D24CC /* MainView.swift */; };
-		83A023EE26B40480002D24CC /* HistoryTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023ED26B40480002D24CC /* HistoryTabItem.swift */; };
 		83A023F026B404EE002D24CC /* ProfileTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023EF26B404EE002D24CC /* ProfileTabItem.swift */; };
 		83A023F726B40910002D24CC /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023F626B40910002D24CC /* SidebarView.swift */; };
 		83A023F926B40B42002D24CC /* TabItemRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A023F826B40B42002D24CC /* TabItemRow.swift */; };
+		83A06C8B26C58B740098863F /* TaskManagerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A06C8A26C58B740098863F /* TaskManagerView.swift */; };
+		83A06C8D26C58DFD0098863F /* TaskManagerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A06C8C26C58DFD0098863F /* TaskManagerDetailView.swift */; };
 		83A7209A26BD4B96007A30D3 /* NavigationBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A7209926BD4B96007A30D3 /* NavigationBarModifier.swift */; };
 		83A7209D26BD7E6E007A30D3 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A7209C26BD7E6E007A30D3 /* Color.swift */; };
-		83AFC69626B9B1C400550E58 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AFC69526B9B1C400550E58 /* ProfileView.swift */; };
 		83B664B926BBE30200F64364 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B664B826BBE30200F64364 /* ProfileViewModel.swift */; };
 		83E9492426AFC384003903FE /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E9492326AFC384003903FE /* Employee.swift */; };
 		83E9492826AFCA9D003903FE /* EmployeeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E9492726AFCA9D003903FE /* EmployeeHelper.swift */; };
@@ -55,8 +56,8 @@
 		83ECAF6626AA115B0069CF25 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83ECAF6226AA115B0069CF25 /* Localizable.strings */; };
 		83EF2A8726B292C500378602 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A8626B292C500378602 /* SignIn.swift */; };
 		83EF2A8926B298F900378602 /* RepositoriesPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A8826B298F900378602 /* RepositoriesPath.swift */; };
-		83EF2A9326B29F1C00378602 /* TaskListTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A9226B29F1C00378602 /* TaskListTabItem.swift */; };
-		8E28E38E26B4352400093850 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E28E38D26B4352400093850 /* LoginView.swift */; };
+		83EF2A9326B29F1C00378602 /* TodoListTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A9226B29F1C00378602 /* TodoListTabItem.swift */; };
+		83F9BE3826C4FB3700B957F2 /* EditTaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F9BE3726C4FB3700B957F2 /* EditTaskListView.swift */; };
 		8E2A614E26B91C9300D82BBE /* AppOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A614D26B91C9300D82BBE /* AppOnboardingView.swift */; };
 		8E35AC5926BA8B00007613E9 /* NoSeparatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E35AC5826BA8B00007613E9 /* NoSeparatorList.swift */; };
 		8E47F5FF26B9754B00B96004 /* EmployeeReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E47F5FE26B9754B00B96004 /* EmployeeReviewView.swift */; };
@@ -70,6 +71,11 @@
 		8EA5EEE226BFC9B2009C534F /* EmployeeReivewViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE126BFC9B2009C534F /* EmployeeReivewViewBuilder.swift */; };
 		8EA5EEE526BFCF07009C534F /* ReviseViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */; };
 		8EB4FA7F26BE4620009AABAF /* TodayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4FA7E26BE4620009AABAF /* TodayListView.swift */; };
+		8EC03EA826C680ED001245E5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC03EA726C680ED001245E5 /* ProfileView.swift */; };
+		8EC03EAB26C6CD94001245E5 /* IphoneReviseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC03EAA26C6CD94001245E5 /* IphoneReviseView.swift */; };
+		8EC984E526C2F5F2000961E1 /* IphoneTodayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984E426C2F5F2000961E1 /* IphoneTodayListView.swift */; };
+		8EC984E826C30045000961E1 /* IphoneEmployeeReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984E726C30045000961E1 /* IphoneEmployeeReview.swift */; };
+		8EC984EB26C30578000961E1 /* IphoneOwnerReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984EA26C30578000961E1 /* IphoneOwnerReview.swift */; };
 		8EC984ED26C3962A000961E1 /* OnboardingDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984EC26C3962A000961E1 /* OnboardingDataModel.swift */; };
 		8EC984EF26C398E4000961E1 /* OnboardingViewPure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984EE26C398E4000961E1 /* OnboardingViewPure.swift */; };
 		8EC984F126C3994E000961E1 /* OnboardingStepView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984F026C3994E000961E1 /* OnboardingStepView.swift */; };
@@ -84,6 +90,7 @@
 		B8B44EEF26BAE977001379AA /* TaskListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B44EEE26BAE977001379AA /* TaskListRepository.swift */; };
 		B8B44EF126BAEC95001379AA /* TaskListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8B44EF026BAEC95001379AA /* TaskListViewModel.swift */; };
 		B8EFD9B426B8562E001E6086 /* CompanyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EFD9B326B8562E001E6086 /* CompanyViewModel.swift */; };
+		F81FDBCD26C4485F0039C37D /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F81FDBCC26C4485F0039C37D /* AddTaskView.swift */; };
 		F83184C426BCF56900354AFD /* TaskListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83184C326BCF56900354AFD /* TaskListDetailView.swift */; };
 		F83184CA26BD328000354AFD /* RepeatSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83184C926BD328000354AFD /* RepeatSheetView.swift */; };
 /* End PBXBuildFile section */
@@ -102,6 +109,7 @@
 		830B1DF926A8149F00D38AE9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		830B1E0026A8149F00D38AE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		830B1E1726A81A3900D38AE9 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		8322357C26C44A2800E74ABF /* TaskListTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListTabItem.swift; sourceTree = "<group>"; };
 		833CCA9C26B67DCC00BA67CA /* AppColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColor.swift; sourceTree = "<group>"; };
 		833CCA9E26B6824300BA67CA /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
 		833CCAA026B683C400BA67CA /* RoleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleService.swift; sourceTree = "<group>"; };
@@ -124,13 +132,13 @@
 		83A023E726B3FF17002D24CC /* PadLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PadLayout.swift; sourceTree = "<group>"; };
 		83A023E926B3FF22002D24CC /* PhoneLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneLayout.swift; sourceTree = "<group>"; };
 		83A023EB26B402A0002D24CC /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
-		83A023ED26B40480002D24CC /* HistoryTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabItem.swift; sourceTree = "<group>"; };
 		83A023EF26B404EE002D24CC /* ProfileTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabItem.swift; sourceTree = "<group>"; };
 		83A023F626B40910002D24CC /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 		83A023F826B40B42002D24CC /* TabItemRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemRow.swift; sourceTree = "<group>"; };
+		83A06C8A26C58B740098863F /* TaskManagerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerView.swift; sourceTree = "<group>"; };
+		83A06C8C26C58DFD0098863F /* TaskManagerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManagerDetailView.swift; sourceTree = "<group>"; };
 		83A7209926BD4B96007A30D3 /* NavigationBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifier.swift; sourceTree = "<group>"; };
 		83A7209C26BD7E6E007A30D3 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		83AFC69526B9B1C400550E58 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		83B664B826BBE30200F64364 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		83E9492326AFC384003903FE /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		83E9492726AFCA9D003903FE /* EmployeeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeHelper.swift; sourceTree = "<group>"; };
@@ -139,9 +147,9 @@
 		83ECAF6426AA115B0069CF25 /* id */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = id; path = id.lproj/Localizable.strings; sourceTree = "<group>"; };
 		83EF2A8626B292C500378602 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		83EF2A8826B298F900378602 /* RepositoriesPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesPath.swift; sourceTree = "<group>"; };
-		83EF2A9226B29F1C00378602 /* TaskListTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListTabItem.swift; sourceTree = "<group>"; };
+		83EF2A9226B29F1C00378602 /* TodoListTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTabItem.swift; sourceTree = "<group>"; };
+		83F9BE3726C4FB3700B957F2 /* EditTaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskListView.swift; sourceTree = "<group>"; };
 		89BFB039E39A5ABB2477EAEE /* Pods-monitool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monitool.debug.xcconfig"; path = "Target Support Files/Pods-monitool/Pods-monitool.debug.xcconfig"; sourceTree = "<group>"; };
-		8E28E38D26B4352400093850 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		8E2A614D26B91C9300D82BBE /* AppOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnboardingView.swift; sourceTree = "<group>"; };
 		8E35AC5826BA8B00007613E9 /* NoSeparatorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSeparatorList.swift; sourceTree = "<group>"; };
 		8E47F5FE26B9754B00B96004 /* EmployeeReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeReviewView.swift; sourceTree = "<group>"; };
@@ -155,6 +163,11 @@
 		8EA5EEE126BFC9B2009C534F /* EmployeeReivewViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeReivewViewBuilder.swift; sourceTree = "<group>"; };
 		8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviseViewBuilder.swift; sourceTree = "<group>"; };
 		8EB4FA7E26BE4620009AABAF /* TodayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayListView.swift; sourceTree = "<group>"; };
+		8EC03EA726C680ED001245E5 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = "monitool/Views/Iphone/Components/Tab Items/ProfileView.swift"; sourceTree = SOURCE_ROOT; };
+		8EC03EAA26C6CD94001245E5 /* IphoneReviseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneReviseView.swift; sourceTree = "<group>"; };
+		8EC984E426C2F5F2000961E1 /* IphoneTodayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneTodayListView.swift; sourceTree = "<group>"; };
+		8EC984E726C30045000961E1 /* IphoneEmployeeReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneEmployeeReview.swift; sourceTree = "<group>"; };
+		8EC984EA26C30578000961E1 /* IphoneOwnerReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneOwnerReview.swift; sourceTree = "<group>"; };
 		8EC984EC26C3962A000961E1 /* OnboardingDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingDataModel.swift; sourceTree = "<group>"; };
 		8EC984EE26C398E4000961E1 /* OnboardingViewPure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewPure.swift; sourceTree = "<group>"; };
 		8EC984F026C3994E000961E1 /* OnboardingStepView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingStepView.swift; sourceTree = "<group>"; };
@@ -172,6 +185,7 @@
 		B8B44EF026BAEC95001379AA /* TaskListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListViewModel.swift; sourceTree = "<group>"; };
 		B8EFD9B326B8562E001E6086 /* CompanyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyViewModel.swift; sourceTree = "<group>"; };
 		F335342D53E4540C34C3D459 /* Pods_monitool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_monitool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F81FDBCC26C4485F0039C37D /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
 		F83184C326BCF56900354AFD /* TaskListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListDetailView.swift; sourceTree = "<group>"; };
 		F83184C926BD328000354AFD /* RepeatSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatSheetView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -252,7 +266,6 @@
 				8EA5EEE026BFC46C009C534F /* EmployeeReview */,
 				8EA5EEDD26BFBE8A009C534F /* OwnerList */,
 				838B23F526BE908D004979A4 /* Today List */,
-				8348BCE326BE4DEC000777EA /* TaskDetailViewModel.swift */,
 			);
 			path = "Task Detail View";
 			sourceTree = "<group>";
@@ -260,6 +273,9 @@
 		835E357F26B169CA00DE542C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				838B23FA26BE97A5004979A4 /* TodayListViewModel.swift */,
+				834FBB3926C1743700ABAACF /* EmployeeReviewViewModel.swift */,
+				8348BCE326BE4DEC000777EA /* TaskDetailViewModel.swift */,
 				835F39D826B5DAE000EC3405 /* PadLayoutViewModel.swift */,
 				6F0CC8E726B137CB00D15B96 /* TaskViewModel.swift */,
 				6F137C8926B2B57F00F79608 /* EmployeeListViewModel.swift */,
@@ -308,10 +324,10 @@
 		835E358326B16A9000DE542C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8348BCE226BE4CA4000777EA /* Task Detail View */,
-				83D8F25C26BC247C007491ED /* Onboarding */,
 				83A023F126B406FA002D24CC /* Main */,
-				83EF2A8326B2927C00378602 /* Components */,
+				8EC03EA426C67E1A001245E5 /* iPad */,
+				8EC03EA326C67E13001245E5 /* iPhone */,
+				83EF2A8326B2927C00378602 /* Shared Components */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -342,7 +358,6 @@
 			children = (
 				8EB4FA7E26BE4620009AABAF /* TodayListView.swift */,
 				838B23F626BE922C004979A4 /* TodayListViewBuilder.swift */,
-				838B23FA26BE97A5004979A4 /* TodayListViewModel.swift */,
 			);
 			path = "Today List";
 			sourceTree = "<group>";
@@ -358,43 +373,47 @@
 		83A023F126B406FA002D24CC /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				83D8F25C26BC247C007491ED /* Onboarding */,
 				83A023EB26B402A0002D24CC /* MainView.swift */,
 				83A023E726B3FF17002D24CC /* PadLayout.swift */,
 				83A023E926B3FF22002D24CC /* PhoneLayout.swift */,
-				83A023F426B408B5002D24CC /* iPad Components */,
-				83A023F326B40828002D24CC /* iPhone Components */,
 			);
 			path = Main;
 			sourceTree = "<group>";
 		};
-		83A023F326B40828002D24CC /* iPhone Components */ = {
+		83A023F326B40828002D24CC /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				83A023F526B408EC002D24CC /* Tab Items */,
+				F81FDBCC26C4485F0039C37D /* AddTaskView.swift */,
+				6F90ECC726C3BE5E008EB2D1 /* TaskListiPhoneView.swift */,
+				83F9BE3726C4FB3700B957F2 /* EditTaskListView.swift */,
 				6F90ECC726C3BE5E008EB2D1 /* TaskListiPhoneView.swift */,
 			);
-			path = "iPhone Components";
+			path = Components;
 			sourceTree = "<group>";
 		};
-		83A023F426B408B5002D24CC /* iPad Components */ = {
+		83A023F426B408B5002D24CC /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8EC03EA726C680ED001245E5 /* ProfileView.swift */,
 				83A023F626B40910002D24CC /* SidebarView.swift */,
 				83A023E526B3F0DC002D24CC /* TaskListView.swift */,
 				833CCA9E26B6824300BA67CA /* HistoryView.swift */,
 				8E97703D26BDAE5C00A4F341 /* HistoryTaskDetailView.swift */,
 				F83184C326BCF56900354AFD /* TaskListDetailView.swift */,
+				83A06C8A26C58B740098863F /* TaskManagerView.swift */,
+				83A06C8C26C58DFD0098863F /* TaskManagerDetailView.swift */,
 			);
-			path = "iPad Components";
+			path = Components;
 			sourceTree = "<group>";
 		};
 		83A023F526B408EC002D24CC /* Tab Items */ = {
 			isa = PBXGroup;
 			children = (
-				83EF2A9226B29F1C00378602 /* TaskListTabItem.swift */,
-				83A023ED26B40480002D24CC /* HistoryTabItem.swift */,
+				83EF2A9226B29F1C00378602 /* TodoListTabItem.swift */,
 				83A023EF26B404EE002D24CC /* ProfileTabItem.swift */,
-				83AFC69526B9B1C400550E58 /* ProfileView.swift */,
+				8322357C26C44A2800E74ABF /* TaskListTabItem.swift */,
 			);
 			path = "Tab Items";
 			sourceTree = "<group>";
@@ -411,7 +430,6 @@
 		83D8F25C26BC247C007491ED /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				830B1DF426A8149E00D38AE9 /* MainOnboardingView.swift */,
 				83D8F25D26BC2483007491ED /* App */,
 				83D8F25E26BC2490007491ED /* Company */,
 			);
@@ -421,9 +439,9 @@
 		83D8F25D26BC2483007491ED /* App */ = {
 			isa = PBXGroup;
 			children = (
+				830B1DF426A8149E00D38AE9 /* MainOnboardingView.swift */,
 				8EC984EE26C398E4000961E1 /* OnboardingViewPure.swift */,
 				8E2A614D26B91C9300D82BBE /* AppOnboardingView.swift */,
-				8E28E38D26B4352400093850 /* LoginView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -445,7 +463,7 @@
 			path = Locales;
 			sourceTree = "<group>";
 		};
-		83EF2A8326B2927C00378602 /* Components */ = {
+		83EF2A8326B2927C00378602 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
 				8EC984F026C3994E000961E1 /* OnboardingStepView.swift */,
@@ -462,7 +480,7 @@
 				8EC984F226C3BF20000961E1 /* OnboardingFirstPage.swift */,
 				8352931426CA6C49009F0F92 /* HistoryRow.swift */,
 			);
-			path = Components;
+			path = "Shared Components";
 			sourceTree = "<group>";
 		};
 		8EA5EEDD26BFBE8A009C534F /* OwnerList */ = {
@@ -479,7 +497,6 @@
 			children = (
 				8E47F5FE26B9754B00B96004 /* EmployeeReviewView.swift */,
 				8EA5EEE126BFC9B2009C534F /* EmployeeReivewViewBuilder.swift */,
-				834FBB3926C1743700ABAACF /* EmployeeReviewViewModel.swift */,
 			);
 			path = EmployeeReview;
 			sourceTree = "<group>";
@@ -491,6 +508,67 @@
 				8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */,
 			);
 			path = Revise;
+			sourceTree = "<group>";
+		};
+		8EC03EA326C67E13001245E5 /* iPhone */ = {
+			isa = PBXGroup;
+			children = (
+				83A023F326B40828002D24CC /* Components */,
+				8EC984E226C2F569000961E1 /* Task Detail */,
+			);
+			path = iPhone;
+			sourceTree = "<group>";
+		};
+		8EC03EA426C67E1A001245E5 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				83A023F426B408B5002D24CC /* Components */,
+				8348BCE226BE4CA4000777EA /* Task Detail View */,
+			);
+			path = iPad;
+			sourceTree = "<group>";
+		};
+		8EC03EA926C6CD73001245E5 /* Revise */ = {
+			isa = PBXGroup;
+			children = (
+				8EC03EAA26C6CD94001245E5 /* IphoneReviseView.swift */,
+			);
+			path = Revise;
+			sourceTree = "<group>";
+		};
+		8EC984E226C2F569000961E1 /* Task Detail */ = {
+			isa = PBXGroup;
+			children = (
+				8EC03EA926C6CD73001245E5 /* Revise */,
+				8EC984E926C30566000961E1 /* OwnerReview */,
+				8EC984E626C3001C000961E1 /* EmployeeReview */,
+				8EC984E326C2F5DD000961E1 /* TodayList */,
+			);
+			path = "Task Detail";
+			sourceTree = "<group>";
+		};
+		8EC984E326C2F5DD000961E1 /* TodayList */ = {
+			isa = PBXGroup;
+			children = (
+				8EC984E426C2F5F2000961E1 /* IphoneTodayListView.swift */,
+			);
+			path = TodayList;
+			sourceTree = "<group>";
+		};
+		8EC984E626C3001C000961E1 /* EmployeeReview */ = {
+			isa = PBXGroup;
+			children = (
+				8EC984E726C30045000961E1 /* IphoneEmployeeReview.swift */,
+			);
+			path = EmployeeReview;
+			sourceTree = "<group>";
+		};
+		8EC984E926C30566000961E1 /* OwnerReview */ = {
+			isa = PBXGroup;
+			children = (
+				8EC984EA26C30578000961E1 /* IphoneOwnerReview.swift */,
+			);
+			path = OwnerReview;
 			sourceTree = "<group>";
 		};
 		8EC984F426C3C4AA000961E1 /* Fonts */ = {
@@ -640,6 +718,7 @@
 				8352931526CA6C49009F0F92 /* HistoryRow.swift in Sources */,
 				8352931326CA6A8A009F0F92 /* DateHelper.swift in Sources */,
 				B8B44EED26BAE8D4001379AA /* TaskList.swift in Sources */,
+				8322357D26C44A2800E74ABF /* TaskListTabItem.swift in Sources */,
 				B8B44EF126BAEC95001379AA /* TaskListViewModel.swift in Sources */,
 				8348BCE426BE4DEC000777EA /* TaskDetailViewModel.swift in Sources */,
 				833CCAA326B688CD00BA67CA /* SidebarViewModel.swift in Sources */,
@@ -647,39 +726,39 @@
 				83A023EC26B402A0002D24CC /* MainView.swift in Sources */,
 				83A7209A26BD4B96007A30D3 /* NavigationBarModifier.swift in Sources */,
 				6F0CC8E826B137CB00D15B96 /* TaskViewModel.swift in Sources */,
-				6F0CC8E826B137CB00D15B96 /* TaskViewModel.swift in Sources */,
 				8EC984F126C3994E000961E1 /* OnboardingStepView.swift in Sources */,
 				838B23FD26BE9B76004979A4 /* RoundedEdge.swift in Sources */,
-				830B1DF526A8149E00D38AE9 /* MainOnboardingView.swift in Sources */,
 				B823A78926B7DEBA0035D9F4 /* AddDataPopOver.swift in Sources */,
 				830B1DF526A8149E00D38AE9 /* MainOnboardingView.swift in Sources */,
 				8E35AC5926BA8B00007613E9 /* NoSeparatorList.swift in Sources */,
-				6F0CC8E826B137CB00D15B96 /* TaskViewModel.swift in Sources */,
 				F83184C426BCF56900354AFD /* TaskListDetailView.swift in Sources */,
-				B823A78926B7DEBA0035D9F4 /* AddDataPopOver.swift in Sources */,
 				6F0CC8E626AFD86700D15B96 /* TaskRepository.swift in Sources */,
+				8EC03EA826C680ED001245E5 /* ProfileView.swift in Sources */,
 				B8B44EEF26BAE977001379AA /* TaskListRepository.swift in Sources */,
 				833CCA9D26B67DCC00BA67CA /* AppColor.swift in Sources */,
 				6F90ECC826C3BE5E008EB2D1 /* TaskListiPhoneView.swift in Sources */,
 				8EA5EEE526BFCF07009C534F /* ReviseViewBuilder.swift in Sources */,
 				83A023F926B40B42002D24CC /* TabItemRow.swift in Sources */,
+				83A06C8D26C58DFD0098863F /* TaskManagerDetailView.swift in Sources */,
 				6F6C13AB26B3F377000BBD26 /* ImagePicker.swift in Sources */,
 				8EA5EEDF26BFBEB5009C534F /* OwnerReviewViewBuilder.swift in Sources */,
 				83E9492426AFC384003903FE /* Employee.swift in Sources */,
+				83F9BE3826C4FB3700B957F2 /* EditTaskListView.swift in Sources */,
 				8E97703626BD7AA100A4F341 /* OwnerReviewView.swift in Sources */,
 				834C9E1126B6D88F0013335F /* AppIcon.swift in Sources */,
 				B8B44EE926BACDF0001379AA /* StorageService.swift in Sources */,
 				830B1DF326A8149E00D38AE9 /* MonitoolApp.swift in Sources */,
 				838B23F726BE922C004979A4 /* TodayListViewBuilder.swift in Sources */,
 				8E47F5FF26B9754B00B96004 /* EmployeeReviewView.swift in Sources */,
+				8EC984E526C2F5F2000961E1 /* IphoneTodayListView.swift in Sources */,
 				B8EFD9B426B8562E001E6086 /* CompanyViewModel.swift in Sources */,
 				8EA5EEE226BFC9B2009C534F /* EmployeeReivewViewBuilder.swift in Sources */,
-				83A023EE26B40480002D24CC /* HistoryTabItem.swift in Sources */,
 				83A023E826B3FF17002D24CC /* PadLayout.swift in Sources */,
 				83ECAF6526AA115B0069CF25 /* Strings.swift in Sources */,
 				8E7A53BD26B13EC4007FA3A8 /* CompanyRepository.swift in Sources */,
 				8EC984F326C3BF20000961E1 /* OnboardingFirstPage.swift in Sources */,
-				83EF2A9326B29F1C00378602 /* TaskListTabItem.swift in Sources */,
+				83A06C8B26C58B740098863F /* TaskManagerView.swift in Sources */,
+				83EF2A9326B29F1C00378602 /* TodoListTabItem.swift in Sources */,
 				6F0CC8E426AFCF4700D15B96 /* Task.swift in Sources */,
 				B850700B26B14B3000530CBA /* CompanyOnboardingView.swift in Sources */,
 				8EC984ED26C3962A000961E1 /* OnboardingDataModel.swift in Sources */,
@@ -691,25 +770,27 @@
 				8EC984EF26C398E4000961E1 /* OnboardingViewPure.swift in Sources */,
 				83B664B926BBE30200F64364 /* ProfileViewModel.swift in Sources */,
 				833CCAA126B683C400BA67CA /* RoleService.swift in Sources */,
+				F81FDBCD26C4485F0039C37D /* AddTaskView.swift in Sources */,
 				83A023F726B40910002D24CC /* SidebarView.swift in Sources */,
 				8E97704026BDBAEF00A4F341 /* ReviseView.swift in Sources */,
 				835E357E26B15FC300DE542C /* EmployeeRepository.swift in Sources */,
+				8EC984E826C30045000961E1 /* IphoneEmployeeReview.swift in Sources */,
 				83A7209D26BD7E6E007A30D3 /* Color.swift in Sources */,
 				830B1E1826A81A3900D38AE9 /* AuthService.swift in Sources */,
+				8EC984EB26C30578000961E1 /* IphoneOwnerReview.swift in Sources */,
 				83EF2A8926B298F900378602 /* RepositoriesPath.swift in Sources */,
 				838B23FB26BE97A5004979A4 /* TodayListViewModel.swift in Sources */,
 				83A023EA26B3FF22002D24CC /* PhoneLayout.swift in Sources */,
 				83EF2A8726B292C500378602 /* SignIn.swift in Sources */,
+				8EC03EAB26C6CD94001245E5 /* IphoneReviseView.swift in Sources */,
 				833CCA9F26B6824300BA67CA /* HistoryView.swift in Sources */,
 				F83184CA26BD328000354AFD /* RepeatSheetView.swift in Sources */,
 				83E9492826AFCA9D003903FE /* EmployeeHelper.swift in Sources */,
 				6F6C13A926B3EB40000BBD26 /* PhotoComponent.swift in Sources */,
 				6F137C8A26B2B57F00F79608 /* EmployeeListViewModel.swift in Sources */,
-				8E28E38E26B4352400093850 /* LoginView.swift in Sources */,
 				B85ACC4F26C413A600B3BA31 /* TextBindingHelper.swift in Sources */,
 				835F39D926B5DAE000EC3405 /* PadLayoutViewModel.swift in Sources */,
 				8E97703E26BDAE5C00A4F341 /* HistoryTaskDetailView.swift in Sources */,
-				83AFC69626B9B1C400550E58 /* ProfileView.swift in Sources */,
 				8EB4FA7F26BE4620009AABAF /* TodayListView.swift in Sources */,
 				8E7A53BF26B13F01007FA3A8 /* Company.swift in Sources */,
 			);
