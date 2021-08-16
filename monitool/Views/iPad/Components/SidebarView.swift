@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct SidebarView: View {
-	@EnvironmentObject var padLayout: PadLayoutViewModel
-	@StateObject var viewModel = SidebarViewModel()
 	@ObservedObject var role: RoleService = .shared
 
 	init() {
@@ -18,17 +16,15 @@ struct SidebarView: View {
 
 	var body: some View {
 		List {
-			ForEach(SidebarMenuItem.allCases, id: \.self) { menuItem in
-				if role.isOwner, menuItem == SidebarMenuItem.taskList { EmptyView() }
-
-				NavigationLink(destination: menuItem.view) {
-					HStack {
-						Image(systemName: menuItem.icon)
-							.foregroundColor(AppColor.accent)
-						Text(menuItem.title)
-					}.padding(5)
-				}
+			SidebarMenuItemModel(type: .todayList)
+			SidebarMenuItemModel(type: .peerReview)
+			SidebarMenuItemModel(type: .ownerReview)
+			SidebarMenuItemModel(type: .revise)
+			if role.isOwner {
+				SidebarMenuItemModel(type: .taskList)
 			}
+			SidebarMenuItemModel(type: .history)
+			SidebarMenuItemModel(type: .profile)
 		}
 		.listStyle(SidebarListStyle())
 		.navigationTitle("Monitool")
