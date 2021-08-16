@@ -8,6 +8,7 @@ target 'monitool' do
   # Pods for monitool
   # add the Firebase pod for Google Analytics
   pod 'Firebase/Analytics'
+  pod 'Firebase/Crashlytics'
   # or pod ‘Firebase/AnalyticsWithoutAdIdSupport’
   # for Analytics without IDFA collection capability
 
@@ -17,6 +18,8 @@ target 'monitool' do
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
   pod 'Firebase/Storage'
+  
+  # pods for get images with URL
   pod 'SDWebImageSwiftUI'
 
 end
