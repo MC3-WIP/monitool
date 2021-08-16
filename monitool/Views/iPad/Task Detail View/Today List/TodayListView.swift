@@ -19,13 +19,13 @@ struct TodayListView: View {
 
 	var body: some View {
 		VStack {
-//			ScrollView {
+			ScrollView {
 				HStack(spacing: 24) {
 					LeftColumn()
 					RightColumn()
 				}
 				.padding(.top)
-//			}
+			}
 			if !role.isOwner {
 				HStack(spacing: 24) {
 					Spacer()

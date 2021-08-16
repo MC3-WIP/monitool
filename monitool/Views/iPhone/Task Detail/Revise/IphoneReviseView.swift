@@ -55,7 +55,7 @@ struct IphoneReviseView: View {
                     .font(.system(size: 17))
                     .padding(.vertical, 18)
                     
-                    Image("kucing1")
+                    Image("MonitoolAddPhotoIllustration")
                         .resizable()
                         .frame(width: proxy.size.width, height: proxy.size.width)
                     if let desc = taskDetailViewModel.task.desc{
@@ -80,13 +80,13 @@ struct IphoneReviseView: View {
                 ZStack{
                     switch proofPage{
                     case 0:
-                        ProofOfWork(image: "kucing2", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
                     case 1:
-                        ProofOfWork(image: "kucing3", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
                     case 2:
-                        ProofOfWork(image: "kucing4", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
                     default:
-                        Text("Error")
+                        Image("MonitoolAddPhotoIllustration")
                     }
                 }
                 .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
