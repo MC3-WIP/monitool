@@ -12,85 +12,26 @@ struct SidebarView: View {
 	@StateObject var viewModel = SidebarViewModel()
 	@ObservedObject var role: RoleService = .shared
 
+	init() {
+		UITableView.appearance().backgroundColor = .clear
+	}
+
 	var body: some View {
-//		ScrollView {
-//			LazyVStack(alignment: .leading) {
-//				FilteredTaskList()
-//				Divider()
-//				MenuItemView(type: .history)
-//				Divider()
-//				if role.isOwner {
-//					MenuItemView(type: .taskList)
-//				}
-//				MenuItemView(type: .profile)
-//			}
-//			.padding()
-//		}
 		List {
 			ForEach(SidebarMenuItem.allCases, id: \.self) { menuItem in
+				if role.isOwner, menuItem == SidebarMenuItem.taskList { EmptyView() }
+
 				NavigationLink(destination: menuItem.view) {
 					HStack {
 						Image(systemName: menuItem.icon)
 							.foregroundColor(AppColor.accent)
 						Text(menuItem.title)
-					}
+					}.padding(5)
 				}
 			}
 		}
 		.listStyle(SidebarListStyle())
 		.navigationTitle("Monitool")
-	}
-}
-
-// MARK: - View Builders
-extension SidebarView {
-	@ViewBuilder
-	func FilteredTaskList() -> some View {
-		Group {
-			MenuItemView(type: .todayList)
-			MenuItemView(type: .peerReview)
-			MenuItemView(type: .ownerReview)
-			MenuItemView(type: .revise)
-		}
-	}
-
-	@ViewBuilder
-	func MenuItemView(type: SidebarMenuItem) -> some View {
-		HStack {
-			Image(systemName: type.icon)
-				.foregroundColor(viewModel.selectedMenuItem == type ? AppColor.primaryForeground : AppColor.accent)
-			Text(type.title)
-				.foregroundColor(viewModel.selectedMenuItem == type ? AppColor.primaryForeground : AppColor.primaryBackground)
-			Spacer()
-//			if let notification = notification, notification.count > 0 {
-//				Text("\(notification.count)")
-//					.foregroundColor(notification.isPriority || isActive ? AppColor.primaryForeground : AppColor.secondary)
-//					.frame(width: 24, height: 24, alignment: .center)
-//					.background(notification.isPriority ? Color.red : Color.clear)
-//					.clipShape(Circle())
-//			}
-		}
-		.padding(12)
-		.background(viewModel.selectedMenuItem == type ? AppColor.accent : Color.clear)
-		.cornerRadius(12)
-		.contentShape(Rectangle())
-		.onTapGesture {
-			viewModel.selectedMenuItem = type
-			padLayout.currentDetailViewType = type
-			switch type {
-			case .todayList:
-				padLayout.currentTaskFilter = .todayList
-			case .peerReview:
-				padLayout.currentTaskFilter = .waitingEmployeeReview
-			case .ownerReview:
-				padLayout.currentTaskFilter = .waitingOwnerReview
-			case .revise:
-				padLayout.currentTaskFilter = .revise
-			case .taskList:
-				padLayout.currentTaskFilter = nil
-			default: break
-			}
-		}
 	}
 }
 
