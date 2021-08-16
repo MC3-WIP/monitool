@@ -7,28 +7,6 @@
 
 import SwiftUI
 
-struct SidebarMenuItemModel: View {
-	private let icon: String
-	private let title: String
-	private let view: AnyView
-
-
-	init(type: SidebarMenuItem) {
-		self.icon = type.icon
-		self.title = type.title
-		self.view = type.view
-	}
-
-	var body: some View {
-		NavigationLink(destination: view) {
-			HStack {
-				Image(systemName: icon)
-				Text(title)
-			}
-		}
-	}
-}
-
 enum SidebarMenuItem: CaseIterable {
 	case todayList,
 		 peerReview,
