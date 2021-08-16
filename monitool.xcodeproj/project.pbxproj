@@ -611,6 +611,7 @@
 				830B1DED26A8149E00D38AE9 /* Resources */,
 				57197A934BED691BB48AF9AB /* [CP] Embed Pods Frameworks */,
 				B84F220126CAA42500244A40 /* ShellScript */,
+				83E83C9D26CAA94000562DB2 /* Run SwiftLint */,
 			);
 			buildRules = (
 			);
@@ -710,6 +711,24 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-monitool/Pods-monitool-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		83E83C9D26CAA94000562DB2 /* Run SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 		B84F220126CAA42500244A40 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
