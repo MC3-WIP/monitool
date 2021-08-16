@@ -24,7 +24,7 @@ final class CompanyRepository: ObservableObject{
     }
     
     func add(_ company: Company){
-        companyRef?.setData(["name": company.name, "minReview": company.minReview, "profileImage": "profile"])
+        companyRef?.setData(["name": company.name, "minReview": company.minReview, "profileImage": "profile", "ownerPin": company.ownerPin])
     }
     
     func addImage(imageURL: String) {

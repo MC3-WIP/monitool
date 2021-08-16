@@ -73,15 +73,16 @@ struct ProfileView: View {
 		.sheet(isPresented: $profileViewModel.isPinPresenting, onDismiss: {
 			role.switchRole(to: .owner)
 		}) {
-			NavigationView {
-
-			}
-			.toolbar {
-				Button("Cancle") {
-                    profileViewModel.isPinPresenting = false
-				}
-			}
-			.navigationBarTitle("Insert PIN", displayMode: .inline)
+            PasscodeField()
+//			NavigationView {
+//                PasscodeField()
+//			}
+//			.toolbar {
+//				Button("Cancel") {
+//                    profileViewModel.isPinPresenting = false
+//				}
+//			}
+//			.navigationBarTitle("Insert PIN", displayMode: .inline)
 		}
 		.environment(\.editMode, $editMode)
 	}
