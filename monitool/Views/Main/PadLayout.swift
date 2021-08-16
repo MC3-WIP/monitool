@@ -10,7 +10,7 @@ import SwiftUI
 struct PadLayout: View {
 	@StateObject private var viewModel: PadLayoutViewModel
 
-	init(detailView: SidebarViewModel.MenuItem? = nil) {
+	init(detailView: SidebarMenuItem? = nil) {
 		_viewModel = StateObject(wrappedValue: PadLayoutViewModel(detailView: detailView))
 	}
 
@@ -21,7 +21,7 @@ struct PadLayout: View {
 				SidebarView()
 					.environmentObject(viewModel)
 			}
-			LayoutDetailView()
+//			LayoutDetailView()
 		}
 		.styleNavigationBar()
 		.accentColor(AppColor.accent)

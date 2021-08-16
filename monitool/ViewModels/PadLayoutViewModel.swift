@@ -9,9 +9,9 @@ import Foundation
 
 class PadLayoutViewModel: ObservableObject {
 	@Published var currentTaskFilter: TaskStatus? = .todayList
-	@Published var currentDetailViewType: SidebarViewModel.MenuItem
+	@Published var currentDetailViewType: SidebarMenuItem
 
-	init(detailView: SidebarViewModel.MenuItem?) {
+	init(detailView: SidebarMenuItem?) {
 		currentDetailViewType = detailView ?? .todayList
 	}
 }

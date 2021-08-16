@@ -13,19 +13,31 @@ struct SidebarView: View {
 	@ObservedObject var role: RoleService = .shared
 
 	var body: some View {
-		ScrollView {
-			LazyVStack(alignment: .leading) {
-				FilteredTaskList()
-				Divider()
-				MenuItemView(type: .history)
-				Divider()
-				if role.isOwner {
-					MenuItemView(type: .taskList)
+//		ScrollView {
+//			LazyVStack(alignment: .leading) {
+//				FilteredTaskList()
+//				Divider()
+//				MenuItemView(type: .history)
+//				Divider()
+//				if role.isOwner {
+//					MenuItemView(type: .taskList)
+//				}
+//				MenuItemView(type: .profile)
+//			}
+//			.padding()
+//		}
+		List {
+			ForEach(SidebarMenuItem.allCases, id: \.self) { menuItem in
+				NavigationLink(destination: menuItem.view) {
+					HStack {
+						Image(systemName: menuItem.icon)
+							.foregroundColor(AppColor.accent)
+						Text(menuItem.title)
+					}
 				}
-				MenuItemView(type: .profile)
 			}
-			.padding()
 		}
+		.listStyle(SidebarListStyle())
 		.navigationTitle("Monitool")
 	}
 }
@@ -43,7 +55,7 @@ extension SidebarView {
 	}
 
 	@ViewBuilder
-	func MenuItemView(type: SidebarViewModel.MenuItem) -> some View {
+	func MenuItemView(type: SidebarMenuItem) -> some View {
 		HStack {
 			Image(systemName: type.icon)
 				.foregroundColor(viewModel.selectedMenuItem == type ? AppColor.primaryForeground : AppColor.accent)
