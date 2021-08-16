@@ -30,7 +30,7 @@ struct ProfileView: View {
 
 	var body: some View {
 		VStack {
-			List {
+            LazyVStack(spacing: 10) {
 				// MARK: - Company Profile
 				Section(header: CompanyProfileHeader()) {
 					if editMode.isEditing {
@@ -63,7 +63,8 @@ struct ProfileView: View {
 			SwitchRoleButton()
 		}
 		.padding(.vertical, 36)
-		.navigationTitle("Profile")
+        .padding(.horizontal, 16)
+        .navigationTitle("Profile")
 		.navigationBarTitleDisplayMode(.inline)
 		.toolbar {
 			if role.isOwner {
