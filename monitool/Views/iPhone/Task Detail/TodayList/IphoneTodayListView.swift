@@ -53,9 +53,16 @@ struct IphoneTodayListView: View {
                     .font(.system(size: 17))
                     .padding(.vertical, 18)
                     
-                    WebImage(url: URL(string: todayListViewModel.task.photoReference ?? ""))
-                        .resizable()
-                        .frame(width: proxy.size.width, height: proxy.size.width)
+                    if let image = todayListViewModel.task.photoReference{
+                        WebImage(url: URL(string: image))
+                            .resizable()
+                            .frame(width: proxy.size.width, height: proxy.size.width)
+                    }
+                    else{
+                        Image("MonitoolEmptyReferenceIllus")
+                            .resizable()
+                            .frame(width: proxy.size.width, height: proxy.size.width)
+                    }
                     if let desc = todayListViewModel.task.desc{
                         Text(desc)
                             .font(.system(size: 17))
@@ -69,16 +76,9 @@ struct IphoneTodayListView: View {
     }
     @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View{
         VStack{
-            if image == ""{
-                Image("MonitoolAddPhotoIllustration")
-                    .resizable()
-                    .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
-            }
-            else{
-                Image(image)
-                    .resizable()
-                    .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
-            }
+            Image("MonitoolAddPhotoIllustration")
+                .resizable()
+                .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
         }
     }
 }

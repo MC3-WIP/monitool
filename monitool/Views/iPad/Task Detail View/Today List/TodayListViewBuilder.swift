@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 
 // MARK: - View Builders
@@ -17,9 +18,16 @@ extension TodayListView {
                 Text(todayListViewModel.task.name)
                     .font(.system(size: 28, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-                Image("DefaultRefference")
-                    .resizable()
-                    .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
+                if let image = todayListViewModel.task.photoReference{
+                    WebImage(url: URL(string: image))
+                        .resizable()
+                        .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
+                }
+                else{
+                    Image("MonitoolEmptyReferenceIllus")
+                        .resizable()
+                        .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
+                }
                 if let desc = todayListViewModel.task.desc {
                     Text(desc)
                         .frame(width: metric.size.width * 0.8, alignment: .topLeading)

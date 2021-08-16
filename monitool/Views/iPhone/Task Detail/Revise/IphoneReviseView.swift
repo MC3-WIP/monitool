@@ -5,6 +5,7 @@
 //  Created by Mac-albert on 12/08/21.
 //
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct IphoneReviseView: View {
     @StateObject var taskDetailViewModel: TaskDetailViewModel
@@ -55,9 +56,16 @@ struct IphoneReviseView: View {
                     .font(.system(size: 17))
                     .padding(.vertical, 18)
                     
-                    Image("MonitoolAddPhotoIllustration")
-                        .resizable()
-                        .frame(width: proxy.size.width, height: proxy.size.width)
+                    if let image = reviseViewModel.task.photoReference{
+                        WebImage(url: URL(string: image))
+                            .resizable()
+                            .frame(width: proxy.size.width, height: proxy.size.width)
+                    }
+                    else{
+                        Image("MonitoolEmptyReferenceIllus")
+                            .resizable()
+                            .frame(width: proxy.size.width, height: proxy.size.width)
+                    }
                     if let desc = taskDetailViewModel.task.desc{
                         Text(desc)
                             .font(.system(size: 17))
@@ -127,7 +135,7 @@ struct IphoneReviseView: View {
     @ViewBuilder
     func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View{
         VStack{
-            Image(image)
+            Image("MonitoolAddPhotoIllustration")
                 .resizable()
                 .frame(width: metricSize.size.width * 0.85, height: metricSize.size.width * 0.85)
             Text(datePhoto)
