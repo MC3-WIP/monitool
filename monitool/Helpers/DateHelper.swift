@@ -12,7 +12,7 @@ struct DateHelper {
 
 	init() {
 		dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "dd-MM-YY"
+		dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
 	}
 
 	func getNumDays(first: Date, second: Date) -> Int {
