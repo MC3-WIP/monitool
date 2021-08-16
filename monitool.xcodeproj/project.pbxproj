@@ -941,7 +941,7 @@
 				CODE_SIGN_ENTITLEMENTS = monitool/Configs/monitool.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"monitool/Resources/dev\"";
 				DEVELOPMENT_TEAM = 8KKWD6QU49;
 				ENABLE_PREVIEWS = YES;
@@ -969,7 +969,7 @@
 				CODE_SIGN_ENTITLEMENTS = monitool/Configs/monitool.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"monitool/Resources/dev\"";
 				DEVELOPMENT_TEAM = 8KKWD6QU49;
 				ENABLE_PREVIEWS = YES;
