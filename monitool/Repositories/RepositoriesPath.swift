@@ -11,13 +11,13 @@ struct RepositoriesPath {
 	var company = "companies"
 	var employee = ""
 	var task = ""
-    var taskList = ""
+	var taskList = ""
 
 	init() {
 		if let id = Auth.auth().currentUser?.uid {
-            employee = "companies/\(id)/employees"
-            task = "companies/\(id)/tasks"
-            taskList = "companies/\(id)/taskList"
-        }
-    }
+			employee = "companies/\(id)/employees"
+			task = "companies/\(id)/tasks"
+			taskList = "companies/\(id)/taskList"
+		}
+	}
 }

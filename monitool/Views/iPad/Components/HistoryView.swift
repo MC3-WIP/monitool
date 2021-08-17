@@ -27,6 +27,7 @@ struct HistoryView: View {
                 }
             }
         }
+		.navigationBarTitle("History", displayMode: .inline)
         .listStyle(InsetGroupedListStyle())
         .background(Color.white)
     }
