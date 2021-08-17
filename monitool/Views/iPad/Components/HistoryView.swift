@@ -51,7 +51,10 @@ struct HistoriesSection: View{
     var body: some View{
         Section(header: Text(day).font(.title).foregroundColor(.black).fontWeight(.bold)){
             ForEach(histories, id: \.id){ history in
-                HistoryRow(task: history)
+                NavigationLink(destination: HistoryTaskDetailView(task: history)){
+                    HistoryRow(task: history)
+                }
+                .listRowBackground(Color(hex: "#F0F9F8"))
             }
         }
         .listStyle(PlainListStyle())
