@@ -28,7 +28,7 @@ struct HistoryTaskDetailView: View {
                         Image("kucing1")
                             .resizable()
                             .frame(width: metric.size.width * 0.75, height: metric.size.width * 0.75, alignment: .leading)
-                        Text(taskDetailViewModel.task.desc ?? "")
+                        Text(taskDetailViewModel.task.desc ?? "-")
                             .fixedSize(horizontal: false, vertical: true)
                             .font(.system(size: 17))
                             .multilineTextAlignment(.leading)
@@ -41,7 +41,7 @@ struct HistoryTaskDetailView: View {
                             .padding(.bottom, 8)
                             .font(.system(size: 20, weight: .bold))
                             .frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
-                            .foregroundColor(Color(hex: "898989"))
+                            .foregroundColor(Color("DarkGray"))
                         VStack{
                             ZStack{
                                 switch proofPage{
@@ -83,33 +83,33 @@ struct HistoryTaskDetailView: View {
                         }
                         .frame(width: matric.size.width * 0.75)
                         .padding(.top, 10)
-                        .background(Color(hex: "F0F9F8"))
+                        .background(Color("LightTosca"))
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+                                .stroke(Color("Accent"), lineWidth: 1)
                         )
                         HStack{
                             Text("PIC: ")
-                                .foregroundColor(Color(hex: "6C6C6C"))
+                                .foregroundColor(Color("DarkGray"))
                                 .font(.system(size: 17, weight: .bold))
-                            Text(taskDetailViewModel.pic?.name ?? "")
+                            Text(taskDetailViewModel.pic?.name ?? "-")
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
                         .padding(.top, 27)
                         
                         HStack{
                             Text("Notes: ")
-                                .foregroundColor(Color(hex: "6C6C6C"))
+                                .foregroundColor(Color("DarkGray"))
                                 .font(.system(size: 17, weight: .bold))
-                            Text(taskDetailViewModel.task.notes ?? "")
+                            Text(taskDetailViewModel.task.notes ?? "-")
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
                         .padding(.top, 20)
                         Spacer()
                         HStack{
                             Text("Comment: ")
                                 .font(.system(size: 17, weight: .bold))
-                                .foregroundColor(Color(hex: "6C6C6C"))
+                                .foregroundColor(Color("DarkGray"))
                                 .frame(alignment: .topLeading)
-                            Text(taskDetailViewModel.task.comment ?? "")
+                            Text(taskDetailViewModel.task.comment ?? "-")
                                 .fixedSize(horizontal: false, vertical: true)
                         }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 20)
@@ -117,7 +117,7 @@ struct HistoryTaskDetailView: View {
                         VStack{
                             Text("Log")
                                 .font(.system(size: 22, weight: .bold))
-                                .foregroundColor(Color(hex: "6C6C6C"))
+                                .foregroundColor(Color("DarkGray"))
                                 .frame(alignment: .topLeading)
                         }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         ScrollView(.vertical){
@@ -133,9 +133,9 @@ struct HistoryTaskDetailView: View {
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 100, maxHeight: 105, alignment: .topLeading)
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+                                .stroke(Color("Accent"), lineWidth: 1)
                         )
-                        .background(RoundedRectangle(cornerRadius: 5).fill(Color(hex: "#F0F9F8")))
+                        .background(RoundedRectangle(cornerRadius: 5).fill(Color("LightTosca")))
                     }
                     .frame(width: matric.size.width * 0.9)
                 }

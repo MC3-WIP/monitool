@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct HistoryRow: View {
     @StateObject var taskDetailViewModel: TaskDetailViewModel
@@ -19,7 +20,7 @@ struct HistoryRow: View {
             Text(taskDetailViewModel.task.name)
             Text("PIC: \(taskDetailViewModel.pic?.name ?? "-")")
 				.font(.caption)
-				.foregroundColor(Color(hex: "#7A7A7A"))
-		}.listRowBackground(Color(hex: "#F0F9F8"))
+                .foregroundColor(Color("DarkGray"))
+        }.listRowBackground(Color("LightTosca"))
 	}
 }

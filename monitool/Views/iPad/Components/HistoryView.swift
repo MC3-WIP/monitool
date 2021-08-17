@@ -54,7 +54,7 @@ struct HistoriesSection: View{
                 NavigationLink(destination: HistoryTaskDetailView(task: history)){
                     HistoryRow(task: history)
                 }
-                .listRowBackground(Color(hex: "#F0F9F8"))
+                .listRowBackground(Color("LightTosca"))
             }
         }
         .listStyle(PlainListStyle())
