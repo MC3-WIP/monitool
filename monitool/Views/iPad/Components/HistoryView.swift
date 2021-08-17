@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct HistoryView: View {
-    @ObservedObject var taskViewModel = TaskViewModel()
-    let dateHelper: DateHelper = DateHelper()
+    @ObservedObject private var taskViewModel = TaskViewModel()
+    private let dateHelper = DateHelper()
     
     init(){
         UITableView.appearance().backgroundColor = .clear
@@ -59,39 +59,8 @@ struct HistoriesSection: View{
     }
 }
 
-struct HistoryRow: View {
-    let task: Task
-    
-    var body: some View{
-        VStack(alignment: .leading){
-            Text(task.name)
-            Text("PIC: ").font(.caption).foregroundColor(Color(hex: "#7A7A7A"))
-        }.listRowBackground(Color(hex: "#F0F9F8"))
-    }
-}
-
 struct HistoryView_Previews: PreviewProvider {
     static var previews: some View {
         HistoryView()
-    }
-}
-
-struct DateHelper {
-    let dateFormatter = DateFormatter()
-    func getNumDays(first: Date, second: Date) -> Int {
-        let calendar = Calendar.current
-
-        // Replace the hour (time) of both dates with 00:00
-        let date1 = calendar.startOfDay(for: first)
-        let date2 = calendar.startOfDay(for: second)
-
-        let components = calendar.dateComponents([.day], from: date1, to: date2)
-        return components.day!
-    }
-    
-    func getStringFromDate(date: Date) -> String{
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "dd MMMM YYYY"
-        return dateFormatter.string(from: date)
     }
 }
