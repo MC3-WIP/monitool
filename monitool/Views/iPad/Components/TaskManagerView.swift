@@ -16,7 +16,7 @@ struct TaskManagerView: View {
 		List {
 			ForEach(viewModel.taskList, id: \.name) { task in
 				NavigationLink(destination: TaskManagerDetailView(task: task)) {
-					TaskListRow(task: task)
+					taskListRow(task: task)
 				}
 			}
 			.onDelete(perform: viewModel.delete)
@@ -64,7 +64,7 @@ extension TaskManagerView {
 
 // MARK: - View Builders
 extension TaskManagerView {
-	@ViewBuilder func TaskListRow(task: TaskList) -> some View {
+	@ViewBuilder func taskListRow(task: TaskList) -> some View {
 		HStack {
 			VStack(alignment: .leading, spacing: 4) {
 				Text(task.name)

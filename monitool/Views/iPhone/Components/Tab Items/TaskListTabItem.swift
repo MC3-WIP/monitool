@@ -16,13 +16,13 @@ struct TaskListTabItem: View {
 			List {
 				ForEach(taskListViewModel.taskLists, id: \.id) { task in
 					NavigationLink(destination: EditTaskListView(task: task)) {
-						TaskListRow(task: task)
+						taskListRow(task: task)
 					}
 				}.onDelete(perform: taskListViewModel.delete)
 			}
 			.navigationBarTitle("Task List", displayMode: .inline)
 			.toolbar {
-				AddTaskButton()
+				addTaskButton()
 			}
 		}
 		.sheet(isPresented: $showSheetView) {
@@ -36,12 +36,12 @@ struct TaskListTabItem: View {
 }
 
 extension TaskListTabItem {
-	@ViewBuilder func TaskListRow(task: TaskList) -> some View {
+	@ViewBuilder func taskListRow(task: TaskList) -> some View {
 		Text(task.name)
 			.padding(.vertical, 12)
 	}
 
-	@ViewBuilder func AddTaskButton() -> some View {
+	@ViewBuilder func addTaskButton() -> some View {
 		Button {
 			showSheetView.toggle()
 		} label: {

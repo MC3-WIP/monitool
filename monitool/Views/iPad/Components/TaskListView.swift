@@ -16,7 +16,6 @@ struct TaskListView: View {
 	@StateObject var taskViewModel = TaskViewModel()
 	@Binding var filter: TaskStatus?
 	@ObservedObject var role: RoleService = .shared
-    
 
 	var filteredData: [Task] {
 		if let filter = filter {
@@ -32,7 +31,7 @@ struct TaskListView: View {
 			ForEach(filteredData) { task in
 				NavigationLink(
 					destination: taskViewModel.route(filter, task: task)) {
-					TaskListRow(task: task)
+					taskListRow(task: task)
 				}
 			}
 			.onDelete(perform: taskViewModel.delete)
@@ -45,13 +44,13 @@ struct TaskListView: View {
                 }.popover(isPresented: $showingPopover) {
                     AddDataPopOver(sheetType: "Task", showingPopOver: $showingPopover).frame(width: 400, height: 400)
                 }
-                
+
 			}
 		}
 	}
 
 	@ViewBuilder
-	func TaskListRow(task: Task) -> some View {
+	func taskListRow(task: Task) -> some View {
 		HStack {
 			VStack(alignment: .leading) {
 				Text(task.name)

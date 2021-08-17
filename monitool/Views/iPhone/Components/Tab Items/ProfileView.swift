@@ -10,49 +10,44 @@ import SwiftUI
 struct ProfileView: View {
 	@StateObject var companyViewModel = CompanyViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
-    
+
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
-    
-    
+
     var company: Company?
-    
+
     @State var companyName = ""
 	@State var editMode: EditMode = .inactive {
 		didSet {
-			if editMode.isEditing { profileViewModel.isPinHidden = false }
-			else { profileViewModel.isPinHidden = true }
+			if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
 		}
 	}
-    
-    
-	@ObservedObject var role: RoleService = .shared
 
+	@ObservedObject var role: RoleService = .shared
 
 	var body: some View {
 		VStack {
 			List {
 				// MARK: - Company Profile
-				Section(header: CompanyProfileHeader()) {
+				Section(header: companyProfileHeader()) {
 					if editMode.isEditing {
-						CompanyInfoTextField(
+						companyInfoTextField(
 							title: "Company Name",
 							placeholder: "Company Inc.",
                             text: $profileViewModel.company.name
 						)
-						CompanyInfoTextField(
+						companyInfoTextField(
 							title: "Owner PIN",
 							placeholder: "1234",
 							text: $profileViewModel.company.ownerPin
 						)
 					}
-					ReviewPolicy()
+					reviewPolicy()
 				}
-                
 
 				// MARK: - Employee List
-				Section(header: EmployeeListHeader()) {
+				Section(header: employeeListHeader()) {
 					ForEach(employeeListViewModel.employees) { employee in
-						EmployeeRow(employee: employee)
+						employeeRow(employee: employee)
 					}
 					.onDelete(perform: employeeListViewModel.delete)
 				}
@@ -60,7 +55,7 @@ struct ProfileView: View {
 
 			Spacer()
 
-			SwitchRoleButton()
+			switchRoleButton()
 		}
 		.padding(.vertical, 36)
 		.navigationTitle("Profile")
@@ -70,9 +65,7 @@ struct ProfileView: View {
 				EditButton()
 			}
 		}
-		.sheet(isPresented: $profileViewModel.isPinPresenting, onDismiss: {
-			role.switchRole(to: .owner)
-		}) {
+		.sheet(isPresented: $profileViewModel.isPinPresenting) {
 			NavigationView {
 
 			}
@@ -89,7 +82,7 @@ struct ProfileView: View {
 
 // MARK: - View Builders
 extension ProfileView {
-	@ViewBuilder func CompanyProfileHeader() -> some View {
+	@ViewBuilder func companyProfileHeader() -> some View {
 		VStack {
 			HStack {
                 Spacer()
@@ -100,7 +93,7 @@ extension ProfileView {
 				HStack {
                     Text(profileViewModel.company.name)
                         .font(.title)
-					
+
 				}
 			}
 		}
@@ -108,7 +101,7 @@ extension ProfileView {
 		.textCase(.none)
 	}
 
-	@ViewBuilder func CompanyInfoTextField(title: String, placeholder: String, text: Binding<String>) -> some View {
+	@ViewBuilder func companyInfoTextField(title: String, placeholder: String, text: Binding<String>) -> some View {
 		GeometryReader { metrics in
 			HStack {
 				HStack {
@@ -123,7 +116,7 @@ extension ProfileView {
 		.padding(.bottom, 6)
 	}
 
-	@ViewBuilder func ReviewPolicy() -> some View {
+	@ViewBuilder func reviewPolicy() -> some View {
 		GeometryReader { metrics in
 			VStack {
 				HStack {
@@ -154,7 +147,7 @@ extension ProfileView {
 		}
 	}
 
-	@ViewBuilder func EmployeeListHeader() -> some View {
+	@ViewBuilder func employeeListHeader() -> some View {
 		VStack(spacing: 24) {
 			HStack {
 				Text("Employee")
@@ -201,7 +194,7 @@ extension ProfileView {
 		.textCase(.none)
 	}
 
-	@ViewBuilder func EmployeeRow(employee: Employee) -> some View {
+	@ViewBuilder func employeeRow(employee: Employee) -> some View {
 		HStack {
 			Text(employee.name)
 			Spacer()
@@ -216,7 +209,7 @@ extension ProfileView {
 		.foregroundColor(.gray)
 	}
 
-	@ViewBuilder func SwitchRoleButton() -> some View {
+	@ViewBuilder func switchRoleButton() -> some View {
 		Button("Switch to \(role.isOwner ? "Employee" : "Owner") role") {
 			if role.isOwner {
 				RoleService.shared.switchRole(to: .employee)
@@ -241,7 +234,7 @@ struct ProfileView_Previews: PreviewProvider {
 	}
 }
 
-fileprivate struct LandscapeModifier: ViewModifier {
+private struct LandscapeModifier: ViewModifier {
 	let height = UIScreen.main.bounds.width
 	let width = UIScreen.main.bounds.height
 

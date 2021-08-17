@@ -26,8 +26,8 @@ enum Strings {
 	}
 }
 
-//extension String {
-//	var localized: String {
-//		NSLocalizedString(self, comment: "")
+//	extension String {
+//		var localized: String {
+//			NSLocalizedString(self, comment: "")
+//		}
 //	}
-//}

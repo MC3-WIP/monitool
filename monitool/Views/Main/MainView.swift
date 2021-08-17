@@ -11,14 +11,14 @@ struct MainView: View {
 	private var device = UIDevice.current.userInterfaceIdiom
 
 	var body: some View {
-		Layout()
+		layout()
     }
 }
 
 // MARK: - View Builders
 extension MainView {
 	@ViewBuilder
-	func Layout() -> some View {
+	func layout() -> some View {
 		if device == .pad {
 			PadLayout()
 		} else if device == .phone {

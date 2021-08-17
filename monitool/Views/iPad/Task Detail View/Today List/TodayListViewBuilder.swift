@@ -7,10 +7,9 @@
 
 import SwiftUI
 
-
 // MARK: - View Builders
 extension TodayListView {
-    @ViewBuilder func LeftColumn() -> some View {
+    @ViewBuilder func leftColumn() -> some View {
         GeometryReader { metric in
             VStack {
                 //			ScrollView {
@@ -29,8 +28,8 @@ extension TodayListView {
             }
         }
     }
-    
-    @ViewBuilder func RightColumn() -> some View {
+
+    @ViewBuilder func rightColumn() -> some View {
         GeometryReader { matric in
             VStack(spacing: 24) {
                 //			ScrollView {
@@ -39,8 +38,8 @@ extension TodayListView {
                     .font(.system(size: 20, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
                     .foregroundColor(Color(hex: "898989"))
-                
-                ProofOfWork(image: "MonitoolAddPhotoIllustration", date: "p", metricSize: matric)
+
+                proofOfWork(image: "MonitoolAddPhotoIllustration", date: "p", metricSize: matric)
                     .frame(width: matric.size.width * 0.75, height: matric.size.width * 0.75)
                     .padding(.vertical, 10)
                     .background(Color(hex: "F0F9F8"))
@@ -48,20 +47,20 @@ extension TodayListView {
                         RoundedRectangle(cornerRadius: 5)
                             .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
                     )
-                
+
                 if role.isOwner {
-                    CustomText(title: "PIC: ", content: todayListViewModel.pic?.name)
-                    CustomText(title: "Notes: ", content: todayListViewModel.task.notes)
+                    customText(title: "PIC: ", content: todayListViewModel.pic?.name)
+                    customText(title: "Notes: ", content: todayListViewModel.task.notes)
                 } else {
                     PICSelector()
-                    NotesTextField()
+                    notesTextField()
                 }
                 //			}
             }
         }
     }
-        
-        @ViewBuilder func EmployeePicker() -> some View {
+
+        @ViewBuilder func employeePicker() -> some View {
             VStack(spacing: -36) {
                 HStack {
                     Button("Cancle") {
@@ -78,7 +77,7 @@ extension TodayListView {
                 }
                 .padding()
                 .zIndex(1)
-                
+
                 Picker("PIC", selection: $todayListViewModel.picSelection) {
                     ForEach(0..<employeeRepository.employees.count) { index in
                         Text(employeeRepository.employees[index].name).tag(index)
@@ -86,7 +85,7 @@ extension TodayListView {
                 }
             }
         }
-        
+
         @ViewBuilder func PICSelector() -> some View {
             VStack(alignment: .leading) {
                 Text("PIC")
@@ -103,7 +102,7 @@ extension TodayListView {
                     }
                     .foregroundColor(.secondary)
                     .popover(isPresented: $todayListViewModel.isEmployeePickerPresenting) {
-                        EmployeePicker()
+                        employeePicker()
                     }
                 }
                 .padding()
@@ -111,8 +110,8 @@ extension TodayListView {
                 .modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
             }
         }
-        
-        @ViewBuilder func NotesTextField() -> some View {
+
+        @ViewBuilder func notesTextField() -> some View {
             VStack(alignment: .leading) {
                 Text("Notes")
                     .font(.title2)
@@ -125,18 +124,18 @@ extension TodayListView {
                     .modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
             }
         }
-        
-        @ViewBuilder func CustomText(title: String, content: String?) -> some View {
-            HStack{
+
+        @ViewBuilder func customText(title: String, content: String?) -> some View {
+            HStack {
                 Text(title)
                     .foregroundColor(Color(hex: "6C6C6C"))
                     .font(.system(size: 17, weight: .bold))
                 Text(content ?? "-")
             }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
         }
-        
-        @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View{
-            VStack{
+
+        @ViewBuilder func proofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View {
+            VStack {
                 Image(image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)

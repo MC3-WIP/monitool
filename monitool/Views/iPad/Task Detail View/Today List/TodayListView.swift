@@ -21,8 +21,8 @@ struct TodayListView: View {
 		VStack {
 			ScrollView {
 				HStack(spacing: 24) {
-					LeftColumn()
-					RightColumn()
+					leftColumn()
+					rightColumn()
 				}
 				.padding(.top)
 			}

@@ -21,7 +21,7 @@ struct PadLayout: View {
 				SidebarView()
 					.environmentObject(viewModel)
 			}
-			LayoutDetailView()
+			layoutDetailView()
 		}
 		.styleNavigationBar()
 		.accentColor(AppColor.accent)
@@ -31,7 +31,7 @@ struct PadLayout: View {
 // MARK: - View Builders
 extension PadLayout {
 	@ViewBuilder
-	func LayoutDetailView() -> some View {
+	func layoutDetailView() -> some View {
 		switch viewModel.currentDetailViewType {
 		case .todayList, .peerReview, .ownerReview, .revise:
 			TaskListView(filter: $viewModel.currentTaskFilter)

@@ -8,21 +8,31 @@
 import Foundation
 import SwiftUI
 
-struct TaskListiPhoneView : View {
+struct TaskListiPhoneView: View {
     @StateObject var taskViewModel = TaskViewModel()
     @State private var selection: Set<TaskStatus> = []
-    
-    let taskStatuses: [TaskStatus] = [.todayList,.waitingEmployeeReview,.waitingOwnerReview,.revise]
-    
-    let statusIcon: [Image] = [Image(systemName: "list.bullet.below.rectangle"), Image(systemName: "person.3"), Image(systemName: "person.crop.circle.badge.checkmark"), Image(systemName: "repeat")]
-    
+
+    let taskStatuses: [TaskStatus] = [.todayList, .waitingEmployeeReview, .waitingOwnerReview, .revise]
+
+    let statusIcon: [Image] = [
+		Image(systemName: "list.bullet.below.rectangle"),
+		Image(systemName: "person.3"),
+		Image(systemName: "person.crop.circle.badge.checkmark"),
+		Image(systemName: "repeat")
+	]
+
     var body: some View {
         NavigationView {
-            List{
-                ForEach(0..<4) { index in
-                    TasksRowView(taskStatus: taskStatuses[index], tasks: getFilteredTask(filter: taskStatuses[index]), isExpanded: self.selection.contains(taskStatuses[index]), icon: statusIcon[index])
-                        .onTapGesture { self.selectDeselect(taskStatuses[index]) }
-                }
+            List {
+				ForEach(0..<4) { index in
+					TasksRowView(
+						taskStatus: taskStatuses[index],
+						tasks: getFilteredTask(filter: taskStatuses[index]),
+						isExpanded: self.selection.contains(taskStatuses[index]),
+						icon: statusIcon[index]
+					)
+					.onTapGesture { self.selectDeselect(taskStatuses[index]) }
+				}
             }
             .navigationTitle("Task List")
         }
@@ -31,7 +41,7 @@ struct TaskListiPhoneView : View {
             Text("Task List")
         }
     }
-    
+
     func selectDeselect(_ taskStatus: TaskStatus) {
         if selection.contains(taskStatus) {
             selection.remove(taskStatus)
@@ -39,9 +49,9 @@ struct TaskListiPhoneView : View {
             selection.insert(taskStatus)
         }
     }
-    
-    func getFilteredTask(filter: TaskStatus) -> [Task]{
-        let result = taskViewModel.tasks.filter{ $0.status == filter}
+
+    func getFilteredTask(filter: TaskStatus) -> [Task] {
+        let result = taskViewModel.tasks.filter { $0.status == filter}
         print(result.count)
         return result
     }
@@ -52,9 +62,9 @@ struct TasksRowView: View {
     let tasks: [Task]
     let isExpanded: Bool
     let icon: Image
-    
+
     var body: some View {
-        HStack{
+        HStack {
             icon.foregroundColor(Color(hex: "#4EB0AB"))
 //            Spacer()
 //                .frame(width: 23.0)
@@ -62,19 +72,17 @@ struct TasksRowView: View {
             Spacer()
             Image(systemName: "chevron.down").foregroundColor(Color(hex: "#4EB0AB"))
         }
-        if isExpanded{
-            if tasks.count != 0{
-                ForEach(tasks){ task in
+        if isExpanded {
+            if tasks.count != 0 {
+                ForEach(tasks) { task in
                     Text(task.name)
                 }
-            }
-            else{
+            } else {
                 Text("No Task")
             }
         }
     }
 }
-
 
 struct TaskListiPhoneView_Previews: PreviewProvider {
     static var previews: some View {

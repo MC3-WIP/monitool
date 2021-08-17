@@ -9,16 +9,15 @@ import SDWebImageSwiftUI
 
 struct IphoneTodayListView: View {
     @StateObject var todayListViewModel: TodayListViewModel
-    
-    
+
     init(task: Task) {
         _todayListViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
     }
-    
+
     var body: some View {
-        VStack{
-            GeometryReader{proxy in
-                NoSeparatorList{
+        VStack {
+            GeometryReader {proxy in
+                NoSeparatorList {
                     Text(todayListViewModel.task.name)
                         .font(.system(size: 28, weight: .bold))
                         .frame(width: proxy.size.width, alignment: .leading)
@@ -26,7 +25,7 @@ struct IphoneTodayListView: View {
                         .font(.system(size: 20, weight: .bold))
                         .frame(width: proxy.size.width, alignment: .leading)
                         .foregroundColor(Color(hex: "898989"))
-                    ProofOfWork(image: "kucing2", date: "p", metricSize: proxy)
+                    proofOfWork(image: "kucing2", date: "p", metricSize: proxy)
                         .frame(width: proxy.size.width, height: proxy.size.width)
                         .padding(.vertical, 10)
                         .background(Color(hex: "F0F9F8"))
@@ -34,15 +33,15 @@ struct IphoneTodayListView: View {
                             RoundedRectangle(cornerRadius: 5)
                                 .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
                         )
-                    VStack(spacing: 4){
-                        HStack{
+                    VStack(spacing: 4) {
+                        HStack {
                             Text("PIC: ")
                                 .foregroundColor(Color(hex: "6C6C6C"))
                                 .fontWeight(.bold)
                             Text(todayListViewModel.task.notes ?? "-")
                         }
                         .frame(width: proxy.size.width, alignment: .leading)
-                        HStack{
+                        HStack {
                             Text("Notes: ")
                                 .foregroundColor(Color(hex: "6C6C6C"))
                                 .fontWeight(.bold)
@@ -52,11 +51,11 @@ struct IphoneTodayListView: View {
                     }
                     .font(.system(size: 17))
                     .padding(.vertical, 18)
-                    
+
                     WebImage(url: URL(string: todayListViewModel.task.photoReference ?? ""))
                         .resizable()
                         .frame(width: proxy.size.width, height: proxy.size.width)
-                    if let desc = todayListViewModel.task.desc{
+                    if let desc = todayListViewModel.task.desc {
                         Text(desc)
                             .font(.system(size: 17))
                             .multilineTextAlignment(.leading)
@@ -67,14 +66,14 @@ struct IphoneTodayListView: View {
         }
         .padding()
     }
-    @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View{
-        VStack{
+
+    @ViewBuilder func proofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View {
+        VStack {
             if image == ""{
                 Image("MonitoolAddPhotoIllustration")
                     .resizable()
                     .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
-            }
-            else{
+            } else {
                 Image(image)
                     .resizable()
                     .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
