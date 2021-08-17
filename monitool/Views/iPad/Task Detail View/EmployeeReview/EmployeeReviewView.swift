@@ -24,6 +24,9 @@ struct EmployeeReviewView: View {
     @State var datePhoto = "21 Juli 2021 at 15.57"
     @State var proofPage = 0
     
+    @State var showingPinField = false
+    @State var isApproving = false
+    
     var body: some View {
         VStack{
             ScrollView{
@@ -38,6 +41,19 @@ struct EmployeeReviewView: View {
             }
         }
         .padding()
+        .sheet(isPresented: $showingPinField, onDismiss: {
+        }) {
+            PasscodeField { inputtedPin, isSuccess in
+                if isApproving {
+                    employeeReviewViewModel.approveTask(pin: inputtedPin)
+                } else {
+                    employeeReviewViewModel.disapproveTask(pin: inputtedPin)
+                }
+                showingPinField = false
+                presentationMode.wrappedValue.dismiss()
+            }
+        }
+        
         
     }
     @ViewBuilder

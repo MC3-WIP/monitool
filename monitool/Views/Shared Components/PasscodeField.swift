@@ -62,10 +62,10 @@ public struct PasscodeField: View {
 //           .disabled(isDisabled)
       
              .introspectTextField { textField in
-                 textField.tintColor = .clear
-                 textField.textColor = .clear
-                 textField.keyboardType = .numberPad
-                 textField.becomeFirstResponder()
+                textField.tintColor = .clear
+                textField.textColor = .clear
+                textField.keyboardType = .numberPad
+                textField.becomeFirstResponder()
                 textField.isEnabled = !profileViewModel.isPasscodeFieldDisabled
          }
     }
@@ -129,31 +129,5 @@ public struct PasscodeField: View {
         }
         
         return "circle.fill"
-    }
-}
-
-extension String {
-    
-    var digits: [Int] {
-        var result = [Int]()
-        
-        for char in self {
-            if let number = Int(String(char)) {
-                result.append(number)
-            }
-        }
-        
-        return result
-    }
-    
-}
-
-extension Int {
-    
-    var numberString: String {
-        
-        guard self < 10 else { return "0" }
-        
-        return String(self)
     }
 }

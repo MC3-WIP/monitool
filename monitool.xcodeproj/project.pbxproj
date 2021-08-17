@@ -83,6 +83,8 @@
 		8EC984F326C3BF20000961E1 /* OnboardingFirstPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC984F226C3BF20000961E1 /* OnboardingFirstPage.swift */; };
 		B823A78926B7DEBA0035D9F4 /* AddDataPopOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A78826B7DEBA0035D9F4 /* AddDataPopOver.swift */; };
 		B84F220026CA75BB00244A40 /* PasscodeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84F21FF26CA75BB00244A40 /* PasscodeField.swift */; };
+		B84F220526CBA93F00244A40 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84F220426CBA93F00244A40 /* String.swift */; };
+		B84F220726CBA98700244A40 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84F220626CBA98700244A40 /* Int.swift */; };
 		B850700926B1461800530CBA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B850700826B1461800530CBA /* GoogleService-Info.plist */; };
 		B850700B26B14B3000530CBA /* CompanyOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850700A26B14B3000530CBA /* CompanyOnboardingView.swift */; };
 		B85ACC4D26C4121400B3BA31 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B85ACC4C26C4121400B3BA31 /* Montserrat-SemiBold.ttf */; };
@@ -178,6 +180,8 @@
 		ADB96F69B4F62B81EF090F6E /* Pods-monitool.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monitool.release.xcconfig"; path = "Target Support Files/Pods-monitool/Pods-monitool.release.xcconfig"; sourceTree = "<group>"; };
 		B823A78826B7DEBA0035D9F4 /* AddDataPopOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDataPopOver.swift; sourceTree = "<group>"; };
 		B84F21FF26CA75BB00244A40 /* PasscodeField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeField.swift; sourceTree = "<group>"; };
+		B84F220426CBA93F00244A40 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		B84F220626CBA98700244A40 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		B850700726B1435900530CBA /* monitool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = monitool.entitlements; sourceTree = "<group>"; };
 		B850700826B1461800530CBA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B850700A26B14B3000530CBA /* CompanyOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyOnboardingView.swift; sourceTree = "<group>"; };
@@ -427,6 +431,8 @@
 			children = (
 				83A7209926BD4B96007A30D3 /* NavigationBarModifier.swift */,
 				83A7209C26BD7E6E007A30D3 /* Color.swift */,
+				B84F220426CBA93F00244A40 /* String.swift */,
+				B84F220626CBA98700244A40 /* Int.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -743,6 +749,7 @@
 				8352931526CA6C49009F0F92 /* HistoryRow.swift in Sources */,
 				8352931326CA6A8A009F0F92 /* DateHelper.swift in Sources */,
 				B8B44EED26BAE8D4001379AA /* TaskList.swift in Sources */,
+				B84F220526CBA93F00244A40 /* String.swift in Sources */,
 				8322357D26C44A2800E74ABF /* TaskListTabItem.swift in Sources */,
 				B8B44EF126BAEC95001379AA /* TaskListViewModel.swift in Sources */,
 				8348BCE426BE4DEC000777EA /* TaskDetailViewModel.swift in Sources */,
@@ -810,6 +817,7 @@
 				83A023EA26B3FF22002D24CC /* PhoneLayout.swift in Sources */,
 				83EF2A8726B292C500378602 /* SignIn.swift in Sources */,
 				8EC03EAB26C6CD94001245E5 /* IphoneReviseView.swift in Sources */,
+				B84F220726CBA98700244A40 /* Int.swift in Sources */,
 				833CCA9F26B6824300BA67CA /* HistoryView.swift in Sources */,
 				F83184CA26BD328000354AFD /* RepeatSheetView.swift in Sources */,
 				83E9492826AFCA9D003903FE /* EmployeeHelper.swift in Sources */,

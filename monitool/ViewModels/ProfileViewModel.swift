@@ -23,7 +23,7 @@ class ProfileViewModel: ObservableObject {
     @Published var pinInputted = ""
     @Published var showingAlert = false
     @Published var isPasscodeFieldDisabled = false
-    @Published var isPinRight = true
+    @Published var isPinRight = false
 
 	private let companyRepository: CompanyRepository = .shared
 
