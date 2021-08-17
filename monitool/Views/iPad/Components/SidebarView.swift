@@ -15,14 +15,14 @@ struct SidebarView: View {
 	var body: some View {
 		ScrollView {
 			LazyVStack(alignment: .leading) {
-				filteredTaskList()
+				FilteredTaskList()
 				Divider()
-				menuItemView(type: .history)
+				MenuItemView(type: .history)
 				Divider()
 				if role.isOwner {
-					menuItemView(type: .taskList)
+					MenuItemView(type: .taskList)
 				}
-				menuItemView(type: .profile)
+				MenuItemView(type: .profile)
 			}
 			.padding()
 		}
@@ -32,16 +32,18 @@ struct SidebarView: View {
 
 // MARK: - View Builders
 extension SidebarView {
-	@ViewBuilder func filteredTaskList() -> some View {
+	@ViewBuilder
+	func FilteredTaskList() -> some View {
 		Group {
-			menuItemView(type: .todayList)
-			menuItemView(type: .peerReview)
-			menuItemView(type: .ownerReview)
-			menuItemView(type: .revise)
+			MenuItemView(type: .todayList)
+			MenuItemView(type: .peerReview)
+			MenuItemView(type: .ownerReview)
+			MenuItemView(type: .revise)
 		}
 	}
 
-	@ViewBuilder func menuItemView(type: SidebarViewModel.MenuItem) -> some View {
+	@ViewBuilder
+	func MenuItemView(type: SidebarViewModel.MenuItem) -> some View {
 		HStack {
 			Image(systemName: type.icon)
 				.foregroundColor(viewModel.selectedMenuItem == type ? AppColor.primaryForeground : AppColor.accent)

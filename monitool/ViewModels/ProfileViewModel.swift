@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseStorage
 
 class ProfileViewModel: ObservableObject {
-
+	
 	@Published var employees = [Employee]()
 	@Published var company: Company
 
@@ -21,6 +21,8 @@ class ProfileViewModel: ObservableObject {
 	@Published var isAddEmployeePresenting = false
 
 	private let companyRepository: CompanyRepository = .shared
+
+
 
 	init() {
 		company = Company(name: "", minReview: 0, ownerPin: "", hasLoggedIn: true, profileImage: "")
@@ -54,22 +56,7 @@ class ProfileViewModel: ObservableObject {
 					fatalError("Unresolved error: \(err)")
 				}
 				if let doc = doc, doc.exists {
-//					self.company = Company(
-//						name: doc.get("name") as? String,
-//						minReview: doc.get("minReview") as? Int,
-//						ownerPin: doc.get("ownerPin") as? String,
-//						hasLoggedIn: true,
-//						profileImage: doc.get("profileImage") as? String
-//					)
-
-					do {
-						if let data = try doc.data(as: Company.self) {
-							self.company = data
-						}
-					} catch {
-						print(error.localizedDescription)
-					}
-
+					self.company = Company(name: doc.get("name") as! String, minReview: doc.get("minReview") as! Int, ownerPin: doc.get("ownerPin") as! String, hasLoggedIn: true, profileImage: doc.get("profileImage") as? String)
 				}
 			})
 		}

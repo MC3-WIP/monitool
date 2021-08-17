@@ -11,16 +11,16 @@ import SwiftUI
 class EmployeeListViewModel: ObservableObject {
 	@ObservedObject private var repository: EmployeeRepository = .shared
     @Published var employees = [Employee]()
-
+    
     private var cancellables = Set<AnyCancellable>()
-
-    init() {
+    
+    init(){
         repository.$employees
             .assign(to: \.employees, on: self)
             .store(in: &cancellables)
     }
 
-    func add(_ employee: Employee) {
+    func add(_ employee: Employee){
         repository.add(employee)
     }
 

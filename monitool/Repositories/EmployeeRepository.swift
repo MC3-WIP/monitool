@@ -33,15 +33,15 @@ final class EmployeeRepository: ObservableObject {
 				.compactMap { try? $0.data(as: Employee.self) } ?? []
 		}
 	}
-
-    func add(_ employee: Employee) {
+    
+    func add(_ employee: Employee){
         do {
             _ = try store.collection(paths.employee).addDocument(from: employee)
-        } catch {
+        } catch{
             fatalError("Fail adding new employee")
         }
     }
-
+    
     func delete(_ employee: Employee) {
         store.collection(paths.employee).document(employee.id).delete()
     }

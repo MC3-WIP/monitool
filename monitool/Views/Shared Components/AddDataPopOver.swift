@@ -17,17 +17,17 @@ struct AddDataPopOver: View {
     @State var taskDesc = ""
     @State var taskRepeated = [false, false, false, false, false, false, false]
     @State var taskPhotoReference: String?
-    @State var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    @State var days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
     @State var selectedDays: [String] = []
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
     @ObservedObject var taskViewModel = TaskViewModel()
     @Binding var showingPopOver: Bool
-
+    
     @State var showImagePicker: Bool = false
     @State private var showActionSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
-
+    
     var body: some View {
         NavigationView {
             if sheetType == "Employee" {
@@ -36,11 +36,11 @@ struct AddDataPopOver: View {
                         Section(header: Color.clear
                                     .frame(width: 0, height: 0)
                                     .accessibilityHidden(true)) {
-                            HStack {
+                            HStack() {
                                 Text("Name")
                                 TextField("", text: $employeeName).multilineTextAlignment(.trailing)
                             }
-                            HStack {
+                            HStack() {
                                 Text("Pin")
                                 Spacer()
                                 Text(employeePin)
@@ -63,34 +63,31 @@ struct AddDataPopOver: View {
                         Section(header: Color.clear
                                     .frame(width: 0, height: 0)
                                     .accessibilityHidden(true)) {
-                            HStack {
+                            HStack() {
                                 Text("Title")
                                 TextField("", text: $taskName).multilineTextAlignment(.trailing)
                             }
-                            HStack {
+                            HStack() {
                                 Text("Description")
                                 TextEditor(text: $taskDesc).multilineTextAlignment(.trailing)
                             }
-                            HStack {
+                            HStack() {
                                 Button("Repeat") {
                                     repeatPopover = true
                                 }
                                 .popover(isPresented: $repeatPopover) {
-                                    RepeatSheetView(
-										repeated: $taskRepeated,
-										selectedDays: $selectedDays
-									).frame(width: 400, height: 400)
+                                    RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays).frame(width: 400, height: 400)
                                 }
                                 Spacer()
-                                Button {
+                                Button(action: {
                                     repeatPopover = true
-								} label: {
-                                    HStack {
+                                }) {
+                                    HStack() {
                                         if selectedDays.count != 0 {
                                             if selectedDays.count == 7 {
                                                 Text("Everyday")
                                             } else {
-                                                ForEach(selectedDays, id: \.self) { day in
+                                                ForEach(selectedDays, id:\.self) { day in
                                                     Text(day)
                                                 }
                                             }
@@ -99,7 +96,7 @@ struct AddDataPopOver: View {
                                     }
                                 }
                             }.foregroundColor(Color.black)
-                            HStack {
+                            HStack() {
                                 Button("Add Photo Reference") {
                                     self.showActionSheet.toggle()
                                 }.sheet(isPresented: $showImagePicker) {
@@ -108,18 +105,14 @@ struct AddDataPopOver: View {
                                     }
                                 }
                                 .actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
-                                    ActionSheet(
-										title: Text("Choose mode"),
-										message: Text("Please choose your preferred mode to set your profile image"),
-										buttons: [ActionSheet.Button.default(Text("Camera"),
-										action: {
+                                    ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to set your profile image"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
                                         self.showImagePicker.toggle()
                                         self.sourceType = .camera
                                     }), ActionSheet.Button.default(Text("Photo Library"), action: {
                                         self.showImagePicker.toggle()
                                         self.sourceType = .photoLibrary
                                     }), ActionSheet.Button.cancel()])
-
+                                    
                                 }
                                 Spacer()
                                 Image(systemName: "camera").foregroundColor(AppColor.accent)
@@ -137,21 +130,12 @@ struct AddDataPopOver: View {
                 .navigationBarItems(trailing: Button("Add", action: {
                     if taskName.count != 0 {
                         showingPopOver = false
-                        let task = Task(
-							name: taskName,
-							description: taskDesc,
-							photoReference: taskPhotoReference,
-							repeated: taskRepeated
-						)
-                        let taskList = TaskList(
-							name: taskName,
-							desc: taskDesc,
-							repeated: taskRepeated,
-							photoReference: taskPhotoReference
-						)
+                        let task = Task(name: taskName, description: taskDesc, photoReference: taskPhotoReference, repeated: taskRepeated)
+                        let taskList = TaskList(name: taskName, desc: taskDesc, repeated: taskRepeated, photoReference: taskPhotoReference)
                         if let image = image {
                             taskViewModel.add(task, taskList, photo: image, id: UUID().uuidString)
-                        } else {
+                        }
+                        else{
                             taskViewModel.add(task, taskList, id: UUID().uuidString)
                         }
                     }

@@ -9,7 +9,7 @@ import FirebaseFirestore
 import Combine
 import FirebaseAuth
 
-final class CompanyRepository: ObservableObject {
+final class CompanyRepository: ObservableObject{
 	@Published var companies = [Company]()
 	private let paths = RepositoriesPath()
 	private let store = Firestore.firestore()
@@ -18,12 +18,12 @@ final class CompanyRepository: ObservableObject {
 	static let shared = CompanyRepository()
 
 	private init() {
-		if let user = Auth.auth().currentUser {
+		if let user = Auth.auth().currentUser{
 			companyRef = store.collection(paths.company).document(user.uid)
 		}
 	}
 
-	func add(_ company: Company) {
+	func add(_ company: Company){
 		companyRef?.setData([
 			"name": company.name,
 			"minReview": company.minReview,
@@ -40,21 +40,21 @@ final class CompanyRepository: ObservableObject {
 		store.collection(paths.company).document(company.id).delete()
 	}
 
-	func editCompanyName(name: String) {
+	func editCompanyName(name: String){
 		companyRef?.updateData(["name": name])
 	}
 
-	func editCompanyMinReview(minReview: Int) {
+	func editCompanyMinReview(minReview: Int){
 		companyRef?.updateData(["minReview": minReview])
 	}
 
 	// MARK: EDIT PHOTO BELOM
 
-	func approveTask(status: String) {
+	func approveTask(status: String){
 
 	}
 
-	func rejectTask(status: String) {
+	func rejectTask(status: String){
 
 	}
 }

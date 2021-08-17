@@ -11,12 +11,12 @@ import SwiftUI
 class CompanyViewModel: ObservableObject {
 	@ObservedObject private var repository: CompanyRepository = .shared
 
-    func create(_ company: Company) {
+    func create(_ company: Company){
         repository.add(company)
     }
-
+    
     func addImage(imageURL: String) {
         repository.addImage(imageURL: imageURL)
     }
-
+    
 }

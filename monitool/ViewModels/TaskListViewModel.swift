@@ -16,13 +16,13 @@ final class TaskListViewModel: ObservableObject {
 
 	static let shared = TaskListViewModel()
 
-	private init() {
+	private init(){
 		repository.$taskLists
 			.assign(to: \.taskLists, on: self)
 			.store(in: &cancellables)
 	}
 
-	func add(_ taskList: TaskList) {
+	func add(_ taskList: TaskList){
 		repository.add(taskList)
 	}
 

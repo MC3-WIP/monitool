@@ -49,16 +49,16 @@ struct TaskManagerDetailView: View {
 			}
 			.padding()
 
-			NoSeparatorList {
-				VStack {
-					HStack {
+			NoSeparatorList{
+				VStack{
+					HStack{
 						Text("Add Photo Reference")
 						Spacer()
-						Button {
+						Button(action: {
 							self.showImagePicker.toggle()
 							self.sourceType = .camera
 
-						} label: {
+						}) {
 							Image(systemName: "camera")
 								.foregroundColor(AppColor.accent)
 						}

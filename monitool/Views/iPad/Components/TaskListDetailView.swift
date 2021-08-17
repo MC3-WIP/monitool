@@ -17,11 +17,11 @@ struct TaskListDetailView: View {
     @State var selectedDays: [String] = []
     @State var taskRepeated = [false, false, false, false, false, false, false]
     @State private var showActionSheet = false
-
+    
     var body: some View {
-        // NavigationView {
+        //NavigationView {
             VStack {
-                List {
+                List() {
                         HStack(spacing: 70) {
                             Text("Title")
                             TextField("Buka Gerbang Toko", text: $taskTitle)
@@ -38,15 +38,15 @@ struct TaskListDetailView: View {
                             RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays).frame(width: 400, height: 400)
                         }
                         Spacer()
-                        Button {
+                        Button(action: {
                             repeatPopover = true
-						} label: {
-                            HStack {
+                        }) {
+                            HStack() {
                                 if selectedDays.count != 0 {
                                     if selectedDays.count == 7 {
                                         Text("Everyday").foregroundColor(.gray)
                                     } else {
-                                        ForEach(selectedDays, id: \.self) { day in
+                                        ForEach(selectedDays, id:\.self) { day in
                                             Text(day).foregroundColor(.gray)
                                         }
                                     }
@@ -57,18 +57,14 @@ struct TaskListDetailView: View {
                     }
                 }.listStyle(DefaultListStyle())
                 .frame(height: 200.0)
-                NoSeparatorList {
-                    VStack {
-                        Text("Photo Reference")
-							.font(.title2.weight(.semibold))
-							.foregroundColor(.black)
-							.padding(.leading)
-							.frame(maxWidth: .infinity, alignment: .leading)
-                        HStack {
-                        Button {
+                NoSeparatorList{
+                    VStack{
+                        Text("Photo Reference").font(.title2).foregroundColor(.black).fontWeight(.semibold).padding(.leading).frame(maxWidth: .infinity, alignment: .leading)
+                        HStack{
+                        Button(action: {
                             self.showActionSheet.toggle()
 
-						} label: {
+                        }) {
                             if image != nil {
                             Image(uiImage: image!)
                                 .resizable()
@@ -79,7 +75,7 @@ struct TaskListDetailView: View {
                             Image("camera")
                             .renderingMode(Image.TemplateRenderingMode?.init(Image.TemplateRenderingMode.original))
                                 .padding(.leading)
-
+                            
                         }
                             Spacer()
                         }.sheet(isPresented: $showImagePicker) {
@@ -88,23 +84,19 @@ struct TaskListDetailView: View {
                             }
                         }
                         .actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
-                            ActionSheet(
-								title: Text("Choose mode"),
-								message: Text("Please choose your preferred mode to add a photo reference"),
-								buttons: [ActionSheet.Button.default(Text("Camera"),
-								action: {
+                            ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to add a photo reference"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
                                 self.showImagePicker.toggle()
                                 self.sourceType = .camera
                             }), ActionSheet.Button.default(Text("Photo Library"), action: {
                                 self.showImagePicker.toggle()
                                 self.sourceType = .photoLibrary
                             }), ActionSheet.Button.cancel()])
-
+                            
                         }
                     }
                 }
             }.navigationTitle("Task List").navigationBarTitleDisplayMode(.inline)
-        // }.navigationViewStyle(StackNavigationViewStyle())
+        //}.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

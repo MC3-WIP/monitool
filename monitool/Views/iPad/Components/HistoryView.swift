@@ -10,17 +10,18 @@ import SwiftUI
 struct HistoryView: View {
     @ObservedObject private var taskViewModel = TaskViewModel()
     private let dateHelper = DateHelper()
-
-    init() {
+    
+    init(){
         UITableView.appearance().backgroundColor = .clear
     }
-
+    
     var body: some View {
-        List {
-            ForEach(0..<6) { index in
-                if taskViewModel.historiesPerDay[index].count == 0 {
+        List{
+            ForEach(0..<6){ index in
+                if taskViewModel.historiesPerDay[index].count == 0{
                     EmptyView()
-                } else {
+                }
+                else{
                     HistoriesSection(histories: taskViewModel.historiesPerDay[index])
                         .padding(.vertical, 5)
                 }
@@ -29,26 +30,27 @@ struct HistoryView: View {
         .listStyle(InsetGroupedListStyle())
         .background(Color.white)
     }
-
+        
 }
 
-struct HistoriesSection: View {
+struct HistoriesSection: View{
     var dateHelper = DateHelper()
     var histories: [Task]
     var day: String
-
-    init(histories: [Task]) {
+    
+    init(histories: [Task]){
         self.histories = histories
         if dateHelper.getNumDays(first: histories[0].createdAt, second: Date()) == 0 {
             self.day = "Today"
-        } else {
+        }
+        else{
             self.day = dateHelper.getStringFromDate(date: histories[0].createdAt)
         }
     }
-
-    var body: some View {
-        Section(header: Text(day).font(.title).foregroundColor(.black).fontWeight(.bold)) {
-            ForEach(histories, id: \.id) { history in
+    
+    var body: some View{
+        Section(header: Text(day).font(.title).foregroundColor(.black).fontWeight(.bold)){
+            ForEach(histories, id: \.id){ history in
                 HistoryRow(task: history)
             }
         }

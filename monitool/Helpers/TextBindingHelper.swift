@@ -17,7 +17,7 @@ class TextBindingHelper: ObservableObject {
     }
     let characterLimit: Int
 
-    init(limit: Int = 4) {
+    init(limit: Int = 4){
         characterLimit = limit
     }
 }

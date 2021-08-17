@@ -14,7 +14,7 @@ class TodayListViewModel: TaskDetailViewModel {
 
 	func submitTask(pic: Employee, notes: String? = nil) {
 		taskRepository.updatePIC(taskID: task.id, employee: pic)
-
+		
 		if let notes = notes, notes != "" {
 			taskRepository.updateNotes(taskID: task.id, notes: notes)
 		}

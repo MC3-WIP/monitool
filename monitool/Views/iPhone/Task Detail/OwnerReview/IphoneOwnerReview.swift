@@ -8,26 +8,26 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct IphoneOwnerReview: View {
-    @StateObject var ownerViewModel: TodayListViewModel
+    @StateObject var OwnerViewModel: TodayListViewModel
     @StateObject var taskDetailViewModel: TaskDetailViewModel
     @ObservedObject var taskViewModel = TaskViewModel()
-
+    
     @State var totalPage: Int = 3
     @State var datePhoto = "21 Juli 2021 at 15.57"
     @State var proofPage = 0
     @State var notes: String = ""
-
+    
     @Environment(\.presentationMode) var presentationMode
-
-    init (task: Task) {
+    
+    init (task: Task){
         _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
-        _ownerViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
+        _OwnerViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
     }
-
+    
     var body: some View {
-        VStack {
-            GeometryReader { proxy in
-                NoSeparatorList {
+        VStack{
+            GeometryReader{ proxy in
+                NoSeparatorList{
                     Text(taskDetailViewModel.task.name)
                         .font(.system(size: 28, weight: .bold))
                         .frame(width: proxy.size.width, alignment: .leading)
@@ -37,16 +37,16 @@ struct IphoneOwnerReview: View {
                         .foregroundColor(Color(hex: "898989"))
                     proofOfWorkComponent(matric: proxy, proofPage: proofPage, totalPage: totalPage, datePhoto: datePhoto)
                         .padding(.top, 10)
-
-                    VStack(spacing: 4) {
-                        HStack {
+                    
+                    VStack(spacing: 4){
+                        HStack{
                             Text("PIC: ")
                                 .foregroundColor(Color(hex: "6C6C6C"))
                                 .fontWeight(.bold)
                             Text(taskDetailViewModel.pic?.name ?? "-")
                         }
                         .frame(width: proxy.size.width, alignment: .leading)
-                        HStack {
+                        HStack{
                             Text("Notes: ")
                                 .foregroundColor(Color(hex: "6C6C6C"))
                                 .fontWeight(.bold)
@@ -56,8 +56,8 @@ struct IphoneOwnerReview: View {
                     }
                     .font(.system(size: 17))
                     .padding(.vertical, 18)
-
-                    VStack {
+                    
+                    VStack{
                         Text("Comment: ")
                             .foregroundColor(Color(hex: "6C6C6C"))
                             .font(.system(size: 20, weight: .bold))
@@ -68,59 +68,39 @@ struct IphoneOwnerReview: View {
                             .background(Color(hex: "F0F9F8"))
                             .modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
                     }
-
-                    WebImage(url: URL(string: ownerViewModel.task.photoReference ?? ""))
+                    
+                    WebImage(url: URL(string: OwnerViewModel.task.photoReference ?? ""))
                         .resizable()
                         .frame(width: proxy.size.width, height: proxy.size.width)
-                    if let desc = taskDetailViewModel.task.desc {
+                    if let desc = taskDetailViewModel.task.desc{
                         Text(desc)
                             .font(.system(size: 17))
                             .multilineTextAlignment(.leading)
                     }
-
-                    VStack(spacing: 8) {
+                    
+                    VStack(spacing: 8){
                         approveButton()
                         reviseButton()
                     }
                     .padding(.vertical, 24)
-
+                    
                 }
             }
         }
         .padding()
     }
-
-    @ViewBuilder func proofOfWorkComponent(
-		matric: GeometryProxy,
-		proofPage: Int,
-		totalPage: Int,
-		datePhoto: String
-	) -> some View {
-            VStack {
-                ZStack {
-                    switch proofPage {
+    @ViewBuilder func proofOfWorkComponent(matric: GeometryProxy, proofPage: Int, totalPage: Int, datePhoto: String) -> some View {
+            VStack{
+                ZStack{
+                    switch proofPage{
                     case 0:
-                        proofOfWork(
-							image: "DefaultRefference",
-							date: "21 Jul 2021 at 15:57",
-							metricSize: matric,
-							datePhoto: datePhoto
-						)
+                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
                     case 1:
-                        proofOfWork(
-							image: "DefaultRefference",
-							date: "21 Jul 2021 at 15:57",
-							metricSize: matric,
-							datePhoto: datePhoto)
+                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
                     case 2:
-                        proofOfWork(
-							image: "DefaultRefference",
-							date: "21 Jul 2021 at 15:57",
-							metricSize: matric,
-							datePhoto: datePhoto
-						)
+                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
                     default:
-                        Image("MonitoolAddPhotoIllustration")
+                        Image("MonitoolAddPhotoIllustration") 
                     }
                 }
                 .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
@@ -128,15 +108,18 @@ struct IphoneOwnerReview: View {
                         if abs(value.translation.height) < abs(value.translation.width) {
                             if abs(value.translation.width) > 50.0 {
                                 if value.translation.width > 0 {
-                                    if proofPage == 0 {
-
-                                    } else {
+                                    if proofPage == 0{
+                                        
+                                    }
+                                    else{
                                         self.proofPage -= 1
                                     }
-                                } else if value.translation.width < 0 {
+                                }
+                                else if value.translation.width < 0 {
                                     if proofPage == totalPage - 1 {
-
-                                    } else {
+                                        
+                                    }
+                                    else{
                                         self.proofPage += 1
                                     }
                                 }
@@ -154,10 +137,9 @@ struct IphoneOwnerReview: View {
                     .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
             )
     }
-
     @ViewBuilder
-    func proofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
-        VStack {
+    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View{
+        VStack{
             Image(image)
                 .resizable()
                 .frame(width: metricSize.size.width * 0.85, height: metricSize.size.width * 0.85)
@@ -166,15 +148,14 @@ struct IphoneOwnerReview: View {
                 .frame(width: metricSize.size.width * 0.85, height: 12, alignment: .leading)
         }
     }
-
     @ViewBuilder
-    func reviseButton() -> some View {
-        Button {
+    func reviseButton() -> some View{
+        Button(action: {
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
             self.presentationMode.wrappedValue.dismiss()
-
-		} label: {
-            HStack {
+            
+        }){
+            HStack{
                 Image(systemName: "repeat")
                 Text("Revise")
             }
@@ -189,12 +170,12 @@ struct IphoneOwnerReview: View {
         }
     }
     @ViewBuilder
-    func approveButton() -> some View {
-        Button {
+    func approveButton() -> some View{
+        Button(action: {
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
             self.presentationMode.wrappedValue.dismiss()
-		} label: {
-            HStack {
+        }){
+            HStack{
                 Image(systemName: "checkmark")
                 Text("Approve")
             }
