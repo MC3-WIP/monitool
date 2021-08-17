@@ -84,7 +84,11 @@ struct TaskListDetailView: View {
                             }
                         }
                         .actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
-                            ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to add a photo reference"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
+                            ActionSheet(
+								title: Text("Choose mode"),
+								message: Text("Please choose your preferred mode to add a photo reference"),
+								buttons: [ActionSheet.Button.default(Text("Camera"),
+								action: {
                                 self.showImagePicker.toggle()
                                 self.sourceType = .camera
                             }), ActionSheet.Button.default(Text("Photo Library"), action: {
