@@ -72,8 +72,7 @@ struct ProfileView: View {
 				EditButton()
 			}
 		}
-		.sheet(isPresented: $profileViewModel.isPinPresenting, onDismiss: {
-		}) {
+		.sheet(isPresented: $profileViewModel.isPinPresenting) {
             PasscodeField { inputtedPin, isSuccess in
                 if inputtedPin == profileViewModel.company.ownerPin {
                     print("sukses")

@@ -10,7 +10,7 @@ import Introspect
 
 public struct PasscodeField: View {
     
-    var maxDigits: Int = 4
+    var maxDigits = 4
     var label = "Enter Pin for Owner"
     
     @State var showPin = false
