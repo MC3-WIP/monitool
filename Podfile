@@ -21,5 +21,6 @@ target 'monitool' do
   
   # pods for get images with URL
   pod 'SDWebImageSwiftUI'
+  pod 'Introspect'
 
 end
