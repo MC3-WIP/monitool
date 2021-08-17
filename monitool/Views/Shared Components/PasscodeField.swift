@@ -6,18 +6,18 @@
 //
 
 import SwiftUI
-// import Introspect
+import Introspect
+
 public struct PasscodeField: View {
     
     var maxDigits: Int = 4
     var label = "Enter Pin for Owner"
     
-    @State var pin: String = ""
     @State var showPin = false
-    @State var isDisabled = false
     
+    @ObservedObject var profileViewModel = ProfileViewModel()
     
-//    var handler: (String, (Bool) -> Void) -> Void
+    var handler: (String, (Bool) -> Void) -> Void
     
     public var body: some View {
         VStack(spacing: 30) {
@@ -27,6 +27,9 @@ public struct PasscodeField: View {
                 backgroundField
             }
             showPinStack
+            if !profileViewModel.isPinRight {
+                Text("Wrong pin")
+            }
         }
         
     }
@@ -43,8 +46,8 @@ public struct PasscodeField: View {
     }
     
     private var backgroundField: some View {
-        let boundPin = Binding<String>(get: { self.pin }, set: { newValue in
-            self.pin = newValue
+        let boundPin = Binding<String>(get: { profileViewModel.pinInputted }, set: { newValue in
+            profileViewModel.pinInputted = newValue
             self.submitPin()
         })
         
@@ -53,24 +56,24 @@ public struct PasscodeField: View {
       // Introspect library can used to make the textField become first resonder on appearing
       // if you decide to add the pod 'Introspect' and import it, comment #50 to #53 and uncomment #55 to #61
       
-           .accentColor(.clear)
-           .foregroundColor(.clear)
-           .keyboardType(.numberPad)
-           .disabled(isDisabled)
+//           .accentColor(.clear)
+//           .foregroundColor(.clear)
+//           .keyboardType(.numberPad)
+//           .disabled(isDisabled)
       
-//             .introspectTextField { textField in
-//                 textField.tintColor = .clear
-//                 textField.textColor = .clear
-//                 textField.keyboardType = .numberPad
-//                 textField.becomeFirstResponder()
-//                 textField.isEnabled = !self.isDisabled
-//         }
+             .introspectTextField { textField in
+                 textField.tintColor = .clear
+                 textField.textColor = .clear
+                 textField.keyboardType = .numberPad
+                 textField.becomeFirstResponder()
+                textField.isEnabled = !profileViewModel.isPasscodeFieldDisabled
+         }
     }
     
     private var showPinStack: some View {
         HStack {
             Spacer()
-            if !pin.isEmpty {
+            if !profileViewModel.pinInputted.isEmpty {
                 showPinButton
             }
         }
@@ -89,40 +92,40 @@ public struct PasscodeField: View {
     }
     
     private func submitPin() {
-        guard !pin.isEmpty else {
+        guard !profileViewModel.pinInputted.isEmpty else {
             showPin = false
             return
         }
         
-        if pin.count == maxDigits {
-            isDisabled = true
+        if profileViewModel.pinInputted.count == maxDigits {
+            profileViewModel.isPasscodeFieldDisabled = true
             
-//            handler(pin) { isSuccess in
-//                if isSuccess {
-//                    print("pin matched, go to next page, no action to perfrom here")
-//                } else {
-//                    pin = ""
-//                    isDisabled = false
-//                    print("this has to called after showing toast why is the failure")
-//                }
-//            }
+            handler(profileViewModel.pinInputted) { isSuccess in
+                if isSuccess {
+                    print("pin matched, go to next page, no action to perfrom here")
+                } else {
+                    profileViewModel.pinInputted = ""
+                    profileViewModel.isPasscodeFieldDisabled = false
+                    print("this has to called after showing toast why is the failure")
+                }
+            }
         }
         
         // this code is never reached under  normal circumstances. If the user pastes a text with count higher than the
         // max digits, we remove the additional characters and make a recursive call.
-        if pin.count > maxDigits {
-            pin = String(pin.prefix(maxDigits))
+        if profileViewModel.pinInputted.count > maxDigits {
+            profileViewModel.pinInputted = String(profileViewModel.pinInputted.prefix(maxDigits))
             submitPin()
         }
     }
     
     private func getImageName(at index: Int) -> String {
-        if index >= self.pin.count {
+        if index >= profileViewModel.pinInputted.count {
             return "circle"
         }
         
         if self.showPin {
-            return self.pin.digits[index].numberString + ".circle"
+            return profileViewModel.pinInputted.digits[index].numberString + ".circle"
         }
         
         return "circle.fill"

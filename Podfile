@@ -18,5 +18,6 @@ target 'monitool' do
   pod 'FirebaseFirestoreSwift'
   pod 'Firebase/Storage'
   pod 'SDWebImageSwiftUI'
+  pod 'Introspect'
 
 end

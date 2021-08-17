@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ProfileView: View {
+    
+    @Environment(\.presentationMode) var presentationMode
 	@StateObject var companyViewModel = CompanyViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
     
@@ -23,7 +25,6 @@ struct ProfileView: View {
 			else { profileViewModel.isPinHidden = true }
 		}
 	}
-    
     
 	@ObservedObject var role: RoleService = .shared
 
@@ -61,6 +62,7 @@ struct ProfileView: View {
 			Spacer()
 
 			SwitchRoleButton()
+            
 		}
 		.padding(.vertical, 36)
 		.navigationTitle("Profile")
@@ -71,18 +73,20 @@ struct ProfileView: View {
 			}
 		}
 		.sheet(isPresented: $profileViewModel.isPinPresenting, onDismiss: {
-			role.switchRole(to: .owner)
 		}) {
-            PasscodeField()
-//			NavigationView {
-//                PasscodeField()
-//			}
-//			.toolbar {
-//				Button("Cancel") {
-//                    profileViewModel.isPinPresenting = false
-//				}
-//			}
-//			.navigationBarTitle("Insert PIN", displayMode: .inline)
+            PasscodeField { inputtedPin, isSuccess in
+                if inputtedPin == profileViewModel.company.ownerPin {
+                    print("sukses")
+                    role.switchRole(to: .owner)
+                    profileViewModel.isPinPresenting = false
+                    profileViewModel.isPinRight = true
+                    hideKeyboard()
+                } else {
+                    profileViewModel.pinInputted = ""
+                    profileViewModel.isPasscodeFieldDisabled = false
+                    profileViewModel.isPinRight = false
+                }
+            }
 		}
 		.environment(\.editMode, $editMode)
 	}
@@ -232,6 +236,10 @@ extension ProfileView {
 		.cornerRadius(8)
 		.disabled(editMode.isEditing)
 	}
+    
+    func hideKeyboard() {
+            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+        }
 }
 
 // MARK: - Preview
