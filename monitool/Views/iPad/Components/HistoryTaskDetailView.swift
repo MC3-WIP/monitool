@@ -8,27 +8,27 @@
 import SwiftUI
 
 struct HistoryTaskDetailView: View {
-    private let pic: String = "Mawar"
-    private let notes: String = "Sudah Pak Bos"
-    // MARK: INITIALIZE TOTAL PAGE
-    private let totalPage: Int = 3
-    private let comment: String = "Kursi yang panjang kurang rapi, lalu lantai depan masih kurang bersih."
-    
+    @StateObject var taskDetailViewModel: TaskDetailViewModel
     @State var proofPage = 0
+    @State var totalPage = 3
+    
+    init(task: Task){
+        _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
+    }
     
     var body: some View {
         NoSeparatorList{
             HStack{
                 GeometryReader{ metric in
                     VStack{
-                        Text("Buka Gerbang Toko!")
+                        Text(taskDetailViewModel.task.name)
                             .font(.system(size: 28, weight: .bold))
                             .padding(.vertical, 24.0)
                             .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
                         Image("kucing1")
                             .resizable()
                             .frame(width: metric.size.width * 0.75, height: metric.size.width * 0.75, alignment: .leading)
-                        Text("Masukkan saja kawat ke lubang kunci dan gerak-gerakkan searah dengan jarum jam. Jika digerakkan berlawanan dengan arah jarum jam sama saja anda menguncinya dan berujung sia-sia. Walaupun demikian, jangan terlalu bergantung pada cara ini, karena bisa saja kualitas kunci yang baik tidak mudah jika dilakukan hal-hal yang tidak sesuai ketentuan dalam proses membuka pintu yang terkunci")
+                        Text(taskDetailViewModel.task.desc ?? "-")
                             .fixedSize(horizontal: false, vertical: true)
                             .font(.system(size: 17))
                             .multilineTextAlignment(.leading)
@@ -41,7 +41,7 @@ struct HistoryTaskDetailView: View {
                             .padding(.bottom, 8)
                             .font(.system(size: 20, weight: .bold))
                             .frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
-                            .foregroundColor(Color(hex: "898989"))
+                            .foregroundColor(Color("DarkGray"))
                         VStack{
                             ZStack{
                                 switch proofPage{
@@ -79,37 +79,37 @@ struct HistoryTaskDetailView: View {
                                     }
                                 }
                             )
-                            PageControl(totalPage: totalPage, current: proofPage)
+                            PageControl(totalPage: 3, current: 0)
                         }
                         .frame(width: matric.size.width * 0.75)
                         .padding(.top, 10)
-                        .background(Color(hex: "F0F9F8"))
+                        .background(Color("LightTosca"))
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+                                .stroke(Color("Accent"), lineWidth: 1)
                         )
                         HStack{
                             Text("PIC: ")
-                                .foregroundColor(Color(hex: "6C6C6C"))
+                                .foregroundColor(Color("DarkGray"))
                                 .font(.system(size: 17, weight: .bold))
-                            Text(pic)
+                            Text(taskDetailViewModel.pic?.name ?? "-")
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
                         .padding(.top, 27)
                         
                         HStack{
                             Text("Notes: ")
-                                .foregroundColor(Color(hex: "6C6C6C"))
+                                .foregroundColor(Color("DarkGray"))
                                 .font(.system(size: 17, weight: .bold))
-                            Text(notes)
+                            Text(taskDetailViewModel.task.notes ?? "-")
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
                         .padding(.top, 20)
                         Spacer()
                         HStack{
                             Text("Comment: ")
                                 .font(.system(size: 17, weight: .bold))
-                                .foregroundColor(Color(hex: "6C6C6C"))
+                                .foregroundColor(Color("DarkGray"))
                                 .frame(alignment: .topLeading)
-                            Text(comment)
+                            Text(taskDetailViewModel.task.comment ?? "-")
                                 .fixedSize(horizontal: false, vertical: true)
                         }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 20)
@@ -117,7 +117,7 @@ struct HistoryTaskDetailView: View {
                         VStack{
                             Text("Log")
                                 .font(.system(size: 22, weight: .bold))
-                                .foregroundColor(Color(hex: "6C6C6C"))
+                                .foregroundColor(Color("DarkGray"))
                                 .frame(alignment: .topLeading)
                         }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         ScrollView(.vertical){
@@ -133,9 +133,9 @@ struct HistoryTaskDetailView: View {
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 100, maxHeight: 105, alignment: .topLeading)
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+                                .stroke(Color("Accent"), lineWidth: 1)
                         )
-                        .background(RoundedRectangle(cornerRadius: 5).fill(Color(hex: "#F0F9F8")))
+                        .background(RoundedRectangle(cornerRadius: 5).fill(Color("LightTosca")))
                     }
                     .frame(width: matric.size.width * 0.9)
                 }
@@ -152,13 +152,5 @@ struct HistoryTaskDetailView: View {
                 .font(.system(size: 11))
                 .frame(width: metricSize.size.width * 0.7, height: 12, alignment: .leading)
         }
-    }
-}
-
-struct HistoryTaskDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        HistoryTaskDetailView()
-            .previewDevice("iPad Pro (12.9-inch) (5th generation)")
-            .previewLayout(.fixed(width: 1112, height: 834))
     }
 }
