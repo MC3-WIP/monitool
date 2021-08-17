@@ -122,7 +122,12 @@ final class TaskRepository: ObservableObject {
     }
     
 	func updateStatus(taskID: String, status: String, completion: ((Error?) -> Void)? = nil) {
-		store.collection(path.task).document(taskID).updateData(["status" : status], completion: completion)
+        if status == TaskStatus.completed.title{
+            store.collection(path.task).document(taskID).updateData(["status" : status, "isHistory" : true], completion: completion)
+        }
+        else{
+            store.collection(path.task).document(taskID).updateData(["status" : status], completion: completion)
+        }
     }
 
 	func appendReviewer(approving: Bool = true, taskID: String, employee: Employee, completion: ((Error?) -> Void)? = nil) {
