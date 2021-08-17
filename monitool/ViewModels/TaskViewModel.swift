@@ -13,10 +13,10 @@ class TaskViewModel: ObservableObject {
     @Published var tasks = [Task]()
     @Published var histories = [Task]()
     @Published var historiesPerDay = [[Task]]()
-    
+
     private var cancellables = Set<AnyCancellable>()
 
-    init(){
+    init() {
         repository.$tasks
             .assign(to: \.tasks, on: self)
             .store(in: &cancellables)
@@ -25,20 +25,20 @@ class TaskViewModel: ObservableObject {
             .store(in: &cancellables)
         separateHistories()
     }
-    
-    func separateHistories(){
+
+    func separateHistories() {
         let dateHelper = DateHelper()
         for index in 0...6 {
-            let historyOfDay = histories.filter{ history in return dateHelper.getNumDays(first: history.createdAt, second: Date()) == index}
+            let historyOfDay = histories.filter { history in return dateHelper.getNumDays(first: history.createdAt, second: Date()) == index}
             historiesPerDay.append(historyOfDay)
         }
     }
 
-    func add(_ task: Task, _ taskList: TaskList, photo: UIImage, id: String){
+    func add(_ task: Task, _ taskList: TaskList, photo: UIImage, id: String) {
         repository.submitTask(task: task, taskList: taskList, photo: photo, id: id)
     }
-    
-    func add(_ task: Task, _ taskList: TaskList, id: String){
+
+    func add(_ task: Task, _ taskList: TaskList, id: String) {
         repository.submitTask(task: task, taskList: taskList, id: id)
     }
 
@@ -47,7 +47,7 @@ class TaskViewModel: ObservableObject {
 			repository.delete(tasks[index])
 		}
 	}
-    
+
     func updateStatus(id: String, status: String) {
 		repository.updateStatus(taskID: id, status: status)
     }

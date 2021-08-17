@@ -10,16 +10,16 @@ import SwiftUI
 
 struct OnboardingStepView: View {
     var data: OnboardingDataModel
-    
+
     var body: some View {
         VStack {
-            GeometryReader{ proxy in
-                VStack{
+            GeometryReader { proxy in
+                VStack {
                     Image(data.image)
                         .resizable()
                         .frame(width: proxy.size.height * 0.7, height: proxy.size.height * 0.7, alignment: .center)
                         .padding(.bottom, 50)
-                    
+
                     Text(data.titleText)
                         .font(.system(size: 25, design: .rounded))
                         .fontWeight(.bold)
@@ -29,7 +29,7 @@ struct OnboardingStepView: View {
                         .multilineTextAlignment(.center)
                 }.frame(width: proxy.size.width, height: proxy.size.height, alignment: .center )
             }
-            
+
         }
     .padding()
     }

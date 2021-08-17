@@ -20,8 +20,8 @@ struct HistoryTabItem: View {
 	var body: some View {
 		NavigationView {
 			List {
-				Section(header: sectionHeader(title: "Today")){
-					ForEach(taskViewModel.tasks, id: \.id){ task in
+				Section(header: sectionHeader(title: "Today")) {
+					ForEach(taskViewModel.tasks, id: \.id) { task in
 						if isToday(task) {
 							HistoryRow(task: task)
 						}
@@ -30,8 +30,8 @@ struct HistoryTabItem: View {
 				.textCase(.none)
 				.listRowBackground(AppColor.primaryForeground)
 
-				Section(header: sectionHeader(title: "Yesterday")){
-					ForEach(taskViewModel.tasks, id: \.id){ task in
+				Section(header: sectionHeader(title: "Yesterday")) {
+					ForEach(taskViewModel.tasks, id: \.id) { task in
 						if isYesterday(task) {
 							HistoryRow(task: task)
 						}
@@ -39,7 +39,7 @@ struct HistoryTabItem: View {
 				}.textCase(.none)
 
 				Section(header: sectionHeader(title: dateHelper.getStringFromDate(date: min2Day!))) {
-					ForEach(taskViewModel.tasks, id: \.id){ task in
+					ForEach(taskViewModel.tasks, id: \.id) { task in
 						if isBeyondYesterday(task) {
 							HistoryRow(task: task)
 						}

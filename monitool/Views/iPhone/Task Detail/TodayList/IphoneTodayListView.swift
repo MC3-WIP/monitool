@@ -9,16 +9,15 @@ import SDWebImageSwiftUI
 
 struct IphoneTodayListView: View {
     @StateObject var todayListViewModel: TodayListViewModel
-    
-    
+
     init(task: Task) {
         _todayListViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
     }
-    
+
     var body: some View {
-        VStack{
-            GeometryReader{proxy in
-                NoSeparatorList{
+        VStack {
+            GeometryReader {proxy in
+                NoSeparatorList {
                     Text(todayListViewModel.task.name)
                         .font(.system(size: 28, weight: .bold))
                         .frame(width: proxy.size.width, alignment: .leading)
@@ -34,15 +33,15 @@ struct IphoneTodayListView: View {
                             RoundedRectangle(cornerRadius: 5)
                                 .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
                         )
-                    VStack(spacing: 4){
-                        HStack{
+                    VStack(spacing: 4) {
+                        HStack {
                             Text("PIC: ")
                                 .foregroundColor(Color(hex: "6C6C6C"))
                                 .fontWeight(.bold)
                             Text(todayListViewModel.task.notes ?? "-")
                         }
                         .frame(width: proxy.size.width, alignment: .leading)
-                        HStack{
+                        HStack {
                             Text("Notes: ")
                                 .foregroundColor(Color(hex: "6C6C6C"))
                                 .fontWeight(.bold)
@@ -52,18 +51,17 @@ struct IphoneTodayListView: View {
                     }
                     .font(.system(size: 17))
                     .padding(.vertical, 18)
-                    
-                    if let image = todayListViewModel.task.photoReference{
+
+                    if let image = todayListViewModel.task.photoReference {
                         WebImage(url: URL(string: image))
                             .resizable()
                             .frame(width: proxy.size.width, height: proxy.size.width)
-                    }
-                    else{
+                    } else {
                         Image("MonitoolEmptyReferenceIllus")
                             .resizable()
                             .frame(width: proxy.size.width, height: proxy.size.width)
                     }
-                    if let desc = todayListViewModel.task.desc{
+                    if let desc = todayListViewModel.task.desc {
                         Text(desc)
                             .font(.system(size: 17))
                             .multilineTextAlignment(.leading)
@@ -74,8 +72,8 @@ struct IphoneTodayListView: View {
         }
         .padding()
     }
-    @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View{
-        VStack{
+    @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View {
+        VStack {
             Image("MonitoolAddPhotoIllustration")
                 .resizable()
                 .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)

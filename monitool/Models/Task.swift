@@ -9,7 +9,7 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 class Task: Codable, Identifiable, Hashable {
-    
+
 	@DocumentID var id: String!
 	let name: String
 	let desc: String?
@@ -30,7 +30,7 @@ class Task: Codable, Identifiable, Hashable {
 	var photoReference: String?
 
 	init(
-		name: String, 
+		name: String,
 		description: String? = nil,
 		photoReference: String? = nil,
 		repeated: [Bool]
@@ -43,11 +43,11 @@ class Task: Codable, Identifiable, Hashable {
 		self.photoReference = photoReference
 		self.repeated = repeated
 	}
-    
+
     static func == (lhs: Task, rhs: Task) -> Bool {
         return lhs.id == rhs.id && lhs.name == rhs.name && lhs.createdAt == rhs.createdAt && lhs.status == rhs.status && lhs.repeated == rhs.repeated && rhs.isHistory == lhs.isHistory
     }
-    
+
     func hash(into hasher: inout Hasher) {
             hasher.combine(id)
             hasher.combine(id)

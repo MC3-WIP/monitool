@@ -7,14 +7,13 @@
 
 import Foundation
 
-
 struct OnboardingDataModel {
     var image: String
     var titleText: String
     var descText: String
 }
 
-extension OnboardingDataModel{
+extension OnboardingDataModel {
     static var dataOnboarding: [OnboardingDataModel] = [
         OnboardingDataModel(image: "MonitoolLogo", titleText: "Monitool", descText: "Level Up Your Business"),
         OnboardingDataModel(image: "Assignillustration", titleText: "Assign", descText: "Assign tasks to make sure your business keep running"),

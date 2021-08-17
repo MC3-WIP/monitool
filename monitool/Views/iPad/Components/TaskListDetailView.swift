@@ -17,11 +17,11 @@ struct TaskListDetailView: View {
     @State var selectedDays: [String] = []
     @State var taskRepeated = [false, false, false, false, false, false, false]
     @State private var showActionSheet = false
-    
+
     var body: some View {
-        //NavigationView {
+        // NavigationView {
             VStack {
-                List() {
+                List {
                         HStack(spacing: 70) {
                             Text("Title")
                             TextField("Buka Gerbang Toko", text: $taskTitle)
@@ -41,12 +41,12 @@ struct TaskListDetailView: View {
                         Button(action: {
                             repeatPopover = true
                         }) {
-                            HStack() {
+                            HStack {
                                 if selectedDays.count != 0 {
                                     if selectedDays.count == 7 {
                                         Text("Everyday").foregroundColor(.gray)
                                     } else {
-                                        ForEach(selectedDays, id:\.self) { day in
+                                        ForEach(selectedDays, id: \.self) { day in
                                             Text(day).foregroundColor(.gray)
                                         }
                                     }
@@ -57,10 +57,10 @@ struct TaskListDetailView: View {
                     }
                 }.listStyle(DefaultListStyle())
                 .frame(height: 200.0)
-                NoSeparatorList{
-                    VStack{
+                NoSeparatorList {
+                    VStack {
                         Text("Photo Reference").font(.title2).foregroundColor(.black).fontWeight(.semibold).padding(.leading).frame(maxWidth: .infinity, alignment: .leading)
-                        HStack{
+                        HStack {
                         Button(action: {
                             self.showActionSheet.toggle()
 
@@ -75,7 +75,7 @@ struct TaskListDetailView: View {
                             Image("camera")
                             .renderingMode(Image.TemplateRenderingMode?.init(Image.TemplateRenderingMode.original))
                                 .padding(.leading)
-                            
+
                         }
                             Spacer()
                         }.sheet(isPresented: $showImagePicker) {
@@ -91,12 +91,12 @@ struct TaskListDetailView: View {
                                 self.showImagePicker.toggle()
                                 self.sourceType = .photoLibrary
                             }), ActionSheet.Button.cancel()])
-                            
+
                         }
                     }
                 }
             }.navigationTitle("Task List").navigationBarTitleDisplayMode(.inline)
-        //}.navigationViewStyle(StackNavigationViewStyle())
+        // }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

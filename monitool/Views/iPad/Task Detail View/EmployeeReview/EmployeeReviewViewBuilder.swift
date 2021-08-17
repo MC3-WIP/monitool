@@ -9,24 +9,23 @@ import Foundation
 import SwiftUI
 import SDWebImageSwiftUI
 
-extension EmployeeReviewView{
+extension EmployeeReviewView {
     @ViewBuilder func LeftColumn() -> some View {
-        GeometryReader{ metric in
-            VStack{
+        GeometryReader { metric in
+            VStack {
                 Text(employeeReviewViewModel.task.name)
                     .font(.system(size: 28, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-                if let image = employeeReviewViewModel.task.photoReference{
+                if let image = employeeReviewViewModel.task.photoReference {
                     WebImage(url: URL(string: image))
                         .resizable()
                         .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
-                }
-                else{
+                } else {
                     Image("MonitoolEmptyReferenceIllus")
                         .resizable()
                         .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
                 }
-                if let desc = employeeReviewViewModel.task.desc{
+                if let desc = employeeReviewViewModel.task.desc {
                     Text(desc)
                         .frame(width: metric.size.width * 0.8, alignment: .topLeading)
                         .font(.system(size: 17))
@@ -36,26 +35,26 @@ extension EmployeeReviewView{
             .padding()
         }
     }
-    @ViewBuilder func RightColumn() -> some View{
-        GeometryReader{ matric in
-            VStack{
+    @ViewBuilder func RightColumn() -> some View {
+        GeometryReader { matric in
+            VStack {
                 Text("Proof of Work")
                     .padding(.bottom, 8)
                     .font(.system(size: 20, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
                     .foregroundColor(Color(hex: "898989"))
-                
+
                 proofOfWorkComponent(matric: matric, proofPage: proofPage, totalPage: totalPage, datePhoto: datePhoto)
-                
-                VStack(spacing: 4){
-                    HStack{
+
+                VStack(spacing: 4) {
+                    HStack {
                         Text("PIC: ")
                             .foregroundColor(Color(hex: "6C6C6C"))
                             .fontWeight(.bold)
                         Text(employeeReviewViewModel.pic?.name ?? "-")
                     }
                     .frame(width: matric.size.width * 0.9, alignment: .leading)
-                    HStack{
+                    HStack {
                         Text("Notes: ")
                             .foregroundColor(Color(hex: "6C6C6C"))
                             .fontWeight(.bold)
@@ -65,16 +64,16 @@ extension EmployeeReviewView{
                 }
                 .font(.system(size: 17))
                 .padding(.vertical, 15)
-                
+
             }
             .padding()
         }
     }
-    
+
     @ViewBuilder func proofOfWorkComponent(matric: GeometryProxy, proofPage: Int, totalPage: Int, datePhoto: String) -> some View {
-        VStack{
-            ZStack{
-                switch proofPage{
+        VStack {
+            ZStack {
+                switch proofPage {
                 case 0:
                     ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
                 case 1:
@@ -90,18 +89,15 @@ extension EmployeeReviewView{
                                         if abs(value.translation.height) < abs(value.translation.width) {
                                             if abs(value.translation.width) > 50.0 {
                                                 if value.translation.width > 0 {
-                                                    if proofPage == 0{
-                                                        
-                                                    }
-                                                    else{
+                                                    if proofPage == 0 {
+
+                                                    } else {
                                                         self.proofPage -= 1
                                                     }
-                                                }
-                                                else if value.translation.width < 0 {
+                                                } else if value.translation.width < 0 {
                                                     if proofPage == totalPage - 1 {
-                                                        
-                                                    }
-                                                    else{
+
+                                                    } else {
                                                         self.proofPage += 1
                                                     }
                                                 }
@@ -120,8 +116,8 @@ extension EmployeeReviewView{
         )
     }
     @ViewBuilder
-    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View{
-        VStack{
+    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
+        VStack {
             Image("MonitoolAddPhotoIllustration")
                 .resizable()
                 .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
@@ -131,13 +127,13 @@ extension EmployeeReviewView{
         }
     }
     @ViewBuilder
-    func approveButton() -> some View{
+    func approveButton() -> some View {
         Button(action: {
             showingPinField = true
             isApproving = true
-			
-        }){
-            HStack{
+
+        }) {
+            HStack {
                 Image(systemName: "checkmark")
                 Text("Approve")
             }
@@ -151,13 +147,13 @@ extension EmployeeReviewView{
             ).background(RoundedRectangle(cornerRadius: 8).fill(Color(hex: "#4FB0AB")))
         }
     }
-    
-    func dissaprroveButton() -> some View{
+
+    func dissaprroveButton() -> some View {
         Button(action: {
 			showingPinField = true
             isApproving = false
-        }){
-            HStack{
+        }) {
+            HStack {
                 Image(systemName: "xmark")
                 Text("Revise")
             }

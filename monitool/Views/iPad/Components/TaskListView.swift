@@ -16,7 +16,6 @@ struct TaskListView: View {
 	@StateObject var taskViewModel = TaskViewModel()
 	@Binding var filter: TaskStatus?
 	@ObservedObject var role: RoleService = .shared
-    
 
 	var filteredData: [Task] {
 		if let filter = filter {
@@ -45,7 +44,7 @@ struct TaskListView: View {
                 }.popover(isPresented: $showingPopover) {
                     AddDataPopOver(sheetType: "Task", showingPopOver: $showingPopover).frame(width: 400, height: 400)
                 }
-                
+
 			}
 		}
 	}

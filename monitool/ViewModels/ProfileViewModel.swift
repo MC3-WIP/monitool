@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseStorage
 
 class ProfileViewModel: ObservableObject {
-	
+
 	@Published var employees = [Employee]()
 	@Published var company: Company
 
@@ -19,15 +19,13 @@ class ProfileViewModel: ObservableObject {
 	@Published var isPinHidden = true
 	@Published var isPinPresenting = false
 	@Published var isAddEmployeePresenting = false
-    
+
     @Published var pinInputted = ""
     @Published var showingAlert = false
     @Published var isPasscodeFieldDisabled = false
     @Published var isPinRight = false
 
 	private let companyRepository: CompanyRepository = .shared
-
-
 
 	init() {
 		company = Company(name: "", minReview: 0, ownerPin: "", hasLoggedIn: true, profileImage: "")

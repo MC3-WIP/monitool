@@ -20,7 +20,7 @@ struct SignIn: View {
         self.roleAuth = .shared
 	}
 
-	//Hashing function using CryptoKit
+	// Hashing function using CryptoKit
 	func sha256(_ input: String) -> String {
 		let inputData = Data(input.utf8)
 		let hashedData = SHA256.hash(data: inputData)
@@ -34,7 +34,7 @@ struct SignIn: View {
 	// from https://firebase.google.com/docs/auth/ios/apple
 	private func randomNonceString(length: Int = 32) -> String {
 		precondition(length > 0)
-		let charset: Array<Character> =
+		let charset: [Character] =
 			Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
 		var result = ""
 		var remainingLength = length
@@ -65,7 +65,7 @@ struct SignIn: View {
 	}
 
     var body: some View {
-        
+
             SignInWithAppleButton(
                 onRequest: { request in
                     let nonce = randomNonceString()
@@ -90,9 +90,9 @@ struct SignIn: View {
                                 return
                             }
 
-                            let credential = OAuthProvider.credential(withProviderID: "apple.com",idToken: idTokenString,rawNonce: nonce)
-                            Auth.auth().signIn(with: credential) { (authResult, error) in
-                                if (error != nil) {
+                            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
+                            Auth.auth().signIn(with: credential) { (_, error) in
+                                if error != nil {
                                     // Error. If error.code == .MissingOrInvalidNonce, make sure
                                     // you're sending the SHA256-hashed nonce as a hex string with
                                     // your request to Apple.
@@ -112,9 +112,7 @@ struct SignIn: View {
                 }
             ).frame(width: 280, height: 45, alignment: .center)
         }
-            
-        
-    
+
 }
 
 struct SignIn_Previews: PreviewProvider {

@@ -25,21 +25,21 @@ struct AddTaskView: View {
 	@State var taskRepeated = [false, false, false, false, false, false, false]
 
 	var body: some View {
-		NavigationView{
+		NavigationView {
 			VStack {
 				VStack {
 					TextField("Task Title", text: $taskTitle)
 					Divider()
 					TextField("Task Description", text: $description)
 					Divider()
-					HStack() {
+					HStack {
 						Text("Repeat")
 						Spacer()
 						if selectedDays.count != 0 {
 							if selectedDays.count == 7 {
 								Text("Everyday").foregroundColor(.gray)
 							} else {
-								ForEach(selectedDays, id:\.self) { day in
+								ForEach(selectedDays, id: \.self) { day in
 									Text(day).foregroundColor(.gray)
 								}
 							}
@@ -116,7 +116,6 @@ extension AddTaskView {
 		}.foregroundColor(AppColor.accent)
 	}
 }
-
 
 struct AddTaskView_Previews: PreviewProvider {
 	static var previews: some View {

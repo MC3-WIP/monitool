@@ -49,9 +49,9 @@ struct EditTaskListView: View {
 			}
 			.padding()
 
-			NoSeparatorList{
-				VStack{
-					HStack{
+			NoSeparatorList {
+				VStack {
+					HStack {
 						Text("Add Photo Reference")
 						Spacer()
 						Button(action: {
