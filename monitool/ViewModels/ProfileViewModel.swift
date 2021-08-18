@@ -21,7 +21,6 @@ class ProfileViewModel: ObservableObject {
 	@Published var isAddEmployeePresenting = false
 
     @Published var pinInputted = ""
-    @Published var showingAlert = false
     @Published var isPasscodeFieldDisabled = false
     @Published var isPinRight = false
 
@@ -30,12 +29,6 @@ class ProfileViewModel: ObservableObject {
 	init() {
 		company = Company(name: "", minReview: 0, ownerPin: "", hasLoggedIn: true, profileImage: "")
 		getCompany()
-	}
-
-	func delete(_ offsets: IndexSet) {
-		offsets.forEach { index in
-			employees.remove(at: index)
-		}
 	}
 
 	var reviewerString: String {

@@ -57,7 +57,6 @@ struct TaskManagerDetailView: View {
 						Button {
 							self.showImagePicker.toggle()
 							self.sourceType = .camera
-
 						} label: {
 							Image(systemName: "camera")
 								.foregroundColor(AppColor.accent)

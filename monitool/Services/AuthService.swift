@@ -34,12 +34,6 @@ class AuthService: ObservableObject {
 		isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
 	}
 
-	func logout() {
-		// login request... on success:
-		UserDefaults.standard.set(false, forKey: "isLoggedIn")
-		isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
-	}
-
     func hasLogin() {
         UserDefaults.standard.set(true, forKey: "hasLoggedIn")
         hasLoggedIn = UserDefaults.standard.bool(forKey: "hasLoggedIn")

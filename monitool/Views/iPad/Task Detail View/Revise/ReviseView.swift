@@ -18,12 +18,8 @@ struct ReviseView: View {
         _reviseViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
     }
 
-    private let notes = "Sudah Pak Bos"
-    private let pic = "Mawar"
-
     @State var totalPage: Int = 3
     @State var datePhoto = "21 Juli 2021 at 15.57"
-    @State private var comment: String = ""
     @State var proofPage = 0
 
     var body: some View {
@@ -40,17 +36,6 @@ struct ReviseView: View {
                 reviseButton()
                 approveButton()
             }.padding()
-        }
-    }
-    @ViewBuilder
-    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View {
-        VStack {
-            Image(image)
-                .resizable()
-                .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
-            Text("21 Jul 2021 at 15:57")
-                .font(.system(size: 11))
-                .frame(width: metricSize.size.width * 0.7, height: 12, alignment: .leading)
         }
     }
 }

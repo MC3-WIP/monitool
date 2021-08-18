@@ -10,15 +10,12 @@ import SwiftUI
 struct EmployeeReviewView: View {
 
     @StateObject var employeeReviewViewModel: EmployeeReviewViewModel
-    @ObservedObject var taskViewModel = TaskViewModel()
     @Environment(\.presentationMode) var presentationMode
 
     init (task: Task) {
         _employeeReviewViewModel = StateObject(wrappedValue: EmployeeReviewViewModel(task: task))
     }
 
-    private let pic: String = "Mawar"
-    private let notes: String = "Sudah Pak Bos"
     // MARK: INITIALIZE TOTAL PAGE
     @State var totalPage: Int = 3
     @State var datePhoto = "21 Juli 2021 at 15.57"
@@ -53,17 +50,6 @@ struct EmployeeReviewView: View {
             }
         }
 
-    }
-    @ViewBuilder
-    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View {
-        VStack {
-            Image(image)
-                .resizable()
-                .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
-            Text("21 Jul 2021 at 15:57")
-                .font(.system(size: 11))
-                .frame(width: metricSize.size.width * 0.7, height: 12, alignment: .leading)
-        }
     }
 }
 

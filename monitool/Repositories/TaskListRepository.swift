@@ -14,7 +14,6 @@ import FirebaseFirestore
 final class TaskListRepository: ObservableObject {
     private let path = RepositoriesPath()
     private let store = Firestore.firestore()
-    private let storage = Storage.storage()
 
     @Published var taskLists: [TaskList] = []
 

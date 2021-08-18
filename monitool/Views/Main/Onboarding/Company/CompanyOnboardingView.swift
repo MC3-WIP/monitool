@@ -12,7 +12,6 @@ struct CompanyOnboardingView: View {
     @State var minReviewers = 0
     @State var companyName: String = ""
     @State private var showingSheet = false
-    @State var isLinkActive = false
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
     @ObservedObject var companyViewModel = CompanyViewModel()
     @ObservedObject var storageService = StorageService()
@@ -73,7 +72,6 @@ struct CompanyOnboardingView: View {
                     }, footer: HStack {
                         Spacer()
                         Button("Save", action: {
-                            self.isLinkActive = true
                             let company = Company(
 								name: companyName,
 								minReview: minReviewers,
@@ -111,10 +109,6 @@ struct CompanyOnboardingView: View {
                 }.listStyle(GroupedListStyle())
             }.navigationTitle("Profile").navigationBarTitleDisplayMode(.inline)
         }.navigationViewStyle(StackNavigationViewStyle())
-    }
-
-    func saveCompanyData(company: Company) {
-
     }
 }
 

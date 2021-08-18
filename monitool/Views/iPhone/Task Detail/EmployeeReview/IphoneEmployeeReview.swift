@@ -10,7 +10,6 @@ import SDWebImageSwiftUI
 struct IphoneEmployeeReview: View {
     @StateObject var employeeReviewModel: TodayListViewModel
     @StateObject var taskDetailViewModel: TaskDetailViewModel
-    @ObservedObject var taskViewModel = TaskViewModel()
     @State var totalPage: Int = 3
     @State var datePhoto = "21 Juli 2021 at 15.57"
     @State var proofPage = 0

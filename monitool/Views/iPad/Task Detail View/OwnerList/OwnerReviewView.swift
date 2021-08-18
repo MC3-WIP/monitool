@@ -10,8 +10,6 @@ import SwiftUI
 struct OwnerReviewView: View {
     @StateObject var OwnerViewModel: TodayListViewModel
     @StateObject var taskDetailViewModel: TaskDetailViewModel
-    @ObservedObject var role: RoleService = .shared
-    @ObservedObject var employeeRepository: EmployeeRepository = .shared
     @ObservedObject var taskViewModel = TaskViewModel()
     @Environment(\.presentationMode) var presentationMode
 
@@ -20,12 +18,8 @@ struct OwnerReviewView: View {
         _OwnerViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
     }
 
-    private let notes = "Sudah Pak Bos"
-    private let pic = "Mawar"
-
     @State var totalPage: Int = 3
     @State var datePhoto = "21 Juli 2021 at 15.57"
-    @State private var comment: String = ""
     @State var proofPage = 0
 
     var body: some View {

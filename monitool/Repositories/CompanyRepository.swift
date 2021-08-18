@@ -30,4 +30,8 @@ final class CompanyRepository: ObservableObject {
 			"ownerPin": company.ownerPin
 		])
 	}
+
+	func addImage(imageURL: String) {
+		companyRef?.updateData(["profileImage": imageURL])
+	}
 }

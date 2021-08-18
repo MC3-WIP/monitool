@@ -9,15 +9,10 @@ import SwiftUI
 
 struct ProfileView: View {
 
-    @Environment(\.presentationMode) var presentationMode
-	@StateObject var companyViewModel = CompanyViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
 
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
 
-    var company: Company?
-
-    @State var companyName = ""
 	@State var editMode: EditMode = .inactive {
 		didSet {
 			if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
@@ -242,25 +237,5 @@ struct ProfileView_Previews: PreviewProvider {
 	static var previews: some View {
 		ProfileView()
 			.previewDevice("iPad Air (4th generation)")
-	}
-}
-
-private struct LandscapeModifier: ViewModifier {
-	let height = UIScreen.main.bounds.width
-	let width = UIScreen.main.bounds.height
-
-	var isPad: Bool {
-		return height >= 768
-	}
-
-	var isRegularWidth: Bool {
-		return height >= 414
-	}
-
-	func body(content: Content) -> some View {
-		content
-			.previewLayout(.fixed(width: height, height: width))
-			.environment(\.horizontalSizeClass, isRegularWidth ? .regular: .compact)
-			.environment(\.verticalSizeClass, isPad ? .regular: .compact)
 	}
 }

@@ -14,7 +14,6 @@ struct OnboardingViewPure: View {
 
     @State var slideGesture: CGSize = CGSize.zero
     @State var curSlideIndex = 0
-    @State var index: Int = 0
 
     var distance: CGFloat = UIScreen.main.bounds.size.width
 

@@ -34,6 +34,7 @@ extension OwnerReviewView {
             .padding()
         }
     }
+
     @ViewBuilder
     func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
         VStack {
@@ -90,16 +91,6 @@ extension OwnerReviewView {
             }
             .padding()
         }
-    }
-
-    @ViewBuilder func CustomText(title: String, content: String?) -> some View {
-        HStack {
-            Text(title)
-                .foregroundColor(Color(hex: "6C6C6C"))
-                .font(.system(size: 17, weight: .bold))
-            Text(content ?? "-")
-        }
-        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
     }
 
     @ViewBuilder func proofOfWorkComponent(matric: GeometryProxy, proofPage: Int, totalPage: Int, datePhoto: String) -> some View {
