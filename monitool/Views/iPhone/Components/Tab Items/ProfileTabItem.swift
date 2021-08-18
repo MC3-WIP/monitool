@@ -9,11 +9,18 @@ import SwiftUI
 
 struct ProfileTabItem: View {
 	var body: some View {
-		Text("Profile View!")
-			.tabItem {
-				Image(systemName: "person.crop.circle")
-				Text("Profile")
+		NavigationView {
+			VStack {
 			}
+			.toolbar {
+				EditButton()
+			}
+			.navigationBarTitle("Profile", displayMode: .inline)
+		}
+		.tabItem {
+			Image(systemName: "person.crop.circle")
+			Text("Profile")
+		}
 	}
 }
 
