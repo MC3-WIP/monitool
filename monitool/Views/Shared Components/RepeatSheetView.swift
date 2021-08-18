@@ -20,7 +20,7 @@ struct RepeatSheetView: View {
 						repeated[index].toggle()
 					} label: {
                         HStack {
-                            Text("Every \(days[index])").foregroundColor(Color.black)
+							Text("Every \(days[index])").foregroundColor(AppColor.primaryBackground)
                             Spacer()
                             if repeated[index] {
                                 Image(systemName: "checkmark").foregroundColor(AppColor.accent)

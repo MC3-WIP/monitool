@@ -32,52 +32,50 @@ struct TaskManagerDetailView: View {
 
 	var body: some View {
 		VStack {
-			VStack {
-				TextField("Task Title", text: $title)
-				Divider()
-				TextField("Task Description", text: $description)
-				Divider()
+			TextField("Task Title", text: $title)
+
+			Divider()
+
+			TextField("Task Description", text: $description)
+
+			Divider()
+
+			HStack {
+				Text("Repeat")
+				Spacer()
 				HStack {
-					Text("Repeat")
-					Spacer()
-					HStack {
-						Text(TaskHelper.convertRepetition(repeated, simplified: true))
-						Image(systemName: "chevron.right")
-							.popover(isPresented: $repeatPopover) {
-								RepeatSheetView(repeated: $repeated)
-									.frame(width: 400, height: 400)
-							}
-					}.foregroundColor(.gray)
-				}
-				.onTapGesture {
-					repeatPopover = true
-				}
-				.padding(.top, 36.0)
-				Divider()
+					Text(TaskHelper.convertRepetition(repeated, simplified: true))
+					Image(systemName: "chevron.right")
+						.popover(isPresented: $repeatPopover) {
+							RepeatSheetView(repeated: $repeated)
+								.frame(width: 400, height: 400)
+						}
+				}.foregroundColor(.gray)
 			}
-			.padding()
+			.onTapGesture {
+				repeatPopover = true
+			}
+			.padding(.top, 36.0)
 
-			NoSeparatorList {
-				VStack {
-					HStack {
-						Text("Add Photo Reference")
-						Spacer()
-						Button {
-							self.showImagePicker.toggle()
-							self.sourceType = .camera
+			Divider()
 
-						} label: {
-							Image(systemName: "camera")
-								.foregroundColor(AppColor.accent)
-						}
-					}
-					.padding()
-					.sheet(isPresented: $showImagePicker) {
-						ImagePicker(sourceType: self.sourceType) { image in
-							self.image = image
-						}
-					}
+			HStack {
+				Text("Add Photo Reference")
+				Spacer()
+				Button {
+					self.showImagePicker.toggle()
+					self.sourceType = .camera
+				} label: {
+					Image(systemName: "camera").foregroundColor(AppColor.accent)
 				}
+			}
+
+			Spacer()
+		}
+		.padding()
+		.sheet(isPresented: $showImagePicker) {
+			ImagePicker(sourceType: self.sourceType) { image in
+				self.image = image
 			}
 		}
 		.navigationBarTitle("Task List", displayMode: .inline)
@@ -97,7 +95,7 @@ struct TaskManagerDetailView: View {
 }
 
 struct TaskListManagerView_Previews: PreviewProvider {
-    static var previews: some View {
-        TaskManagerDetailView(task: TaskList(name: "hehe"))
-    }
+	static var previews: some View {
+		TaskManagerDetailView(task: TaskList(name: "hehe"))
+	}
 }

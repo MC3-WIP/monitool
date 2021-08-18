@@ -11,11 +11,13 @@ struct TaskListTabItem: View {
 	@StateObject var taskListViewModel: TaskListViewModel = .shared
 	@State var showSheetView = false
 
+	@State var isDisabled = false
+
 	var body: some View {
 		NavigationView {
 			List {
 				ForEach(taskListViewModel.taskLists, id: \.id) { task in
-					NavigationLink(destination: EditTaskListView(task: task)) {
+					NavigationLink(destination: EditTaskListView(task: task, isDisabled: $isDisabled)) {
 						TaskListRow(task: task)
 					}
 				}.onDelete(perform: taskListViewModel.delete)
@@ -32,6 +34,8 @@ struct TaskListTabItem: View {
 			Image(systemName: "text.badge.plus")
 			Text("Task List")
 		}
+		.disabled(isDisabled)
+		.accentColor(isDisabled ? .gray : AppColor.accent)
 	}
 }
 
