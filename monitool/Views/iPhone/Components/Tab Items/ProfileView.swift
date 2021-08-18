@@ -64,8 +64,7 @@ struct ProfileView: View {
 		}
 		.padding(.vertical, 36)
         .padding(.horizontal, 16)
-        .navigationTitle("Profile")
-		.navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("Profile", displayMode: .inline)
 		.toolbar {
 			if role.isOwner {
 				EditButton()
