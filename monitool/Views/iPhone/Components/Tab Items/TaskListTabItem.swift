@@ -37,8 +37,15 @@ struct TaskListTabItem: View {
 
 extension TaskListTabItem {
 	@ViewBuilder func TaskListRow(task: TaskList) -> some View {
-		Text(task.name)
-			.padding(.vertical, 12)
+		VStack(alignment: .leading) {
+			Text(task.name)
+				.font(.headline)
+			if let repetition = task.repeated {
+				Text(TaskHelper.convertRepetition(repetition, simplified: true))
+					.font(.subheadline)
+					.foregroundColor(.gray)
+			}
+		}.padding(.vertical, 12)
 	}
 
 	@ViewBuilder func AddTaskButton() -> some View {
