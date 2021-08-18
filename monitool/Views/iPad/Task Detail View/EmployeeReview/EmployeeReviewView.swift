@@ -39,8 +39,8 @@ struct EmployeeReviewView: View {
                 dissaprroveButton()
                 approveButton()
             }
+            .padding()
         }
-        .padding()
         .sheet(isPresented: $showingPinField) {
             PasscodeField { inputtedPin, _ in
                 if isApproving {

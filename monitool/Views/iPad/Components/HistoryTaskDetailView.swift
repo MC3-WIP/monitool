@@ -23,7 +23,7 @@ struct HistoryTaskDetailView: View {
         ScrollView {
             HStack {
                 GeometryReader { metric in
-                    VStack {
+                    VStack (alignment: .leading){
                         Text(taskDetailViewModel.task.name)
                             .font(.system(size: 28, weight: .bold))
                             .padding(.vertical, 24.0)
@@ -40,7 +40,7 @@ struct HistoryTaskDetailView: View {
                     }
                 }
                 GeometryReader { matric in
-                    VStack(spacing: 8) {
+                    VStack(alignment: .leading, spacing: 8) {
                         Text("Proof of Work")
                             .padding(.bottom, 8)
                             .font(.system(size: 20, weight: .bold))
@@ -141,6 +141,7 @@ struct HistoryTaskDetailView: View {
                     .frame(width: matric.size.width * 0.9)
                 }
             }
+            .padding()
         }
     }
     @ViewBuilder

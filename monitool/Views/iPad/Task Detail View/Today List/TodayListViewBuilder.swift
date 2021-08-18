@@ -39,7 +39,7 @@ extension TodayListView {
 
     @ViewBuilder func RightColumn() -> some View {
         GeometryReader { matric in
-            VStack(spacing: 24) {
+            VStack(alignment: .leading, spacing: 24) {
                 //			ScrollView {
                 Text("Proof of Work")
                     .padding(.bottom, 8)
