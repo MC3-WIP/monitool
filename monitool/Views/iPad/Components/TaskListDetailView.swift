@@ -14,8 +14,7 @@ struct TaskListDetailView: View {
     @State var showImagePicker: Bool = false
     @State var sourceType: UIImagePickerController.SourceType = .camera
     @State var image: UIImage?
-    @State var selectedDays: [String] = []
-    @State var taskRepeated = [false, false, false, false, false, false, false]
+	@State var taskRepeated = Task.defaultRepetition
     @State private var showActionSheet = false
 
     var body: some View {
@@ -35,7 +34,7 @@ struct TaskListDetailView: View {
                             repeatPopover = true
                         }
                         .popover(isPresented: $repeatPopover) {
-                            RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays)
+                            RepeatSheetView(repeated: $taskRepeated)
 								.frame(width: 400, height: 400)
                         }
                         Spacer()
@@ -43,17 +42,9 @@ struct TaskListDetailView: View {
                             repeatPopover = true
 						} label: {
                             HStack {
-                                if selectedDays.count != 0 {
-                                    if selectedDays.count == 7 {
-                                        Text("Everyday").foregroundColor(.gray)
-                                    } else {
-                                        ForEach(selectedDays, id: \.self) { day in
-                                            Text(day).foregroundColor(.gray)
-                                        }
-                                    }
-                                }
-                                Image(systemName: "chevron.right").foregroundColor(.gray)
-                            }
+								Text(TaskHelper.convertRepetition(taskRepeated, simplified: true))
+                                Image(systemName: "chevron.right")
+                            }.foregroundColor(.gray)
                         }
                     }
                 }.listStyle(DefaultListStyle())

@@ -21,8 +21,7 @@ struct AddTaskView: View {
 	@Binding var showSheetView: Bool
 
 	@ObservedObject var taskListViewModel: TaskListViewModel = .shared
-	@State var selectedDays: [String] = []
-	@State var taskRepeated = [false, false, false, false, false, false, false]
+	@State var taskRepeated = Task.defaultRepetition
 
 	var body: some View {
 		NavigationView {
@@ -35,22 +34,14 @@ struct AddTaskView: View {
 					HStack {
 						Text("Repeat")
 						Spacer()
-						if selectedDays.count != 0 {
-							if selectedDays.count == 7 {
-								Text("Everyday").foregroundColor(.gray)
-							} else {
-								ForEach(selectedDays, id: \.self) { day in
-									Text(day).foregroundColor(.gray)
-								}
-							}
-						}
+						Text(TaskHelper.convertRepetition(taskRepeated, simplified: true))
 						Image(systemName: "chevron.right")
-							.foregroundColor(.gray)
 					}
+					.foregroundColor(.gray)
 					.onTapGesture {
 						repeatPopover = true
 					}.sheet(isPresented: $repeatPopover) {
-						RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays)
+						RepeatSheetView(repeated: $taskRepeated)
 					}
 					.padding(.top, 36.0)
 					Divider()

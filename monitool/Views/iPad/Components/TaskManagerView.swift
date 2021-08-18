@@ -10,7 +10,7 @@ import Combine
 
 struct TaskManagerView: View {
 	@State private var showingPopover = false
-	@StateObject var viewModel: ViewModel = .shared
+	@StateObject var viewModel = ViewModel()
 
 	var body: some View {
 		List {
@@ -38,7 +38,7 @@ struct TaskManagerView: View {
 
 // MARK: - View Model
 extension TaskManagerView {
-	final class ViewModel: ObservableObject {
+	class ViewModel: ObservableObject {
 
 		@Published var taskList = [TaskList]()
 
@@ -46,9 +46,7 @@ extension TaskManagerView {
 
 		private var subscriptions = Set<AnyCancellable>()
 
-		static let shared = ViewModel()
-
-		private init() {
+		init() {
 			repository.$taskLists
 				.assign(to: \.taskList, on: self)
 				.store(in: &subscriptions)
@@ -70,30 +68,13 @@ extension TaskManagerView {
 				Text(task.name)
 					.font(.headline)
 				if let repetition = task.repeated {
-					Text(convertRepetition(repetition))
+					Text(TaskHelper.convertRepetition(repetition))
 						.font(.subheadline)
 						.foregroundColor(.gray)
 				}
 			}
 		}
 		.padding(8)
-	}
-
-	func convertRepetition(_ repetition: [Bool]) -> String {
-		let days = [
-			"Sunday", "Monday", "Tuesday",
-			"Wednesday", "Thursday", "Friday", "Saturday"
-		]
-
-		var filteredDays = [String]()
-
-		days.enumerated().forEach { (index, day) in
-			if repetition.count == days.count, repetition[index] {
-				filteredDays.append(day)
-			}
-		}
-
-		return filteredDays.joined(separator: ", ")
 	}
 }
 

@@ -13,6 +13,7 @@ struct TaskManagerDetailView: View {
 	let taskID: String
 	@State var title: String
 	@State var description: String
+	@State var repeated: [Bool]
 
 	@State private var repeatPopover = false
 	@State var showImagePicker = false
@@ -24,6 +25,7 @@ struct TaskManagerDetailView: View {
 
 	init(task: TaskList) {
 		taskID 			= task.id
+		_repeated		= State(wrappedValue: task.repeated ?? Task.defaultRepetition)
 		_title 			= State(wrappedValue: task.name)
 		_description 	= State(wrappedValue: task.desc ?? "")
 	}
@@ -38,8 +40,14 @@ struct TaskManagerDetailView: View {
 				HStack {
 					Text("Repeat")
 					Spacer()
-					Image(systemName: "chevron.right")
-						.foregroundColor(.gray)
+					HStack {
+						Text(TaskHelper.convertRepetition(repeated, simplified: true))
+						Image(systemName: "chevron.right")
+							.popover(isPresented: $repeatPopover) {
+								RepeatSheetView(repeated: $repeated)
+									.frame(width: 400, height: 400)
+							}
+					}.foregroundColor(.gray)
 				}
 				.onTapGesture {
 					repeatPopover = true
@@ -79,7 +87,7 @@ struct TaskManagerDetailView: View {
 					id: taskID,
 					name: title,
 					desc: description,
-					repeated: [true]
+					repeated: repeated
 				)
 				presentationMode.wrappedValue.dismiss()
 			}

@@ -15,10 +15,9 @@ struct AddDataPopOver: View {
     @State var employeePin = Employee.Helper.generatePIN()
     @State var taskName = ""
     @State var taskDesc = ""
-    @State var taskRepeated = [false, false, false, false, false, false, false]
+	@State var taskRepeated = Task.defaultRepetition
     @State var taskPhotoReference: String?
     @State var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    @State var selectedDays: [String] = []
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
     @ObservedObject var taskViewModel = TaskViewModel()
     @Binding var showingPopOver: Bool
@@ -76,7 +75,7 @@ struct AddDataPopOver: View {
                                     repeatPopover = true
                                 }
                                 .popover(isPresented: $repeatPopover) {
-                                    RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays)
+                                    RepeatSheetView(repeated: $taskRepeated)
 										.frame(width: 400, height: 400)
                                 }
                                 Spacer()
@@ -84,17 +83,9 @@ struct AddDataPopOver: View {
                                     repeatPopover = true
 								} label: {
                                     HStack {
-                                        if selectedDays.count != 0 {
-                                            if selectedDays.count == 7 {
-                                                Text("Everyday")
-                                            } else {
-                                                ForEach(selectedDays, id: \.self) { day in
-                                                    Text(day)
-                                                }
-                                            }
-                                        }
-                                        Image(systemName: "chevron.right").foregroundColor(.gray)
-                                    }
+										Text(TaskHelper.convertRepetition(taskRepeated, simplified: true))
+                                        Image(systemName: "chevron.right")
+                                    }.foregroundColor(.gray)
                                 }
                             }.foregroundColor(Color.black)
                             HStack {
