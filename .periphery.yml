@@ -1,0 +1,6 @@
+retain_public: true
+schemes:
+- monitool
+targets:
+- monitool
+workspace: monitool.xcworkspace
