@@ -22,7 +22,7 @@ struct EditTaskListView: View {
 
 	@State var sourceType: UIImagePickerController.SourceType = .camera
 	@State var image: UIImage?
-	var imageUrl: URL?
+	private var imageUrl: URL?
 
 	@Binding var isDisabled: Bool
 
@@ -89,8 +89,7 @@ struct EditTaskListView: View {
 				} label: {
 					Image(systemName: "camera").foregroundColor(AppColor.accent)
 				}
-			}
-			.padding(.vertical)
+			}.padding(.vertical)
 
 			if let imageUrl = imageUrl {
 				if let image = image {
@@ -136,31 +135,21 @@ struct EditTaskListView: View {
 
 				if let image = image {
 					isDisabled = true
-					StorageService
-						.shared
-						.upload(image: image, path: "taskPhotoReference/\(taskID)/\(UUID().uuidString)") { metadata, err in
-							if let metadata = metadata,
-							   let path = metadata.path {
-								TaskListRepository.shared.updatePhotoReference(taskID: taskID, photoRef: path) { err in
-									if let err = err {
-										print("Error uploading photo reference:", err.localizedDescription)
-										isShowingAlert.toggle()
-									}
-									isDisabled = false
-									presentationMode.wrappedValue.dismiss()
-								}
-							}
+					taskListViewModel.updatePhotoReference(image: image, taskID: taskID) { err in
+						if let err = err {
+							print("Error uploading photo reference:", err.localizedDescription)
+							isShowingAlert.toggle()
 						}
+						isDisabled = false
+						presentationMode.wrappedValue.dismiss()
+					}
 				} else {
 					presentationMode.wrappedValue.dismiss()
 				}
 			}
 		}
 		.alert(isPresented: $isShowingAlert) {
-			Alert(
-				title: Text("Alert"),
-				message: Text("It seems like we're currently unable to upload your reference image, please wait and try again.")
-			)
+			AppAlert.TaskList.failUploading
 		}
 		.accentColor(AppColor.accent)
 	}

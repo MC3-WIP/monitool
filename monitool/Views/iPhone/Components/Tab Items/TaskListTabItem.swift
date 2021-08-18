@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct TaskListTabItem: View {
-	@StateObject var taskListViewModel: TaskListViewModel = .shared
 	@State var showSheetView = false
-
 	@State var isDisabled = false
+
+	@StateObject var taskListViewModel: TaskListViewModel = .shared
 
 	var body: some View {
 		NavigationView {

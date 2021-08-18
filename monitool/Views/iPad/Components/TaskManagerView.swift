@@ -10,12 +10,14 @@ import Combine
 
 struct TaskManagerView: View {
 	@State private var showingPopover = false
+	@State var isDisabled = false
+
 	@StateObject var viewModel = ViewModel()
 
 	var body: some View {
 		List {
 			ForEach(viewModel.taskList, id: \.name) { task in
-				NavigationLink(destination: TaskManagerDetailView(task: task)) {
+				NavigationLink(destination: TaskManagerDetailView(task: task, isDisabled: $isDisabled)) {
 					TaskListRow(task: task)
 				}
 			}

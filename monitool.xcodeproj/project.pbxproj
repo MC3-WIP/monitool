@@ -59,6 +59,8 @@
 		83EF2A8926B298F900378602 /* RepositoriesPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A8826B298F900378602 /* RepositoriesPath.swift */; };
 		83EF2A9326B29F1C00378602 /* TodoListTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EF2A9226B29F1C00378602 /* TodoListTabItem.swift */; };
 		83F9BE3826C4FB3700B957F2 /* EditTaskListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83F9BE3726C4FB3700B957F2 /* EditTaskListView.swift */; };
+		83FEC45626CD823D00AA65F1 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEC45526CD823D00AA65F1 /* Alerts.swift */; };
+		83FEC45926CD82AB00AA65F1 /* AppAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83FEC45826CD82AB00AA65F1 /* AppAlert.swift */; };
 		8E2A614E26B91C9300D82BBE /* AppOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A614D26B91C9300D82BBE /* AppOnboardingView.swift */; };
 		8E35AC5926BA8B00007613E9 /* NoSeparatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E35AC5826BA8B00007613E9 /* NoSeparatorList.swift */; };
 		8E47F5FF26B9754B00B96004 /* EmployeeReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E47F5FE26B9754B00B96004 /* EmployeeReviewView.swift */; };
@@ -154,6 +156,8 @@
 		83EF2A8826B298F900378602 /* RepositoriesPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesPath.swift; sourceTree = "<group>"; };
 		83EF2A9226B29F1C00378602 /* TodoListTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTabItem.swift; sourceTree = "<group>"; };
 		83F9BE3726C4FB3700B957F2 /* EditTaskListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskListView.swift; sourceTree = "<group>"; };
+		83FEC45526CD823D00AA65F1 /* Alerts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alerts.swift; sourceTree = "<group>"; };
+		83FEC45826CD82AB00AA65F1 /* AppAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAlert.swift; sourceTree = "<group>"; };
 		89BFB039E39A5ABB2477EAEE /* Pods-monitool.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-monitool.debug.xcconfig"; path = "Target Support Files/Pods-monitool/Pods-monitool.debug.xcconfig"; sourceTree = "<group>"; };
 		8E2A614D26B91C9300D82BBE /* AppOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnboardingView.swift; sourceTree = "<group>"; };
 		8E35AC5826BA8B00007613E9 /* NoSeparatorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSeparatorList.swift; sourceTree = "<group>"; };
@@ -263,6 +267,7 @@
 			children = (
 				833CCA9C26B67DCC00BA67CA /* AppColor.swift */,
 				834C9E1026B6D88F0013335F /* AppIcon.swift */,
+				83FEC45826CD82AB00AA65F1 /* AppAlert.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -484,6 +489,7 @@
 		83EF2A8326B2927C00378602 /* Shared Components */ = {
 			isa = PBXGroup;
 			children = (
+				83FEC45726CD824400AA65F1 /* Task List */,
 				8EC984F026C3994E000961E1 /* OnboardingStepView.swift */,
 				8E97703726BD7DC300A4F341 /* PageControl.swift */,
 				83EF2A8626B292C500378602 /* SignIn.swift */,
@@ -500,6 +506,14 @@
 				8352931426CA6C49009F0F92 /* HistoryRow.swift */,
 			);
 			path = "Shared Components";
+			sourceTree = "<group>";
+		};
+		83FEC45726CD824400AA65F1 /* Task List */ = {
+			isa = PBXGroup;
+			children = (
+				83FEC45526CD823D00AA65F1 /* Alerts.swift */,
+			);
+			path = "Task List";
 			sourceTree = "<group>";
 		};
 		8EA5EEDD26BFBE8A009C534F /* OwnerList */ = {
@@ -811,6 +825,7 @@
 				8E47F5FF26B9754B00B96004 /* EmployeeReviewView.swift in Sources */,
 				8EC984E526C2F5F2000961E1 /* IphoneTodayListView.swift in Sources */,
 				B8EFD9B426B8562E001E6086 /* CompanyViewModel.swift in Sources */,
+				83FEC45926CD82AB00AA65F1 /* AppAlert.swift in Sources */,
 				8EA5EEE226BFC9B2009C534F /* EmployeeReviewViewBuilder.swift in Sources */,
 				83A023E826B3FF17002D24CC /* PadLayout.swift in Sources */,
 				83ECAF6526AA115B0069CF25 /* Strings.swift in Sources */,
@@ -824,6 +839,7 @@
 				8EC984ED26C3962A000961E1 /* OnboardingDataModel.swift in Sources */,
 				8E2A614E26B91C9300D82BBE /* AppOnboardingView.swift in Sources */,
 				8E97703826BD7DC300A4F341 /* PageControl.swift in Sources */,
+				83FEC45626CD823D00AA65F1 /* Alerts.swift in Sources */,
 				834FBB3A26C1743700ABAACF /* EmployeeReviewViewModel.swift in Sources */,
 				838B23F926BE943D004979A4 /* PrimaryButtonStyle.swift in Sources */,
 				83A023F026B404EE002D24CC /* ProfileTabItem.swift in Sources */,

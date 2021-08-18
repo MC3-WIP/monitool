@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct TaskManagerDetailView: View {
 	@Environment(\.presentationMode) var presentationMode
@@ -17,20 +18,40 @@ struct TaskManagerDetailView: View {
 
 	@State private var repeatPopover = false
 	@State var showImagePicker = false
+	@State var isShowingAlert = false
 
 	@State var sourceType: UIImagePickerController.SourceType = .camera
 	@State var image: UIImage?
+	private var imageUrl: URL?
+
+	@Binding var isDisabled: Bool
 
 	@ObservedObject var taskListViewModel: TaskListViewModel = .shared
 
-	init(task: TaskList) {
+	init(task: TaskList, isDisabled: Binding<Bool>) {
 		taskID 			= task.id
 		_repeated		= State(wrappedValue: task.repeated ?? Task.defaultRepetition)
 		_title 			= State(wrappedValue: task.name)
 		_description 	= State(wrappedValue: task.desc ?? "")
+		_isDisabled 	= isDisabled
+
+		if let imageRef = task.photoReference, let imageUrl = URL(string: imageRef) {
+			self.imageUrl = imageUrl
+		}
 	}
 
 	var body: some View {
+		if isDisabled {
+			VStack(spacing: 12) {
+				ProgressView()
+				Text("Updating Changes...")
+			}
+		} else {
+			content
+		}
+	}
+
+	private var content: some View {
 		VStack {
 			TextField("Task Title", text: $title)
 
@@ -68,9 +89,33 @@ struct TaskManagerDetailView: View {
 				} label: {
 					Image(systemName: "camera").foregroundColor(AppColor.accent)
 				}
-			}
+			}.padding(.vertical)
 
-			Spacer()
+			if let imageUrl = imageUrl {
+				if let image = image {
+					Image(uiImage: image)
+						.resizable()
+						.scaledToFill()
+						.cornerRadius(8)
+				} else {
+					WebImage(url: imageUrl)
+						.resizable()
+						.indicator(content: { _, _ in
+							VStack(spacing: 12) {
+								ProgressView()
+								Text("Loading photo reference...")
+							}
+						})
+						.transition(.fade(duration: 0.5))
+						.scaledToFill()
+						.cornerRadius(8)
+				}
+			} else if let image = image {
+				Image(uiImage: image)
+					.resizable()
+					.scaledToFill()
+					.cornerRadius(8)
+			}
 		}
 		.padding()
 		.sheet(isPresented: $showImagePicker) {
@@ -87,8 +132,24 @@ struct TaskManagerDetailView: View {
 					desc: description,
 					repeated: repeated
 				)
-				presentationMode.wrappedValue.dismiss()
+
+				if let image = image {
+					isDisabled = true
+					taskListViewModel.updatePhotoReference(image: image, taskID: taskID) { err in
+						if let err = err {
+							print("Error uploading photo reference:", err.localizedDescription)
+							isShowingAlert.toggle()
+						}
+						isDisabled = false
+						presentationMode.wrappedValue.dismiss()
+					}
+				} else {
+					presentationMode.wrappedValue.dismiss()
+				}
 			}
+		}
+		.alert(isPresented: $isShowingAlert) {
+			AppAlert.TaskList.failUploading
 		}
 		.accentColor(AppColor.accent)
 	}
@@ -96,6 +157,6 @@ struct TaskManagerDetailView: View {
 
 struct TaskListManagerView_Previews: PreviewProvider {
 	static var previews: some View {
-		TaskManagerDetailView(task: TaskList(name: "hehe"))
+		TaskManagerDetailView(task: TaskList(name: "hehe"), isDisabled: .constant(false))
 	}
 }
