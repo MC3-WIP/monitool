@@ -8,23 +8,27 @@
 import SwiftUI
 
 struct ProfileView: View {
-
     @Environment(\.presentationMode) var presentationMode
 	@StateObject var companyViewModel = CompanyViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
 
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
+    @ObservedObject var role: RoleService = .shared
 
     var company: Company?
 
     @State var companyName = ""
+    @State var companyPIN = ""
 	@State var editMode: EditMode = .inactive {
 		didSet {
 			if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
 		}
 	}
-
-	@ObservedObject var role: RoleService = .shared
+    
+    init(){
+        self.companyName = profileViewModel.company.name
+        self.companyPIN = profileViewModel.company.ownerPin
+    }
 
 	var body: some View {
 		VStack {
@@ -35,12 +39,12 @@ struct ProfileView: View {
 						CompanyInfoTextField(
 							title: "Company Name",
 							placeholder: "Company Inc.",
-                            text: $profileViewModel.company.name
+                            text: $companyName
 						)
 						CompanyInfoTextField(
 							title: "Owner PIN",
 							placeholder: "1234",
-							text: $profileViewModel.company.ownerPin
+							text: $companyPIN
 						)
 					}
 					ReviewPolicy()
@@ -98,7 +102,7 @@ extension ProfileView {
 			}
 			if !editMode.isEditing {
 				HStack {
-                    Text(profileViewModel.company.name)
+                    Text(companyName)
                         .font(.title)
 
 				}
