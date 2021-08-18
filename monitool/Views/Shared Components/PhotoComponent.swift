@@ -16,7 +16,7 @@ struct PhotoComponent: View {
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
 
-    @ObservedObject var profileViewModel = ProfileViewModel()
+	@ObservedObject var profileViewModel: ProfileViewModel = .shared
 
     var imageURL: String
     @Binding var editMode: EditMode

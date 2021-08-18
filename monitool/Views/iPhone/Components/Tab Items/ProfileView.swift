@@ -11,7 +11,7 @@ struct ProfileView: View {
 
     @Environment(\.presentationMode) var presentationMode
 	@StateObject var companyViewModel = CompanyViewModel()
-    @StateObject var profileViewModel = ProfileViewModel()
+	@ObservedObject var profileViewModel: ProfileViewModel = .shared
 
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
 
