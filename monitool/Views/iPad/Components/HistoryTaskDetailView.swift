@@ -11,16 +11,16 @@ struct HistoryTaskDetailView: View {
     @StateObject var taskDetailViewModel: TaskDetailViewModel
     @State var proofPage = 0
     @State var totalPage = 3
-    
-    init(task: Task){
+
+    init(task: Task) {
         _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
     }
-    
+
     var body: some View {
-        NoSeparatorList{
-            HStack{
-                GeometryReader{ metric in
-                    VStack{
+        NoSeparatorList {
+            HStack {
+                GeometryReader { metric in
+                    VStack {
                         Text(taskDetailViewModel.task.name)
                             .font(.system(size: 28, weight: .bold))
                             .padding(.vertical, 24.0)
@@ -35,16 +35,16 @@ struct HistoryTaskDetailView: View {
                     }
                     .padding(.leading, 18.0)
                 }
-                GeometryReader{ matric in
-                    VStack(spacing: 8){
+                GeometryReader { matric in
+                    VStack(spacing: 8) {
                         Text("Proof of Work")
                             .padding(.bottom, 8)
                             .font(.system(size: 20, weight: .bold))
                             .frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
                             .foregroundColor(Color("DarkGray"))
-                        VStack{
-                            ZStack{
-                                switch proofPage{
+                        VStack {
+                            ZStack {
+                                switch proofPage {
                                 case 0:
                                     ProofOfWork(image: "kucing2", date: "21 Jul 2021 at 15:57", metricSize: matric)
                                 case 1:
@@ -60,18 +60,15 @@ struct HistoryTaskDetailView: View {
                                     if abs(value.translation.height) < abs(value.translation.width) {
                                         if abs(value.translation.width) > 50.0 {
                                             if value.translation.width > 0 {
-                                                if proofPage == 0{
-                                                    
-                                                }
-                                                else{
+                                                if proofPage == 0 {
+
+                                                } else {
                                                     proofPage -= 1
                                                 }
-                                            }
-                                            else if value.translation.width < 0 {
+                                            } else if value.translation.width < 0 {
                                                 if proofPage == totalPage - 1 {
-                                                    
-                                                }
-                                                else{
+
+                                                } else {
                                                     proofPage += 1
                                                 }
                                             }
@@ -88,15 +85,15 @@ struct HistoryTaskDetailView: View {
                             RoundedRectangle(cornerRadius: 5)
                                 .stroke(Color("Accent"), lineWidth: 1)
                         )
-                        HStack{
+                        HStack {
                             Text("PIC: ")
                                 .foregroundColor(Color("DarkGray"))
                                 .font(.system(size: 17, weight: .bold))
                             Text(taskDetailViewModel.pic?.name ?? "-")
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
                         .padding(.top, 27)
-                        
-                        HStack{
+
+                        HStack {
                             Text("Notes: ")
                                 .foregroundColor(Color("DarkGray"))
                                 .font(.system(size: 17, weight: .bold))
@@ -104,7 +101,7 @@ struct HistoryTaskDetailView: View {
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
                         .padding(.top, 20)
                         Spacer()
-                        HStack{
+                        HStack {
                             Text("Comment: ")
                                 .font(.system(size: 17, weight: .bold))
                                 .foregroundColor(Color("DarkGray"))
@@ -114,16 +111,16 @@ struct HistoryTaskDetailView: View {
                         }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding(.top, 20)
                         Spacer()
-                        VStack{
+                        VStack {
                             Text("Log")
                                 .font(.system(size: 22, weight: .bold))
                                 .foregroundColor(Color("DarkGray"))
                                 .frame(alignment: .topLeading)
                         }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                        ScrollView(.vertical){
-                            List{
-                                ForEach(0..<10){number in
-                                    HStack{
+                        ScrollView(.vertical) {
+                            List {
+                                ForEach(0..<10) {_ in
+                                    HStack {
                                         Text("Aku kiri")
                                         Spacer()
                                         Text("Aku kanan")
@@ -143,8 +140,8 @@ struct HistoryTaskDetailView: View {
         }
     }
     @ViewBuilder
-    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View{
-        VStack{
+    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View {
+        VStack {
             Image(image)
                 .resizable()
                 .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)

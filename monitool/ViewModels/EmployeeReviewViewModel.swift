@@ -43,7 +43,7 @@ class EmployeeReviewViewModel: TaskDetailViewModel {
 			return
 		}
 
-		taskRepository.get(id: task.id) { [self] task in
+		taskRepository.get(id: task.id) { [self] _ in
 //			if let task = task, let company = company {
 
 				getReviewer()

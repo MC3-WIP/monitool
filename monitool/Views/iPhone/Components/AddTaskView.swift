@@ -25,21 +25,21 @@ struct AddTaskView: View {
 	@State var taskRepeated = [false, false, false, false, false, false, false]
 
 	var body: some View {
-		NavigationView{
+		NavigationView {
 			VStack {
 				VStack {
 					TextField("Task Title", text: $taskTitle)
 					Divider()
 					TextField("Task Description", text: $description)
 					Divider()
-					HStack() {
+					HStack {
 						Text("Repeat")
 						Spacer()
 						if selectedDays.count != 0 {
 							if selectedDays.count == 7 {
 								Text("Everyday").foregroundColor(.gray)
 							} else {
-								ForEach(selectedDays, id:\.self) { day in
+								ForEach(selectedDays, id: \.self) { day in
 									Text(day).foregroundColor(.gray)
 								}
 							}
@@ -76,16 +76,24 @@ struct AddTaskView: View {
 							}
 						}
 						.actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
-							ActionSheet(title: Text("Choose mode"), message: Text("Please choose your preferred mode to add a photo reference"), buttons: [ActionSheet.Button.default(Text("Camera"), action: {
-								self.showImagePicker.toggle()
-								self.sourceType = .camera
-							}), ActionSheet.Button.default(Text("Photo Library"), action: {
-								self.showImagePicker.toggle()
-								self.sourceType = .photoLibrary
-							}), ActionSheet.Button.cancel()])
-
+							ActionSheet(
+								title: Text("Choose mode"),
+								message: Text("Please choose your preferred mode to add a photo reference"),
+								buttons: [
+									ActionSheet.Button.default(Text("Camera")) {
+										self.showImagePicker.toggle()
+										self.sourceType = .camera
+									},
+									ActionSheet.Button.default(Text("Photo Library")) {
+										self.showImagePicker.toggle()
+										self.sourceType = .photoLibrary
+									},
+									ActionSheet.Button.cancel()
+								]
+							)
 						}
 					}
+
 					if let image = image {
 						Image(uiImage: image)
 							.resizable()
@@ -116,7 +124,6 @@ extension AddTaskView {
 		}.foregroundColor(AppColor.accent)
 	}
 }
-
 
 struct AddTaskView_Previews: PreviewProvider {
 	static var previews: some View {

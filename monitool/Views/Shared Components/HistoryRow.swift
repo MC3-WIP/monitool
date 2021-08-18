@@ -10,8 +10,8 @@ import UIKit
 
 struct HistoryRow: View {
     @StateObject var taskDetailViewModel: TaskDetailViewModel
-    
-    init (task: Task){
+
+    init (task: Task) {
         _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
     }
 

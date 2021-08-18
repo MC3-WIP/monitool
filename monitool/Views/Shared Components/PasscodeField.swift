@@ -9,16 +9,16 @@ import SwiftUI
 import Introspect
 
 public struct PasscodeField: View {
-    
+
     var maxDigits = 4
     var label = "Enter Pin for Owner"
-    
+
     @State var showPin = false
-    
+
     @ObservedObject var profileViewModel = ProfileViewModel()
-    
+
     var handler: (String, (Bool) -> Void) -> Void
-    
+
     public var body: some View {
         VStack(spacing: 30) {
             Text(label).font(.title)
@@ -31,9 +31,9 @@ public struct PasscodeField: View {
                 Text("Wrong pin")
             }
         }
-        
+
     }
-    
+
     private var pinDots: some View {
         HStack {
             Spacer()
@@ -44,23 +44,23 @@ public struct PasscodeField: View {
             }
         }
     }
-    
+
     private var backgroundField: some View {
         let boundPin = Binding<String>(get: { profileViewModel.pinInputted }, set: { newValue in
             profileViewModel.pinInputted = newValue
             self.submitPin()
         })
-        
+
         return TextField("", text: boundPin, onCommit: submitPin)
-      
+
       // Introspect library can used to make the textField become first resonder on appearing
       // if you decide to add the pod 'Introspect' and import it, comment #50 to #53 and uncomment #55 to #61
-      
+
 //           .accentColor(.clear)
 //           .foregroundColor(.clear)
 //           .keyboardType(.numberPad)
 //           .disabled(isDisabled)
-      
+
              .introspectTextField { textField in
                 textField.tintColor = .clear
                 textField.textColor = .clear
@@ -69,7 +69,7 @@ public struct PasscodeField: View {
                 textField.isEnabled = !profileViewModel.isPasscodeFieldDisabled
          }
     }
-    
+
     private var showPinStack: some View {
         HStack {
             Spacer()
@@ -80,7 +80,7 @@ public struct PasscodeField: View {
         .frame(height: 20)
         .padding([.trailing])
     }
-    
+
     private var showPinButton: some View {
         Button(action: {
             self.showPin.toggle()
@@ -90,16 +90,16 @@ public struct PasscodeField: View {
                 Image(systemName: "eye.fill").foregroundColor(.primary)
         })
     }
-    
+
     private func submitPin() {
         guard !profileViewModel.pinInputted.isEmpty else {
             showPin = false
             return
         }
-        
+
         if profileViewModel.pinInputted.count == maxDigits {
             profileViewModel.isPasscodeFieldDisabled = true
-            
+
             handler(profileViewModel.pinInputted) { isSuccess in
                 if isSuccess {
                     print("pin matched, go to next page, no action to perfrom here")
@@ -110,7 +110,7 @@ public struct PasscodeField: View {
                 }
             }
         }
-        
+
         // this code is never reached under  normal circumstances. If the user pastes a text with count higher than the
         // max digits, we remove the additional characters and make a recursive call.
         if profileViewModel.pinInputted.count > maxDigits {
@@ -118,16 +118,16 @@ public struct PasscodeField: View {
             submitPin()
         }
     }
-    
+
     private func getImageName(at index: Int) -> String {
         if index >= profileViewModel.pinInputted.count {
             return "circle"
         }
-        
+
         if self.showPin {
             return profileViewModel.pinInputted.digits[index].numberString + ".circle"
         }
-        
+
         return "circle.fill"
     }
 }

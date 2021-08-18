@@ -12,7 +12,6 @@ struct SidebarMenuItemView: View {
 	private let title: String
 	private let view: AnyView
 
-
 	init(type: SidebarMenuItem) {
 		self.icon = type.icon
 		self.title = type.title

@@ -9,11 +9,11 @@ import SwiftUI
 
 struct OnboardingFirstPage: View {
     var data: OnboardingDataModel
-    
+
     var body: some View {
         VStack {
-            GeometryReader{ proxy in
-                VStack{
+            GeometryReader { proxy in
+                VStack {
                     Image(data.image)
                         .resizable()
                         .frame(width: 216, height: 216, alignment: .center)

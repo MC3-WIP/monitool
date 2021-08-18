@@ -13,14 +13,14 @@ struct TaskNotification {
 }
 
 struct TabItemRow: View {
-	var notification: TaskNotification? = nil
+	var notification: TaskNotification?
 	@Binding var selection: String
 	let title: String
 	let icon: String
 	var isActive: Bool {
 		selection == title
 	}
-	var onTap: ((Self) -> Void)? = nil
+	var onTap: ((Self) -> Void)?
 
     var body: some View {
 		HStack {

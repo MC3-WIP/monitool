@@ -8,26 +8,23 @@
 import SwiftUI
 
 struct ProfileView: View {
-    
+
     @Environment(\.presentationMode) var presentationMode
 	@StateObject var companyViewModel = CompanyViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
-    
+
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
-    
-    
+
     var company: Company?
-    
+
     @State var companyName = ""
 	@State var editMode: EditMode = .inactive {
 		didSet {
-			if editMode.isEditing { profileViewModel.isPinHidden = false }
-			else { profileViewModel.isPinHidden = true }
+			if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
 		}
 	}
-    
-	@ObservedObject var role: RoleService = .shared
 
+	@ObservedObject var role: RoleService = .shared
 
 	var body: some View {
 		VStack {
@@ -48,7 +45,6 @@ struct ProfileView: View {
 					}
 					ReviewPolicy()
 				}
-                
 
 				// MARK: - Employee List
 				Section(header: EmployeeListHeader()) {
@@ -62,7 +58,7 @@ struct ProfileView: View {
 			Spacer()
 
 			SwitchRoleButton()
-            
+
 		}
 		.padding(.vertical, 36)
 		.navigationTitle("Profile")
@@ -73,7 +69,7 @@ struct ProfileView: View {
 			}
 		}
 		.sheet(isPresented: $profileViewModel.isPinPresenting) {
-            PasscodeField { inputtedPin, isSuccess in
+            PasscodeField { inputtedPin, _ in
                 if inputtedPin == profileViewModel.company.ownerPin {
                     print("sukses")
                     role.switchRole(to: .owner)
@@ -104,7 +100,7 @@ extension ProfileView {
 				HStack {
                     Text(profileViewModel.company.name)
                         .font(.title)
-					
+
 				}
 			}
 		}
@@ -235,7 +231,7 @@ extension ProfileView {
 		.cornerRadius(8)
 		.disabled(editMode.isEditing)
 	}
-    
+
     func hideKeyboard() {
             UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
         }
@@ -249,7 +245,7 @@ struct ProfileView_Previews: PreviewProvider {
 	}
 }
 
-fileprivate struct LandscapeModifier: ViewModifier {
+private struct LandscapeModifier: ViewModifier {
 	let height = UIScreen.main.bounds.width
 	let width = UIScreen.main.bounds.height
 

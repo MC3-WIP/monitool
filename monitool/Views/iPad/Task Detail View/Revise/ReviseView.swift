@@ -12,39 +12,39 @@ struct ReviseView: View {
     @StateObject var taskDetailViewModel: TaskDetailViewModel
     @ObservedObject var taskViewModel = TaskViewModel()
     @Environment(\.presentationMode) var presentationMode
-    
-    init (task: Task){
+
+    init (task: Task) {
         _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
         _reviseViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
     }
-    
+
     private let notes = "Sudah Pak Bos"
     private let pic = "Mawar"
-    
+
     @State var totalPage: Int = 3
     @State var datePhoto = "21 Juli 2021 at 15.57"
     @State private var comment: String = ""
     @State var proofPage = 0
-    
+
     var body: some View {
-        VStack{
-            ScrollView{
-                HStack{
+        VStack {
+            ScrollView {
+                HStack {
                     LeftColumn()
                     RightColumn()
                 }
                 .frame(height: 680)
             }
-            HStack(spacing: 24){
-                
+            HStack(spacing: 24) {
+
                 reviseButton()
                 approveButton()
             }.padding()
         }
     }
     @ViewBuilder
-    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View{
-        VStack{
+    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View {
+        VStack {
             Image(image)
                 .resizable()
                 .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)

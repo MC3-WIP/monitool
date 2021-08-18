@@ -10,30 +10,29 @@ import SwiftUI
 
 struct OnboardingViewPure: View {
     var data: [OnboardingDataModel]
-    var doneFunction: () -> ()
-    
+    var doneFunction: () -> Void
+
     @State var slideGesture: CGSize = CGSize.zero
     @State var curSlideIndex = 0
     @State var index: Int = 0
-    
+
     var distance: CGFloat = UIScreen.main.bounds.size.width
-    
+
     var body: some View {
         ZStack {
             Color(.systemBackground).edgesIgnoringSafeArea(.all)
-            
-            GeometryReader{proxy in
-                VStack(spacing: 30){
+
+            GeometryReader {proxy in
+                VStack(spacing: 30) {
                     ZStack(alignment: .center) {
                         ForEach(0..<data.count) { i in
-                            if i == 0{
+                            if i == 0 {
                                 OnboardingFirstPage(data: self.data[i])
                                     .frame(height: proxy.size.height * 0.7, alignment: .center)
                                     .offset(x: CGFloat(i) * self.distance)
                                     .offset(x: self.slideGesture.width - CGFloat(self.curSlideIndex) * self.distance)
                                     .animation(.spring())
-                            }
-                            else{
+                            } else {
                                 OnboardingStepView(data: self.data[i])
                                     .frame(height: proxy.size.height * 0.7, alignment: .center)
                                     .offset(x: CGFloat(i) * self.distance)
@@ -41,32 +40,30 @@ struct OnboardingViewPure: View {
                                     .animation(.spring())
                             }
                         }
-                        
+
                     }
                     self.progressView()
                     SignIn()
                 }
                 .contentShape(Rectangle())
-                .gesture(DragGesture().onChanged{ value in
+                .gesture(DragGesture().onChanged { value in
                     self.slideGesture = value.translation
                 }
                 .onEnded { value in
-                    if abs(value.translation.height) < abs(value.translation.width){
-                        if abs(value.translation.width) > 50{
+                    if abs(value.translation.height) < abs(value.translation.width) {
+                        if abs(value.translation.width) > 50 {
                             if value .translation.width > 0 {
                                 if curSlideIndex == 0 {
-                                    
-                                }
-                                else{
+
+                                } else {
                                     withAnimation { self.curSlideIndex -= 1
                                     }
                                 }
                             }
                             if value.translation.width < 0 {
-                                if curSlideIndex == data.count - 1{
-                                    
-                                }
-                                else{
+                                if curSlideIndex == data.count - 1 {
+
+                                } else {
                                     withAnimation {     self.curSlideIndex += 1
                                     }
                                 }
@@ -90,7 +87,7 @@ struct OnboardingViewPure: View {
             }
         }
     }
-    
+
 }
 
 struct OnboardingViewPure_Previews: PreviewProvider {

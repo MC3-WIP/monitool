@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseStorage
 
 class ProfileViewModel: ObservableObject {
-	
+
 	@Published var employees = [Employee]()
 	@Published var company: Company
 
@@ -19,15 +19,13 @@ class ProfileViewModel: ObservableObject {
 	@Published var isPinHidden = true
 	@Published var isPinPresenting = false
 	@Published var isAddEmployeePresenting = false
-    
+
     @Published var pinInputted = ""
     @Published var showingAlert = false
     @Published var isPasscodeFieldDisabled = false
     @Published var isPinRight = false
 
 	private let companyRepository: CompanyRepository = .shared
-
-
 
 	init() {
 		company = Company(name: "", minReview: 0, ownerPin: "", hasLoggedIn: true, profileImage: "")
@@ -56,14 +54,19 @@ class ProfileViewModel: ObservableObject {
 
 	func getCompany() {
 		if let ref = companyRepository.companyRef {
-			ref.getDocument(completion: { doc, err in
-				if let err = err {
-					fatalError("Unresolved error: \(err)")
-				}
+			ref.getDocument { doc, err in
+				if let err = err { fatalError("Unresolved error: \(err)") }
+
 				if let doc = doc, doc.exists {
-					self.company = Company(name: doc.get("name") as! String, minReview: doc.get("minReview") as! Int, ownerPin: doc.get("ownerPin") as! String, hasLoggedIn: true, profileImage: doc.get("profileImage") as? String)
+					do {
+						if let company = try doc.data(as: Company.self) {
+							self.company = company
+						}
+					} catch {
+						print(error.localizedDescription)
+					}
 				}
-			})
+			}
 		}
 	}
 }

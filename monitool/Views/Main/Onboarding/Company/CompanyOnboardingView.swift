@@ -18,11 +18,11 @@ struct CompanyOnboardingView: View {
     @ObservedObject var storageService = StorageService()
     @ObservedObject var userAuth: AuthService
     @ObservedObject var ownerPin = TextBindingHelper(limit: 4)
-    
+
     init() {
         self.userAuth = .shared
     }
-    
+
     var body: some View {
         NavigationView {
             VStack {
@@ -30,20 +30,22 @@ struct CompanyOnboardingView: View {
                     Section(header: Color.clear
                                 .frame(width: 0, height: 0)
                                 .accessibilityHidden(true)) {
-                        HStack() {
+                        HStack {
                             Spacer()
                             PhotoComponent(imageURL: "", editMode: .constant(.active))
                             Spacer()
                         }
-                        HStack() {
+                        HStack {
                             Text("Company Name")
                             TextField("Company Name", text: $companyName).multilineTextAlignment(.trailing)
                         }
-                        HStack() {
+                        HStack {
                             Text("Owner Pin")
-                            TextField("Owner Pin", text: $ownerPin.text).multilineTextAlignment(.trailing).keyboardType(.numberPad)
+                            TextField("Owner Pin", text: $ownerPin.text)
+								.multilineTextAlignment(.trailing)
+								.keyboardType(.numberPad)
                         }
-                        HStack() {
+                        HStack {
                             Text("Task Reviewer: ")
                             Spacer()
                             Stepper("\(minReviewers) Reviewer(s)", onIncrement: {
@@ -55,20 +57,30 @@ struct CompanyOnboardingView: View {
                             })
                         }
                     }
-                    Section(header: HStack() {
-                        Text("Employee").font(.title2).foregroundColor(.black).fontWeight(.semibold).frame(maxWidth: .infinity, alignment: .leading)
+                    Section(header: HStack {
+                        Text("Employee")
+							.font(.title2.weight(.semibold))
+							.foregroundColor(.black)
+							.frame(maxWidth: .infinity, alignment: .leading)
                         Spacer()
                         Button("Add Employee") {
                             showingSheet = true
                         }
                         .popover(isPresented: $showingSheet) {
-                            AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet).frame(width: 400, height: 400)
+                            AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
+								.frame(width: 400, height: 400)
                         }
-                    }, footer: HStack() {
+                    }, footer: HStack {
                         Spacer()
                         Button("Save", action: {
                             self.isLinkActive = true
-                            let company = Company(name: companyName, minReview: minReviewers, ownerPin: ownerPin.text, hasLoggedIn: true, profileImage: "")
+                            let company = Company(
+								name: companyName,
+								minReview: minReviewers,
+								ownerPin: ownerPin.text,
+								hasLoggedIn: true,
+								profileImage: ""
+							)
                             companyViewModel.create(company)
                             storageService.updateImageURL(category: "profile")
                             userAuth.hasLogin()
@@ -81,13 +93,13 @@ struct CompanyOnboardingView: View {
                         Spacer()
                     }
                     ) {
-                        HStack() {
+                        HStack {
                             Text("Name").foregroundColor(.gray)
                             Spacer()
                             Text("Pin").foregroundColor(.gray)
                         }
                         ForEach(employeeViewModel.employees) { employee in
-                            HStack() {
+                            HStack {
                                 Text(employee.name)
                                 Spacer()
                                 Text(employee.pin)
@@ -95,14 +107,14 @@ struct CompanyOnboardingView: View {
                         }
                         .onDelete(perform: employeeViewModel.delete)
                     }.textCase(nil)
-                    
+
                 }.listStyle(GroupedListStyle())
             }.navigationTitle("Profile").navigationBarTitleDisplayMode(.inline)
         }.navigationViewStyle(StackNavigationViewStyle())
     }
-    
+
     func saveCompanyData(company: Company) {
-        
+
     }
 }
 

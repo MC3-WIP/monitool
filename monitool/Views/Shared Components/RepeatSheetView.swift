@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RepeatSheetView: View {
-    @State var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"]
+    @State var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
     @State var daysSimplified = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     @Binding var repeated: [Bool]
     @Binding var selectedDays: [String]
@@ -16,7 +16,7 @@ struct RepeatSheetView: View {
         NavigationView {
             VStack {
                 List(0..<days.count) { i in
-                    Button(action: {
+                    Button {
                         if repeated[i] {
                             repeated[i] = !repeated[i]
                             selectedDays.removeAll(where: {$0 == daysSimplified[i]})
@@ -24,15 +24,15 @@ struct RepeatSheetView: View {
                             repeated[i] = !repeated[i]
                             selectedDays.append(daysSimplified[i])
                         }
-                    }) {
-                        HStack() {
+					} label: {
+                        HStack {
                             Text("Every \(days[i])").foregroundColor(Color.black)
                             Spacer()
                             if repeated[i] {
                                 Image(systemName: "checkmark").foregroundColor(AppColor.accent)
                             }
                         }
-                        
+
                     }
                 }
             }.navigationTitle("Task List").navigationBarTitleDisplayMode(.inline)
@@ -40,8 +40,8 @@ struct RepeatSheetView: View {
     }
 }
 
-//struct RepeatSheetView_Previews: PreviewProvider {
+// struct RepeatSheetView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        RepeatSheetView(repeated: )
 //    }
-//}
+// }

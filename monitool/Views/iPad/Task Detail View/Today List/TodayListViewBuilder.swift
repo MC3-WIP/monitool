@@ -8,7 +8,6 @@
 import SwiftUI
 import SDWebImageSwiftUI
 
-
 // MARK: - View Builders
 extension TodayListView {
     @ViewBuilder func LeftColumn() -> some View {
@@ -18,12 +17,11 @@ extension TodayListView {
                 Text(todayListViewModel.task.name)
                     .font(.system(size: 28, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-                if let image = todayListViewModel.task.photoReference{
+                if let image = todayListViewModel.task.photoReference {
                     WebImage(url: URL(string: image))
                         .resizable()
                         .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
-                }
-                else{
+                } else {
                     Image("MonitoolEmptyReferenceIllus")
                         .resizable()
                         .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
@@ -37,7 +35,7 @@ extension TodayListView {
             }
         }
     }
-    
+
     @ViewBuilder func RightColumn() -> some View {
         GeometryReader { matric in
             VStack(spacing: 24) {
@@ -47,7 +45,7 @@ extension TodayListView {
                     .font(.system(size: 20, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
                     .foregroundColor(Color(hex: "898989"))
-                
+
                 ProofOfWork(image: "MonitoolAddPhotoIllustration", date: "p", metricSize: matric)
                     .frame(width: matric.size.width * 0.75, height: matric.size.width * 0.75)
                     .padding(.vertical, 10)
@@ -56,7 +54,7 @@ extension TodayListView {
                         RoundedRectangle(cornerRadius: 5)
                             .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
                     )
-                
+
                 if role.isOwner {
                     CustomText(title: "PIC: ", content: todayListViewModel.pic?.name)
                     CustomText(title: "Notes: ", content: todayListViewModel.task.notes)
@@ -68,7 +66,7 @@ extension TodayListView {
             }
         }
     }
-        
+
         @ViewBuilder func EmployeePicker() -> some View {
             VStack(spacing: -36) {
                 HStack {
@@ -86,7 +84,7 @@ extension TodayListView {
                 }
                 .padding()
                 .zIndex(1)
-                
+
                 Picker("PIC", selection: $todayListViewModel.picSelection) {
                     ForEach(0..<employeeRepository.employees.count) { index in
                         Text(employeeRepository.employees[index].name).tag(index)
@@ -94,7 +92,7 @@ extension TodayListView {
                 }
             }
         }
-        
+
         @ViewBuilder func PICSelector() -> some View {
             VStack(alignment: .leading) {
                 Text("PIC")
@@ -119,7 +117,7 @@ extension TodayListView {
                 .modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
             }
         }
-        
+
         @ViewBuilder func NotesTextField() -> some View {
             VStack(alignment: .leading) {
                 Text("Notes")
@@ -133,18 +131,18 @@ extension TodayListView {
                     .modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
             }
         }
-        
+
         @ViewBuilder func CustomText(title: String, content: String?) -> some View {
-            HStack{
+            HStack {
                 Text(title)
                     .foregroundColor(Color(hex: "6C6C6C"))
                     .font(.system(size: 17, weight: .bold))
                 Text(content ?? "-")
             }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
         }
-        
-        @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View{
-            VStack{
+
+        @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View {
+            VStack {
                 Image(image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
