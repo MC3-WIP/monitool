@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 extension OwnerReviewView {
     @ViewBuilder func LeftColumn() -> some View {
         GeometryReader { metric in
-            VStack {
+            VStack (alignment: .leading){
                 Text(taskDetailViewModel.task.name)
                     .font(.system(size: 28, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
@@ -26,6 +26,7 @@ extension OwnerReviewView {
                 }
                 if let desc = taskDetailViewModel.task.desc {
                     Text(desc)
+                        .fixedSize(horizontal: false, vertical: true)
                         .frame(width: metric.size.width * 0.8, alignment: .topLeading)
                         .font(.system(size: 17))
                         .multilineTextAlignment(.leading)
@@ -48,7 +49,7 @@ extension OwnerReviewView {
 
     @ViewBuilder func RightColumn() -> some View {
         GeometryReader { matric in
-            VStack {
+            VStack (alignment: .leading) {
                 Text("Proof of Work")
                     .padding(.bottom, 8)
                     .font(.system(size: 20, weight: .bold))
