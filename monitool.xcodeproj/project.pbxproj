@@ -61,6 +61,7 @@
 		8E2A614E26B91C9300D82BBE /* AppOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2A614D26B91C9300D82BBE /* AppOnboardingView.swift */; };
 		8E35AC5926BA8B00007613E9 /* NoSeparatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E35AC5826BA8B00007613E9 /* NoSeparatorList.swift */; };
 		8E47F5FF26B9754B00B96004 /* EmployeeReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E47F5FE26B9754B00B96004 /* EmployeeReviewView.swift */; };
+		8E55714626CCFC0F0026CDF9 /* IphoneProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E55714526CCFC0F0026CDF9 /* IphoneProfileView.swift */; };
 		8E7A53BD26B13EC4007FA3A8 /* CompanyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A53BC26B13EC4007FA3A8 /* CompanyRepository.swift */; };
 		8E7A53BF26B13F01007FA3A8 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E7A53BE26B13F01007FA3A8 /* Company.swift */; };
 		8E97703626BD7AA100A4F341 /* OwnerReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E97703526BD7AA100A4F341 /* OwnerReviewView.swift */; };
@@ -156,6 +157,7 @@
 		8E2A614D26B91C9300D82BBE /* AppOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppOnboardingView.swift; sourceTree = "<group>"; };
 		8E35AC5826BA8B00007613E9 /* NoSeparatorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSeparatorList.swift; sourceTree = "<group>"; };
 		8E47F5FE26B9754B00B96004 /* EmployeeReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeReviewView.swift; sourceTree = "<group>"; };
+		8E55714526CCFC0F0026CDF9 /* IphoneProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneProfileView.swift; sourceTree = "<group>"; };
 		8E7A53BC26B13EC4007FA3A8 /* CompanyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyRepository.swift; sourceTree = "<group>"; };
 		8E7A53BE26B13F01007FA3A8 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		8E97703526BD7AA100A4F341 /* OwnerReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerReviewView.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				83A023F526B408EC002D24CC /* Tab Items */,
 				F81FDBCC26C4485F0039C37D /* AddTaskView.swift */,
 				83F9BE3726C4FB3700B957F2 /* EditTaskListView.swift */,
+				8E55714526CCFC0F0026CDF9 /* IphoneProfileView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -851,6 +854,7 @@
 				8E97703E26BDAE5C00A4F341 /* HistoryTaskDetailView.swift in Sources */,
 				8EB4FA7F26BE4620009AABAF /* TodayListView.swift in Sources */,
 				8E7A53BF26B13F01007FA3A8 /* Company.swift in Sources */,
+				8E55714626CCFC0F0026CDF9 /* IphoneProfileView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
