@@ -6,4 +6,9 @@ excluded:
   - Pods
 
 line_length:
+  warning: 122
   ignores_comments: true
+  ignores_function_declarations: true
+
+function_body_length:
+  warning: 42

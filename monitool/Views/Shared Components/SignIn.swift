@@ -90,8 +90,13 @@ struct SignIn: View {
                                 return
                             }
 
-                            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
-                            Auth.auth().signIn(with: credential) { (_, error) in
+                            let credential = OAuthProvider.credential(
+								withProviderID: "apple.com",
+								idToken: idTokenString,
+								rawNonce: nonce
+							)
+
+							Auth.auth().signIn(with: credential) { (_, error) in
                                 if error != nil {
                                     // Error. If error.code == .MissingOrInvalidNonce, make sure
                                     // you're sending the SHA256-hashed nonce as a hex string with

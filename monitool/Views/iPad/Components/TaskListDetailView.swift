@@ -35,12 +35,13 @@ struct TaskListDetailView: View {
                             repeatPopover = true
                         }
                         .popover(isPresented: $repeatPopover) {
-                            RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays).frame(width: 400, height: 400)
+                            RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays)
+								.frame(width: 400, height: 400)
                         }
                         Spacer()
-                        Button(action: {
+                        Button {
                             repeatPopover = true
-                        }) {
+						} label: {
                             HStack {
                                 if selectedDays.count != 0 {
                                     if selectedDays.count == 7 {
@@ -59,12 +60,15 @@ struct TaskListDetailView: View {
                 .frame(height: 200.0)
                 NoSeparatorList {
                     VStack {
-                        Text("Photo Reference").font(.title2).foregroundColor(.black).fontWeight(.semibold).padding(.leading).frame(maxWidth: .infinity, alignment: .leading)
+                        Text("Photo Reference")
+							.font(.title2.weight(.semibold))
+							.foregroundColor(.black)
+							.padding(.leading)
+							.frame(maxWidth: .infinity, alignment: .leading)
                         HStack {
-                        Button(action: {
+                        Button {
                             self.showActionSheet.toggle()
-
-                        }) {
+						} label: {
                             if image != nil {
                             Image(uiImage: image!)
                                 .resizable()

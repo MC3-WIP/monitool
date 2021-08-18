@@ -14,7 +14,12 @@ struct TodoListTabItem: View {
 
 	let taskStatuses: [TaskStatus] = [.todayList, .waitingEmployeeReview, .waitingOwnerReview, .revise]
 
-	let statusIcon: [Image] = [Image(systemName: "list.bullet.below.rectangle"), Image(systemName: "person.3"), Image(systemName: "person.crop.circle.badge.checkmark"), Image(systemName: "repeat")]
+	let statusIcon: [Image] = [
+		Image(systemName: "list.bullet.below.rectangle"),
+		Image(systemName: "person.3"),
+		Image(systemName: "person.crop.circle.badge.checkmark"),
+		Image(systemName: "repeat")
+	]
 
 	var body: some View {
 		NavigationView {

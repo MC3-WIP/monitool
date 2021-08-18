@@ -54,11 +54,11 @@ struct EditTaskListView: View {
 					HStack {
 						Text("Add Photo Reference")
 						Spacer()
-						Button(action: {
+						Button {
 							self.showImagePicker.toggle()
 							self.sourceType = .camera
 
-						}) {
+						} label: {
 							Image(systemName: "camera")
 								.foregroundColor(AppColor.accent)
 						}

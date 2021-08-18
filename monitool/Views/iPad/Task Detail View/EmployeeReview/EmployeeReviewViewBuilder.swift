@@ -75,11 +75,26 @@ extension EmployeeReviewView {
             ZStack {
                 switch proofPage {
                 case 0:
-                    ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                    ProofOfWork(
+						image: "DefaultRefference",
+						date: "21 Jul 2021 at 15:57",
+						metricSize: matric,
+						datePhoto: datePhoto
+					)
                 case 1:
-                    ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                    ProofOfWork(
+						image: "DefaultRefference",
+						date: "21 Jul 2021 at 15:57",
+						metricSize: matric,
+						datePhoto: datePhoto
+					)
                 case 2:
-                    ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                    ProofOfWork(
+						image: "DefaultRefference",
+						date: "21 Jul 2021 at 15:57",
+						metricSize: matric,
+						datePhoto: datePhoto
+					)
                 default:
                     Image("MonitoolAddPhotoIllustration")
                 }
@@ -115,8 +130,8 @@ extension EmployeeReviewView {
                 .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
         )
     }
-    @ViewBuilder
-    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
+
+    @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
         VStack {
             Image("MonitoolAddPhotoIllustration")
                 .resizable()
@@ -126,13 +141,13 @@ extension EmployeeReviewView {
                 .frame(width: metricSize.size.width * 0.7, height: 12, alignment: .leading)
         }
     }
-    @ViewBuilder
-    func approveButton() -> some View {
-        Button(action: {
+
+    @ViewBuilder func approveButton() -> some View {
+        Button {
             showingPinField = true
             isApproving = true
 
-        }) {
+		} label: {
             HStack {
                 Image(systemName: "checkmark")
                 Text("Approve")
@@ -148,11 +163,11 @@ extension EmployeeReviewView {
         }
     }
 
-    func dissaprroveButton() -> some View {
-        Button(action: {
+	@ViewBuilder func dissaprroveButton() -> some View {
+        Button {
 			showingPinField = true
             isApproving = false
-        }) {
+		} label: {
             HStack {
                 Image(systemName: "xmark")
                 Text("Revise")

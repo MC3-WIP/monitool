@@ -45,7 +45,12 @@ class Task: Codable, Identifiable, Hashable {
 	}
 
     static func == (lhs: Task, rhs: Task) -> Bool {
-        return lhs.id == rhs.id && lhs.name == rhs.name && lhs.createdAt == rhs.createdAt && lhs.status == rhs.status && lhs.repeated == rhs.repeated && rhs.isHistory == lhs.isHistory
+        lhs.id == rhs.id &&
+		lhs.name == rhs.name &&
+		lhs.createdAt == rhs.createdAt &&
+		lhs.status == rhs.status &&
+		lhs.repeated == rhs.repeated &&
+		rhs.isHistory == lhs.isHistory
     }
 
     func hash(into hasher: inout Hasher) {

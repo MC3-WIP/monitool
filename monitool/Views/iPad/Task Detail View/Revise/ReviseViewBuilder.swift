@@ -91,16 +91,32 @@ extension ReviseView {
                 .frame(width: metricSize.size.width * 0.7, height: 12, alignment: .leading)
         }
     }
+
     @ViewBuilder func proofOfWorkComponent(matric: GeometryProxy, proofPage: Int, totalPage: Int, datePhoto: String) -> some View {
             VStack {
                 ZStack {
                     switch proofPage {
                     case 0:
-                        ProofOfWork(image: "kucing2", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                        ProofOfWork(
+							image: "kucing2",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
                     case 1:
-                        ProofOfWork(image: "kucing3", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                        ProofOfWork(
+							image: "kucing3",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
                     case 2:
-                        ProofOfWork(image: "kucing4", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                        ProofOfWork(
+							image: "kucing4",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
                     default:
                         Image("MonitoolAddPhotoIllustration")
                     }
@@ -136,13 +152,13 @@ extension ReviseView {
                     .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
             )
     }
-    @ViewBuilder
-    func reviseButton() -> some View {
-        Button(action: {
+
+    @ViewBuilder func reviseButton() -> some View {
+        Button {
             // MARK: ACTION BUTTON REVISE
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
             self.presentationMode.wrappedValue.dismiss()
-        }) {
+		} label: {
             HStack {
                 Image(systemName: "repeat")
                 Text("Revise")
@@ -157,12 +173,13 @@ extension ReviseView {
                             )
         }
     }
+
     func approveButton() -> some View {
-        Button(action: {
+        Button {
             // MARK: ACTION BUTTON APPROVE
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
             self.presentationMode.wrappedValue.dismiss()
-        }) {
+		} label: {
             HStack {
                 Image(systemName: "checkmark")
                 Text("Approve")

@@ -76,12 +76,13 @@ struct AddDataPopOver: View {
                                     repeatPopover = true
                                 }
                                 .popover(isPresented: $repeatPopover) {
-                                    RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays).frame(width: 400, height: 400)
+                                    RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays)
+										.frame(width: 400, height: 400)
                                 }
                                 Spacer()
-                                Button(action: {
+                                Button {
                                     repeatPopover = true
-                                }) {
+								} label: {
                                     HStack {
                                         if selectedDays.count != 0 {
                                             if selectedDays.count == 7 {
@@ -134,8 +135,18 @@ struct AddDataPopOver: View {
                 .navigationBarItems(trailing: Button("Add", action: {
                     if taskName.count != 0 {
                         showingPopOver = false
-                        let task = Task(name: taskName, description: taskDesc, photoReference: taskPhotoReference, repeated: taskRepeated)
-                        let taskList = TaskList(name: taskName, desc: taskDesc, repeated: taskRepeated, photoReference: taskPhotoReference)
+                        let task = Task(
+							name: taskName,
+							description: taskDesc,
+							photoReference: taskPhotoReference,
+							repeated: taskRepeated
+						)
+						let taskList = TaskList(
+							name: taskName,
+							desc: taskDesc,
+							repeated: taskRepeated,
+							photoReference: taskPhotoReference
+						)
                         if let image = image {
                             taskViewModel.add(task, taskList, photo: image, id: UUID().uuidString)
                         } else {

@@ -41,7 +41,9 @@ struct CompanyOnboardingView: View {
                         }
                         HStack {
                             Text("Owner Pin")
-                            TextField("Owner Pin", text: $ownerPin.text).multilineTextAlignment(.trailing).keyboardType(.numberPad)
+                            TextField("Owner Pin", text: $ownerPin.text)
+								.multilineTextAlignment(.trailing)
+								.keyboardType(.numberPad)
                         }
                         HStack {
                             Text("Task Reviewer: ")
@@ -56,19 +58,29 @@ struct CompanyOnboardingView: View {
                         }
                     }
                     Section(header: HStack {
-                        Text("Employee").font(.title2).foregroundColor(.black).fontWeight(.semibold).frame(maxWidth: .infinity, alignment: .leading)
+                        Text("Employee")
+							.font(.title2.weight(.semibold))
+							.foregroundColor(.black)
+							.frame(maxWidth: .infinity, alignment: .leading)
                         Spacer()
                         Button("Add Employee") {
                             showingSheet = true
                         }
                         .popover(isPresented: $showingSheet) {
-                            AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet).frame(width: 400, height: 400)
+                            AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
+								.frame(width: 400, height: 400)
                         }
                     }, footer: HStack {
                         Spacer()
                         Button("Save", action: {
                             self.isLinkActive = true
-                            let company = Company(name: companyName, minReview: minReviewers, ownerPin: ownerPin.text, hasLoggedIn: true, profileImage: "")
+                            let company = Company(
+								name: companyName,
+								minReview: minReviewers,
+								ownerPin: ownerPin.text,
+								hasLoggedIn: true,
+								profileImage: ""
+							)
                             companyViewModel.create(company)
                             storageService.updateImageURL(category: "profile")
                             userAuth.hasLogin()

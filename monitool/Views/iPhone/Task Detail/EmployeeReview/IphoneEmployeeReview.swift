@@ -74,18 +74,33 @@ struct IphoneEmployeeReview: View {
     }
     @ViewBuilder func proofOfWorkComponent(matric: GeometryProxy, proofPage: Int, totalPage: Int, datePhoto: String) -> some View {
             VStack {
-                ZStack {
-                    switch proofPage {
-                    case 0:
-                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
-                    case 1:
-                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
-                    case 2:
-                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
-                    default:
-                        Image("MonitoolAddPhotoIllustration")
-                    }
-                }
+				ZStack {
+					switch proofPage {
+					case 0:
+						ProofOfWork(
+							image: "DefaultRefference",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
+					case 1:
+						ProofOfWork(
+							image: "DefaultRefference",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
+					case 2:
+						ProofOfWork(
+							image: "DefaultRefference",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
+					default:
+						Image("MonitoolAddPhotoIllustration")
+					}
+				}
                 .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
                     .onEnded { value in
                         if abs(value.translation.height) < abs(value.translation.width) {

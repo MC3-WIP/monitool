@@ -87,11 +87,26 @@ struct IphoneReviseView: View {
                 ZStack {
                     switch proofPage {
                     case 0:
-                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                        ProofOfWork(
+							image: "DefaultRefference",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
                     case 1:
-                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                        ProofOfWork(
+							image: "DefaultRefference",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
                     case 2:
-                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                        ProofOfWork(
+							image: "DefaultRefference",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
                     default:
                         Image("MonitoolAddPhotoIllustration")
                     }
@@ -140,13 +155,12 @@ struct IphoneReviseView: View {
         }
     }
 
-    @ViewBuilder
-    func reviseButton() -> some View {
-        Button(action: {
+    @ViewBuilder func reviseButton() -> some View {
+        Button {
             // MARK: ACTION BUTTON REVISE
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
             self.presentationMode.wrappedValue.dismiss()
-        }) {
+		} label: {
             HStack {
                 Image(systemName: "repeat")
                 Text("Revise")
@@ -162,13 +176,12 @@ struct IphoneReviseView: View {
         }
     }
 
-    @ViewBuilder
-    func approveButton() -> some View {
-        Button(action: {
+    @ViewBuilder func approveButton() -> some View {
+        Button {
             // MARK: ACTION BUTTON APPROVE
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
             self.presentationMode.wrappedValue.dismiss()
-        }) {
+		} label: {
             HStack {
                 Image(systemName: "checkmark")
                 Text("Approve")

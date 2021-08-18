@@ -41,8 +41,7 @@ struct EmployeeReviewView: View {
             }
         }
         .padding()
-        .sheet(isPresented: $showingPinField, onDismiss: {
-        }) {
+        .sheet(isPresented: $showingPinField) {
             PasscodeField { inputtedPin, _ in
                 if isApproving {
                     employeeReviewViewModel.approveTask(pin: inputtedPin)

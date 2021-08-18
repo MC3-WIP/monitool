@@ -16,7 +16,7 @@ struct RepeatSheetView: View {
         NavigationView {
             VStack {
                 List(0..<days.count) { i in
-                    Button(action: {
+                    Button {
                         if repeated[i] {
                             repeated[i] = !repeated[i]
                             selectedDays.removeAll(where: {$0 == daysSimplified[i]})
@@ -24,7 +24,7 @@ struct RepeatSheetView: View {
                             repeated[i] = !repeated[i]
                             selectedDays.append(daysSimplified[i])
                         }
-                    }) {
+					} label: {
                         HStack {
                             Text("Every \(days[i])").foregroundColor(Color.black)
                             Spacer()

@@ -29,7 +29,9 @@ class TaskViewModel: ObservableObject {
     func separateHistories() {
         let dateHelper = DateHelper()
         for index in 0...6 {
-            let historyOfDay = histories.filter { history in return dateHelper.getNumDays(first: history.createdAt, second: Date()) == index}
+            let historyOfDay = histories.filter { history in
+				dateHelper.getNumDays(first: history.createdAt, second: Date()) == index
+			}
             historiesPerDay.append(historyOfDay)
         }
     }

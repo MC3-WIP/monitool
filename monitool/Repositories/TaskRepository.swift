@@ -123,7 +123,10 @@ final class TaskRepository: ObservableObject {
 
 	func updateStatus(taskID: String, status: String, completion: ((Error?) -> Void)? = nil) {
         if status == TaskStatus.completed.title {
-            store.collection(path.task).document(taskID).updateData(["status": status, "isHistory": true], completion: completion)
+            store
+				.collection(path.task)
+				.document(taskID)
+				.updateData(["status": status, "isHistory": true], completion: completion)
         } else {
             store.collection(path.task).document(taskID).updateData(["status": status], completion: completion)
         }
@@ -156,7 +159,9 @@ final class TaskRepository: ObservableObject {
     func submitTask(task: Task, taskList: TaskList, photo: UIImage, id: String) {
         self.add(task, taskList, id) { _ in
             // Setelah task ada di firebase, baru upload photo
-            StorageService.shared.upload(image: photo, path: "taskPhotoReference/\(id)/\(UUID().uuidString)") { metadata, _ in
+            StorageService
+				.shared
+				.upload(image: photo, path: "taskPhotoReference/\(id)/\(UUID().uuidString)") { metadata, _ in
                 // Setelah photo di upload, update field photo ref task tadi
                 if let metadata = metadata,
                    let path = metadata.path {

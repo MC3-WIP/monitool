@@ -95,16 +95,32 @@ struct IphoneOwnerReview: View {
         }
         .padding()
     }
+
     @ViewBuilder func proofOfWorkComponent(matric: GeometryProxy, proofPage: Int, totalPage: Int, datePhoto: String) -> some View {
             VStack {
                 ZStack {
                     switch proofPage {
                     case 0:
-                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                        ProofOfWork(
+							image: "DefaultRefference",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
                     case 1:
-                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                        ProofOfWork(
+							image: "DefaultRefference",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
                     case 2:
-                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
+                        ProofOfWork(
+							image: "DefaultRefference",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
                     default:
                         Image("MonitoolAddPhotoIllustration")
                     }
@@ -140,8 +156,8 @@ struct IphoneOwnerReview: View {
                     .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
             )
     }
-    @ViewBuilder
-    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
+
+    @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
         VStack {
             Image("MonitoolAddPhotoIllustration")
                 .resizable()
@@ -151,13 +167,13 @@ struct IphoneOwnerReview: View {
                 .frame(width: metricSize.size.width * 0.85, height: 12, alignment: .leading)
         }
     }
-    @ViewBuilder
-    func reviseButton() -> some View {
-        Button(action: {
+
+    @ViewBuilder func reviseButton() -> some View {
+        Button {
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
             self.presentationMode.wrappedValue.dismiss()
 
-        }) {
+		} label: {
             HStack {
                 Image(systemName: "repeat")
                 Text("Revise")
@@ -172,12 +188,12 @@ struct IphoneOwnerReview: View {
                             )
         }
     }
-    @ViewBuilder
-    func approveButton() -> some View {
-        Button(action: {
+
+    @ViewBuilder func approveButton() -> some View {
+        Button {
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
             self.presentationMode.wrappedValue.dismiss()
-        }) {
+		} label: {
             HStack {
                 Image(systemName: "checkmark")
                 Text("Approve")

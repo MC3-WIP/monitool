@@ -101,20 +101,36 @@ extension OwnerReviewView {
         }
         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
     }
+
     @ViewBuilder func proofOfWorkComponent(matric: GeometryProxy, proofPage: Int, totalPage: Int, datePhoto: String) -> some View {
             VStack {
-                ZStack {
-                    switch proofPage {
-                    case 0:
-                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
-                    case 1:
-                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
-                    case 2:
-                        ProofOfWork(image: "DefaultRefference", date: "21 Jul 2021 at 15:57", metricSize: matric, datePhoto: datePhoto)
-                    default:
-                        Image("MonitoolAddPhotoIllustration")
-                    }
-                }
+				ZStack {
+					switch proofPage {
+					case 0:
+						ProofOfWork(
+							image: "DefaultRefference",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
+					case 1:
+						ProofOfWork(
+							image: "DefaultRefference",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
+					case 2:
+						ProofOfWork(
+							image: "DefaultRefference",
+							date: "21 Jul 2021 at 15:57",
+							metricSize: matric,
+							datePhoto: datePhoto
+						)
+					default:
+						Image("MonitoolAddPhotoIllustration")
+					}
+				}
                 .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
                     .onEnded { value in
                         if abs(value.translation.height) < abs(value.translation.width) {
@@ -146,13 +162,12 @@ extension OwnerReviewView {
                     .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
             )
     }
-    @ViewBuilder
-    func reviseButton() -> some View {
-        Button(action: {
+    @ViewBuilder func reviseButton() -> some View {
+        Button {
             // MARK: ACTION BUTTON REVISE
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
             self.presentationMode.wrappedValue.dismiss()
-        }) {
+		} label: {
             HStack {
                 Image(systemName: "repeat")
                 Text("Revise")
@@ -167,12 +182,13 @@ extension OwnerReviewView {
                             )
         }
     }
-    func approveButton() -> some View {
-        Button(action: {
+
+	@ViewBuilder func approveButton() -> some View {
+        Button {
             // MARK: ACTION BUTTON APPROVE
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
             self.presentationMode.wrappedValue.dismiss()
-        }) {
+		} label: {
             HStack {
                 Image(systemName: "checkmark")
                 Text("Approve")
