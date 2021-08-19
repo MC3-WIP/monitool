@@ -13,7 +13,6 @@ struct RepeatSheetView: View {
     @Binding var repeated: [Bool]
     @Binding var selectedDays: [String]
     @Binding var isPresented: Bool
-    
     var body: some View {
         NavigationView {
             VStack {
