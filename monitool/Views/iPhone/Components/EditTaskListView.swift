@@ -21,6 +21,7 @@ struct EditTaskListView: View {
 	@State var isShowingAlert = false
 
 	@State var sourceType: UIImagePickerController.SourceType = .camera
+	@State var showSourceTypePopover = false
 	@State var image: UIImage?
 	private var imageUrl: URL?
 
@@ -83,11 +84,44 @@ struct EditTaskListView: View {
 			HStack {
 				Text("Add Photo Reference")
 				Spacer()
-				Button {
-					self.showImagePicker.toggle()
-					self.sourceType = .camera
-				} label: {
-					Image(systemName: "camera").foregroundColor(AppColor.accent)
+				PhonePopover(
+					showPopover: $showSourceTypePopover,
+					popoverSize: CGSize(width: 300, height: 100),
+					arrowDirections: .right
+				) {
+					Button {
+						showSourceTypePopover = true
+					} label: {
+						Image(systemName: "camera").foregroundColor(AppColor.accent)
+					}
+				} popoverContent: {
+					VStack(alignment: .leading, spacing: 12) {
+						Button {
+							showSourceTypePopover = false
+							self.sourceType = .camera
+							self.showImagePicker = true
+						} label: {
+							HStack {
+								Image(systemName: "camera")
+									.foregroundColor(AppColor.accent)
+								Text("Take a Photo")
+							}
+						}
+						Divider()
+						Button {
+							showSourceTypePopover = false
+							self.sourceType = .photoLibrary
+							self.showImagePicker = true
+						} label: {
+							HStack {
+								Image(systemName: "photo.on.rectangle")
+									.foregroundColor(AppColor.accent)
+								Text("Select from Camera Roll")
+							}
+						}
+					}
+					.foregroundColor(AppColor.primaryBackground)
+					.padding()
 				}
 			}.padding(.vertical)
 

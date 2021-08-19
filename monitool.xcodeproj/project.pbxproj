@@ -50,6 +50,7 @@
 		83A48C9526CAF22A00BA9980 /* SidebarMenuItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A48C9426CAF22A00BA9980 /* SidebarMenuItemView.swift */; };
 		83A7209A26BD4B96007A30D3 /* NavigationBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A7209926BD4B96007A30D3 /* NavigationBarModifier.swift */; };
 		83A7209D26BD7E6E007A30D3 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A7209C26BD7E6E007A30D3 /* Color.swift */; };
+		83B395CD26CE30A400AE6824 /* PhonePopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B395CC26CE30A400AE6824 /* PhonePopover.swift */; };
 		83B664B926BBE30200F64364 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B664B826BBE30200F64364 /* ProfileViewModel.swift */; };
 		83E9492426AFC384003903FE /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E9492326AFC384003903FE /* Employee.swift */; };
 		83E9492826AFCA9D003903FE /* EmployeeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E9492726AFCA9D003903FE /* EmployeeHelper.swift */; };
@@ -146,6 +147,7 @@
 		83A48C9426CAF22A00BA9980 /* SidebarMenuItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarMenuItemView.swift; sourceTree = "<group>"; };
 		83A7209926BD4B96007A30D3 /* NavigationBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarModifier.swift; sourceTree = "<group>"; };
 		83A7209C26BD7E6E007A30D3 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		83B395CC26CE30A400AE6824 /* PhonePopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonePopover.swift; sourceTree = "<group>"; };
 		83B664B826BBE30200F64364 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		83E9492326AFC384003903FE /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		83E9492726AFCA9D003903FE /* EmployeeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeHelper.swift; sourceTree = "<group>"; };
@@ -512,6 +514,7 @@
 			isa = PBXGroup;
 			children = (
 				83FEC45526CD823D00AA65F1 /* Alerts.swift */,
+				83B395CC26CE30A400AE6824 /* PhonePopover.swift */,
 			);
 			path = "Task List";
 			sourceTree = "<group>";
@@ -840,6 +843,7 @@
 				8E2A614E26B91C9300D82BBE /* AppOnboardingView.swift in Sources */,
 				8E97703826BD7DC300A4F341 /* PageControl.swift in Sources */,
 				83FEC45626CD823D00AA65F1 /* Alerts.swift in Sources */,
+				83B395CD26CE30A400AE6824 /* PhonePopover.swift in Sources */,
 				834FBB3A26C1743700ABAACF /* EmployeeReviewViewModel.swift in Sources */,
 				838B23F926BE943D004979A4 /* PrimaryButtonStyle.swift in Sources */,
 				83A023F026B404EE002D24CC /* ProfileTabItem.swift in Sources */,
