@@ -14,17 +14,14 @@ struct ProfileView: View {
     @StateObject var profileViewModel = ProfileViewModel()
 
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
-
-    var company: Company?
-
-    @State var companyName = ""
+    @ObservedObject var role: RoleService = .shared
 	@State var editMode: EditMode = .inactive {
 		didSet {
 			if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
 		}
 	}
 
-	@ObservedObject var role: RoleService = .shared
+	
 
 	var body: some View {
 		VStack {
@@ -32,16 +29,36 @@ struct ProfileView: View {
 				// MARK: - Company Profile
 				Section(header: CompanyProfileHeader()) {
 					if editMode.isEditing {
-						CompanyInfoTextField(
-							title: "Company Name",
-							placeholder: "Company Inc.",
-                            text: $profileViewModel.company.name
-						)
-						CompanyInfoTextField(
-							title: "Owner PIN",
-							placeholder: "1234",
-							text: $profileViewModel.company.ownerPin
-						)
+                        GeometryReader { metrics in
+                            HStack {
+                                HStack {
+                                    Text("Company Name")
+                                    Spacer()
+                                }
+                                .frame(width: metrics.size.width * 0.2)
+                                TextField("Company Inc.", text: $profileViewModel.company.name)
+                                    .onChange(of: profileViewModel.company.name){ value in
+                                        profileViewModel.company.name = value
+                                    }
+                            }
+                        }
+                        .padding(.top, 4)
+                        .padding(.bottom, 6)
+                        GeometryReader { metrics in
+                            HStack {
+                                HStack {
+                                    Text("Owner PIN")
+                                    Spacer()
+                                }
+                                .frame(width: metrics.size.width * 0.2)
+                                TextField("1234", text: $profileViewModel.company.ownerPin)
+                                    .onChange(of: profileViewModel.company.ownerPin){ value in
+                                        profileViewModel.company.ownerPin = value
+                                    }
+                            }
+                        }
+                        .padding(.top, 4)
+                        .padding(.bottom, 6)
 					}
 					ReviewPolicy()
 				}
@@ -84,6 +101,11 @@ struct ProfileView: View {
             }
 		}
 		.environment(\.editMode, $editMode)
+        .onChange(of: editMode, perform: { value in
+            if !value.isEditing{
+                profileViewModel.updateCompany(companyName: profileViewModel.company.name, companyPIN: profileViewModel.company.ownerPin, minReview: profileViewModel.company.minReview)
+            }
+        })
 	}
 }
 
@@ -124,6 +146,7 @@ extension ProfileView {
 	}
 
 	@ViewBuilder func ReviewPolicy() -> some View {
+        let max = employeeListViewModel.employees.count
 		GeometryReader { metrics in
 			VStack {
 				HStack {
@@ -134,11 +157,7 @@ extension ProfileView {
 					.frame(width: metrics.size.width * 0.7)
 					if editMode.isEditing {
 						HStack {
-							Stepper(profileViewModel.reviewerString) {
-								profileViewModel.incrementReviewer()
-							} onDecrement: {
-								profileViewModel.decrementReviewer()
-							}
+                            Stepper("\(profileViewModel.company.minReview)", value: $profileViewModel.company.minReview, in: 0...max-1)
 						}
 					} else {
 						HStack {
