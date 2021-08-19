@@ -91,30 +91,34 @@ struct TaskManagerDetailView: View {
 				}
 			}.padding(.vertical)
 
-			if let imageUrl = imageUrl {
-				if let image = image {
+			HStack {
+				if let imageUrl = imageUrl {
+					if let image = image {
+						Image(uiImage: image)
+							.resizable()
+							.scaledToFill()
+							.cornerRadius(8)
+					} else {
+						WebImage(url: imageUrl)
+							.resizable()
+							.indicator(content: { _, _ in
+								VStack(spacing: 12) {
+									ProgressView()
+									Text("Loading photo reference...")
+								}
+							})
+							.transition(.fade(duration: 0.5))
+							.scaledToFill()
+							.cornerRadius(8)
+					}
+				} else if let image = image {
 					Image(uiImage: image)
 						.resizable()
 						.scaledToFill()
 						.cornerRadius(8)
-				} else {
-					WebImage(url: imageUrl)
-						.resizable()
-						.indicator(content: { _, _ in
-							VStack(spacing: 12) {
-								ProgressView()
-								Text("Loading photo reference...")
-							}
-						})
-						.transition(.fade(duration: 0.5))
-						.scaledToFill()
-						.cornerRadius(8)
 				}
-			} else if let image = image {
-				Image(uiImage: image)
-					.resizable()
-					.scaledToFill()
-					.cornerRadius(8)
+
+				Spacer()
 			}
 		}
 		.padding()
