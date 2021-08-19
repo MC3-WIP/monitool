@@ -11,7 +11,12 @@ struct TodayListView: View {
 	@StateObject var todayListViewModel: TodayListViewModel
 	@ObservedObject var role: RoleService = .shared
 	@ObservedObject var employeeRepository: EmployeeRepository = .shared
+    @ObservedObject var storageService = StorageService()
 	@Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @State var showImagePicker: Bool = false
+    @State var showActionSheet = false
+    @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
+    @State var image: UIImage?
 
 	init(task: Task) {
 		_todayListViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
