@@ -96,6 +96,7 @@ struct TaskManagerDetailView: View {
 					if let image = image {
 						Image(uiImage: image)
 							.resizable()
+							.frame(maxWidth: 200)
 							.scaledToFill()
 							.cornerRadius(8)
 					} else {
@@ -108,12 +109,14 @@ struct TaskManagerDetailView: View {
 								}
 							})
 							.transition(.fade(duration: 0.5))
+							.frame(maxWidth: 200)
 							.scaledToFill()
 							.cornerRadius(8)
 					}
 				} else if let image = image {
 					Image(uiImage: image)
 						.resizable()
+						.frame(maxWidth: 200)
 						.scaledToFill()
 						.cornerRadius(8)
 				}
