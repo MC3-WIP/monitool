@@ -50,7 +50,7 @@ struct AddTaskView: View {
 					.onTapGesture {
 						repeatPopover = true
 					}.sheet(isPresented: $repeatPopover) {
-						RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays)
+                        RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays, isPresented: $repeatPopover)
 					}
 					.padding(.top, 36.0)
 					Divider()
