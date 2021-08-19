@@ -52,7 +52,7 @@ struct TaskManagerDetailView: View {
 	}
 
 	private var content: some View {
-		VStack {
+		ScrollView(.vertical, showsIndicators: false) {
 			TextField("Task Title", text: $title)
 
 			Divider()
