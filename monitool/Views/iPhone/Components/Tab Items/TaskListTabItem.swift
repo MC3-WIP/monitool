@@ -25,9 +25,9 @@ struct TaskListTabItem: View {
 				AddTaskButton()
 			}
 		}
-		.sheet(isPresented: $showSheetView) {
-			AddTaskView(showSheetView: $showSheetView)
-		}
+        .popover(isPresented: $showSheetView) {
+            AddDataPopOver(sheetType: "Task", showingPopOver: $showSheetView)
+        }
 		.tabItem {
 			Image(systemName: "text.badge.plus")
 			Text("Task List")
