@@ -43,10 +43,3 @@ struct RepeatSheetView: View {
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
-
-// struct RepeatSheetView_Previews: PreviewProvider {
-
-//    static var previews: some View {
-//        RepeatSheetView(repeated: )
-//    }
-// }
