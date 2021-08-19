@@ -32,16 +32,36 @@ struct ProfileView: View {
 				// MARK: - Company Profile
 				Section(header: CompanyProfileHeader()) {
 					if editMode.isEditing {
-						CompanyInfoTextField(
-							title: "Company Name",
-							placeholder: "Company Inc.",
-                            text: $profileViewModel.company.name
-						)
-						CompanyInfoTextField(
-							title: "Owner PIN",
-							placeholder: "1234",
-							text: $profileViewModel.company.ownerPin
-						)
+                        GeometryReader { metrics in
+                            HStack {
+                                HStack {
+                                    Text("Company Name")
+                                    Spacer()
+                                }
+                                .frame(width: metrics.size.width * 0.2)
+                                TextField("Company Inc.", text: $profileViewModel.company.name)
+                                    .onChange(of: profileViewModel.company.name){ value in
+                                        profileViewModel.company.name = value
+                                    }
+                            }
+                        }
+                        .padding(.top, 4)
+                        .padding(.bottom, 6)
+                        GeometryReader { metrics in
+                            HStack {
+                                HStack {
+                                    Text("Owner PIN")
+                                    Spacer()
+                                }
+                                .frame(width: metrics.size.width * 0.2)
+                                TextField("1234", text: $profileViewModel.company.ownerPin)
+                                    .onChange(of: profileViewModel.company.ownerPin){ value in
+                                        profileViewModel.company.ownerPin = value
+                                    }
+                            }
+                        }
+                        .padding(.top, 4)
+                        .padding(.bottom, 6)
 					}
 					ReviewPolicy()
 				}
@@ -84,6 +104,11 @@ struct ProfileView: View {
             }
 		}
 		.environment(\.editMode, $editMode)
+        .onChange(of: editMode, perform: { value in
+            if !value.isEditing{
+                profileViewModel.updateCompany(companyName: profileViewModel.company.name, companyPIN: profileViewModel.company.ownerPin)
+            }
+        })
 	}
 }
 

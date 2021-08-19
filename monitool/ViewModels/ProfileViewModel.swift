@@ -51,6 +51,11 @@ class ProfileViewModel: ObservableObject {
 		company.minReview -= 1
 		if company.minReview < 0 { company.minReview = 0 }
 	}
+    
+    func updateCompany(companyName: String, companyPIN: String){
+        companyRepository.editCompanyName(name: companyName)
+        companyRepository.editCompanyPIN(ownerPIN: companyPIN)
+    }
 
 	func getCompany() {
 		if let ref = companyRepository.companyRef {
