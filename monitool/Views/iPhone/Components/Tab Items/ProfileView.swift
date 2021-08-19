@@ -14,17 +14,14 @@ struct ProfileView: View {
     @StateObject var profileViewModel = ProfileViewModel()
 
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
-
-    var company: Company?
-
-    @State var companyName = ""
+    @ObservedObject var role: RoleService = .shared
 	@State var editMode: EditMode = .inactive {
 		didSet {
 			if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
 		}
 	}
 
-	@ObservedObject var role: RoleService = .shared
+	
 
 	var body: some View {
 		VStack {
@@ -106,7 +103,7 @@ struct ProfileView: View {
 		.environment(\.editMode, $editMode)
         .onChange(of: editMode, perform: { value in
             if !value.isEditing{
-                profileViewModel.updateCompany(companyName: profileViewModel.company.name, companyPIN: profileViewModel.company.ownerPin)
+                profileViewModel.updateCompany(companyName: profileViewModel.company.name, companyPIN: profileViewModel.company.ownerPin, minReview: profileViewModel.company.minReview)
             }
         })
 	}
@@ -149,6 +146,7 @@ extension ProfileView {
 	}
 
 	@ViewBuilder func ReviewPolicy() -> some View {
+        let max = employeeListViewModel.employees.count
 		GeometryReader { metrics in
 			VStack {
 				HStack {
@@ -159,11 +157,7 @@ extension ProfileView {
 					.frame(width: metrics.size.width * 0.7)
 					if editMode.isEditing {
 						HStack {
-							Stepper(profileViewModel.reviewerString) {
-								profileViewModel.incrementReviewer()
-							} onDecrement: {
-								profileViewModel.decrementReviewer()
-							}
+                            Stepper("\(profileViewModel.company.minReview)", value: $profileViewModel.company.minReview, in: 0...max-1)
 						}
 					} else {
 						HStack {
