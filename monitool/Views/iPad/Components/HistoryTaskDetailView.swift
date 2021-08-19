@@ -23,7 +23,7 @@ struct HistoryTaskDetailView: View {
         ScrollView {
             HStack {
                 GeometryReader { metric in
-                    VStack (alignment: .leading){
+                    VStack (alignment: .leading) {
                         Text(taskDetailViewModel.task.name)
                             .font(.system(size: 28, weight: .bold))
                             .padding(.vertical, 24.0)
@@ -31,10 +31,11 @@ struct HistoryTaskDetailView: View {
                         if let image = historyViewModel.task.photoReference {
                             WebImage(url: URL(string: image))
                                 .resizable()
-                                .frame(width: metric.size.width * 0.75, height: metric.size.width * 0.75, alignment: .leading)
+                                .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
                         }
                         Text(taskDetailViewModel.task.desc ?? "-")
                             .fixedSize(horizontal: false, vertical: true)
+                            .frame(width: metric.size.width * 0.8, alignment: .topLeading)
                             .font(.system(size: 17))
                             .multilineTextAlignment(.leading)
                     }
