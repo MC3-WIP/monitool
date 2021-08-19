@@ -10,48 +10,55 @@ import SwiftUI
 struct IphoneProfileView: View {
     @StateObject var companyViewModel = CompanyViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
-
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
     @ObservedObject var role: RoleService = .shared
-
     var company: Company?
-
     @State var companyName = ""
-    @State var editMode: EditMode = .inactive {
+    @State var editModeIphone: EditMode = .inactive {
         didSet {
-            if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
+            if editModeIphone.isEditing {
+                profileViewModel.isPinHidden = false
+            } else {
+                profileViewModel.isPinHidden = true
+            }
         }
     }
     var body: some View {
         VStack {
-            ScrollView {
-                LazyVStack(spacing: 10) {
-                    Section(header: CompanyProfileHeader()) {
-                        if editMode.isEditing {
-                            CompanyInfoTextField(
-                                title: "Company Name",
-                                placeholder: "Company Inc.",
-                                text: $profileViewModel.company.name
-                            )
-                            CompanyInfoTextField(
-                                title: "Owner PIN",
-                                placeholder: "1234",
-                                text: $profileViewModel.company.ownerPin
-                            )
-                        }
-                        ReviewPolicy()
+            List {
+                Section(header: CompanyProfileHeader()) {
+                    if editModeIphone.isEditing {
+                        CompanyInfoNameTextField(
+                            placeholder: "Company Inc.",
+                            text: $profileViewModel.company.name
+                        )
+                        CompanyInfoTextField(
+                            title: "Owner PIN",
+                            placeholder: "1234",
+                            text: $profileViewModel.company.ownerPin
+                        )
                     }
-                    Spacer()
-                    Section(header: EmployeeListHeader()) {
-                        ForEach(employeeListViewModel.employees) { employee in
-                            EmployeeRow(employee: employee)
-                        }
-                        .onDelete(perform: employeeListViewModel.delete)
-                    }
+                    ReviewPolicy()
                 }
+//                .frame(width: UIScreen.main.bounds.size.width)
+                Section(header: EmployeeListHeader()) {
+                    ForEach(employeeListViewModel.employees) { employee in
+                        EmployeeRow(employee: employee)
+                    }
+                    .onDelete(perform: employeeListViewModel.delete)
+                }
+            }
+            .listStyle(GroupedListStyle())
+            .onAppear {
+                     UITableView.appearance().separatorColor = .clear
             }
         }
         .padding()
+        .toolbar {
+            EditButton()
+        }
+        .navigationBarTitle("Profile", displayMode: .inline)
+        .environment(\.editMode, $editModeIphone)
     }
 }
 
@@ -60,14 +67,13 @@ extension IphoneProfileView {
         VStack {
             HStack {
                 Spacer()
-                PhotoComponent(imageURL: profileViewModel.company.profileImage ?? "", editMode: $editMode)
+                PhotoComponent(imageURL: profileViewModel.company.profileImage ?? "", editMode: $editModeIphone)
                 Spacer()
             }
-            if !editMode.isEditing {
+            if !editModeIphone.isEditing {
                 HStack {
                     Text(profileViewModel.company.name)
                         .font(.title)
-
                 }
             }
         }
@@ -81,23 +87,27 @@ extension IphoneProfileView {
                     Text(title)
                     Spacer()
                 }
-                .frame(width: metrics.size.width * 0.2)
+                .frame(width: metrics.size.width * 0.35)
+                Spacer()
                 TextField(placeholder, text: text)
+                    .frame(alignment: .trailing)
             }
         }
         .padding(.top, 4)
         .padding(.bottom, 6)
     }
+    @ViewBuilder func CompanyInfoNameTextField (placeholder: String, text: Binding<String>) -> some View {
+        HStack {
+            TextField(placeholder, text: text)
+        }
+        .padding(.top, 4)
+        .padding(.bottom, 6)
+    }
     @ViewBuilder func ReviewPolicy() -> some View {
-        GeometryReader { metrics in
+        GeometryReader {
             VStack {
                 HStack {
-                    HStack {
-                        Text("Task Reviewer")
-                        Spacer()
-                    }
-                    .frame(width: metrics.size.width * 0.7)
-                    if editMode.isEditing {
+                    if editModeIphone.isEditing {
                         HStack {
                             Stepper(profileViewModel.reviewerString) {
                                 profileViewModel.incrementReviewer()
@@ -106,10 +116,19 @@ extension IphoneProfileView {
                             }
                         }
                     } else {
-                        HStack {
-                            Spacer()
-                            Text(profileViewModel.reviewerString)
+                        LazyVStack(spacing: 10) {
+                            HStack {
+                                Text("Owner Pin")
+                                Spacer()
+                                Text(profileViewModel.company.ownerPin)
+                            }
+                            HStack {
+                                Text("Task Reviewer")
+                                Spacer()
+                                Text(profileViewModel.reviewerString)
+                            }
                         }
+                        .padding(.bottom, 15)
                     }
                 }
                 Divider()
@@ -129,9 +148,11 @@ extension IphoneProfileView {
                     Button {
                         profileViewModel.isPinHidden.toggle()
                     } label: {
-                        if editMode.isEditing {
-                            Button("Add Employee") {
+                        if editModeIphone.isEditing {
+                            Button(action: {
                                 profileViewModel.isAddEmployeePresenting = true
+                            }){
+                                Image(systemName: "plus.circle")
                             }
                         } else if profileViewModel.isPinHidden {
                             Image(systemName: "eye")
@@ -141,7 +162,7 @@ extension IphoneProfileView {
                     }
                     .popover(isPresented: $profileViewModel.isAddEmployeePresenting) {
                         AddDataPopOver(sheetType: "Employee", showingPopOver: $profileViewModel.isAddEmployeePresenting)
-                            .frame(width: 400, height: 400)
+                            .frame(width: 400, height: .infinity)
                             .accentColor(AppColor.accent)
                     }
                 }
@@ -169,7 +190,7 @@ extension IphoneProfileView {
             Text(employee.name)
             Spacer()
             if role.isOwner {
-                if editMode.isEditing {
+                if editModeIphone.isEditing {
                     Text(employee.pin)
                 } else {
                     Text(profileViewModel.isPinHidden ? "****" : employee.pin)

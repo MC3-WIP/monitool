@@ -10,13 +10,7 @@ import SwiftUI
 struct ProfileTabItem: View {
 	var body: some View {
 		NavigationView {
-			VStack {
-                IphoneProfileView()
-			}
-			.toolbar {
-				EditButton()
-			}
-			.navigationBarTitle("Profile", displayMode: .inline)
+            IphoneProfileView()
 		}
 		.tabItem {
 			Image(systemName: "person.crop.circle")
