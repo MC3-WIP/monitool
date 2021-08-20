@@ -16,6 +16,7 @@ class TaskDetailViewModel: ObservableObject {
 	private let companyRepository: CompanyRepository = .shared
 
 	@Published var pic: Employee?
+
 	var reviewer = [Employee]() {
 		didSet {
 			if let company = company, reviewer.count == company.minReview {
@@ -48,8 +49,8 @@ class TaskDetailViewModel: ObservableObject {
 
 	init(task: Task) {
 		self.task = task
-		getPIC()
 		getCompany()
+		getPIC()
 		getReviewer()
 	}
 
