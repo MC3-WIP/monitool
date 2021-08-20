@@ -58,7 +58,7 @@ struct HistoriesSection: View {
                     .listRowBackground(Color("LightTosca"))
                 }
                 else if device == .phone {
-                    NavigationLink(destination: IphoneTodayListView(task: history)) {
+                    NavigationLink(destination: HistoryDetail(history: history)) {
                         HistoryRow(task: history)
                     }
                     .listRowBackground(Color("LightTosca"))

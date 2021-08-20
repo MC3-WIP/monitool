@@ -31,6 +31,7 @@ struct TodoListTabItem: View {
 						isExpanded: self.selection.contains(taskStatuses[index]),
 						icon: statusIcon[index]
 					)
+                    .animation(Animation.easeIn)
 					.onTapGesture { self.selectDeselect(taskStatuses[index]) }
 				}
 			}
@@ -60,7 +61,7 @@ struct TodoListTabItem: View {
 
 	func getFilteredTask(filter: TaskStatus) -> [Task] {
 		let result = taskViewModel.tasks.filter { $0.status == filter}
-		return result
+		return result   
 	}
 }
 
@@ -77,6 +78,8 @@ struct TasksRowView: View {
 			Spacer()
 			Image(systemName: "chevron.down").foregroundColor(Color(hex: "#4EB0AB"))
 		}
+        .contentShape(Rectangle())
+        .animation(.linear(duration: 0.3))
 		if isExpanded {
 			if tasks.count != 0 {
 				ForEach(tasks) { task in
