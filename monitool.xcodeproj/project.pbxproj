@@ -29,6 +29,7 @@
 		8352931526CA6C49009F0F92 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8352931426CA6C49009F0F92 /* HistoryRow.swift */; };
 		8352931B26CA7238009F0F92 /* HistoryTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8352931A26CA7238009F0F92 /* HistoryTabItem.swift */; };
 		835E357E26B15FC300DE542C /* EmployeeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835E357D26B15FC300DE542C /* EmployeeRepository.swift */; };
+		835F9ACC26CF993B00B9F52C /* ReviewerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835F9ACB26CF993B00B9F52C /* ReviewerStatus.swift */; };
 		838B23F726BE922C004979A4 /* TodayListViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23F626BE922C004979A4 /* TodayListViewBuilder.swift */; };
 		838B23F926BE943D004979A4 /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23F826BE943D004979A4 /* PrimaryButtonStyle.swift */; };
 		838B23FB26BE97A5004979A4 /* TodayListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23FA26BE97A5004979A4 /* TodayListViewModel.swift */; };
@@ -121,6 +122,7 @@
 		8352931426CA6C49009F0F92 /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
 		8352931A26CA7238009F0F92 /* HistoryTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabItem.swift; sourceTree = "<group>"; };
 		835E357D26B15FC300DE542C /* EmployeeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeRepository.swift; sourceTree = "<group>"; };
+		835F9ACB26CF993B00B9F52C /* ReviewerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewerStatus.swift; sourceTree = "<group>"; };
 		838B23F626BE922C004979A4 /* TodayListViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayListViewBuilder.swift; sourceTree = "<group>"; };
 		838B23F826BE943D004979A4 /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
 		838B23FA26BE97A5004979A4 /* TodayListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayListViewModel.swift; sourceTree = "<group>"; };
@@ -492,6 +494,7 @@
 				8EC984F226C3BF20000961E1 /* OnboardingFirstPage.swift */,
 				B84F21FF26CA75BB00244A40 /* PasscodeField.swift */,
 				8352931426CA6C49009F0F92 /* HistoryRow.swift */,
+				835F9ACB26CF993B00B9F52C /* ReviewerStatus.swift */,
 			);
 			path = "Shared Components";
 			sourceTree = "<group>";
@@ -775,6 +778,7 @@
 				B8B44EF126BAEC95001379AA /* TaskListViewModel.swift in Sources */,
 				8348BCE426BE4DEC000777EA /* TaskDetailViewModel.swift in Sources */,
 				83A023E626B3F0DC002D24CC /* TaskListView.swift in Sources */,
+				835F9ACC26CF993B00B9F52C /* ReviewerStatus.swift in Sources */,
 				83A023EC26B402A0002D24CC /* MainView.swift in Sources */,
 				83A7209A26BD4B96007A30D3 /* NavigationBarModifier.swift in Sources */,
 				6F0CC8E826B137CB00D15B96 /* TaskViewModel.swift in Sources */,
