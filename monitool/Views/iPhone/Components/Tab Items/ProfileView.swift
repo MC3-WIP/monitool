@@ -21,6 +21,7 @@ struct ProfileView: View {
 		}
 	}
 
+    @State var isPinTrue: Bool?
 	var body: some View {
 		VStack {
             LazyVStack(spacing: 10) {
@@ -84,17 +85,17 @@ struct ProfileView: View {
 			}
 		}
 		.sheet(isPresented: $profileViewModel.isPinPresenting) {
-            PasscodeField { inputtedPin, _ in
+            PasscodeField(isPinTrue: $isPinTrue) { inputtedPin, _ in
                 if inputtedPin == profileViewModel.company.ownerPin {
                     print("sukses")
                     role.switchRole(to: .owner)
                     profileViewModel.isPinPresenting = false
-                    profileViewModel.isPinRight = true
+                    isPinTrue = true
                     hideKeyboard()
                 } else {
                     profileViewModel.pinInputted = ""
                     profileViewModel.isPasscodeFieldDisabled = false
-                    profileViewModel.isPinRight = false
+                    isPinTrue = false
                 }
             }
 		}
