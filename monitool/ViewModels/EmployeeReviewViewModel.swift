@@ -20,7 +20,7 @@ class EmployeeReviewViewModel: TaskDetailViewModel {
 	}
 
 	var notes: String {
-		task.notes ?? ""
+		task.notes ?? "-"
 	}
 
 	var picName: String {

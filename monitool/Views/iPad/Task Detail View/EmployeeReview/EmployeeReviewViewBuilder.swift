@@ -11,29 +11,32 @@ import SDWebImageSwiftUI
 
 extension EmployeeReviewView {
     @ViewBuilder func LeftColumn() -> some View {
-        GeometryReader { metric in
-            VStack {
-                Text(employeeReviewViewModel.task.name)
-                    .font(.system(size: 28, weight: .bold))
-                    .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-                if let image = employeeReviewViewModel.task.photoReference {
-                    WebImage(url: URL(string: image))
-                        .resizable()
-                        .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
-                } else {
-                    Image("MonitoolEmptyReferenceIllus")
-                        .resizable()
-                        .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
-                }
-                if let desc = employeeReviewViewModel.task.desc {
-                    Text(desc)
-                        .frame(width: metric.size.width * 0.8, alignment: .topLeading)
-                        .font(.system(size: 17))
-                        .multilineTextAlignment(.leading)
-                }
-            }
-            .padding()
-        }
+		// About Task
+		VStack(alignment: .leading) {
+			// Task Title
+			Text(viewModel.title)
+				.font(.largeTitle)
+				.bold()
+
+			// Reference Image
+			if let image = viewModel.photoReference {
+				WebImage(url: URL(string: image))
+					.resizable()
+					.placeholder(Image("MonitoolEmptyReferenceIllus"))
+					.indicator { _, _ in
+						ProgressView()
+					}
+					.transition(.fade)
+					.aspectRatio(1, contentMode: .fill)
+			} else {
+				Image("MonitoolEmptyReferenceIllus")
+					.resizable()
+					.scaledToFill()
+			}
+
+			// Task Desc
+			Text(viewModel.desc)
+		}
     }
 
     @ViewBuilder func RightColumn() -> some View {
@@ -48,21 +51,27 @@ extension EmployeeReviewView {
 					proofOfWorkComponent(matric: matric, proofPage: proofPage, totalPage: totalPage, datePhoto: datePhoto)
 				}
 
-				VStack(alignment: .leading, spacing: 8) {
+				// Detail
+				VStack(alignment: .leading) {
+					// PIC
                     HStack {
                         Text("PIC: ")
 							.foregroundColor(.gray)
                             .bold()
-                        Text(employeeReviewViewModel.pic?.name ?? "-")
+                        Text(viewModel.picName)
 					}
+
+					// Notes
                     HStack {
                         Text("Notes: ")
 							.foregroundColor(.gray)
                             .bold()
-                        Text(employeeReviewViewModel.task.notes ?? "-")
+                        Text(viewModel.notes)
 					}
-					if let company = employeeReviewViewModel.company {
-						ReviewerStatus(currentReviewer: employeeReviewViewModel.reviewer.count, minReviewer: company.minReview)
+
+					// Review Status
+					if let company = viewModel.company {
+						ReviewerStatus(currentReviewer: viewModel.reviewer.count, minReviewer: company.minReview)
 					}
                 }
 
@@ -147,7 +156,6 @@ extension EmployeeReviewView {
         Button {
             showingPinField = true
             isApproving = true
-
 		} label: {
             HStack {
                 Image(systemName: "checkmark")

@@ -15,20 +15,20 @@ struct IphoneEmployeeReview: View {
 	}
 
 	var body: some View {
-		if viewModel.company != nil {
-			content
-		} else {
+		if viewModel.company == nil {
 			VStack(spacing: 24) {
 				ProgressView()
 				Text("Loading...")
 			}
+		} else {
+			content
 		}
 	}
 
 	private var content: some View {
 		ScrollView {
 			LazyVStack(alignment: .leading, spacing: 32) {
-				// Tentang Task
+				// About Task
 				VStack(alignment: .leading) {
 					Text(viewModel.title)
 						.font(.largeTitle)
@@ -64,7 +64,7 @@ struct IphoneEmployeeReview: View {
 						Text("Notes: ")
 							.foregroundColor(.gray)
 							.bold()
-						Text(viewModel.task.notes ?? "-")
+						Text(viewModel.notes)
 					}
 
 					// Review Status
@@ -86,6 +86,7 @@ struct IphoneEmployeeReview: View {
 							.indicator { _, _ in
 								ProgressView()
 							}
+							.transition(.fade)
 							.scaledToFill()
 							.cornerRadius(8)
 					}

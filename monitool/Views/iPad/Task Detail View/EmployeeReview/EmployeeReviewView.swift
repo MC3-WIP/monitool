@@ -9,17 +9,13 @@ import SwiftUI
 
 struct EmployeeReviewView: View {
 
-    @StateObject var employeeReviewViewModel: EmployeeReviewViewModel
-    @ObservedObject var taskViewModel = TaskViewModel()
-    @Environment(\.presentationMode) var presentationMode
+	@Environment(\.presentationMode) var presentationMode
+    @StateObject var viewModel: EmployeeReviewViewModel
 
     init (task: Task) {
-        _employeeReviewViewModel = StateObject(wrappedValue: EmployeeReviewViewModel(task: task))
+        _viewModel = StateObject(wrappedValue: EmployeeReviewViewModel(task: task))
     }
 
-    private let pic: String = "Mawar"
-    private let notes: String = "Sudah Pak Bos"
-    // MARK: INITIALIZE TOTAL PAGE
     @State var totalPage: Int = 3
     @State var datePhoto = "21 Juli 2021 at 15.57"
     @State var proofPage = 0
@@ -28,32 +24,42 @@ struct EmployeeReviewView: View {
     @State var isApproving = false
 
     var body: some View {
-        VStack {
-            ScrollView {
-                HStack {
-                    LeftColumn()
-                    RightColumn()
-                }
-            }
-            HStack(spacing: 24) {
-                dissaprroveButton()
-                approveButton()
-            }
-        }
-        .padding()
-        .sheet(isPresented: $showingPinField) {
-            PasscodeField { inputtedPin, _ in
-                if isApproving {
-                    employeeReviewViewModel.approveTask(pin: inputtedPin)
-                } else {
-                    employeeReviewViewModel.disapproveTask(pin: inputtedPin)
-                }
-                showingPinField = false
-                presentationMode.wrappedValue.dismiss()
-            }
-        }
-
+		if viewModel.company == nil {
+			VStack(spacing: 24) {
+				ProgressView()
+				Text("Loading...")
+			}
+		} else {
+			content
+		}
     }
+
+	private var content: some View {
+		VStack {
+			ScrollView {
+				HStack {
+					LeftColumn()
+					RightColumn()
+				}
+			}
+			HStack(spacing: 24) {
+				dissaprroveButton()
+				approveButton()
+			}
+		}
+		.padding()
+		.sheet(isPresented: $showingPinField) {
+			PasscodeField { inputtedPin, _ in
+				if isApproving {
+					viewModel.approveTask(pin: inputtedPin)
+				} else {
+					viewModel.disapproveTask(pin: inputtedPin)
+				}
+				showingPinField = false
+				presentationMode.wrappedValue.dismiss()
+			}
+		}
+	}
 }
 
 struct TaskDetailView_Previews: PreviewProvider {
@@ -61,9 +67,5 @@ struct TaskDetailView_Previews: PreviewProvider {
         EmployeeReviewView(task: (Task(name: "EmployeeReview", repeated: [])))
             .previewDevice("iPad Pro (12.9-inch) (5th generation)")
             .previewLayout(.fixed(width: 1112, height: 834))
-        //        TaskDetailView()
-        //
-        //            .previewDevice("iPad Air (4th generation)")
-        //            .environment(\.horizontalSizeClass, .regular)
     }
 }

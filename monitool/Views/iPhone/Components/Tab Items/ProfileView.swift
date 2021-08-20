@@ -21,8 +21,6 @@ struct ProfileView: View {
 		}
 	}
 
-	
-
 	var body: some View {
 		VStack {
             LazyVStack(spacing: 10) {
@@ -37,7 +35,7 @@ struct ProfileView: View {
                                 }
                                 .frame(width: metrics.size.width * 0.2)
                                 TextField("Company Inc.", text: $profileViewModel.company.name)
-                                    .onChange(of: profileViewModel.company.name){ value in
+                                    .onChange(of: profileViewModel.company.name) { value in
                                         profileViewModel.company.name = value
                                     }
                             }
@@ -52,7 +50,7 @@ struct ProfileView: View {
                                 }
                                 .frame(width: metrics.size.width * 0.2)
                                 TextField("1234", text: $profileViewModel.company.ownerPin)
-                                    .onChange(of: profileViewModel.company.ownerPin){ value in
+                                    .onChange(of: profileViewModel.company.ownerPin) { value in
                                         profileViewModel.company.ownerPin = value
                                     }
                             }
@@ -102,8 +100,12 @@ struct ProfileView: View {
 		}
 		.environment(\.editMode, $editMode)
         .onChange(of: editMode, perform: { value in
-            if !value.isEditing{
-                profileViewModel.updateCompany(companyName: profileViewModel.company.name, companyPIN: profileViewModel.company.ownerPin, minReview: profileViewModel.company.minReview)
+            if !value.isEditing {
+                profileViewModel.updateCompany(
+					companyName: profileViewModel.company.name,
+					companyPIN: profileViewModel.company.ownerPin,
+					minReview: profileViewModel.company.minReview
+				)
             }
         })
 	}
@@ -157,7 +159,11 @@ extension ProfileView {
 					.frame(width: metrics.size.width * 0.7)
 					if editMode.isEditing {
 						HStack {
-                            Stepper("\(profileViewModel.company.minReview)", value: $profileViewModel.company.minReview, in: 0...max-1)
+                            Stepper(
+								"\(profileViewModel.company.minReview)",
+								value: $profileViewModel.company.minReview,
+								in: 0...max-1
+							)
 						}
 					} else {
 						HStack {
