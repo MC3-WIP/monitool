@@ -26,6 +26,7 @@ class ProfileViewModel: ObservableObject {
     static let shared = ProfileViewModel()
 
 	private let companyRepository: CompanyRepository = .shared
+	static let shared = ProfileViewModel()
 
 	init() {
 		company = Company(name: "", minReview: 0, ownerPin: "", hasLoggedIn: true, profileImage: "")
@@ -69,7 +70,7 @@ class ProfileViewModel: ObservableObject {
 							self.company = company
 						}
 					} catch {
-						print(error.localizedDescription)
+						print("Error parsing company data:", error.localizedDescription)
 					}
 				}
 			}
