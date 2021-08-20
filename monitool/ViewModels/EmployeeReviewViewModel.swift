@@ -63,9 +63,12 @@ class EmployeeReviewViewModel: TaskDetailViewModel {
 			return
 		}
 
-		taskRepository.get(id: task.id) { [self] _ in
-				getReviewer()
-	  }
+		taskRepository.get(id: task.id) { [self] task in
+            if let task = task {
+                getReviewer(task: task)
+            }
+		}
+	}
 
     func approveTask(pin: String, isPinTrue: Binding<Bool?>, presentation: Binding<PresentationMode>, showPin: Binding<Bool>, pinInputted: Binding<String>, isPasscodeFieldDisabled: Binding<Bool>) {
 		switch validateApproval(pin: pin) {

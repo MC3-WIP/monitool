@@ -104,39 +104,38 @@ extension IphoneProfileView {
         .padding(.bottom, 6)
     }
     @ViewBuilder func ReviewPolicy() -> some View {
-        GeometryReader {
-            VStack {
-                HStack {
-                    if editModeIphone.isEditing {
-                        HStack {
-                            Stepper(profileViewModel.reviewerString) {
-                                profileViewModel.incrementReviewer()
-                            } onDecrement: {
-                                profileViewModel.decrementReviewer()
-                            }
+        VStack {
+            HStack {
+                if editModeIphone.isEditing {
+                    HStack {
+                        Stepper(profileViewModel.reviewerString) {
+                            profileViewModel.incrementReviewer()
+                        } onDecrement: {
+                            profileViewModel.decrementReviewer()
                         }
-                    } else {
-                        LazyVStack(spacing: 10) {
-                            HStack {
-                                Text("Owner Pin")
-                                Spacer()
-                                Text(profileViewModel.company.ownerPin)
-                            }
-                            HStack {
-                                Text("Task Reviewer")
-                                Spacer()
-                                Text(profileViewModel.reviewerString)
-                            }
-                        }
-                        .padding(.bottom, 15)
                     }
+                } else {
+                    LazyVStack(spacing: 10) {
+                        HStack {
+                            Text("Owner Pin")
+                            Spacer()
+                            Text(profileViewModel.company.ownerPin)
+                        }
+                        HStack {
+                            Text("Task Reviewer")
+                            Spacer()
+                            Text(profileViewModel.reviewerString)
+                        }
+                    }
+                    .padding(.bottom, 15)
                 }
-                Divider()
-                    .padding(.trailing, -16)
             }
-            .padding(.top, 6)
+            Divider()
+                .padding(.trailing, -16)
         }
+        .padding(.top, 6)
     }
+
     @ViewBuilder func EmployeeListHeader() -> some View {
         VStack(spacing: 24) {
             HStack {
@@ -149,9 +148,9 @@ extension IphoneProfileView {
                         profileViewModel.isPinHidden.toggle()
                     } label: {
                         if editModeIphone.isEditing {
-                            Button(action: {
+                            Button {
                                 profileViewModel.isAddEmployeePresenting = true
-                            }){
+                            } label: {
                                 Image(systemName: "plus.circle")
                             }
                         } else if profileViewModel.isPinHidden {

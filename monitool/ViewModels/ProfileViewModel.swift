@@ -26,7 +26,6 @@ class ProfileViewModel: ObservableObject {
     static let shared = ProfileViewModel()
 
 	private let companyRepository: CompanyRepository = .shared
-	static let shared = ProfileViewModel()
 
 	init() {
 		company = Company(name: "", minReview: 0, ownerPin: "", hasLoggedIn: true, profileImage: "")
