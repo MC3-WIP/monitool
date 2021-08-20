@@ -39,8 +39,10 @@ struct OwnerReviewView: View {
             }
 
             HStack(spacing: 24) {
-                reviseButton()
-                approveButton()
+                if role.isOwner{
+                    reviseButton()
+                    approveButton()
+                }
             }
             .padding()
         }
