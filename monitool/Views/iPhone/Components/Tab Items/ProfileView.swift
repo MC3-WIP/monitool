@@ -11,7 +11,7 @@ struct ProfileView: View {
 
     @Environment(\.presentationMode) var presentationMode
 	@StateObject var companyViewModel = CompanyViewModel()
-    @StateObject var profileViewModel = ProfileViewModel()
+	@ObservedObject var profileViewModel: ProfileViewModel = .shared
 
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
     @ObservedObject var role: RoleService = .shared
@@ -161,8 +161,7 @@ extension ProfileView {
 						HStack {
                             Stepper(
 								"\(profileViewModel.company.minReview)",
-								value: $profileViewModel.company.minReview,
-								in: 0...max-1
+								value: $profileViewModel.company.minReview, in: 0...max-1
 							)
 						}
 					} else {

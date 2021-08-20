@@ -51,7 +51,7 @@ class TaskDetailViewModel: ObservableObject {
 		self.task = task
 		getCompany()
 		getPIC()
-		getReviewer()
+		getReviewer(task: task)
 	}
 
 	func getCompany() {
@@ -80,7 +80,8 @@ class TaskDetailViewModel: ObservableObject {
 		}
 	}
 
-	func getReviewer() {
+	func getReviewer(task: Task) {
+		self.task = task
 		task.approvingReviewer?.forEach(mapReviewer)
 		task.disapprovingReviewer?.forEach(mapReviewer)
 	}
