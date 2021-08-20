@@ -11,6 +11,7 @@ struct EmployeeReviewView: View {
 
 	@Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: EmployeeReviewViewModel
+    @ObservedObject var profileViewModel: ProfileViewModel = .shared
 
     init (task: Task) {
         _viewModel = StateObject(wrappedValue: EmployeeReviewViewModel(task: task))
@@ -22,6 +23,7 @@ struct EmployeeReviewView: View {
 
     @State var showingPinField = false
     @State var isApproving = false
+    @State var isPinTrue: Bool?
 
     var body: some View {
 		if viewModel.company == nil {
@@ -49,14 +51,24 @@ struct EmployeeReviewView: View {
 		}
 		.padding()
 		.sheet(isPresented: $showingPinField) {
-			PasscodeField { inputtedPin, _ in
+            PasscodeField(isPinTrue: $isPinTrue) { inputtedPin, _ in
 				if isApproving {
-					viewModel.approveTask(pin: inputtedPin)
+                    viewModel.approveTask(
+                        pin: inputtedPin,
+                        isPinTrue: $isPinTrue,
+                        presentation: presentationMode,
+                        showPin: $showingPinField,
+                        pinInputted: $profileViewModel.pinInputted,
+                        isPasscodeFieldDisabled: $profileViewModel.isPasscodeFieldDisabled)
 				} else {
-					viewModel.disapproveTask(pin: inputtedPin)
+                    viewModel.disapproveTask(
+                        pin: inputtedPin,
+                        isPinTrue: $isPinTrue,
+                        presentation: presentationMode,
+                        showPin: $showingPinField,
+                        pinInputted: $profileViewModel.pinInputted,
+                        isPasscodeFieldDisabled: $profileViewModel.isPasscodeFieldDisabled)
 				}
-				showingPinField = false
-				presentationMode.wrappedValue.dismiss()
 			}
 		}
 	}
