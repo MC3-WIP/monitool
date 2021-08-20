@@ -37,7 +37,7 @@ struct TodoListTabItem: View {
 			.navigationTitle("Task List")
 			.toolbar(content: {
                 NavigationLink(
-                    destination: HistoryView()){
+                    destination: HistoryView()) {
                     Button(action: {}, label: {
                         Image(systemName: "clock")
                     })

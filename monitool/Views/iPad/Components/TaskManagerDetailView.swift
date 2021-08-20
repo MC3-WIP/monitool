@@ -69,7 +69,7 @@ struct TaskManagerDetailView: View {
 					Text(TaskHelper.convertRepetition(repeated, simplified: true))
 					Image(systemName: "chevron.right")
 						.popover(isPresented: $repeatPopover) {
-							RepeatSheetView(repeated: $repeated)
+							RepeatSheetView(repeated: $repeated, isPresented: $repeatPopover)
 								.frame(width: 400, height: 400)
 						}
 				}.foregroundColor(.gray)
