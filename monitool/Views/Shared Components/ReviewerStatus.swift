@@ -30,7 +30,7 @@ struct ReviewerStatus: View {
 					.foregroundColor(.gray)
 					.bold()
 				Text(reviewerStatus)
-			}.font(.title3)
+			}
 
 			HStack {
 				ForEach(0..<currentReviewer) { _ in
@@ -41,8 +41,8 @@ struct ReviewerStatus: View {
 					Rectangle().cornerRadius(8)
 				}.foregroundColor(.gray)
 			}
-			.frame(height: 16)
-		}.padding()
+			.frame(height: 14)
+		}
 	}
 }
 
