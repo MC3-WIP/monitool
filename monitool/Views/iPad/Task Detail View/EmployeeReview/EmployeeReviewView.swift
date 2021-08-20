@@ -11,6 +11,7 @@ struct EmployeeReviewView: View {
 
     @StateObject var employeeReviewViewModel: EmployeeReviewViewModel
     @ObservedObject var taskViewModel = TaskViewModel()
+    @ObservedObject var role: RoleService = .shared
     @Environment(\.presentationMode) var presentationMode
 
     init (task: Task) {
@@ -36,8 +37,10 @@ struct EmployeeReviewView: View {
                 }
             }
             HStack(spacing: 24) {
-                dissaprroveButton()
-                approveButton()
+                if !role.isOwner{
+                    dissaprroveButton()
+                    approveButton()
+                }
             }
         }
         .padding()
