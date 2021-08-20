@@ -82,7 +82,8 @@ struct EditTaskListView: View {
 			Divider()
 
 			HStack {
-				Text("Add Photo Reference")
+				Text("Photo Reference")
+					.font(.title3.weight(.semibold))
 				Spacer()
 				PhonePopover(
 					showPopover: $showSourceTypePopover,

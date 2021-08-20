@@ -21,6 +21,7 @@ struct TaskManagerDetailView: View {
 	@State var isShowingAlert = false
 
 	@State var sourceType: UIImagePickerController.SourceType = .camera
+	@State var showSourceTypePopover = false
 	@State var image: UIImage?
 	private var imageUrl: URL?
 
@@ -81,23 +82,20 @@ struct TaskManagerDetailView: View {
 			Divider()
 
 			HStack {
-				Text("Add Photo Reference")
-				Spacer()
-				Button {
-					self.showImagePicker.toggle()
-					self.sourceType = .camera
-				} label: {
-					Image(systemName: "camera").foregroundColor(AppColor.accent)
-				}
-			}.padding(.vertical)
+				Text("Photo Reference")
+					.font(.title3.weight(.semibold))
+					.padding(.top)
 
-			HStack {
+				Spacer()
+			}
+
+			HStack(spacing: 16) {
 				if let imageUrl = imageUrl {
 					if let image = image {
 						Image(uiImage: image)
 							.resizable()
-							.frame(maxWidth: 200)
 							.scaledToFill()
+							.frame(width: 200)
 							.cornerRadius(8)
 					} else {
 						WebImage(url: imageUrl)
@@ -105,20 +103,66 @@ struct TaskManagerDetailView: View {
 							.indicator(content: { _, _ in
 								VStack(spacing: 12) {
 									ProgressView()
-									Text("Loading photo reference...")
+									Text("Loading Photo Reference...")
 								}
 							})
 							.transition(.fade(duration: 0.5))
-							.frame(maxWidth: 200)
 							.scaledToFill()
+							.frame(width: 200)
 							.cornerRadius(8)
 					}
 				} else if let image = image {
 					Image(uiImage: image)
 						.resizable()
-						.frame(maxWidth: 200)
 						.scaledToFill()
+						.frame(width: 200)
 						.cornerRadius(8)
+				}
+
+				Button {
+					showSourceTypePopover = true
+				} label: {
+					VStack(spacing: 24) {
+						Image(systemName: "camera")
+							.resizable()
+							.scaledToFit()
+							.frame(width: 90)
+						Text("Replace Photo")
+							.font(.title3.weight(.semibold))
+					}
+					.frame(width: 200, height: 200)
+				}
+				.foregroundColor(AppColor.primaryForeground)
+				.background(AppColor.accent)
+				.cornerRadius(8)
+				.popover(isPresented: $showSourceTypePopover) {
+					VStack(alignment: .leading, spacing: 12) {
+						Button {
+							showSourceTypePopover = false
+							self.sourceType = .camera
+							self.showImagePicker = true
+						} label: {
+							HStack {
+								Image(systemName: "camera")
+									.foregroundColor(AppColor.accent)
+								Text("Take a Photo")
+							}
+						}
+						Divider()
+						Button {
+							showSourceTypePopover = false
+							self.sourceType = .photoLibrary
+							self.showImagePicker = true
+						} label: {
+							HStack {
+								Image(systemName: "photo.on.rectangle")
+									.foregroundColor(AppColor.accent)
+								Text("Select from Camera Roll")
+							}
+						}
+					}
+					.foregroundColor(AppColor.primaryBackground)
+					.padding()
 				}
 
 				Spacer()
