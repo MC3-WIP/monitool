@@ -36,9 +36,12 @@ struct TodoListTabItem: View {
 			}
 			.navigationTitle("Task List")
 			.toolbar(content: {
-				Button(action: {}, label: {
-					Image(systemName: "clock")
-				})
+                NavigationLink(
+                    destination: HistoryView()){
+                    Button(action: {}, label: {
+                        Image(systemName: "clock")
+                    })
+                }
 			})
 		}
 		.tabItem {
@@ -57,7 +60,6 @@ struct TodoListTabItem: View {
 
 	func getFilteredTask(filter: TaskStatus) -> [Task] {
 		let result = taskViewModel.tasks.filter { $0.status == filter}
-		print(result.count)
 		return result
 	}
 }
@@ -70,9 +72,7 @@ struct TasksRowView: View {
 
 	var body: some View {
 		HStack {
-			icon.foregroundColor(Color(hex: "#4EB0AB"))
-			//            Spacer()
-			//                .frame(width: 23.0)
+            icon.foregroundColor(AppColor.accent)
 			Text(taskStatus.title).font(.headline)
 			Spacer()
 			Image(systemName: "chevron.down").foregroundColor(Color(hex: "#4EB0AB"))

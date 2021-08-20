@@ -34,8 +34,8 @@ struct TaskListDetailView: View {
                             repeatPopover = true
                         }
                         .popover(isPresented: $repeatPopover) {
-                            RepeatSheetView(repeated: $taskRepeated)
-								.frame(width: 400, height: 400)
+                            RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
+                                .frame(width: 400, height: 400)
                         }
                         Spacer()
                         Button {

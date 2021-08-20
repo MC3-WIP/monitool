@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AddDataPopOver: View {
     var sheetType: String
+    @State private var device = UIDevice.current.userInterfaceIdiom
     @Environment(\.presentationMode) var presentationMode
     @State private var repeatPopover = false
     @State var employeeName: String = ""
@@ -75,8 +76,13 @@ struct AddDataPopOver: View {
                                     repeatPopover = true
                                 }
                                 .popover(isPresented: $repeatPopover) {
-                                    RepeatSheetView(repeated: $taskRepeated)
-										.frame(width: 400, height: 400)
+                                    if device == .pad {
+                                        RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
+                                            .frame(width: 400, height: 400)
+                                    } else {
+                                        RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
+                                            .frame(width: 400, height: 400)
+                                    }
                                 }
                                 Spacer()
                                 Button {

@@ -34,6 +34,7 @@ struct HistoryView: View {
 }
 
 struct HistoriesSection: View {
+    private var device = UIDevice.current.userInterfaceIdiom
     var dateHelper = DateHelper()
     var histories: [Task]
     var day: String
@@ -50,10 +51,15 @@ struct HistoriesSection: View {
     var body: some View {
         Section(header: Text(day).font(.title).foregroundColor(.black).fontWeight(.bold)) {
             ForEach(histories, id: \.id) { history in
-                NavigationLink(destination: HistoryTaskDetailView(task: history)) {
-                    HistoryRow(task: history)
+                if device == .pad {
+                    NavigationLink(destination: HistoryTaskDetailView(task: history)) {
+                        HistoryRow(task: history)
+                    }.listRowBackground(Color("LightTosca"))
+                } else if device == .phone {
+                    NavigationLink(destination: IphoneTodayListView(task: history)) {
+                        HistoryRow(task: history)
+                    }.listRowBackground(Color("LightTosca"))
                 }
-                .listRowBackground(Color("LightTosca"))
             }
         }
         .listStyle(PlainListStyle())

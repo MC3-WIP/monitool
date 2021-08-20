@@ -11,6 +11,7 @@ struct RepeatSheetView: View {
     @State var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
 	@Binding var repeated: [Bool]
+    @Binding var isPresented: Bool
 
     var body: some View {
         NavigationView {
@@ -28,13 +29,13 @@ struct RepeatSheetView: View {
                         }
                     }
                 }
-            }.navigationBarTitle("Task List", displayMode: .inline)
+            }
+            .navigationBarTitle("Repeat List", displayMode: .inline)
+            .navigationBarItems(
+                trailing: Button("Done") {
+                    isPresented = false
+                }
+            ).foregroundColor(AppColor.accent)
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
-
-// struct RepeatSheetView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        RepeatSheetView(repeated: )
-//    }
-// }
