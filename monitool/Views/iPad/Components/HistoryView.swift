@@ -51,17 +51,14 @@ struct HistoriesSection: View {
     var body: some View {
         Section(header: Text(day).font(.title).foregroundColor(.black).fontWeight(.bold)) {
             ForEach(histories, id: \.id) { history in
-                if device == .pad{
+                if device == .pad {
                     NavigationLink(destination: HistoryTaskDetailView(task: history)) {
                         HistoryRow(task: history)
-                    }
-                    .listRowBackground(Color("LightTosca"))
-                }
-                else if device == .phone {
+                    }.listRowBackground(Color("LightTosca"))
+                } else if device == .phone {
                     NavigationLink(destination: IphoneTodayListView(task: history)) {
                         HistoryRow(task: history)
-                    }
-                    .listRowBackground(Color("LightTosca"))
+                    }.listRowBackground(Color("LightTosca"))
                 }
             }
         }

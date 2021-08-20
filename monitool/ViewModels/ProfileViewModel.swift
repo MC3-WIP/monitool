@@ -26,6 +26,7 @@ class ProfileViewModel: ObservableObject {
     @Published var isPinRight = false
 
 	private let companyRepository: CompanyRepository = .shared
+	static let shared = ProfileViewModel()
 
 	init() {
 		company = Company(name: "", minReview: 0, ownerPin: "", hasLoggedIn: true, profileImage: "")
@@ -51,8 +52,8 @@ class ProfileViewModel: ObservableObject {
 		company.minReview -= 1
 		if company.minReview < 0 { company.minReview = 0 }
 	}
-    
-    func updateCompany(companyName: String, companyPIN: String, minReview: Int){
+
+	func updateCompany(companyName: String, companyPIN: String, minReview: Int) {
         companyRepository.editCompanyName(name: companyName)
         companyRepository.editCompanyPIN(ownerPIN: companyPIN)
         companyRepository.editCompanyMinReview(minReview: minReview)
@@ -69,7 +70,7 @@ class ProfileViewModel: ObservableObject {
 							self.company = company
 						}
 					} catch {
-						print(error.localizedDescription)
+						print("Error parsing company data:", error.localizedDescription)
 					}
 				}
 			}

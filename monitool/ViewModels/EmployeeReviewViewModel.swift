@@ -11,6 +11,26 @@ import SwiftUI
 class EmployeeReviewViewModel: TaskDetailViewModel {
 	private let employeeRepository: EmployeeRepository = .shared
 
+	var title: String {
+		task.name
+	}
+
+	var desc: String {
+		task.desc ?? ""
+	}
+
+	var notes: String {
+		task.notes ?? "-"
+	}
+
+	var picName: String {
+		pic?.name ?? "-"
+	}
+
+	var photoReference: String? {
+		task.photoReference
+	}
+
 	private func findEmployeeBy(pin: String) -> Employee? {
 		var match: Employee?
 
@@ -43,10 +63,12 @@ class EmployeeReviewViewModel: TaskDetailViewModel {
 			return
 		}
 
-		taskRepository.get(id: task.id) { [self] _ in
+		taskRepository.get(id: task.id) { [self] task in
 //			if let task = task, let company = company {
 
-				getReviewer()
+				if let task = task {
+					getReviewer(task: task)
+				}
 
 //				DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
 //
