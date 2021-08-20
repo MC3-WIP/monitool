@@ -11,6 +11,26 @@ import SwiftUI
 class EmployeeReviewViewModel: TaskDetailViewModel {
 	private let employeeRepository: EmployeeRepository = .shared
 
+	var title: String {
+		task.name
+	}
+
+	var desc: String {
+		task.desc ?? ""
+	}
+
+	var notes: String {
+		task.notes ?? ""
+	}
+
+	var picName: String {
+		pic?.name ?? "-"
+	}
+
+	var photoReference: String? {
+		task.photoReference
+	}
+
 	private func findEmployeeBy(pin: String) -> Employee? {
 		var match: Employee?
 

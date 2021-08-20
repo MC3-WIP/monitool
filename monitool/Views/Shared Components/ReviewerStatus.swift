@@ -35,7 +35,7 @@ struct ReviewerStatus: View {
 			HStack {
 				ForEach(0..<currentReviewer) { _ in
 					Rectangle().cornerRadius(8)
-				}.foregroundColor(.accentColor)
+				}.foregroundColor(AppColor.accent)
 
 				ForEach(0..<gap) { _ in
 					Rectangle().cornerRadius(8)
