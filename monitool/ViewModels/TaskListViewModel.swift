@@ -40,4 +40,19 @@ final class TaskListViewModel: ObservableObject {
 			repeated: repeated
 		)
 	}
+
+	func updatePhotoReference(image: UIImage, taskID: String, completion: ((Error?) -> Void)? = nil) {
+		StorageService
+			.shared
+			.upload(image: image, path: "taskPhotoReference/\(taskID)") { metadata, _ in
+				if let metadata = metadata,
+				   let path = metadata.path {
+					self.repository.updatePhotoReference(
+						taskID: taskID,
+						photoRef: path,
+						completion: completion
+					)
+				}
+			}
+	}
 }

@@ -54,13 +54,11 @@ struct HistoriesSection: View {
                 if device == .pad {
                     NavigationLink(destination: HistoryTaskDetailView(task: history)) {
                         HistoryRow(task: history)
-                    }
-                    .listRowBackground(Color("LightTosca"))
+                    }.listRowBackground(Color("LightTosca"))
                 } else if device == .phone {
                     NavigationLink(destination: IphoneTodayListView(task: history)) {
                         HistoryRow(task: history)
-                    }
-                    .listRowBackground(Color("LightTosca"))
+                    }.listRowBackground(Color("LightTosca"))
                 }
             }
         }

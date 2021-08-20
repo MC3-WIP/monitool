@@ -69,7 +69,7 @@ class ProfileViewModel: ObservableObject {
 							self.company = company
 						}
 					} catch {
-						print(error.localizedDescription)
+						print("Error parsing company data:", error.localizedDescription)
 					}
 				}
 			}

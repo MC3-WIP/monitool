@@ -35,14 +35,11 @@ struct TodoListTabItem: View {
 				}
 			}
 			.navigationTitle("Task List")
-			.toolbar(content: {
-                NavigationLink(
-                    destination: HistoryView()) {
-                    Button(action: {}, label: {
-                        Image(systemName: "clock")
-                    })
+			.toolbar {
+                NavigationLink(destination: HistoryView()) {
+					Image(systemName: "clock")
                 }
-			})
+			}
 		}
 		.tabItem {
 			Image(systemName: "list.number")
@@ -80,7 +77,9 @@ struct TasksRowView: View {
 		if isExpanded {
 			if tasks.count != 0 {
 				ForEach(tasks) { task in
-					Text(task.name)
+					NavigationLink(destination: IphoneEmployeeReview(task: task)) {
+						Text(task.name)
+					}
 				}
 			} else {
 				Text("No Task").foregroundColor(.gray)

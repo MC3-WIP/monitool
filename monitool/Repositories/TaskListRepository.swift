@@ -62,4 +62,18 @@ final class TaskListRepository: ObservableObject {
         ])
     }
 
+	func updatePhotoReference(taskID: String, photoRef: String, completion: ((Error?) -> Void)? = nil) {
+		storage.reference().child(photoRef).downloadURL {[self] url, _ in
+			if let url = url {
+				store
+					.collection(path.taskList)
+					.document(taskID)
+					.setData(["photoReference": url.absoluteString], merge: true, completion: completion)
+				store
+					.collection(path.task)
+					.document(taskID)
+					.setData(["photoReference": url.absoluteString], merge: true, completion: completion)
+			}
+		}
+	}
 }
