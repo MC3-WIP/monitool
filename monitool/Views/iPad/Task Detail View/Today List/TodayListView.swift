@@ -16,9 +16,11 @@ struct TodayListView: View {
     @State var showImagePicker: Bool = false
     @State var showActionSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @State var image: UIImage?
-
-	init(task: Task) {
+    @State var images = [String]()
+    @State var image = UIImage?
+    @State var proofPage = 0
+    @State var totalPage: Int = 0
+    init(task: Task) {
 		_todayListViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
 	}
 
