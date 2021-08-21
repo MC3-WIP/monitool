@@ -40,15 +40,49 @@ extension TodayListView {
         GeometryReader { matric in
             VStack(spacing: 24) {
                 //			ScrollView {
-                Text("Proof of Work")
-                    .padding(.bottom, 8)
-                    .font(.system(size: 20, weight: .bold))
-                    .frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
-                    .foregroundColor(Color(hex: "898989"))
-
-                Button(action: {
-                    self.showActionSheet.toggle()
-                }){
+                HStack {
+                    Text("Proof of Work")
+                        .padding(.bottom, 8)
+                        .font(.system(size: 20, weight: .bold))
+                        .frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
+                        .foregroundColor(Color(hex: "898989"))
+                    Spacer()
+                    if role.isOwner{
+                        EmptyView()
+                    }
+                    else {
+                        Button(action: {
+                            self.showActionSheet.toggle()
+                        }) {
+                            HStack(alignment: .lastTextBaseline){
+                                Text("Add Photo")
+                                Image(systemName: "camera")
+                            }
+                        }
+                        .sheet(isPresented: $showImagePicker) {
+                            ImagePicker(sourceType: self.sourceType) { image in
+                                self.image = image
+                                if let image = self.image {
+                                    storageService.upload(image: image, path: "proofPhoto/\(todayListViewModel.task.id!)/\(UUID().uuidString)")
+                                }
+                            }
+                        }
+                        .actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
+                            ActionSheet(
+                                title: Text("Choose mode"),
+                                message: Text("Please choose your preferred mode to set your profile image"),
+                                buttons: [
+                                    ActionSheet.Button.default(Text("Camera")) {
+                                        self.showImagePicker.toggle()
+                                        self.sourceType = .camera
+                                    },
+                                    ActionSheet.Button.cancel()
+                                ]
+                            )
+                        }
+                    }
+                }
+                if role.isOwner {
                     ProofOfWork(image: "MonitoolAddPhotoIllustration", date: "p", metricSize: matric)
                         .frame(width: matric.size.width * 0.75, height: matric.size.width * 0.75)
                         .padding(.vertical, 10)
@@ -58,27 +92,40 @@ extension TodayListView {
                                 .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
                         )
                 }
-                .sheet(isPresented: $showImagePicker) {
-                    ImagePicker(sourceType: self.sourceType) { image in
-                        self.image = image
-                        if let image = self.image {
-                            storageService.upload(image: image, path: "proofPhoto/\(todayListViewModel.task.id!)/\(UUID().uuidString)")
-                        }
-
+                else {
+                    Button(action: {
+                        self.showActionSheet.toggle()
+                    }) {
+                        ProofOfWork(image: "MonitoolAddPhotoIllustration", date: "p", metricSize: matric)
+                            .frame(width: matric.size.width * 0.75, height: matric.size.width * 0.75)
+                            .padding(.vertical, 10)
+                            .background(Color(hex: "F0F9F8"))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+                            )
                     }
-                }
-                .actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
-                    ActionSheet(
-                        title: Text("Choose mode"),
-                        message: Text("Please choose your preferred mode to set your profile image"),
-                        buttons: [
-                            ActionSheet.Button.default(Text("Camera")) {
-                                self.showImagePicker.toggle()
-                                self.sourceType = .camera
-                            },
-                            ActionSheet.Button.cancel()
-                        ]
-                    )
+                    .sheet(isPresented: $showImagePicker) {
+                        ImagePicker(sourceType: self.sourceType) { image in
+                            self.image = image
+                            if let image = self.image {
+                                storageService.upload(image: image, path: "proofPhoto/\(todayListViewModel.task.id!)/\(UUID().uuidString)")
+                            }
+                        }
+                    }
+                    .actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
+                        ActionSheet(
+                            title: Text("Choose mode"),
+                            message: Text("Please choose your preferred mode to set your profile image"),
+                            buttons: [
+                                ActionSheet.Button.default(Text("Camera")) {
+                                    self.showImagePicker.toggle()
+                                    self.sourceType = .camera
+                                },
+                                ActionSheet.Button.cancel()
+                            ]
+                        )
+                    }
                 }
                 
                 if role.isOwner {

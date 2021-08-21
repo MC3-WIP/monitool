@@ -17,7 +17,7 @@ struct TodayListView: View {
     @State var showActionSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var images = [String]()
-    @State var image = UIImage?
+    @State var image: UIImage?
     @State var proofPage = 0
     @State var totalPage: Int = 0
     init(task: Task) {
