@@ -11,6 +11,26 @@ import SwiftUI
 class EmployeeReviewViewModel: TaskDetailViewModel {
 	private let employeeRepository: EmployeeRepository = .shared
 
+	var title: String {
+		task.name
+	}
+
+	var desc: String {
+		task.desc ?? ""
+	}
+
+	var notes: String {
+		task.notes ?? "-"
+	}
+
+	var picName: String {
+		pic?.name ?? "-"
+	}
+
+	var photoReference: String? {
+		task.photoReference
+	}
+
 	private func findEmployeeBy(pin: String) -> Employee? {
 		var match: Employee?
 
@@ -43,42 +63,48 @@ class EmployeeReviewViewModel: TaskDetailViewModel {
 			return
 		}
 
-		taskRepository.get(id: task.id) { [self] _ in
-//			if let task = task, let company = company {
-
-				getReviewer()
-
-//				DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//
-//				}
-//			}
+		taskRepository.get(id: task.id) { [self] task in
+            if let task = task {
+                getReviewer(task: task)
+            }
 		}
 	}
 
-	//	func approveTask(pin: String, isAlert: Binding<Bool>, errorType: Binding<TaskErrorType>) {
-	func approveTask(pin: String) {
+    func approveTask(pin: String, isPinTrue: Binding<Bool?>, presentation: Binding<PresentationMode>, showPin: Binding<Bool>, pinInputted: Binding<String>, isPasscodeFieldDisabled: Binding<Bool>) {
 		switch validateApproval(pin: pin) {
 		case .success(let employee):
+            showPin.wrappedValue = false
+            presentation.wrappedValue.dismiss()
 			taskRepository.appendReviewer(
 				taskID: task.id,
 				employee: employee
 			) { self.handleReviewCompletion($0) }
 		case .failure(let error):
-			//			isAlert.wrappedValue = true
-			//			errorType.wrappedValue = error
+            if isPinTrue.wrappedValue != nil {
+                isPinTrue.wrappedValue = false
+            }
+            pinInputted.wrappedValue = ""
+            isPasscodeFieldDisabled.wrappedValue = false
 			print("Validation Error:", error.localizedDescription)
 		}
 	}
 
-	func disapproveTask(pin: String) {
+    func disapproveTask(pin: String, isPinTrue: Binding<Bool?>, presentation: Binding<PresentationMode>, showPin: Binding<Bool>, pinInputted: Binding<String>, isPasscodeFieldDisabled: Binding<Bool>) {
 		switch validateApproval(pin: pin) {
 		case .success(let employee):
+            showPin.wrappedValue = false
+            presentation.wrappedValue.dismiss()
 			taskRepository.appendReviewer(
 				approving: false,
 				taskID: task.id,
 				employee: employee
 			) { self.handleReviewCompletion($0, approving: false) }
 		case .failure(let error):
+            if isPinTrue.wrappedValue != nil {
+                isPinTrue.wrappedValue = false
+            }
+            pinInputted.wrappedValue = ""
+            isPasscodeFieldDisabled.wrappedValue = false
 			print("Validation Error:", error.localizedDescription)
 		}
 	}

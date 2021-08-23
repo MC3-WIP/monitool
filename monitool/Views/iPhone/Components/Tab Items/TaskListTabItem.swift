@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct TaskListTabItem: View {
-	@StateObject var taskListViewModel: TaskListViewModel = .shared
 	@State var showSheetView = false
+	@State var isDisabled = false
+
+	@StateObject var taskListViewModel: TaskListViewModel = .shared
 
 	var body: some View {
 		NavigationView {
 			List {
 				ForEach(taskListViewModel.taskLists, id: \.id) { task in
-					NavigationLink(destination: EditTaskListView(task: task)) {
+					NavigationLink(destination: EditTaskListView(task: task, isDisabled: $isDisabled)) {
 						TaskListRow(task: task)
 					}
 				}.onDelete(perform: taskListViewModel.delete)
@@ -25,20 +27,29 @@ struct TaskListTabItem: View {
 				AddTaskButton()
 			}
 		}
-		.sheet(isPresented: $showSheetView) {
-			AddTaskView(showSheetView: $showSheetView)
-		}
+        .popover(isPresented: $showSheetView) {
+            AddDataPopOver(sheetType: "Task", showingPopOver: $showSheetView)
+        }
 		.tabItem {
 			Image(systemName: "text.badge.plus")
 			Text("Task List")
 		}
+		.disabled(isDisabled)
+		.accentColor(isDisabled ? .gray : AppColor.accent)
 	}
 }
 
 extension TaskListTabItem {
 	@ViewBuilder func TaskListRow(task: TaskList) -> some View {
-		Text(task.name)
-			.padding(.vertical, 12)
+		VStack(alignment: .leading) {
+			Text(task.name)
+				.font(.headline)
+			if let repetition = task.repeated {
+				Text(TaskHelper.convertRepetition(repetition, simplified: true))
+					.font(.subheadline)
+					.foregroundColor(.gray)
+			}
+		}.padding(.vertical, 12)
 	}
 
 	@ViewBuilder func AddTaskButton() -> some View {

@@ -9,16 +9,16 @@ import SwiftUI
 
 struct AddDataPopOver: View {
     var sheetType: String
+    @State private var device = UIDevice.current.userInterfaceIdiom
     @Environment(\.presentationMode) var presentationMode
     @State private var repeatPopover = false
     @State var employeeName: String = ""
     @State var employeePin = Employee.Helper.generatePIN()
     @State var taskName = ""
     @State var taskDesc = ""
-    @State var taskRepeated = [false, false, false, false, false, false, false]
+	@State var taskRepeated = Task.defaultRepetition
     @State var taskPhotoReference: String?
     @State var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    @State var selectedDays: [String] = []
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
     @ObservedObject var taskViewModel = TaskViewModel()
     @Binding var showingPopOver: Bool
@@ -76,25 +76,22 @@ struct AddDataPopOver: View {
                                     repeatPopover = true
                                 }
                                 .popover(isPresented: $repeatPopover) {
-                                    RepeatSheetView(repeated: $taskRepeated, selectedDays: $selectedDays)
-										.frame(width: 400, height: 400)
+                                    if device == .pad {
+                                        RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
+                                            .frame(width: 400, height: 400)
+                                    } else {
+                                        RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
+                                            .frame(width: 400, height: 400)
+                                    }
                                 }
                                 Spacer()
                                 Button {
                                     repeatPopover = true
 								} label: {
                                     HStack {
-                                        if selectedDays.count != 0 {
-                                            if selectedDays.count == 7 {
-                                                Text("Everyday")
-                                            } else {
-                                                ForEach(selectedDays, id: \.self) { day in
-                                                    Text(day)
-                                                }
-                                            }
-                                        }
-                                        Image(systemName: "chevron.right").foregroundColor(.gray)
-                                    }
+										Text(TaskHelper.convertRepetition(taskRepeated, simplified: true))
+                                        Image(systemName: "chevron.right")
+                                    }.foregroundColor(.gray)
                                 }
                             }.foregroundColor(Color.black)
                             HStack {

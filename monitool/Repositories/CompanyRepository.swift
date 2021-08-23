@@ -19,7 +19,7 @@ final class CompanyRepository: ObservableObject {
 
 	private init() {
 		if let user = Auth.auth().currentUser {
-			companyRef = store.collection(paths.company).document(user.uid)
+            companyRef = store.collection(paths.company).document(user.uid)
 		}
 	}
 
@@ -46,7 +46,11 @@ final class CompanyRepository: ObservableObject {
 
 	func editCompanyMinReview(minReview: Int) {
 		companyRef?.updateData(["minReview": minReview])
-	}
+    }
+
+    func editCompanyPIN(ownerPIN: String) {
+        companyRef?.updateData(["ownerPin": ownerPIN])
+    }
 
 	// MARK: EDIT PHOTO BELOM
 

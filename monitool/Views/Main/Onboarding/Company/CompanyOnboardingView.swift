@@ -49,7 +49,9 @@ struct CompanyOnboardingView: View {
                             Text("Task Reviewer: ")
                             Spacer()
                             Stepper("\(minReviewers) Reviewer(s)", onIncrement: {
-                                minReviewers += 1
+                                if minReviewers < employeeViewModel.employees.count {
+                                    minReviewers += 1
+                                }
                             }, onDecrement: {
                                 if minReviewers > 0 {
                                     minReviewers -= 1
