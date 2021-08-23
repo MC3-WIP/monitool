@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HistoryView: View {
-    @ObservedObject private var taskViewModel = TaskViewModel()
+    @StateObject private var taskViewModel = TaskViewModel()
     private let dateHelper = DateHelper()
 
     init() {
