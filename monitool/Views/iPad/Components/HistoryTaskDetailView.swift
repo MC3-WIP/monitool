@@ -6,37 +6,42 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct HistoryTaskDetailView: View {
     @StateObject var taskDetailViewModel: TaskDetailViewModel
+    @StateObject var historyViewModel: TodayListViewModel
     @State var proofPage = 0
     @State var totalPage = 3
 
     init(task: Task) {
         _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
+        _historyViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
     }
 
     var body: some View {
-        NoSeparatorList {
+        ScrollView {
             HStack {
                 GeometryReader { metric in
-                    VStack {
+                    VStack (alignment: .leading) {
                         Text(taskDetailViewModel.task.name)
                             .font(.system(size: 28, weight: .bold))
                             .padding(.vertical, 24.0)
                             .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-                        Image("kucing1")
-                            .resizable()
-                            .frame(width: metric.size.width * 0.75, height: metric.size.width * 0.75, alignment: .leading)
+                        if let image = historyViewModel.task.photoReference {
+                            WebImage(url: URL(string: image))
+                                .resizable()
+                                .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
+                        }
                         Text(taskDetailViewModel.task.desc ?? "-")
                             .fixedSize(horizontal: false, vertical: true)
+                            .frame(width: metric.size.width * 0.8, alignment: .topLeading)
                             .font(.system(size: 17))
                             .multilineTextAlignment(.leading)
                     }
-                    .padding(.leading, 18.0)
                 }
                 GeometryReader { matric in
-                    VStack(spacing: 8) {
+                    VStack(alignment: .leading, spacing: 8) {
                         Text("Proof of Work")
                             .padding(.bottom, 8)
                             .font(.system(size: 20, weight: .bold))
@@ -137,6 +142,7 @@ struct HistoryTaskDetailView: View {
                     .frame(width: matric.size.width * 0.9)
                 }
             }
+            .padding()
         }
     }
     @ViewBuilder

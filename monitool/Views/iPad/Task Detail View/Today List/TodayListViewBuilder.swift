@@ -12,7 +12,7 @@ import SDWebImageSwiftUI
 extension TodayListView {
     @ViewBuilder func LeftColumn() -> some View {
         GeometryReader { metric in
-            VStack {
+            VStack(alignment: .leading) {
                 //			ScrollView {
                 Text(todayListViewModel.task.name)
                     .font(.system(size: 28, weight: .bold))
@@ -28,6 +28,7 @@ extension TodayListView {
                 }
                 if let desc = todayListViewModel.task.desc {
                     Text(desc)
+                        .fixedSize(horizontal: false, vertical: true)
                         .frame(width: metric.size.width * 0.8, alignment: .topLeading)
                         .font(.system(size: 17))
                         .multilineTextAlignment(.leading)
@@ -38,7 +39,7 @@ extension TodayListView {
 
     @ViewBuilder func RightColumn() -> some View {
         GeometryReader { matric in
-            VStack(spacing: 24) {
+            VStack(alignment: .leading, spacing: 24) {
                 //			ScrollView {
                 Text("Proof of Work")
                     .padding(.bottom, 8)
