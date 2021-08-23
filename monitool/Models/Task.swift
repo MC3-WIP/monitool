@@ -59,6 +59,10 @@ class Task: Codable, Identifiable, Hashable {
         }
 }
 
+extension Task {
+	static let defaultRepetition = [false, false, false, false, false, false, false]
+}
+
 enum TaskStatus: String, Codable, CaseIterable {
 	case todayList = "Today List"
 	case waitingEmployeeReview = "Waiting Employee Review"

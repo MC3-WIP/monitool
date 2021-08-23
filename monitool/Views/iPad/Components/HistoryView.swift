@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HistoryView: View {
-    @ObservedObject private var taskViewModel = TaskViewModel()
+    @StateObject private var taskViewModel = TaskViewModel()
     private let dateHelper = DateHelper()
 
     init() {
@@ -51,7 +51,7 @@ struct HistoriesSection: View {
     var body: some View {
         Section(header: Text(day).font(.title).foregroundColor(.black).fontWeight(.bold)) {
             ForEach(histories, id: \.id) { history in
-                if device == .pad{
+                if device == .pad {
                     NavigationLink(destination: HistoryTaskDetailView(task: history)) {
                         HistoryRow(task: history)
                     }
@@ -60,8 +60,7 @@ struct HistoriesSection: View {
                 else if device == .phone {
                     NavigationLink(destination: HistoryDetail(history: history)) {
                         HistoryRow(task: history)
-                    }
-                    .listRowBackground(Color("LightTosca"))
+                    }.listRowBackground(Color("LightTosca"))
                 }
             }
         }

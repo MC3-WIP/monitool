@@ -65,7 +65,7 @@ enum SidebarMenuItem: CaseIterable {
 		case .revise:
 			return AnyView(TaskListView(filter: .constant(.revise)))
 		case .taskList:
-			return AnyView(TaskListDetailView())
+			return AnyView(TaskManagerView())
 		case .history:
 			return AnyView(HistoryView())
 		case .profile:
