@@ -28,7 +28,7 @@ final class CompanyRepository: ObservableObject {
             "name": company.name,
             "minReview": company.minReview,
             "profileImage": "profile",
-            "ownerPin": company.ownerPin,
+            "ownerPin": company.ownerPin
         ])
     }
 

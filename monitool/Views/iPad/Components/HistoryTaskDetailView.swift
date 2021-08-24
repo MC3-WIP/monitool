@@ -31,7 +31,11 @@ struct HistoryTaskDetailView: View {
                         if let image = historyViewModel.task.photoReference {
                             WebImage(url: URL(string: image))
                                 .resizable()
-                                .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
+                                .frame(
+                                    width: metric.size.width * 0.8,
+                                    height: metric.size.width * 0.8,
+                                    alignment: .leading
+                                )
                         }
                         Text(taskDetailViewModel.task.desc ?? "-")
                             .fixedSize(horizontal: false, vertical: true)

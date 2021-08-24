@@ -39,7 +39,7 @@ struct OwnerReviewView: View {
             }
 
             HStack(spacing: 24) {
-                if role.isOwner{
+                if role.isOwner {
                     reviseButton()
                     approveButton()
                 }

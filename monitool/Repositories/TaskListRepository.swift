@@ -58,7 +58,7 @@ final class TaskListRepository: ObservableObject {
         store.collection(path.taskList).document(taskID).updateData([
             "name": name,
             "desc": desc,
-            "repeated": repeated,
+            "repeated": repeated
         ])
     }
 

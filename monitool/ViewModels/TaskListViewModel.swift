@@ -46,8 +46,7 @@ final class TaskListViewModel: ObservableObject {
             .shared
             .upload(image: image, path: "taskPhotoReference/\(taskID)") { metadata, _ in
                 if let metadata = metadata,
-                   let path = metadata.path
-                {
+                   let path = metadata.path {
                     self.repository.updatePhotoReference(
                         taskID: taskID,
                         photoRef: path,

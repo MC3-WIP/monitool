@@ -78,7 +78,7 @@ struct PhotoComponent: View {
                         self.showImagePicker.toggle()
                         self.sourceType = .photoLibrary
                     },
-                    ActionSheet.Button.cancel(),
+                    ActionSheet.Button.cancel()
                 ]
             )
         }

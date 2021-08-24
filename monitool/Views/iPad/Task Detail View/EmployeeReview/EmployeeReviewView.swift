@@ -13,6 +13,11 @@ struct EmployeeReviewView: View {
     @StateObject var viewModel: EmployeeReviewViewModel
     @ObservedObject var profileViewModel: ProfileViewModel = .shared
 
+    // Dummy data
+    @State var proofPage = 0
+    var totalPage = 3
+    var datePhoto = "21 Juli 2021 at 15.57"
+
     init(task: Task) {
         _viewModel = StateObject(wrappedValue: EmployeeReviewViewModel(task: task))
     }
@@ -40,7 +45,7 @@ struct EmployeeReviewView: View {
                     RightColumn()
                 }
             }
-            if !role.isOwner{
+            if !role.isOwner {
               HStack(spacing: 24) {
                   dissaprroveButton()
                   approveButton()

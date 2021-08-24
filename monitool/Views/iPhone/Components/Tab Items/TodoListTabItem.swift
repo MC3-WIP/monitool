@@ -18,7 +18,7 @@ struct TodoListTabItem: View {
         Image(systemName: "list.bullet.below.rectangle"),
         Image(systemName: "person.3"),
         Image(systemName: "person.crop.circle.badge.checkmark"),
-        Image(systemName: "repeat"),
+        Image(systemName: "repeat")
     ]
 
     var body: some View {

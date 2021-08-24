@@ -34,7 +34,7 @@ extension TodayListView {
             }
         }
     }
-    
+
     @ViewBuilder func RightColumn() -> some View {
         VStack(alignment: .leading, spacing: 24) {
             Text("Proof of Work")
@@ -42,7 +42,7 @@ extension TodayListView {
                 .font(.system(size: 20, weight: .bold))
                 .frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
                 .foregroundColor(Color(hex: "898989"))
-            
+
             ProofOfWork(image: "MonitoolAddPhotoIllustration", date: "p")
                 .padding(.vertical, 10)
                 .background(Color(hex: "F0F9F8"))
@@ -50,7 +50,7 @@ extension TodayListView {
                     RoundedRectangle(cornerRadius: 5)
                         .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
                 )
-            
+
             if role.isOwner {
                 CustomText(title: "PIC: ", content: todayListViewModel.pic?.name)
                 CustomText(title: "Notes: ", content: todayListViewModel.task.notes)
@@ -67,7 +67,7 @@ extension TodayListView {
             }
         }
     }
-    
+
     @ViewBuilder func EmployeePicker() -> some View {
         VStack(spacing: -36) {
             HStack {
@@ -85,7 +85,7 @@ extension TodayListView {
             }
             .padding()
             .zIndex(1)
-            
+
             Picker("PIC", selection: $todayListViewModel.picSelection) {
                 ForEach(0..<employeeRepository.employees.count) { index in
                     Text(employeeRepository.employees[index].name).tag(index)
@@ -93,7 +93,7 @@ extension TodayListView {
             }
         }
     }
-    
+
     @ViewBuilder func PICSelector() -> some View {
         VStack(alignment: .leading) {
             Text("PIC")
@@ -133,7 +133,7 @@ extension TodayListView {
                 .zIndex(1)
         }
     }
-    
+
     @ViewBuilder func CustomText(title: String, content: String?) -> some View {
         HStack {
             Text(title)
@@ -142,7 +142,7 @@ extension TodayListView {
             Text(content ?? "-")
         }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
     }
-    
+
     @ViewBuilder func ProofOfWork(image: String, date: String) -> some View {
         VStack {
             Image(image)
