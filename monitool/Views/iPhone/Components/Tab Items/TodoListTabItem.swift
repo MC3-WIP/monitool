@@ -35,7 +35,7 @@ struct TodoListTabItem: View {
                     .onTapGesture { self.selectDeselect(taskStatuses[index]) }
                 }
             }
-            .navigationTitle("Task List")
+            .navigationTitle("To-Do List")
             .toolbar {
                 NavigationLink(destination: HistoryView()) {
                     Image(systemName: "clock")
@@ -43,8 +43,8 @@ struct TodoListTabItem: View {
             }
         }
         .tabItem {
-            Image(systemName: "list.number")
-            Text("Task List")
+            Image(systemName: "list.bullet.rectangle")
+            Text("To-Do List")
         }
     }
 
