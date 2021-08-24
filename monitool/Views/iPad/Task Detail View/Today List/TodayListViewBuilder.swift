@@ -12,7 +12,6 @@ import SDWebImageSwiftUI
 extension TodayListView {
     @ViewBuilder func LeftColumn() -> some View {
         VStack(alignment: .leading) {
-            //			ScrollView {
             Text(todayListViewModel.task.name)
                 .font(.system(size: 28, weight: .bold))
             if let image = todayListViewModel.task.photoReference {
@@ -37,7 +36,6 @@ extension TodayListView {
     
     @ViewBuilder func RightColumn() -> some View {
         VStack(alignment: .leading, spacing: 24) {
-            //			ScrollView {
             Text("Proof of Work")
                 .padding(.top, 10)
                 .font(.system(size: 20, weight: .bold))
