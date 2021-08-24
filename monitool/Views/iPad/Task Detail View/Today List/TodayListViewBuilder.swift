@@ -12,67 +12,66 @@ import SwiftUI
 
 extension TodayListView {
     @ViewBuilder func LeftColumn() -> some View {
-        GeometryReader { metric in
-            VStack(alignment: .leading) {
-                //			ScrollView {
-                Text(todayListViewModel.task.name)
-                    .font(.system(size: 28, weight: .bold))
-                    .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-                if let image = todayListViewModel.task.photoReference {
-                    WebImage(url: URL(string: image))
-                        .resizable()
-                        .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
-                } else {
-                    Image("MonitoolEmptyReferenceIllus")
-                        .resizable()
-                        .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
-                }
-                if let desc = todayListViewModel.task.desc {
-                    Text(desc)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .frame(width: metric.size.width * 0.8, alignment: .topLeading)
-                        .font(.system(size: 17))
-                        .multilineTextAlignment(.leading)
-                }
+        VStack(alignment: .leading) {
+            Text(todayListViewModel.task.name)
+                .font(.system(size: 28, weight: .bold))
+            if let image = todayListViewModel.task.photoReference {
+                WebImage(url: URL(string: image))
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxHeight: 400)
+            } else {
+                Image("MonitoolEmptyReferenceIllus")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxHeight: 400)
+            }
+            if let desc = todayListViewModel.task.desc {
+                Text(desc)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .font(.system(size: 17))
+                    .multilineTextAlignment(.leading)
             }
         }
     }
-
+    
     @ViewBuilder func RightColumn() -> some View {
-        GeometryReader { matric in
-            VStack(alignment: .leading, spacing: 24) {
-                //			ScrollView {
-                Text("Proof of Work")
-                    .padding(.bottom, 8)
-                    .font(.system(size: 20, weight: .bold))
-                    .frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
-                    .foregroundColor(Color(hex: "898989"))
-
-                ProofOfWork(image: "MonitoolAddPhotoIllustration", date: "p", metricSize: matric)
-                    .frame(width: matric.size.width * 0.75, height: matric.size.width * 0.75)
-                    .padding(.vertical, 10)
-                    .background(Color(hex: "F0F9F8"))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 5)
-                            .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+        VStack(alignment: .leading, spacing: 24) {
+            Text("Proof of Work")
+                .padding(.top, 10)
+                .font(.system(size: 20, weight: .bold))
+                .frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
+                .foregroundColor(Color(hex: "898989"))
+            
+            ProofOfWork(image: "MonitoolAddPhotoIllustration", date: "p")
+                .padding(.vertical, 10)
+                .background(Color(hex: "F0F9F8"))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+                )
+            
+            if role.isOwner {
+                CustomText(title: "PIC: ", content: todayListViewModel.pic?.name)
+                CustomText(title: "Notes: ", content: todayListViewModel.task.notes)
+            } else {
+                PICSelector()
+                NotesTextField()
+                Button("Submit") {
+                    todayListViewModel.submitTask(
+                        pic: employeeRepository.employees[todayListViewModel.picSelection],
+                        notes: todayListViewModel.notesText
                     )
-
-                if role.isOwner {
-                    CustomText(title: "PIC: ", content: todayListViewModel.pic?.name)
-                    CustomText(title: "Notes: ", content: todayListViewModel.task.notes)
-                } else {
-                    PICSelector()
-                    NotesTextField()
-                }
-                //			}
+                    presentationMode.wrappedValue.dismiss()
+                }.buttonStyle(PrimaryButtonStyle())
             }
         }
     }
-
+    
     @ViewBuilder func EmployeePicker() -> some View {
         VStack(spacing: -36) {
             HStack {
-                Button("Cancle") {
+                Button("Cancel") {
                     todayListViewModel.isEmployeePickerPresenting = false
                 }.foregroundColor(AppColor.accent)
                 Spacer()
@@ -86,15 +85,15 @@ extension TodayListView {
             }
             .padding()
             .zIndex(1)
-
+            
             Picker("PIC", selection: $todayListViewModel.picSelection) {
-                ForEach(0 ..< employeeRepository.employees.count) { index in
+                ForEach(0..<employeeRepository.employees.count) { index in
                     Text(employeeRepository.employees[index].name).tag(index)
                 }
             }
         }
     }
-
+    
     @ViewBuilder func PICSelector() -> some View {
         VStack(alignment: .leading) {
             Text("PIC")
@@ -131,9 +130,10 @@ extension TodayListView {
                 .frame(height: 120, alignment: .top)
                 .background(Color(hex: "F0F9F8"))
                 .modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
+                .zIndex(1)
         }
     }
-
+    
     @ViewBuilder func CustomText(title: String, content: String?) -> some View {
         HStack {
             Text(title)
@@ -142,13 +142,13 @@ extension TodayListView {
             Text(content ?? "-")
         }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
     }
-
-    @ViewBuilder func ProofOfWork(image: String, date _: String, metricSize: GeometryProxy) -> some View {
+    
+    @ViewBuilder func ProofOfWork(image: String, date: String) -> some View {
         VStack {
             Image(image)
                 .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: metricSize.size.width * 0.5, height: metricSize.size.width * 0.5)
+                .aspectRatio(contentMode: .fit)
+                .frame(maxHeight: 400)
         }
     }
 }
