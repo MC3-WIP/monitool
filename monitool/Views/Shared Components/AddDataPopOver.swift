@@ -16,7 +16,7 @@ struct AddDataPopOver: View {
     @State var employeePin = Employee.Helper.generatePIN()
     @State var taskName = ""
     @State var taskDesc = ""
-	@State var taskRepeated = Task.defaultRepetition
+    @State var taskRepeated = Task.defaultRepetition
     @State var taskPhotoReference: String?
     @State var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
@@ -34,123 +34,123 @@ struct AddDataPopOver: View {
                 VStack {
                     List {
                         Section(header: Color.clear
-                                    .frame(width: 0, height: 0)
-                                    .accessibilityHidden(true)) {
-                            HStack {
-                                Text("Name")
-                                TextField("", text: $employeeName).multilineTextAlignment(.trailing)
-                            }
-                            HStack {
-                                Text("Pin")
-                                Spacer()
-                                Text(employeePin)
-                            }
+                            .frame(width: 0, height: 0)
+                            .accessibilityHidden(true)) {
+                                HStack {
+                                    Text("Name")
+                                    TextField("", text: $employeeName).multilineTextAlignment(.trailing)
+                                }
+                                HStack {
+                                    Text("Pin")
+                                    Spacer()
+                                    Text(employeePin)
+                                }
                         }
                     }.listStyle(GroupedListStyle())
                 }.navigationTitle("Add Employee").navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(leading: Button("Cancel", action: {
-                    showingPopOver = false
-                }), trailing: Button("Add", action: {
-                    if employeeName.count != 0 {
+                    .navigationBarItems(leading: Button("Cancel", action: {
                         showingPopOver = false
-                        let employee = Employee(name: employeeName, pin: employeePin)
-                        employeeViewModel.add(employee)
-                    }
-                }))
+                    }), trailing: Button("Add", action: {
+                        if employeeName.count != 0 {
+                            showingPopOver = false
+                            let employee = Employee(name: employeeName, pin: employeePin)
+                            employeeViewModel.add(employee)
+                        }
+                    }))
             } else {
                 VStack {
                     List {
                         Section(header: Color.clear
-                                    .frame(width: 0, height: 0)
-                                    .accessibilityHidden(true)) {
-                            HStack {
-                                Text("Title")
-                                TextField("", text: $taskName).multilineTextAlignment(.trailing)
-                            }
-                            HStack {
-                                Text("Description")
-                                TextEditor(text: $taskDesc).multilineTextAlignment(.trailing)
-                            }
-                            HStack {
-                                Button("Repeat") {
-                                    repeatPopover = true
+                            .frame(width: 0, height: 0)
+                            .accessibilityHidden(true)) {
+                                HStack {
+                                    Text("Title")
+                                    TextField("", text: $taskName).multilineTextAlignment(.trailing)
                                 }
-                                .popover(isPresented: $repeatPopover) {
-                                    if device == .pad {
-                                        RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
-                                            .frame(width: 400, height: 400)
-                                    } else {
-                                        RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
-                                            .frame(width: 400, height: 400)
+                                HStack {
+                                    Text("Description")
+                                    TextEditor(text: $taskDesc).multilineTextAlignment(.trailing)
+                                }
+                                HStack {
+                                    Button("Repeat") {
+                                        repeatPopover = true
                                     }
-                                }
-                                Spacer()
-                                Button {
-                                    repeatPopover = true
-								} label: {
-                                    HStack {
-										Text(TaskHelper.convertRepetition(taskRepeated, simplified: true))
-                                        Image(systemName: "chevron.right")
-                                    }.foregroundColor(.gray)
-                                }
-                            }.foregroundColor(Color.black)
-                            HStack {
-                                Button("Add Photo Reference") {
-                                    self.showActionSheet.toggle()
-                                }.sheet(isPresented: $showImagePicker) {
-                                    ImagePicker(sourceType: self.sourceType) { image in
-                                        self.image = image
+                                    .popover(isPresented: $repeatPopover) {
+                                        if device == .pad {
+                                            RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
+                                                .frame(width: 400, height: 400)
+                                        } else {
+                                            RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
+                                                .frame(width: 400, height: 400)
+                                        }
                                     }
+                                    Spacer()
+                                    Button {
+                                        repeatPopover = true
+                                    } label: {
+                                        HStack {
+                                            Text(TaskHelper.convertRepetition(taskRepeated, simplified: true))
+                                            Image(systemName: "chevron.right")
+                                        }.foregroundColor(.gray)
+                                    }
+                                }.foregroundColor(Color.black)
+                                HStack {
+                                    Button("Add Photo Reference") {
+                                        self.showActionSheet.toggle()
+                                    }.sheet(isPresented: $showImagePicker) {
+                                        ImagePicker(sourceType: self.sourceType) { image in
+                                            self.image = image
+                                        }
+                                    }
+                                    .actionSheet(isPresented: $showActionSheet) { () -> ActionSheet in
+                                        ActionSheet(
+                                            title: Text("Choose mode"),
+                                            message: Text("Please choose your preferred mode to set your profile image"),
+                                            buttons: [ActionSheet.Button.default(Text("Camera"),
+                                                                                 action: {
+                                                                                     self.showImagePicker.toggle()
+                                                                                     self.sourceType = .camera
+                                                                                 }), ActionSheet.Button.default(Text("Photo Library"), action: {
+                                                    self.showImagePicker.toggle()
+                                                    self.sourceType = .photoLibrary
+                                                }), ActionSheet.Button.cancel()]
+                                        )
+                                    }
+                                    Spacer()
+                                    Image(systemName: "camera").foregroundColor(AppColor.accent)
+                                }.foregroundColor(Color.black)
+                                if image != nil {
+                                    Image(uiImage: image!)
+                                        .resizable()
+                                        .frame(width: 100, height: 100, alignment: .center)
+                                        .clipShape(Rectangle())
+                                        .padding(.bottom, 10.0)
                                 }
-                                .actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
-                                    ActionSheet(
-										title: Text("Choose mode"),
-										message: Text("Please choose your preferred mode to set your profile image"),
-										buttons: [ActionSheet.Button.default(Text("Camera"),
-										action: {
-                                        self.showImagePicker.toggle()
-                                        self.sourceType = .camera
-                                    }), ActionSheet.Button.default(Text("Photo Library"), action: {
-                                        self.showImagePicker.toggle()
-                                        self.sourceType = .photoLibrary
-                                    }), ActionSheet.Button.cancel()])
-
-                                }
-                                Spacer()
-                                Image(systemName: "camera").foregroundColor(AppColor.accent)
-                            }.foregroundColor(Color.black)
-                            if image != nil {
-                                Image(uiImage: image!)
-                                    .resizable()
-                                    .frame(width: 100, height: 100, alignment: .center)
-                                    .clipShape(Rectangle())
-                                    .padding(.bottom, 10.0)
-                            }
                         }
                     }.listStyle(GroupedListStyle())
                 }.navigationTitle("Add Task").navigationBarTitleDisplayMode(.inline)
-                .navigationBarItems(trailing: Button("Add", action: {
-                    if taskName.count != 0 {
-                        showingPopOver = false
-                        let task = Task(
-							name: taskName,
-							description: taskDesc,
-							photoReference: taskPhotoReference,
-							repeated: taskRepeated
-						)
-						let taskList = TaskList(
-							name: taskName,
-							desc: taskDesc,
-							repeated: taskRepeated,
-							photoReference: taskPhotoReference
-						)
-                        if let image = image {
-                            taskViewModel.add(task, taskList, photo: image, id: UUID().uuidString)
-                        } else {
-                            taskViewModel.add(task, taskList, id: UUID().uuidString)
+                    .navigationBarItems(trailing: Button("Add", action: {
+                        if taskName.count != 0 {
+                            showingPopOver = false
+                            let task = Task(
+                                name: taskName,
+                                description: taskDesc,
+                                photoReference: taskPhotoReference,
+                                repeated: taskRepeated
+                            )
+                            let taskList = TaskList(
+                                name: taskName,
+                                desc: taskDesc,
+                                repeated: taskRepeated,
+                                photoReference: taskPhotoReference
+                            )
+                            if let image = image {
+                                taskViewModel.add(task, taskList, photo: image, id: UUID().uuidString)
+                            } else {
+                                taskViewModel.add(task, taskList, id: UUID().uuidString)
+                            }
                         }
-                    }
-                }).foregroundColor(AppColor.accent))
+                    }).foregroundColor(AppColor.accent))
             }
         }.navigationViewStyle(StackNavigationViewStyle())
     }

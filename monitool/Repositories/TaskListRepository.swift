@@ -5,11 +5,11 @@
 //  Created by Naufaldi Athallah Rifqi on 04/08/21.
 //
 
-import Firebase
 import Combine
-import PhotosUI
-import FirebaseStorage
+import Firebase
 import FirebaseFirestore
+import FirebaseStorage
+import PhotosUI
 
 final class TaskListRepository: ObservableObject {
     private let path = RepositoriesPath()
@@ -18,7 +18,7 @@ final class TaskListRepository: ObservableObject {
 
     @Published var taskLists: [TaskList] = []
 
-	static let shared = TaskListRepository()
+    static let shared = TaskListRepository()
 
     private init() {
         get()
@@ -32,7 +32,7 @@ final class TaskListRepository: ObservableObject {
                     return
                 }
 
-                let taskLists = querySnapshot?.documents.compactMap {document in
+                let taskLists = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: TaskList.self)
                 } ?? []
 
@@ -58,22 +58,22 @@ final class TaskListRepository: ObservableObject {
         store.collection(path.taskList).document(taskID).updateData([
             "name": name,
             "desc": desc,
-            "repeated": repeated
+            "repeated": repeated,
         ])
     }
 
-	func updatePhotoReference(taskID: String, photoRef: String, completion: ((Error?) -> Void)? = nil) {
-		storage.reference().child(photoRef).downloadURL {[self] url, _ in
-			if let url = url {
-				store
-					.collection(path.taskList)
-					.document(taskID)
-					.setData(["photoReference": url.absoluteString], merge: true, completion: completion)
-				store
-					.collection(path.task)
-					.document(taskID)
-					.setData(["photoReference": url.absoluteString], merge: true, completion: completion)
-			}
-		}
-	}
+    func updatePhotoReference(taskID: String, photoRef: String, completion: ((Error?) -> Void)? = nil) {
+        storage.reference().child(photoRef).downloadURL { [self] url, _ in
+            if let url = url {
+                store
+                    .collection(path.taskList)
+                    .document(taskID)
+                    .setData(["photoReference": url.absoluteString], merge: true, completion: completion)
+                store
+                    .collection(path.task)
+                    .document(taskID)
+                    .setData(["photoReference": url.absoluteString], merge: true, completion: completion)
+            }
+        }
+    }
 }

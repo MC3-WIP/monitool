@@ -8,7 +8,6 @@
 import SwiftUI
 
 extension String {
-
     var digits: [Int] {
         var result = [Int]()
 
@@ -20,5 +19,4 @@ extension String {
 
         return result
     }
-
 }

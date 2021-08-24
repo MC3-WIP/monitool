@@ -5,10 +5,10 @@
 //  Created by Naufaldi Athallah Rifqi on 04/08/21.
 //
 
-import SwiftUI
 import FirebaseAuth
-import FirebaseStorage
 import FirebaseFirestoreSwift
+import FirebaseStorage
+import SwiftUI
 
 class StorageService: ObservableObject {
     let storage = Storage.storage()
@@ -41,7 +41,7 @@ class StorageService: ObservableObject {
         let storageRef = storage.reference().child("images")
 
         // List all items in the images folder
-        storageRef.listAll { (result, error) in
+        storageRef.listAll { result, error in
             if let error = error {
                 print("Error while listing all files: ", error)
             }
@@ -59,7 +59,7 @@ class StorageService: ObservableObject {
         }
 
         // Create a completion handler - aka what the function should do after it listed all the items
-        let handler: (StorageListResult, Error?) -> Void = { (result, error) in
+        let handler: (StorageListResult, Error?) -> Void = { result, error in
             if let error = error {
                 print("error", error)
             }

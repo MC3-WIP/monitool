@@ -18,7 +18,7 @@ struct HistoryTabItem: View {
 
     var body: some View {
         List {
-            ForEach(0..<6) { index in
+            ForEach(0 ..< 6) { index in
                 if taskViewModel.historiesPerDay[index].count == 0 {
                     EmptyView()
                 } else {

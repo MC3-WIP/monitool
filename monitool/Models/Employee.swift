@@ -12,11 +12,11 @@ import Foundation
 
 class Employee: Codable, Identifiable {
     @DocumentID var id: String!
-	var name: String
-	var pin: String
+    var name: String
+    var pin: String
 
     init(name: String, pin: String? = nil) {
-		self.name = name
-		self.pin = pin ?? Helper.generatePIN()
-	}
+        self.name = name
+        self.pin = pin ?? Helper.generatePIN()
+    }
 }

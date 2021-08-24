@@ -6,13 +6,13 @@
 //
 
 import Foundation
-import SwiftUI
 import SDWebImageSwiftUI
+import SwiftUI
 
 extension ReviseView {
     @ViewBuilder func LeftColumn() -> some View {
         GeometryReader { metric in
-            VStack (alignment: .leading){
+            VStack(alignment: .leading) {
                 Text(taskDetailViewModel.task.name)
                     .font(.system(size: 28, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
@@ -36,9 +36,10 @@ extension ReviseView {
             .padding()
         }
     }
+
     @ViewBuilder func RightColumn() -> some View {
         GeometryReader { matric in
-            VStack (alignment: .leading){
+            VStack(alignment: .leading) {
                 Text("Proof of Work")
                     .padding(.bottom, 8)
                     .font(.system(size: 20, weight: .bold))
@@ -81,8 +82,9 @@ extension ReviseView {
             .padding()
         }
     }
+
     @ViewBuilder
-    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
+    func ProofOfWork(image _: String, date _: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
         VStack {
             Image("MonitoolAddPhotoIllustration")
                 .resizable()
@@ -94,72 +96,71 @@ extension ReviseView {
     }
 
     @ViewBuilder func proofOfWorkComponent(matric: GeometryProxy, proofPage: Int, totalPage: Int, datePhoto: String) -> some View {
-            VStack {
-                ZStack {
-                    switch proofPage {
-                    case 0:
-                        ProofOfWork(
-							image: "kucing2",
-							date: "21 Jul 2021 at 15:57",
-							metricSize: matric,
-							datePhoto: datePhoto
-						)
-                    case 1:
-                        ProofOfWork(
-							image: "kucing3",
-							date: "21 Jul 2021 at 15:57",
-							metricSize: matric,
-							datePhoto: datePhoto
-						)
-                    case 2:
-                        ProofOfWork(
-							image: "kucing4",
-							date: "21 Jul 2021 at 15:57",
-							metricSize: matric,
-							datePhoto: datePhoto
-						)
-                    default:
-                        Image("MonitoolAddPhotoIllustration")
-                    }
+        VStack {
+            ZStack {
+                switch proofPage {
+                case 0:
+                    ProofOfWork(
+                        image: "kucing2",
+                        date: "21 Jul 2021 at 15:57",
+                        metricSize: matric,
+                        datePhoto: datePhoto
+                    )
+                case 1:
+                    ProofOfWork(
+                        image: "kucing3",
+                        date: "21 Jul 2021 at 15:57",
+                        metricSize: matric,
+                        datePhoto: datePhoto
+                    )
+                case 2:
+                    ProofOfWork(
+                        image: "kucing4",
+                        date: "21 Jul 2021 at 15:57",
+                        metricSize: matric,
+                        datePhoto: datePhoto
+                    )
+                default:
+                    Image("MonitoolAddPhotoIllustration")
                 }
-                .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
-                    .onEnded { value in
-                        if abs(value.translation.height) < abs(value.translation.width) {
-                            if abs(value.translation.width) > 50.0 {
-                                if value.translation.width > 0 {
-                                    if proofPage == 0 {
-
-                                    } else {
-                                        self.proofPage -= 1
-                                    }
-                                } else if value.translation.width < 0 {
-                                    if proofPage == totalPage - 1 {
-
-                                    } else {
-                                        self.proofPage += 1
-                                    }
+            }
+            .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
+                .onEnded { value in
+                    if abs(value.translation.height) < abs(value.translation.width) {
+                        if abs(value.translation.width) > 50.0 {
+                            if value.translation.width > 0 {
+                                if proofPage == 0 {
+                                } else {
+                                    self.proofPage -= 1
+                                }
+                            } else if value.translation.width < 0 {
+                                if proofPage == totalPage - 1 {
+                                } else {
+                                    self.proofPage += 1
                                 }
                             }
                         }
                     }
-                )
-                PageControl(totalPage: totalPage, current: proofPage)
-            }
-            .frame(width: matric.size.width * 0.75)
-            .padding(.top, 10)
-            .background(Color(hex: "F0F9F8"))
-            .overlay(
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+                }
             )
+            PageControl(totalPage: totalPage, current: proofPage)
+        }
+        .frame(width: matric.size.width * 0.75)
+        .padding(.top, 10)
+        .background(Color(hex: "F0F9F8"))
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+        )
     }
 
     @ViewBuilder func reviseButton() -> some View {
         Button {
             // MARK: ACTION BUTTON REVISE
+
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
             self.presentationMode.wrappedValue.dismiss()
-		} label: {
+        } label: {
             HStack {
                 Image(systemName: "repeat")
                 Text("Revise")
@@ -171,16 +172,17 @@ extension ReviseView {
             .background(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(Color(hex: "#4FB0AB"), lineWidth: 2)
-                            )
+            )
         }
     }
 
     func approveButton() -> some View {
         Button {
             // MARK: ACTION BUTTON APPROVE
+
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
             self.presentationMode.wrappedValue.dismiss()
-		} label: {
+        } label: {
             HStack {
                 Image(systemName: "checkmark")
                 Text("Approve")

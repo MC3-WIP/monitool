@@ -27,11 +27,10 @@ struct OnboardingStepView: View {
                         .frame(width: proxy.size.width, height: proxy.size.height * 0.2, alignment: .center)
                         .font(.system(size: 17))
                         .multilineTextAlignment(.center)
-                }.frame(width: proxy.size.width, height: proxy.size.height, alignment: .center )
+                }.frame(width: proxy.size.width, height: proxy.size.height, alignment: .center)
             }
-
         }
-    .padding()
+        .padding()
     }
 }
 
