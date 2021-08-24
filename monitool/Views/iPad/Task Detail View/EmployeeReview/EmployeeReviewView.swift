@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EmployeeReviewView: View {
+    @ObservedObject var role: RoleService = .shared
     @Environment(\.presentationMode) var presentationMode
     @StateObject var viewModel: EmployeeReviewViewModel
     @ObservedObject var profileViewModel: ProfileViewModel = .shared
@@ -15,10 +16,6 @@ struct EmployeeReviewView: View {
     init(task: Task) {
         _viewModel = StateObject(wrappedValue: EmployeeReviewViewModel(task: task))
     }
-
-    @State var totalPage: Int = 3
-    @State var datePhoto = "21 Juli 2021 at 15.57"
-    @State var proofPage = 0
 
     @State var showingPinField = false
     @State var isApproving = false
@@ -43,9 +40,11 @@ struct EmployeeReviewView: View {
                     RightColumn()
                 }
             }
-            HStack(spacing: 24) {
-                dissaprroveButton()
-                approveButton()
+            if !role.isOwner{
+              HStack(spacing: 24) {
+                  dissaprroveButton()
+                  approveButton()
+              }
             }
         }
         .padding()
