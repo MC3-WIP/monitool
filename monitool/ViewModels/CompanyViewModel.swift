@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 class CompanyViewModel: ObservableObject {
-	@ObservedObject private var repository: CompanyRepository = .shared
+	private let repository: CompanyRepository = .shared
 
     func create(_ company: Company) {
         repository.add(company)

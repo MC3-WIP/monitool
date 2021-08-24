@@ -31,18 +31,16 @@ struct TodoListTabItem: View {
 						isExpanded: self.selection.contains(taskStatuses[index]),
 						icon: statusIcon[index]
 					)
+                    .animation(Animation.easeIn)
 					.onTapGesture { self.selectDeselect(taskStatuses[index]) }
 				}
 			}
 			.navigationTitle("Task List")
-			.toolbar(content: {
-                NavigationLink(
-                    destination: HistoryView()){
-                    Button(action: {}, label: {
-                        Image(systemName: "clock")
-                    })
+			.toolbar {
+                NavigationLink(destination: HistoryView()) {
+					Image(systemName: "clock")
                 }
-			})
+			}
 		}
 		.tabItem {
 			Image(systemName: "list.number")
@@ -60,7 +58,7 @@ struct TodoListTabItem: View {
 
 	func getFilteredTask(filter: TaskStatus) -> [Task] {
 		let result = taskViewModel.tasks.filter { $0.status == filter}
-		return result
+		return result   
 	}
 }
 
@@ -77,10 +75,14 @@ struct TasksRowView: View {
 			Spacer()
 			Image(systemName: "chevron.down").foregroundColor(Color(hex: "#4EB0AB"))
 		}
+        .contentShape(Rectangle())
+        .animation(.linear(duration: 0.3))
 		if isExpanded {
 			if tasks.count != 0 {
 				ForEach(tasks) { task in
-					Text(task.name)
+					NavigationLink(destination: IphoneEmployeeReview(task: task)) {
+						Text(task.name)
+					}
 				}
 			} else {
 				Text("No Task").foregroundColor(.gray)

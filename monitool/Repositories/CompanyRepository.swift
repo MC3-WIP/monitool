@@ -46,8 +46,8 @@ final class CompanyRepository: ObservableObject {
 
 	func editCompanyMinReview(minReview: Int) {
 		companyRef?.updateData(["minReview": minReview])
-	}
-    
+    }
+
     func editCompanyPIN(ownerPIN: String) {
         companyRef?.updateData(["ownerPin": ownerPIN])
     }

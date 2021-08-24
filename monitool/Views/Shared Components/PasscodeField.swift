@@ -11,12 +11,12 @@ import Introspect
 public struct PasscodeField: View {
 
     var maxDigits = 4
-    var label = "Enter Pin for Owner"
+    var label = "Enter Pin"
 
     @State var showPin = false
+    @Binding var isPinTrue: Bool?
 
     @ObservedObject var profileViewModel = ProfileViewModel()
-
     var handler: (String, (Bool) -> Void) -> Void
 
     public var body: some View {
@@ -27,8 +27,10 @@ public struct PasscodeField: View {
                 backgroundField
             }
             showPinStack
-            if !profileViewModel.isPinRight {
-                Text("Wrong pin")
+            if let isPinTrue = isPinTrue {
+                if !isPinTrue {
+                    Text("Wrong pin")
+                }
             }
         }
 

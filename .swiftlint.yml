@@ -1,6 +1,7 @@
 disabled_rules:
   - identifier_name
   - type_name
+  - function_parameter_count
 
 excluded:
   - Pods

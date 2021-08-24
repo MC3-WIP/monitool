@@ -15,18 +15,16 @@ struct EmployeeReviewView: View {
     @Environment(\.presentationMode) var presentationMode
 
     init (task: Task) {
-        _employeeReviewViewModel = StateObject(wrappedValue: EmployeeReviewViewModel(task: task))
+        _viewModel = StateObject(wrappedValue: EmployeeReviewViewModel(task: task))
     }
 
-    private let pic: String = "Mawar"
-    private let notes: String = "Sudah Pak Bos"
-    // MARK: INITIALIZE TOTAL PAGE
     @State var totalPage: Int = 3
     @State var datePhoto = "21 Juli 2021 at 15.57"
     @State var proofPage = 0
 
     @State var showingPinField = false
     @State var isApproving = false
+    @State var isPinTrue: Bool?
 
     var body: some View {
         VStack {
@@ -68,6 +66,43 @@ struct EmployeeReviewView: View {
                 .frame(width: metricSize.size.width * 0.7, height: 12, alignment: .leading)
         }
     }
+
+	private var content: some View {
+		VStack {
+			ScrollView {
+				HStack {
+					LeftColumn()
+					RightColumn()
+				}
+			}
+			HStack(spacing: 24) {
+				dissaprroveButton()
+				approveButton()
+			}
+		}
+		.padding()
+		.sheet(isPresented: $showingPinField) {
+            PasscodeField(isPinTrue: $isPinTrue) { inputtedPin, _ in
+				if isApproving {
+                    viewModel.approveTask(
+                        pin: inputtedPin,
+                        isPinTrue: $isPinTrue,
+                        presentation: presentationMode,
+                        showPin: $showingPinField,
+                        pinInputted: $profileViewModel.pinInputted,
+                        isPasscodeFieldDisabled: $profileViewModel.isPasscodeFieldDisabled)
+				} else {
+                    viewModel.disapproveTask(
+                        pin: inputtedPin,
+                        isPinTrue: $isPinTrue,
+                        presentation: presentationMode,
+                        showPin: $showingPinField,
+                        pinInputted: $profileViewModel.pinInputted,
+                        isPasscodeFieldDisabled: $profileViewModel.isPasscodeFieldDisabled)
+				}
+			}
+		}
+	}
 }
 
 struct TaskDetailView_Previews: PreviewProvider {
@@ -75,9 +110,5 @@ struct TaskDetailView_Previews: PreviewProvider {
         EmployeeReviewView(task: (Task(name: "EmployeeReview", repeated: [])))
             .previewDevice("iPad Pro (12.9-inch) (5th generation)")
             .previewLayout(.fixed(width: 1112, height: 834))
-        //        TaskDetailView()
-        //
-        //            .previewDevice("iPad Air (4th generation)")
-        //            .environment(\.horizontalSizeClass, .regular)
     }
 }
