@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 
 class TaskViewModel: ObservableObject {
-	@ObservedObject private var repository: TaskRepository = .shared
+    @ObservedObject private var repository: TaskRepository = .shared
     @Published var tasks = [Task]()
     @Published var histories = [Task]()
     @Published var historiesPerDay = [[Task]]()
@@ -28,10 +28,10 @@ class TaskViewModel: ObservableObject {
 
     func separateHistories() {
         let dateHelper = DateHelper()
-        for index in 0...6 {
+        for index in 0 ... 6 {
             let historyOfDay = histories.filter { history in
-				dateHelper.getNumDays(first: history.createdAt, second: Date()) == index
-			}
+                dateHelper.getNumDays(first: history.createdAt, second: Date()) == index
+            }
             historiesPerDay.append(historyOfDay)
         }
     }
@@ -44,33 +44,33 @@ class TaskViewModel: ObservableObject {
         repository.submitTask(task: task, taskList: taskList, id: id)
     }
 
-	func delete(_ offsets: IndexSet) {
-		offsets.forEach { index in
-			repository.delete(tasks[index])
-		}
-	}
-
-    func updateStatus(id: String, status: String) {
-		repository.updateStatus(taskID: id, status: status)
+    func delete(_ offsets: IndexSet) {
+        offsets.forEach { index in
+            repository.delete(tasks[index])
+        }
     }
 
-	@ViewBuilder
-	func route(_ filter: TaskStatus?, task: Task) -> some View {
-		if let filter = filter {
-			switch filter {
-			case .todayList:
-				TodayListView(task: task)
-			case .waitingEmployeeReview:
+    func updateStatus(id: String, status: String) {
+        repository.updateStatus(taskID: id, status: status)
+    }
+
+    @ViewBuilder
+    func route(_ filter: TaskStatus?, task: Task) -> some View {
+        if let filter = filter {
+            switch filter {
+            case .todayList:
+                TodayListView(task: task)
+            case .waitingEmployeeReview:
                 EmployeeReviewView(task: task)
-			case .waitingOwnerReview:
+            case .waitingOwnerReview:
                 OwnerReviewView(task: task)
-			case .revise:
+            case .revise:
                 ReviseView(task: task)
-			default:
-				EmptyView()
-			}
-		} else {
-			TaskListDetailView()
-		}
-	}
+            default:
+                EmptyView()
+            }
+        } else {
+            TaskListDetailView()
+        }
+    }
 }

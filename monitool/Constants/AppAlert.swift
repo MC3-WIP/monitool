@@ -7,5 +7,4 @@
 
 import Foundation
 
-struct AppAlert {
-}
+struct AppAlert {}

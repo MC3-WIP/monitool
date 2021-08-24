@@ -5,8 +5,8 @@
 //  Created by Mac-albert on 07/08/21.
 //
 
-import SwiftUI
 import SDWebImageSwiftUI
+import SwiftUI
 
 struct HistoryTaskDetailView: View {
     @StateObject var taskDetailViewModel: TaskDetailViewModel
@@ -23,7 +23,7 @@ struct HistoryTaskDetailView: View {
         ScrollView {
             HStack {
                 GeometryReader { metric in
-                    VStack (alignment: .leading) {
+                    VStack(alignment: .leading) {
                         Text(taskDetailViewModel.task.name)
                             .font(.system(size: 28, weight: .bold))
                             .padding(.vertical, 24.0)
@@ -66,13 +66,11 @@ struct HistoryTaskDetailView: View {
                                         if abs(value.translation.width) > 50.0 {
                                             if value.translation.width > 0 {
                                                 if proofPage == 0 {
-
                                                 } else {
                                                     proofPage -= 1
                                                 }
                                             } else if value.translation.width < 0 {
                                                 if proofPage == totalPage - 1 {
-
                                                 } else {
                                                     proofPage += 1
                                                 }
@@ -96,7 +94,7 @@ struct HistoryTaskDetailView: View {
                                 .font(.system(size: 17, weight: .bold))
                             Text(taskDetailViewModel.pic?.name ?? "-")
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
-                        .padding(.top, 27)
+                            .padding(.top, 27)
 
                         HStack {
                             Text("Notes: ")
@@ -104,7 +102,7 @@ struct HistoryTaskDetailView: View {
                                 .font(.system(size: 17, weight: .bold))
                             Text(taskDetailViewModel.task.notes ?? "-")
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 21, alignment: .leading)
-                        .padding(.top, 20)
+                            .padding(.top, 20)
                         Spacer()
                         HStack {
                             Text("Comment: ")
@@ -114,7 +112,7 @@ struct HistoryTaskDetailView: View {
                             Text(taskDetailViewModel.task.comment ?? "-")
                                 .fixedSize(horizontal: false, vertical: true)
                         }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                        .padding(.top, 20)
+                            .padding(.top, 20)
                         Spacer()
                         VStack {
                             Text("Log")
@@ -124,7 +122,7 @@ struct HistoryTaskDetailView: View {
                         }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         ScrollView(.vertical) {
                             List {
-                                ForEach(0..<10) {_ in
+                                ForEach(0 ..< 10) { _ in
                                     HStack {
                                         Text("Aku kiri")
                                         Spacer()
@@ -133,11 +131,11 @@ struct HistoryTaskDetailView: View {
                                 }
                             }
                         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 100, maxHeight: 105, alignment: .topLeading)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color("Accent"), lineWidth: 1)
-                        )
-                        .background(RoundedRectangle(cornerRadius: 5).fill(Color("LightTosca")))
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 5)
+                                    .stroke(Color("Accent"), lineWidth: 1)
+                            )
+                            .background(RoundedRectangle(cornerRadius: 5).fill(Color("LightTosca")))
                     }
                     .frame(width: matric.size.width * 0.9)
                 }
@@ -145,8 +143,9 @@ struct HistoryTaskDetailView: View {
             .padding()
         }
     }
+
     @ViewBuilder
-    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View {
+    func ProofOfWork(image: String, date _: String, metricSize: GeometryProxy) -> some View {
         VStack {
             Image(image)
                 .resizable()

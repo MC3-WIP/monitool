@@ -14,22 +14,22 @@ struct OnboardingDataModel {
 }
 
 extension OnboardingDataModel {
-	static var dataOnboarding: [OnboardingDataModel] = [
-		OnboardingDataModel(image: "MonitoolLogo", titleText: "Monitool", descText: "Level Up Your Business"),
-		OnboardingDataModel(
-			image: "Assignillustration",
-			titleText: "Assign",
-			descText: "Assign tasks to make sure your business keep running"
-		),
-		OnboardingDataModel(
-			image: "MonitorIllustration",
-			titleText: "Monitor",
-			descText: "Monitor your employee works result with ease"
-		),
-		OnboardingDataModel(
-			image: "ReviewIllustration",
-			titleText: "Review",
-			descText: "You can review and let your employee validates their peer works result on site"
-		)
-	]
+    static var dataOnboarding: [OnboardingDataModel] = [
+        OnboardingDataModel(image: "MonitoolLogo", titleText: "Monitool", descText: "Level Up Your Business"),
+        OnboardingDataModel(
+            image: "Assignillustration",
+            titleText: "Assign",
+            descText: "Assign tasks to make sure your business keep running"
+        ),
+        OnboardingDataModel(
+            image: "MonitorIllustration",
+            titleText: "Monitor",
+            descText: "Monitor your employee works result with ease"
+        ),
+        OnboardingDataModel(
+            image: "ReviewIllustration",
+            titleText: "Review",
+            descText: "You can review and let your employee validates their peer works result on site"
+        ),
+    ]
 }

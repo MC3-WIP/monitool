@@ -13,59 +13,58 @@ struct TaskListView: View {
     @State var taskRepeated = []
     @State var taskPhotoReference = []
     @State private var showingPopover = false
-	@StateObject var taskViewModel = TaskViewModel()
-	@Binding var filter: TaskStatus?
-	@ObservedObject var role: RoleService = .shared
+    @StateObject var taskViewModel = TaskViewModel()
+    @Binding var filter: TaskStatus?
+    @ObservedObject var role: RoleService = .shared
 
-	var filteredData: [Task] {
-		if let filter = filter {
-			return taskViewModel.tasks.filter { task in
-				task.status == filter
-			}
-		}
-		return taskViewModel.tasks
-	}
+    var filteredData: [Task] {
+        if let filter = filter {
+            return taskViewModel.tasks.filter { task in
+                task.status == filter
+            }
+        }
+        return taskViewModel.tasks
+    }
 
-	var body: some View {
-		List {
-			ForEach(filteredData) { task in
-				NavigationLink(
-					destination: taskViewModel.route(filter, task: task)) {
-					TaskListRow(task: task)
-				}
-			}
-			.onDelete(perform: taskViewModel.delete)
-		}
-		.navigationBarTitle(filter?.title ?? "Task List", displayMode: .inline)
-		.toolbar {
-			if role.isOwner {
-				Button("Add task") {
-					showingPopover = true
+    var body: some View {
+        List {
+            ForEach(filteredData) { task in
+                NavigationLink(
+                    destination: taskViewModel.route(filter, task: task)) {
+                        TaskListRow(task: task)
+                }
+            }
+            .onDelete(perform: taskViewModel.delete)
+        }
+        .navigationBarTitle(filter?.title ?? "Task List", displayMode: .inline)
+        .toolbar {
+            if role.isOwner {
+                Button("Add task") {
+                    showingPopover = true
                 }.popover(isPresented: $showingPopover) {
                     AddDataPopOver(sheetType: "Task", showingPopOver: $showingPopover).frame(width: 400, height: 400)
                 }
+            }
+        }
+    }
 
-			}
-		}
-	}
-
-	@ViewBuilder
-	func TaskListRow(task: Task) -> some View {
-		HStack {
-			VStack(alignment: .leading) {
-				Text(task.name)
-					.font(.headline)
-				Text(task.status.title)
-					.font(.subheadline)
-					.foregroundColor(.gray)
-			}
-		}
-		.padding(8)
-	}
+    @ViewBuilder
+    func TaskListRow(task: Task) -> some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text(task.name)
+                    .font(.headline)
+                Text(task.status.title)
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+            }
+        }
+        .padding(8)
+    }
 }
 
 struct TaskList_Previews: PreviewProvider {
-	static var previews: some View {
-		TaskListView(filter: .constant(.todayList ))
-	}
+    static var previews: some View {
+        TaskListView(filter: .constant(.todayList))
+    }
 }

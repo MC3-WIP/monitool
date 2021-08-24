@@ -23,6 +23,7 @@ struct IphoneProfileView: View {
             }
         }
     }
+
     var body: some View {
         VStack {
             List {
@@ -50,7 +51,7 @@ struct IphoneProfileView: View {
             }
             .listStyle(GroupedListStyle())
             .onAppear {
-                     UITableView.appearance().separatorColor = .clear
+                UITableView.appearance().separatorColor = .clear
             }
         }
         .padding()
@@ -80,6 +81,7 @@ extension IphoneProfileView {
         .background(AppColor.primaryForeground)
         .textCase(.none)
     }
+
     @ViewBuilder func CompanyInfoTextField(title: String, placeholder: String, text: Binding<String>) -> some View {
         GeometryReader { metrics in
             HStack {
@@ -96,13 +98,15 @@ extension IphoneProfileView {
         .padding(.top, 4)
         .padding(.bottom, 6)
     }
-    @ViewBuilder func CompanyInfoNameTextField (placeholder: String, text: Binding<String>) -> some View {
+
+    @ViewBuilder func CompanyInfoNameTextField(placeholder: String, text: Binding<String>) -> some View {
         HStack {
             TextField(placeholder, text: text)
         }
         .padding(.top, 4)
         .padding(.bottom, 6)
     }
+
     @ViewBuilder func ReviewPolicy() -> some View {
         VStack {
             HStack {
@@ -184,6 +188,7 @@ extension IphoneProfileView {
         .padding(.top, 28)
         .textCase(.none)
     }
+
     @ViewBuilder func EmployeeRow(employee: Employee) -> some View {
         HStack {
             Text(employee.name)

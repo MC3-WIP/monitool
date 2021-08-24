@@ -12,7 +12,7 @@ struct OnboardingViewPure: View {
     var data: [OnboardingDataModel]
     var doneFunction: () -> Void
 
-    @State var slideGesture: CGSize = CGSize.zero
+    @State var slideGesture = CGSize.zero
     @State var curSlideIndex = 0
     @State var index: Int = 0
 
@@ -22,10 +22,10 @@ struct OnboardingViewPure: View {
         ZStack {
             Color(.systemBackground).edgesIgnoringSafeArea(.all)
 
-            GeometryReader {proxy in
+            GeometryReader { proxy in
                 VStack(spacing: 30) {
                     ZStack(alignment: .center) {
-                        ForEach(0..<data.count) { i in
+                        ForEach(0 ..< data.count) { i in
                             if i == 0 {
                                 OnboardingFirstPage(data: self.data[i])
                                     .frame(height: proxy.size.height * 0.7, alignment: .center)
@@ -40,7 +40,6 @@ struct OnboardingViewPure: View {
                                     .animation(.spring())
                             }
                         }
-
                     }
                     self.progressView()
                     SignIn()
@@ -52,9 +51,8 @@ struct OnboardingViewPure: View {
                 .onEnded { value in
                     if abs(value.translation.height) < abs(value.translation.width) {
                         if abs(value.translation.width) > 50 {
-                            if value .translation.width > 0 {
+                            if value.translation.width > 0 {
                                 if curSlideIndex == 0 {
-
                                 } else {
                                     withAnimation { self.curSlideIndex -= 1
                                     }
@@ -62,9 +60,8 @@ struct OnboardingViewPure: View {
                             }
                             if value.translation.width < 0 {
                                 if curSlideIndex == data.count - 1 {
-
                                 } else {
-                                    withAnimation {     self.curSlideIndex += 1
+                                    withAnimation { self.curSlideIndex += 1
                                     }
                                 }
                             }
@@ -79,7 +76,7 @@ struct OnboardingViewPure: View {
 
     func progressView() -> some View {
         HStack {
-            ForEach(0..<data.count) { i in
+            ForEach(0 ..< data.count) { i in
                 Circle()
                     .scaledToFit()
                     .frame(width: 10)
@@ -87,7 +84,6 @@ struct OnboardingViewPure: View {
             }
         }
     }
-
 }
 
 struct OnboardingViewPure_Previews: PreviewProvider {

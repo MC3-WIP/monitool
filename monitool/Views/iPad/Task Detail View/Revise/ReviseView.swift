@@ -13,7 +13,7 @@ struct ReviseView: View {
     @ObservedObject var taskViewModel = TaskViewModel()
     @Environment(\.presentationMode) var presentationMode
 
-    init (task: Task) {
+    init(task: Task) {
         _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
         _reviseViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
     }
@@ -42,8 +42,9 @@ struct ReviseView: View {
             .padding()
         }
     }
+
     @ViewBuilder
-    func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View {
+    func ProofOfWork(image: String, date _: String, metricSize: GeometryProxy) -> some View {
         VStack {
             Image(image)
                 .resizable()

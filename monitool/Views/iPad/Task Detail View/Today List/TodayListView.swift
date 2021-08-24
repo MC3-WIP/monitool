@@ -26,13 +26,28 @@ struct TodayListView: View {
                 }
                 .padding(.top)
             }
+            if !role.isOwner {
+                HStack(spacing: 24) {
+                    Spacer()
+                        .frame(minWidth: 0, maxWidth: .infinity)
+                    Button("Submit") {
+                        todayListViewModel.submitTask(
+                            pic: employeeRepository.employees[todayListViewModel.picSelection],
+                            notes: todayListViewModel.notesText
+                        )
+                        presentationMode.wrappedValue.dismiss()
+                    }.buttonStyle(PrimaryButtonStyle())
+                }
+                .padding(.top)
+            }
         }
-        .padding([.leading, .trailing], 24)
+        .padding([.leading, .trailing, .bottom], 24)
         .navigationTitle("Today List")
     }
 }
 
 // MARK: - Previews
+
 struct TodayListView_Previews: PreviewProvider {
     static var previews: some View {
         TodayListView(task: Task(name: "Hehe", repeated: []))

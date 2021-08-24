@@ -5,19 +5,19 @@
 //  Created by Devin Winardi on 20/08/21.
 //
 
-import SwiftUI
 import SDWebImageSwiftUI
+import SwiftUI
 
 struct HistoryDetail: View {
     @StateObject var taskDetailViewModel: TaskDetailViewModel
-    
-    init(history: Task){
+
+    init(history: Task) {
         _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: history))
     }
-    
-    var body: some View{
-        ScrollView{
-            VStack(alignment: .leading){
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading) {
                 descComponent()
                 Spacer()
                 statusComponent()
@@ -30,28 +30,27 @@ struct HistoryDetail: View {
             .navigationTitle(taskDetailViewModel.task.name)
         }
     }
-    
-    @ViewBuilder func descComponent() -> some View{
-        if taskDetailViewModel.task.desc == ""{
+
+    @ViewBuilder func descComponent() -> some View {
+        if taskDetailViewModel.task.desc == "" {
             Text("No description").foregroundColor(.gray)
-        }
-        else if let desc = taskDetailViewModel.task.desc {
+        } else if let desc = taskDetailViewModel.task.desc {
             Text(desc)
         }
     }
-    
-    @ViewBuilder func statusComponent() -> some View{
+
+    @ViewBuilder func statusComponent() -> some View {
         Text("Status")
             .font(.title2)
             .fontWeight(.bold)
         Text(taskDetailViewModel.task.status.rawValue)
-            .padding(.vertical,10)
-            .padding(.horizontal,15)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 15)
             .background(Color("LightTosca"))
             .cornerRadius(40)
     }
-    
-    @ViewBuilder func proofOfWorkComponent() -> some View{
+
+    @ViewBuilder func proofOfWorkComponent() -> some View {
         Text("Proof of Work")
             .font(.title2)
             .fontWeight(.bold)
@@ -65,48 +64,48 @@ struct HistoryDetail: View {
                 .frame(width: 100, height: 100, alignment: .leading)
         }
     }
-    
-    @ViewBuilder func PICComponent() -> some View{
+
+    @ViewBuilder func PICComponent() -> some View {
         Text("PIC")
             .font(.title2)
             .fontWeight(.bold)
-        HStack{
+        HStack {
             Text(taskDetailViewModel.pic?.name ?? "-")
                 .padding(.horizontal)
             Spacer()
         }
-        .padding(.horizontal,5)
-        .padding(.vertical,10)
+        .padding(.horizontal, 5)
+        .padding(.vertical, 10)
         .background(AppColor.accent.brightness(0.65))
     }
-    
-    @ViewBuilder func notesComponent() -> some View{
+
+    @ViewBuilder func notesComponent() -> some View {
         Text("Notes")
             .font(.title2)
             .fontWeight(.bold)
-        HStack{
+        HStack {
             Text(taskDetailViewModel.task.notes ?? "-")
                 .padding(.horizontal)
             Spacer()
         }
-        .frame(minHeight:100, alignment: .topLeading)
-        .padding(.horizontal,5)
-        .padding(.vertical,15)
+        .frame(minHeight: 100, alignment: .topLeading)
+        .padding(.horizontal, 5)
+        .padding(.vertical, 15)
         .background(AppColor.accent.brightness(0.65))
     }
-    
-    @ViewBuilder func commentComponent() -> some View{
+
+    @ViewBuilder func commentComponent() -> some View {
         Text("Comment")
             .font(.title2)
             .fontWeight(.bold)
-        HStack{
+        HStack {
             Text(taskDetailViewModel.task.comment ?? "-")
                 .padding(.horizontal)
             Spacer()
         }
-        .frame(minHeight:100, alignment: .topLeading)
-        .padding(.horizontal,5)
-        .padding(.vertical,15)
+        .frame(minHeight: 100, alignment: .topLeading)
+        .padding(.horizontal, 5)
+        .padding(.vertical, 15)
         .background(AppColor.accent.brightness(0.65))
     }
 }
