@@ -28,11 +28,9 @@ extension TodayListView {
             }
             if let desc = todayListViewModel.task.desc {
                 Text(desc)
-                    .fixedSize(horizontal: false, vertical: true)
                     .font(.system(size: 17))
-                    .multilineTextAlignment(.leading)
             }
-        }
+        }.frame(minWidth: 0, maxWidth: .infinity)
     }
 
     @ViewBuilder func RightColumn() -> some View {
@@ -65,7 +63,7 @@ extension TodayListView {
                     presentationMode.wrappedValue.dismiss()
                 }.buttonStyle(PrimaryButtonStyle())
             }
-        }
+        }.frame(minWidth: 0, maxWidth: .infinity)
     }
 
     @ViewBuilder func EmployeePicker() -> some View {
