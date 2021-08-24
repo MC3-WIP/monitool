@@ -80,7 +80,7 @@ struct TasksRowView: View {
         if isExpanded {
             if tasks.count != 0 {
                 ForEach(tasks) { task in
-                    NavigationLink(destination: IphoneEmployeeReview(task: task)) {
+                    NavigationLink(destination: IphoneTodayListView(task: task)) {
                         Text(task.name)
                     }
                 }
