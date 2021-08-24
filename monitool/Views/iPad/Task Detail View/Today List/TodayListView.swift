@@ -18,7 +18,7 @@ struct TodayListView: View {
     }
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             ScrollView {
                 HStack(alignment: .top, spacing: 24) {
                     LeftColumn()
@@ -26,22 +26,8 @@ struct TodayListView: View {
                 }
                 .padding(.top)
             }
-            if !role.isOwner {
-                HStack(spacing: 24) {
-                    Spacer()
-                        .frame(minWidth: 0, maxWidth: .infinity)
-                    Button("Submit") {
-                        todayListViewModel.submitTask(
-                            pic: employeeRepository.employees[todayListViewModel.picSelection],
-                            notes: todayListViewModel.notesText
-                        )
-                        presentationMode.wrappedValue.dismiss()
-                    }.buttonStyle(PrimaryButtonStyle())
-                }
-                .padding(.top)
-            }
         }
-        .padding([.leading, .trailing, .bottom], 24)
+        .padding([.leading, .trailing], 24)
         .navigationTitle("Today List")
     }
 }
