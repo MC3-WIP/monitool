@@ -5,60 +5,56 @@
 //  Created by Mac-albert on 28/07/21.
 //
 
-import FirebaseFirestore
 import Combine
 import FirebaseAuth
+import FirebaseFirestore
 
 final class CompanyRepository: ObservableObject {
-	@Published var companies = [Company]()
-	private let paths = RepositoriesPath()
-	private let store = Firestore.firestore()
-	var companyRef: DocumentReference?
+    @Published var companies = [Company]()
+    private let paths = RepositoriesPath()
+    private let store = Firestore.firestore()
+    var companyRef: DocumentReference?
 
-	static let shared = CompanyRepository()
+    static let shared = CompanyRepository()
 
-	private init() {
-		if let user = Auth.auth().currentUser {
+    private init() {
+        if let user = Auth.auth().currentUser {
             companyRef = store.collection(paths.company).document(user.uid)
-		}
-	}
+        }
+    }
 
-	func add(_ company: Company) {
-		companyRef?.setData([
-			"name": company.name,
-			"minReview": company.minReview,
-			"profileImage": "profile",
-			"ownerPin": company.ownerPin
-		])
-	}
+    func add(_ company: Company) {
+        companyRef?.setData([
+            "name": company.name,
+            "minReview": company.minReview,
+            "profileImage": "profile",
+            "ownerPin": company.ownerPin
+        ])
+    }
 
-	func addImage(imageURL: String) {
-		companyRef?.updateData(["profileImage": imageURL])
-	}
+    func addImage(imageURL: String) {
+        companyRef?.updateData(["profileImage": imageURL])
+    }
 
-	func delete(_ company: Company) {
-		store.collection(paths.company).document(company.id).delete()
-	}
+    func delete(_ company: Company) {
+        store.collection(paths.company).document(company.id).delete()
+    }
 
-	func editCompanyName(name: String) {
-		companyRef?.updateData(["name": name])
-	}
+    func editCompanyName(name: String) {
+        companyRef?.updateData(["name": name])
+    }
 
-	func editCompanyMinReview(minReview: Int) {
-		companyRef?.updateData(["minReview": minReview])
-	}
-    
+    func editCompanyMinReview(minReview: Int) {
+        companyRef?.updateData(["minReview": minReview])
+    }
+
     func editCompanyPIN(ownerPIN: String) {
         companyRef?.updateData(["ownerPin": ownerPIN])
     }
 
-	// MARK: EDIT PHOTO BELOM
+    // MARK: EDIT PHOTO BELOM
 
-	func approveTask(status: String) {
+    func approveTask(status _: String) {}
 
-	}
-
-	func rejectTask(status: String) {
-
-	}
+    func rejectTask(status _: String) {}
 }

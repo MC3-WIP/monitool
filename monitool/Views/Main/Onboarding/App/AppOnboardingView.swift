@@ -21,6 +21,7 @@ struct AppOnboardingView: View {
             print("done")
         })
     }
+
     @ViewBuilder
     func DetailOnboarding(image: String, titleText: String, descText: String, proxy: GeometryProxy) -> some View {
         VStack(alignment: .center) {
@@ -35,7 +36,6 @@ struct AppOnboardingView: View {
                 .font(.system(size: 20))
                 .multilineTextAlignment(.center)
         }
-
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HistoryView: View {
-    @ObservedObject private var taskViewModel = TaskViewModel()
+    @StateObject private var taskViewModel = TaskViewModel()
     private let dateHelper = DateHelper()
 
     init() {
@@ -17,7 +17,7 @@ struct HistoryView: View {
 
     var body: some View {
         List {
-            ForEach(0..<6) { index in
+            ForEach(0 ..< 6) { index in
                 if taskViewModel.historiesPerDay[index].count == 0 {
                     EmptyView()
                 } else {
@@ -26,11 +26,10 @@ struct HistoryView: View {
                 }
             }
         }
-		.navigationBarTitle("History", displayMode: .inline)
+        .navigationBarTitle("History", displayMode: .inline)
         .listStyle(InsetGroupedListStyle())
         .background(Color.white)
     }
-
 }
 
 struct HistoriesSection: View {
@@ -42,31 +41,29 @@ struct HistoriesSection: View {
     init(histories: [Task]) {
         self.histories = histories
         if dateHelper.getNumDays(first: histories[0].createdAt, second: Date()) == 0 {
-            self.day = "Today"
+            day = "Today"
         } else {
-            self.day = dateHelper.getStringFromDate(date: histories[0].createdAt)
+            day = dateHelper.getStringFromDate(date: histories[0].createdAt)
         }
     }
 
     var body: some View {
         Section(header: Text(day).font(.title).foregroundColor(.black).fontWeight(.bold)) {
             ForEach(histories, id: \.id) { history in
-                if device == .pad{
+                if device == .pad {
                     NavigationLink(destination: HistoryTaskDetailView(task: history)) {
                         HistoryRow(task: history)
                     }
                     .listRowBackground(Color("LightTosca"))
-                }
-                else if device == .phone {
-                    NavigationLink(destination: IphoneTodayListView(task: history)) {
+                } else if device == .phone {
+                    NavigationLink(destination: HistoryDetail(history: history)) {
                         HistoryRow(task: history)
-                    }
-                    .listRowBackground(Color("LightTosca"))
+                    }.listRowBackground(Color("LightTosca"))
                 }
             }
         }
         .listStyle(PlainListStyle())
-		.navigationTitle("History")
+        .navigationTitle("History")
     }
 }
 

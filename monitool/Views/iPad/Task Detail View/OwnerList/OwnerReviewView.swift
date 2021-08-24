@@ -15,7 +15,7 @@ struct OwnerReviewView: View {
     @ObservedObject var taskViewModel = TaskViewModel()
     @Environment(\.presentationMode) var presentationMode
 
-    init (task: Task) {
+    init(task: Task) {
         _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
         _OwnerViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
     }
@@ -39,13 +39,16 @@ struct OwnerReviewView: View {
             }
 
             HStack(spacing: 24) {
-                reviseButton()
-                approveButton()
+                if role.isOwner {
+                    reviseButton()
+                    approveButton()
+                }
             }
             .padding()
         }
     }
 }
+
 struct OwnerReviewView_Preview: PreviewProvider {
     static var previews: some View {
         OwnerReviewView(task: Task(name: "OwnerReview", repeated: []))

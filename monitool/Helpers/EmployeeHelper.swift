@@ -6,10 +6,10 @@
 //
 
 extension Employee {
-	struct Helper {
-		static func generatePIN() -> String {
-			let pin = Int.random(in: 0..<10000)
-			return String(pin).padding(toLength: 4, withPad: "0", startingAt: 0)
-		}
-	}
+    enum Helper {
+        static func generatePIN() -> String {
+            let pin = Int.random(in: 0 ..< 10000)
+            return String(pin).padding(toLength: 4, withPad: "0", startingAt: 0)
+        }
+    }
 }

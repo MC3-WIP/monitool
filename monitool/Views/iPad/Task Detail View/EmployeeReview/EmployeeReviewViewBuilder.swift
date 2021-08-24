@@ -6,65 +6,74 @@
 //
 
 import Foundation
-import SwiftUI
 import SDWebImageSwiftUI
+import SwiftUI
 
 extension EmployeeReviewView {
     @ViewBuilder func LeftColumn() -> some View {
-        GeometryReader { metric in
-            VStack {
-                Text(employeeReviewViewModel.task.name)
-                    .font(.system(size: 28, weight: .bold))
-                    .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-                if let image = employeeReviewViewModel.task.photoReference {
-                    WebImage(url: URL(string: image))
-                        .resizable()
-                        .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
-                } else {
-                    Image("MonitoolEmptyReferenceIllus")
-                        .resizable()
-                        .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
-                }
-                if let desc = employeeReviewViewModel.task.desc {
-                    Text(desc)
-                        .frame(width: metric.size.width * 0.8, alignment: .topLeading)
-                        .font(.system(size: 17))
-                        .multilineTextAlignment(.leading)
-                }
+        // About Task
+        VStack(alignment: .leading) {
+            // Task Title
+            Text(viewModel.title)
+                .font(.largeTitle)
+                .bold()
+
+            // Reference Image
+            if let image = viewModel.photoReference {
+                WebImage(url: URL(string: image))
+                    .resizable()
+                    .placeholder(Image("MonitoolEmptyReferenceIllus"))
+                    .indicator { _, _ in
+                        ProgressView()
+                    }
+                    .transition(.fade)
+                    .aspectRatio(1, contentMode: .fill)
+            } else {
+                Image("MonitoolEmptyReferenceIllus")
+                    .resizable()
+                    .scaledToFill()
             }
-            .padding()
+
+            // Task Desc
+            Text(viewModel.desc)
         }
     }
+
     @ViewBuilder func RightColumn() -> some View {
         GeometryReader { matric in
-            VStack {
-                Text("Proof of Work")
-                    .padding(.bottom, 8)
-                    .font(.system(size: 20, weight: .bold))
-                    .frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
-                    .foregroundColor(Color(hex: "898989"))
+            VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading) {
+                    Text("Proof of Work")
+                        .font(.title3)
+                        .bold()
+                        .foregroundColor(.gray)
 
-                proofOfWorkComponent(matric: matric, proofPage: proofPage, totalPage: totalPage, datePhoto: datePhoto)
+                    proofOfWorkComponent(matric: matric, proofPage: proofPage, totalPage: totalPage, datePhoto: datePhoto)
+                }
 
-                VStack(spacing: 4) {
+                // Detail
+                VStack(alignment: .leading) {
+                    // PIC
                     HStack {
                         Text("PIC: ")
-                            .foregroundColor(Color(hex: "6C6C6C"))
-                            .fontWeight(.bold)
-                        Text(employeeReviewViewModel.pic?.name ?? "-")
+                            .foregroundColor(.gray)
+                            .bold()
+                        Text(viewModel.picName)
                     }
-                    .frame(width: matric.size.width * 0.9, alignment: .leading)
+
+                    // Notes
                     HStack {
                         Text("Notes: ")
-                            .foregroundColor(Color(hex: "6C6C6C"))
-                            .fontWeight(.bold)
-                        Text(employeeReviewViewModel.task.notes ?? "-")
+                            .foregroundColor(.gray)
+                            .bold()
+                        Text(viewModel.notes)
                     }
-                    .frame(width: matric.size.width * 0.9, alignment: .leading)
-                }
-                .font(.system(size: 17))
-                .padding(.vertical, 15)
 
+                    // Review Status
+                    if let company = viewModel.company {
+                        ReviewerStatus(currentReviewer: viewModel.reviewer.count, minReviewer: company.minReview)
+                    }
+                }
             }
             .padding()
         }
@@ -76,54 +85,52 @@ extension EmployeeReviewView {
                 switch proofPage {
                 case 0:
                     ProofOfWork(
-						image: "DefaultRefference",
-						date: "21 Jul 2021 at 15:57",
-						metricSize: matric,
-						datePhoto: datePhoto
-					)
+                        image: "DefaultRefference",
+                        date: "21 Jul 2021 at 15:57",
+                        metricSize: matric,
+                        datePhoto: datePhoto
+                    )
                 case 1:
                     ProofOfWork(
-						image: "DefaultRefference",
-						date: "21 Jul 2021 at 15:57",
-						metricSize: matric,
-						datePhoto: datePhoto
-					)
+                        image: "DefaultRefference",
+                        date: "21 Jul 2021 at 15:57",
+                        metricSize: matric,
+                        datePhoto: datePhoto
+                    )
                 case 2:
                     ProofOfWork(
-						image: "DefaultRefference",
-						date: "21 Jul 2021 at 15:57",
-						metricSize: matric,
-						datePhoto: datePhoto
-					)
+                        image: "DefaultRefference",
+                        date: "21 Jul 2021 at 15:57",
+                        metricSize: matric,
+                        datePhoto: datePhoto
+                    )
                 default:
                     Image("MonitoolAddPhotoIllustration")
                 }
             }
-            .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
-                                    .onEnded { value in
-                                        if abs(value.translation.height) < abs(value.translation.width) {
-                                            if abs(value.translation.width) > 50.0 {
-                                                if value.translation.width > 0 {
-                                                    if proofPage == 0 {
-
-                                                    } else {
-                                                        self.proofPage -= 1
-                                                    }
-                                                } else if value.translation.width < 0 {
-                                                    if proofPage == totalPage - 1 {
-
-                                                    } else {
-                                                        self.proofPage += 1
-                                                    }
-                                                }
-                                            }
-                                        }
+            .highPriorityGesture(
+                DragGesture(minimumDistance: 25, coordinateSpace: .local)
+                    .onEnded { value in
+                        if abs(value.translation.height) < abs(value.translation.width) {
+                            if abs(value.translation.width) > 50.0 {
+                                if value.translation.width > 0 {
+                                    if proofPage == 0 {
+                                    } else {
+                                        self.proofPage -= 1
                                     }
+                                } else if value.translation.width < 0 {
+                                    if proofPage == totalPage - 1 {
+                                    } else {
+                                        self.proofPage += 1
+                                    }
+                                }
+                            }
+                        }
+                    }
             )
             PageControl(totalPage: totalPage, current: proofPage)
         }
-        .frame(width: matric.size.width * 0.75)
-        .padding(.top, 10)
+        .padding(.vertical)
         .background(Color(hex: "F0F9F8"))
         .overlay(
             RoundedRectangle(cornerRadius: 5)
@@ -131,7 +138,7 @@ extension EmployeeReviewView {
         )
     }
 
-    @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
+    @ViewBuilder func ProofOfWork(image _: String, date _: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
         VStack {
             Image("MonitoolAddPhotoIllustration")
                 .resizable()
@@ -146,8 +153,7 @@ extension EmployeeReviewView {
         Button {
             showingPinField = true
             isApproving = true
-
-		} label: {
+        } label: {
             HStack {
                 Image(systemName: "checkmark")
                 Text("Approve")
@@ -163,11 +169,11 @@ extension EmployeeReviewView {
         }
     }
 
-	@ViewBuilder func dissaprroveButton() -> some View {
+    @ViewBuilder func dissaprroveButton() -> some View {
         Button {
-			showingPinField = true
+            showingPinField = true
             isApproving = false
-		} label: {
+        } label: {
             HStack {
                 Image(systemName: "xmark")
                 Text("Revise")
@@ -179,7 +185,7 @@ extension EmployeeReviewView {
             .background(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(Color(hex: "#4FB0AB"), lineWidth: 2)
-                            )
+            )
         }
     }
 }
