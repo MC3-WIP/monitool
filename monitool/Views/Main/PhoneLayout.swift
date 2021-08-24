@@ -14,8 +14,8 @@ struct PhoneLayout: View {
 
     @State var selectedTab: PhoneTabItem
 
-    init(selectedTab: PhoneTabItem = .todoList) {
-        self.selectedTab = selectedTab
+    init(selectedTab: PhoneTabItem = .taskList) {
+        _selectedTab = State(wrappedValue: selectedTab)
     }
 
     var body: some View {
@@ -26,8 +26,7 @@ struct PhoneLayout: View {
                 .tag(PhoneTabItem.taskList)
             ProfileTabItem()
                 .tag(PhoneTabItem.profile)
-        }
-        .accentColor(AppColor.accent)
+        }.accentColor(AppColor.accent)
     }
 }
 

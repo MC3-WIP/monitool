@@ -16,12 +16,8 @@ struct CompanyOnboardingView: View {
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
     @ObservedObject var companyViewModel = CompanyViewModel()
     @ObservedObject var storageService = StorageService()
-    @ObservedObject var userAuth: AuthService
+    @ObservedObject var userAuth: AuthService = .shared
     @ObservedObject var ownerPin = TextBindingHelper(limit: 4)
-
-    init() {
-        userAuth = .shared
-    }
 
     var body: some View {
         NavigationView {
@@ -59,41 +55,22 @@ struct CompanyOnboardingView: View {
                                 })
                             }
                     }
-                    Section(header: HStack {
-                        Text("Employee")
-                            .font(.title2.weight(.semibold))
-                            .foregroundColor(.black)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        Spacer()
-                        Button("Add Employee") {
-                            showingSheet = true
+                    Section(
+                        header: HStack {
+                            Text("Employee")
+                                .font(.title2.weight(.semibold))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Spacer()
+                            Button("Add Employee") {
+                                showingSheet = true
+                            }
+                            .popover(isPresented: $showingSheet) {
+                                AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
+                                    .frame(width: 400, height: 400)
+                            }
                         }
-                        .popover(isPresented: $showingSheet) {
-                            AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
-                                .frame(width: 400, height: 400)
-                        }
-                    }, footer: HStack {
-                        Spacer()
-                        Button("Save", action: {
-                            self.isLinkActive = true
-                            let company = Company(
-                                name: companyName,
-                                minReview: minReviewers,
-                                ownerPin: ownerPin.text,
-                                hasLoggedIn: true,
-                                profileImage: ""
-                            )
-                            companyViewModel.create(company)
-                            storageService.updateImageURL(category: "profile")
-                            userAuth.hasLogin()
-                        })
-                            .padding()
-                            .background(AppColor.accent)
-                            .foregroundColor(AppColor.primaryForeground)
-                            .clipShape(Rectangle())
-                            .cornerRadius(10)
-                        Spacer()
-                    }) {
+                    ) {
                         HStack {
                             Text("Name").foregroundColor(.gray)
                             Spacer()
@@ -110,11 +87,32 @@ struct CompanyOnboardingView: View {
                     }.textCase(nil)
 
                 }.listStyle(GroupedListStyle())
-            }.navigationTitle("Profile").navigationBarTitleDisplayMode(.inline)
+                HStack {
+                    Button {
+                        self.isLinkActive = true
+                        let company = Company(
+                            name: companyName,
+                            minReview: minReviewers,
+                            ownerPin: ownerPin.text,
+                            hasLoggedIn: true,
+                            profileImage: ""
+                        )
+                        companyViewModel.create(company)
+                        storageService.updateImageURL(category: "profile")
+                        userAuth.hasLogin()
+                    } label: {
+                        Text("Save")
+                            .padding()
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .background(AppColor.accent)
+                            .foregroundColor(AppColor.primaryForeground)
+                            .contentShape(Rectangle())
+                            .cornerRadius(8)
+                    }
+                }.padding()
+            }.navigationBarTitle("Profile", displayMode: .inline)
         }.navigationViewStyle(StackNavigationViewStyle())
     }
-
-    func saveCompanyData(company _: Company) {}
 }
 
 struct CompanyOnboarding_Previews: PreviewProvider {
