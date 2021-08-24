@@ -18,9 +18,8 @@ struct HistoryView: View {
     var body: some View {
         List {
             ForEach(0..<6) { index in
-                if taskViewModel.historiesPerDay[index].count == 0 {
-                    EmptyView()
-                } else {
+                if taskViewModel.historiesPerDay[index].count > 0 {
+                    Text("\(index), \(taskViewModel.historiesPerDay[index].count)")
                     HistoriesSection(histories: taskViewModel.historiesPerDay[index])
                         .padding(.vertical, 5)
                 }
@@ -28,7 +27,6 @@ struct HistoryView: View {
         }
 		.navigationBarTitle("History", displayMode: .inline)
         .listStyle(InsetGroupedListStyle())
-        .background(Color.white)
     }
 
 }
@@ -37,7 +35,7 @@ struct HistoriesSection: View {
     private var device = UIDevice.current.userInterfaceIdiom
     var dateHelper = DateHelper()
     var histories: [Task]
-    var day: String
+    var day: String = "Today"
 
     init(histories: [Task]) {
         self.histories = histories
@@ -56,8 +54,7 @@ struct HistoriesSection: View {
                         HistoryRow(task: history)
                     }
                     .listRowBackground(Color("LightTosca"))
-                }
-                else if device == .phone {
+                } else if device == .phone {
                     NavigationLink(destination: HistoryDetail(history: history)) {
                         HistoryRow(task: history)
                     }.listRowBackground(Color("LightTosca"))

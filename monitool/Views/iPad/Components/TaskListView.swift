@@ -11,7 +11,6 @@ struct TaskListView: View {
     @State var taskName = ""
     @State var taskDesc = ""
     @State var taskRepeated = []
-    @State var taskPhotoReference = []
     @State private var showingPopover = false
 	@StateObject var taskViewModel = TaskViewModel()
 	@Binding var filter: TaskStatus?

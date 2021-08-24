@@ -17,7 +17,6 @@ struct AddDataPopOver: View {
     @State var taskName = ""
     @State var taskDesc = ""
 	@State var taskRepeated = Task.defaultRepetition
-    @State var taskPhotoReference: String?
     @State var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     @ObservedObject var employeeViewModel = EmployeeListViewModel()
     @ObservedObject var taskViewModel = TaskViewModel()
@@ -135,14 +134,12 @@ struct AddDataPopOver: View {
                         let task = Task(
 							name: taskName,
 							description: taskDesc,
-							photoReference: taskPhotoReference,
 							repeated: taskRepeated
 						)
 						let taskList = TaskList(
 							name: taskName,
 							desc: taskDesc,
-							repeated: taskRepeated,
-							photoReference: taskPhotoReference
+							repeated: taskRepeated
 						)
                         if let image = image {
                             taskViewModel.add(task, taskList, photo: image, id: UUID().uuidString)

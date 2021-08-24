@@ -23,10 +23,12 @@ class TaskViewModel: ObservableObject {
         repository.$histories
             .assign(to: \.histories, on: self)
             .store(in: &cancellables)
-        separateHistories()
+        $histories.sink { histories in
+            self.separateHistories(histories: histories)
+        }.store(in: &cancellables)
     }
 
-    func separateHistories() {
+    func separateHistories(histories: [Task]) {
         let dateHelper = DateHelper()
         for index in 0...6 {
             let historyOfDay = histories.filter { history in

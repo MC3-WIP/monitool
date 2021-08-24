@@ -152,6 +152,10 @@ final class TaskRepository: ObservableObject {
                     .collection(path.task)
                     .document(taskID)
                     .setData(["photoReference": url.absoluteString], merge: true, completion: completion)
+                store
+                    .collection(path.taskList)
+                    .document(taskID)
+                    .setData(["photoReference": url.absoluteString], merge: true, completion: completion)
             }
         }
     }
