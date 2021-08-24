@@ -5,10 +5,11 @@
 //  Created by Christianto Budisaputra on 07/08/21.
 //
 
-import SwiftUI
 import SDWebImageSwiftUI
+import SwiftUI
 
 // MARK: - View Builders
+
 extension TodayListView {
     @ViewBuilder func LeftColumn() -> some View {
         VStack(alignment: .leading) {
@@ -117,7 +118,7 @@ extension TodayListView {
             .modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
         }
     }
-    
+
     @ViewBuilder func NotesTextField() -> some View {
         VStack(alignment: .leading) {
             Text("Notes")

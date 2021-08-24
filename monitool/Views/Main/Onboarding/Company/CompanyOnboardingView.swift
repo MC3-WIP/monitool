@@ -5,8 +5,8 @@
 //  Created by Naufaldi Athallah Rifqi on 28/07/21.
 //
 
-import SwiftUI
 import FirebaseAuth
+import SwiftUI
 
 struct CompanyOnboardingView: View {
     @State var minReviewers = 0
@@ -20,7 +20,7 @@ struct CompanyOnboardingView: View {
     @ObservedObject var ownerPin = TextBindingHelper(limit: 4)
 
     init() {
-        self.userAuth = .shared
+        userAuth = .shared
     }
 
     var body: some View {
@@ -28,73 +28,72 @@ struct CompanyOnboardingView: View {
             VStack {
                 List {
                     Section(header: Color.clear
-                                .frame(width: 0, height: 0)
-                                .accessibilityHidden(true)) {
-                        HStack {
-                            Spacer()
-                            PhotoComponent(imageURL: "", editMode: .constant(.active))
-                            Spacer()
-                        }
-                        HStack {
-                            Text("Company Name")
-                            TextField("Company Name", text: $companyName).multilineTextAlignment(.trailing)
-                        }
-                        HStack {
-                            Text("Owner Pin")
-                            TextField("Owner Pin", text: $ownerPin.text)
-								.multilineTextAlignment(.trailing)
-								.keyboardType(.numberPad)
-                        }
-                        HStack {
-                            Text("Task Reviewer: ")
-                            Spacer()
-                            Stepper("\(minReviewers) Reviewer(s)", onIncrement: {
-                                if minReviewers < employeeViewModel.employees.count {
-                                    minReviewers += 1
-                                }
-                            }, onDecrement: {
-                                if minReviewers > 0 {
-                                    minReviewers -= 1
-                                }
-                            })
-                        }
+                        .frame(width: 0, height: 0)
+                        .accessibilityHidden(true)) {
+                            HStack {
+                                Spacer()
+                                PhotoComponent(imageURL: "", editMode: .constant(.active))
+                                Spacer()
+                            }
+                            HStack {
+                                Text("Company Name")
+                                TextField("Company Name", text: $companyName).multilineTextAlignment(.trailing)
+                            }
+                            HStack {
+                                Text("Owner Pin")
+                                TextField("Owner Pin", text: $ownerPin.text)
+                                    .multilineTextAlignment(.trailing)
+                                    .keyboardType(.numberPad)
+                            }
+                            HStack {
+                                Text("Task Reviewer: ")
+                                Spacer()
+                                Stepper("\(minReviewers) Reviewer(s)", onIncrement: {
+                                    if minReviewers < employeeViewModel.employees.count {
+                                        minReviewers += 1
+                                    }
+                                }, onDecrement: {
+                                    if minReviewers > 0 {
+                                        minReviewers -= 1
+                                    }
+                                })
+                            }
                     }
                     Section(header: HStack {
                         Text("Employee")
-							.font(.title2.weight(.semibold))
-							.foregroundColor(.black)
-							.frame(maxWidth: .infinity, alignment: .leading)
+                            .font(.title2.weight(.semibold))
+                            .foregroundColor(.black)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         Spacer()
                         Button("Add Employee") {
                             showingSheet = true
                         }
                         .popover(isPresented: $showingSheet) {
                             AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
-								.frame(width: 400, height: 400)
+                                .frame(width: 400, height: 400)
                         }
                     }, footer: HStack {
                         Spacer()
                         Button("Save", action: {
                             self.isLinkActive = true
                             let company = Company(
-								name: companyName,
-								minReview: minReviewers,
-								ownerPin: ownerPin.text,
-								hasLoggedIn: true,
-								profileImage: ""
-							)
+                                name: companyName,
+                                minReview: minReviewers,
+                                ownerPin: ownerPin.text,
+                                hasLoggedIn: true,
+                                profileImage: ""
+                            )
                             companyViewModel.create(company)
                             storageService.updateImageURL(category: "profile")
                             userAuth.hasLogin()
                         })
-                        .padding()
-						.background(AppColor.accent)
-						.foregroundColor(AppColor.primaryForeground)
-                        .clipShape(Rectangle())
-                        .cornerRadius(10)
+                            .padding()
+                            .background(AppColor.accent)
+                            .foregroundColor(AppColor.primaryForeground)
+                            .clipShape(Rectangle())
+                            .cornerRadius(10)
                         Spacer()
-                    }
-                    ) {
+                    }) {
                         HStack {
                             Text("Name").foregroundColor(.gray)
                             Spacer()
@@ -115,9 +114,7 @@ struct CompanyOnboardingView: View {
         }.navigationViewStyle(StackNavigationViewStyle())
     }
 
-    func saveCompanyData(company: Company) {
-
-    }
+    func saveCompanyData(company _: Company) {}
 }
 
 struct CompanyOnboarding_Previews: PreviewProvider {

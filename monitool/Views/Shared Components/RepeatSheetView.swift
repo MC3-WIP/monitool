@@ -10,18 +10,18 @@ import SwiftUI
 struct RepeatSheetView: View {
     @State var days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
-	@Binding var repeated: [Bool]
+    @Binding var repeated: [Bool]
     @Binding var isPresented: Bool
 
     var body: some View {
         NavigationView {
             VStack {
-                List(0..<7) { index in
+                List(0 ..< 7) { index in
                     Button {
-						repeated[index].toggle()
-					} label: {
+                        repeated[index].toggle()
+                    } label: {
                         HStack {
-							Text("Every \(days[index])").foregroundColor(AppColor.primaryBackground)
+                            Text("Every \(days[index])").foregroundColor(AppColor.primaryBackground)
                             Spacer()
                             if repeated[index] {
                                 Image(systemName: "checkmark").foregroundColor(AppColor.accent)

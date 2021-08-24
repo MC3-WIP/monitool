@@ -4,8 +4,8 @@
 //
 //  Created by Mac-albert on 11/08/21.
 //
-import SwiftUI
 import SDWebImageSwiftUI
+import SwiftUI
 
 struct IphoneTodayListView: View {
     @StateObject var todayListViewModel: TodayListViewModel
@@ -16,7 +16,7 @@ struct IphoneTodayListView: View {
 
     var body: some View {
         VStack {
-            GeometryReader {proxy in
+            GeometryReader { proxy in
                 NoSeparatorList {
                     Text(todayListViewModel.task.name)
                         .font(.system(size: 28, weight: .bold))
@@ -72,7 +72,8 @@ struct IphoneTodayListView: View {
         }
         .padding()
     }
-    @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View {
+
+    @ViewBuilder func ProofOfWork(image _: String, date _: String, metricSize: GeometryProxy) -> some View {
         VStack {
             Image("MonitoolAddPhotoIllustration")
                 .resizable()

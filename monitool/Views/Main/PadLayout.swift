@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct PadLayout: View {
-	var body: some View {
-		NavigationView {
-			ZStack {
-				AppColor.secondary.edgesIgnoringSafeArea(.all)
-				SidebarView()
-			}
-		}
-		.styleNavigationBar()
-		.accentColor(AppColor.accent)
-	}
+    var body: some View {
+        NavigationView {
+            ZStack {
+                AppColor.secondary.edgesIgnoringSafeArea(.all)
+                SidebarView()
+            }
+        }
+        .styleNavigationBar()
+        .accentColor(AppColor.accent)
+    }
 }
 
 struct PadMenu_Previews: PreviewProvider {
-	static var previews: some View {
-		PadLayout()
-	}
+    static var previews: some View {
+        PadLayout()
+    }
 }

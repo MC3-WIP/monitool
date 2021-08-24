@@ -8,26 +8,26 @@
 import Foundation
 
 struct DateHelper {
-	private let dateFormatter: DateFormatter
+    private let dateFormatter: DateFormatter
 
-	init() {
-		dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
-	}
+    init() {
+        dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+    }
 
-	func getNumDays(first: Date, second: Date) -> Int {
-		let calendar = Calendar.current
+    func getNumDays(first: Date, second: Date) -> Int {
+        let calendar = Calendar.current
 
-		// Replace the hour (time) of both dates with 00:00
-		let date1 = calendar.startOfDay(for: first)
-		let date2 = calendar.startOfDay(for: second)
+        // Replace the hour (time) of both dates with 00:00
+        let date1 = calendar.startOfDay(for: first)
+        let date2 = calendar.startOfDay(for: second)
 
-		let components = calendar.dateComponents([.day], from: date1, to: date2)
+        let components = calendar.dateComponents([.day], from: date1, to: date2)
 
-		return components.day ?? 0
-	}
+        return components.day ?? 0
+    }
 
-	func getStringFromDate(date: Date) -> String {
-		dateFormatter.string(from: date)
-	}
+    func getStringFromDate(date: Date) -> String {
+        dateFormatter.string(from: date)
+    }
 }
