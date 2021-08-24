@@ -54,6 +54,9 @@
 		83A7209D26BD7E6E007A30D3 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A7209C26BD7E6E007A30D3 /* Color.swift */; };
 		83B395CD26CE30A400AE6824 /* PhonePopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B395CC26CE30A400AE6824 /* PhonePopover.swift */; };
 		83B664B926BBE30200F64364 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B664B826BBE30200F64364 /* ProfileViewModel.swift */; };
+		83BCB48126D55C1100265411 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCB48026D55C1100265411 /* Carousel.swift */; };
+		83BCB48326D5634600265411 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCB48226D5634600265411 /* UIApplication.swift */; };
+		83BCB48526D563FC00265411 /* CarouselRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCB48426D563FC00265411 /* CarouselRepository.swift */; };
 		83E9492426AFC384003903FE /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E9492326AFC384003903FE /* Employee.swift */; };
 		83E9492826AFCA9D003903FE /* EmployeeHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E9492726AFCA9D003903FE /* EmployeeHelper.swift */; };
 		83ECAF6526AA115B0069CF25 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECAF6126AA115B0069CF25 /* Strings.swift */; };
@@ -153,6 +156,9 @@
 		83A7209C26BD7E6E007A30D3 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		83B395CC26CE30A400AE6824 /* PhonePopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonePopover.swift; sourceTree = "<group>"; };
 		83B664B826BBE30200F64364 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		83BCB48026D55C1100265411 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
+		83BCB48226D5634600265411 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		83BCB48426D563FC00265411 /* CarouselRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselRepository.swift; sourceTree = "<group>"; };
 		83E9492326AFC384003903FE /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		83E9492726AFCA9D003903FE /* EmployeeHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeHelper.swift; sourceTree = "<group>"; };
 		83ECAF6126AA115B0069CF25 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -325,6 +331,7 @@
 				6F0CC8E526AFD86700D15B96 /* TaskRepository.swift */,
 				83EF2A8826B298F900378602 /* RepositoriesPath.swift */,
 				B8B44EEE26BAE977001379AA /* TaskListRepository.swift */,
+				83BCB48426D563FC00265411 /* CarouselRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -453,6 +460,7 @@
 				83A7209C26BD7E6E007A30D3 /* Color.swift */,
 				B84F220426CBA93F00244A40 /* String.swift */,
 				B84F220626CBA98700244A40 /* Int.swift */,
+				83BCB48226D5634600265411 /* UIApplication.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -512,6 +520,7 @@
 				B84F21FF26CA75BB00244A40 /* PasscodeField.swift */,
 				8352931426CA6C49009F0F92 /* HistoryRow.swift */,
 				835F9ACB26CF993B00B9F52C /* ReviewerStatus.swift */,
+				83BCB48026D55C1100265411 /* Carousel.swift */,
 			);
 			path = "Shared Components";
 			sourceTree = "<group>";
@@ -803,11 +812,13 @@
 				8322357D26C44A2800E74ABF /* TaskListTabItem.swift in Sources */,
 				B8B44EF126BAEC95001379AA /* TaskListViewModel.swift in Sources */,
 				8348BCE426BE4DEC000777EA /* TaskDetailViewModel.swift in Sources */,
+				83BCB48126D55C1100265411 /* Carousel.swift in Sources */,
 				83A023E626B3F0DC002D24CC /* TaskListView.swift in Sources */,
 				835F9ACC26CF993B00B9F52C /* ReviewerStatus.swift in Sources */,
 				83A023EC26B402A0002D24CC /* MainView.swift in Sources */,
 				83A7209A26BD4B96007A30D3 /* NavigationBarModifier.swift in Sources */,
 				6F0CC8E826B137CB00D15B96 /* TaskViewModel.swift in Sources */,
+				83BCB48326D5634600265411 /* UIApplication.swift in Sources */,
 				8EC984F126C3994E000961E1 /* OnboardingStepView.swift in Sources */,
 				838B23FD26BE9B76004979A4 /* RoundedEdge.swift in Sources */,
 				B823A78926B7DEBA0035D9F4 /* AddDataPopOver.swift in Sources */,
@@ -853,6 +864,7 @@
 				8E97703826BD7DC300A4F341 /* PageControl.swift in Sources */,
 				83FEC45626CD823D00AA65F1 /* Alerts.swift in Sources */,
 				83B395CD26CE30A400AE6824 /* PhonePopover.swift in Sources */,
+				83BCB48526D563FC00265411 /* CarouselRepository.swift in Sources */,
 				834FBB3A26C1743700ABAACF /* EmployeeReviewViewModel.swift in Sources */,
 				838B23F926BE943D004979A4 /* PrimaryButtonStyle.swift in Sources */,
 				83A023F026B404EE002D24CC /* ProfileTabItem.swift in Sources */,
