@@ -32,7 +32,9 @@ struct TabItemRow: View {
             Spacer()
             if let notification = notification, notification.count > 0 {
                 Text("\(notification.count)")
-                    .foregroundColor(notification.isPriority || isActive ? AppColor.primaryForeground : AppColor.secondary)
+                    .foregroundColor(
+                        notification.isPriority || isActive ? AppColor.primaryForeground : AppColor.secondary
+                    )
                     .frame(width: 24, height: 24, alignment: .center)
                     .background(notification.isPriority ? Color.red : Color.clear)
                     .clipShape(Circle())

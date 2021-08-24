@@ -164,8 +164,7 @@ final class TaskRepository: ObservableObject {
                 .upload(image: photo, path: "taskPhotoReference/\(id)/\(UUID().uuidString)") { metadata, _ in
                     // Setelah photo di upload, update field photo ref task tadi
                     if let metadata = metadata,
-                       let path = metadata.path
-                    {
+                       let path = metadata.path {
                         self.updatePhotoReference(taskID: id, photoRef: path)
                     }
                 }

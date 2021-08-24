@@ -106,14 +106,22 @@ struct AddDataPopOver: View {
                                         ActionSheet(
                                             title: Text("Choose mode"),
                                             message: Text("Please choose your preferred mode to set your profile image"),
-                                            buttons: [ActionSheet.Button.default(Text("Camera"),
-                                                                                 action: {
-                                                                                     self.showImagePicker.toggle()
-                                                                                     self.sourceType = .camera
-                                                                                 }), ActionSheet.Button.default(Text("Photo Library"), action: {
-                                                    self.showImagePicker.toggle()
-                                                    self.sourceType = .photoLibrary
-                                                }), ActionSheet.Button.cancel()]
+                                            buttons: [
+                                                ActionSheet.Button.default(
+                                                    Text("Camera"),
+                                                    action: {
+                                                         self.showImagePicker.toggle()
+                                                         self.sourceType = .camera
+                                                     }
+                                                ),
+                                                ActionSheet.Button.default(
+                                                    Text("Photo Library"),
+                                                    action: {
+                                                        self.showImagePicker.toggle()
+                                                        self.sourceType = .photoLibrary
+                                                    }
+                                                ),
+                                                ActionSheet.Button.cancel()]
                                         )
                                     }
                                     Spacer()

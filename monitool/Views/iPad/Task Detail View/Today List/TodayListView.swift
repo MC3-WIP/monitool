@@ -12,11 +12,11 @@ struct TodayListView: View {
     @ObservedObject var role: RoleService = .shared
     @ObservedObject var employeeRepository: EmployeeRepository = .shared
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    
+
     init(task: Task) {
         _todayListViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
     }
-    
+
     var body: some View {
         VStack {
             ScrollView {

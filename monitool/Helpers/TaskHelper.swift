@@ -13,7 +13,7 @@ struct TaskHelper {
 
         let days = [
             "Sunday", "Monday", "Tuesday",
-            "Wednesday", "Thursday", "Friday", "Saturday",
+            "Wednesday", "Thursday", "Friday", "Saturday"
         ]
 
         let simplifiedDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]

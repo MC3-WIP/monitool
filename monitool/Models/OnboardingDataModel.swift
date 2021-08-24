@@ -30,6 +30,6 @@ extension OnboardingDataModel {
             image: "ReviewIllustration",
             titleText: "Review",
             descText: "You can review and let your employee validates their peer works result on site"
-        ),
+        )
     ]
 }
