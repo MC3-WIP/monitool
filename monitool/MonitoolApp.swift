@@ -10,6 +10,7 @@ import SwiftUI
 
 @main
 struct MonitoolApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     init() {
         FirebaseApp.configure()
     }

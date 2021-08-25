@@ -102,6 +102,7 @@
 		B8EFD9B426B8562E001E6086 /* CompanyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EFD9B326B8562E001E6086 /* CompanyViewModel.swift */; };
 		F83184C426BCF56900354AFD /* TaskListDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83184C326BCF56900354AFD /* TaskListDetailView.swift */; };
 		F83184CA26BD328000354AFD /* RepeatSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F83184C926BD328000354AFD /* RepeatSheetView.swift */; };
+		F8D6F4FD26D628600012D05E /* AppDelegateAdaptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D6F4FC26D628600012D05E /* AppDelegateAdaptor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -206,6 +207,8 @@
 		F335342D53E4540C34C3D459 /* Pods_monitool.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_monitool.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F83184C326BCF56900354AFD /* TaskListDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskListDetailView.swift; sourceTree = "<group>"; };
 		F83184C926BD328000354AFD /* RepeatSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatSheetView.swift; sourceTree = "<group>"; };
+		F8D6F4F426D5541B0012D05E /* monitoolDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = monitoolDebug.entitlements; sourceTree = "<group>"; };
+		F8D6F4FC26D628600012D05E /* AppDelegateAdaptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegateAdaptor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,8 +244,10 @@
 		830B1DF126A8149E00D38AE9 /* monitool */ = {
 			isa = PBXGroup;
 			children = (
+				F8D6F4F426D5541B0012D05E /* monitoolDebug.entitlements */,
 				8EC984F426C3C4AA000961E1 /* Fonts */,
 				830B1DF226A8149E00D38AE9 /* MonitoolApp.swift */,
+				F8D6F4FC26D628600012D05E /* AppDelegateAdaptor.swift */,
 				83A7209B26BD7E57007A30D3 /* Extensions */,
 				835E358526B16CA800DE542C /* Configs */,
 				833CCA9B26B67DB800BA67CA /* Constants */,
@@ -658,6 +663,8 @@
 			dependencies = (
 			);
 			name = monitool;
+			packageProductDependencies = (
+			);
 			productName = monitool;
 			productReference = 830B1DEF26A8149E00D38AE9 /* monitool.app */;
 			productType = "com.apple.product-type.application";
@@ -686,6 +693,8 @@
 				id,
 			);
 			mainGroup = 830B1DE626A8149E00D38AE9;
+			packageReferences = (
+			);
 			productRefGroup = 830B1DF026A8149E00D38AE9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -814,6 +823,7 @@
 				830B1DF526A8149E00D38AE9 /* MainOnboardingView.swift in Sources */,
 				8E35AC5926BA8B00007613E9 /* NoSeparatorList.swift in Sources */,
 				F83184C426BCF56900354AFD /* TaskListDetailView.swift in Sources */,
+				F8D6F4FD26D628600012D05E /* AppDelegateAdaptor.swift in Sources */,
 				6F0CC8E626AFD86700D15B96 /* TaskRepository.swift in Sources */,
 				8EC03EA826C680ED001245E5 /* ProfileView.swift in Sources */,
 				B8B44EEF26BAE977001379AA /* TaskListRepository.swift in Sources */,
@@ -1025,7 +1035,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = monitool/Configs/monitool.entitlements;
+				CODE_SIGN_ENTITLEMENTS = monitool/monitoolDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 19;

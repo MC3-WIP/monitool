@@ -21,7 +21,7 @@ target 'monitool' do
   pod 'Firebase/Crashlytics'
   # or pod ‘Firebase/AnalyticsWithoutAdIdSupport’
   # for Analytics without IDFA collection capability
-
+  pod 'Firebase/Messaging'
   # add pods for any other desired Firebase products
   # https://firebase.google.com/docs/ios/setup#available-pods
   pod 'Firebase/Auth'
