@@ -10,6 +10,7 @@ import SwiftUI
 struct IphoneProfileView: View {
     @StateObject var companyViewModel = CompanyViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
+    @ObservedObject var ownerPin = TextLimiter(limit: 4)
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
     @ObservedObject var role: RoleService = .shared
     var company: Company?
@@ -33,11 +34,22 @@ struct IphoneProfileView: View {
                             placeholder: "Company Inc.",
                             text: $profileViewModel.company.name
                         )
+                        .onChange(of: profileViewModel.company.name) { value in
+                            profileViewModel.company.name = value
+                        }
                         CompanyInfoTextField(
                             title: "Owner PIN",
-                            placeholder: "1234",
-                            text: $profileViewModel.company.ownerPin
+                            placeholder: profileViewModel.company.ownerPin,
+                            text: $ownerPin.value
                         )
+                        .onChange(of: profileViewModel.company.ownerPin) { value in
+                            if value.count < 4{
+                                
+                            }
+                            else{
+                                profileViewModel.company.ownerPin = value
+                            }
+                        }
                     }
                     ReviewPolicy()
                 }
