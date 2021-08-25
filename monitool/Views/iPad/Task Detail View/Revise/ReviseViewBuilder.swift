@@ -11,32 +11,30 @@ import SwiftUI
 
 extension ReviseView {
     @ViewBuilder func LeftColumn() -> some View {
-        GeometryReader { metric in
-            VStack(alignment: .leading) {
-                Text(taskDetailViewModel.task.name)
-                    .font(.system(size: 28, weight: .bold))
-                    .frame(minWidth: 100, maxWidth: .infinity, minHeight: 28, maxHeight: 32, alignment: .leading)
-                if let image = reviseViewModel.task.photoReference {
-                    WebImage(url: URL(string: image))
-                        .resizable()
-                        .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
-                } else {
-                    Image("MonitoolEmptyReferenceIllus")
-                        .resizable()
-                        .frame(width: metric.size.width * 0.8, height: metric.size.width * 0.8, alignment: .leading)
-                }
-                if let desc = taskDetailViewModel.task.desc {
-                    Text(desc)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .frame(width: metric.size.width * 0.8, alignment: .topLeading)
-                        .font(.system(size: 17))
-                        .multilineTextAlignment(.leading)
-                }
+        VStack(alignment: .leading) {
+            Text(reviseViewModel.task.name)
+                .font(.system(size: 28, weight: .bold))
+            if let image = reviseViewModel.task.photoReference {
+                WebImage(url: URL(string: image))
+                    .resizable()
+                    .placeholder(Image("MonitoolEmptyReferenceIllus"))
+                    .indicator { _, _ in
+                        ProgressView()
+                    }
+                    .transition(.fade)
+                    .aspectRatio(contentMode: .fit)
+            } else {
+                Image("MonitoolEmptyReferenceIllus")
+                    .resizable()
+                    .scaledToFit()
             }
-            .padding()
-        }
+            if let desc = reviseViewModel.task.desc {
+                Text(desc)
+                    .font(.system(size: 17))
+            }
+        }.frame(minWidth: 0, maxWidth: .infinity)
     }
-
+    
     @ViewBuilder func RightColumn() -> some View {
         GeometryReader { matric in
             VStack(alignment: .leading) {
@@ -45,9 +43,9 @@ extension ReviseView {
                     .font(.system(size: 20, weight: .bold))
                     .frame(minWidth: 100, maxWidth: .infinity, minHeight: 20, maxHeight: 24, alignment: .leading)
                     .foregroundColor(Color(hex: "898989"))
-
+                
                 proofOfWorkComponent(matric: matric, proofPage: proofPage, totalPage: totalPage, datePhoto: datePhoto)
-
+                
                 VStack(spacing: 4) {
                     HStack {
                         Text("PIC: ")
@@ -66,7 +64,7 @@ extension ReviseView {
                 }
                 .font(.system(size: 17))
                 .padding(.vertical, 15)
-
+                
                 VStack {
                     Text("Comment: ")
                         .foregroundColor(Color(hex: "6C6C6C"))
@@ -82,7 +80,7 @@ extension ReviseView {
             .padding()
         }
     }
-
+    
     @ViewBuilder
     func ProofOfWork(image _: String, date _: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
         VStack {
@@ -94,7 +92,7 @@ extension ReviseView {
                 .frame(width: metricSize.size.width * 0.7, height: 12, alignment: .leading)
         }
     }
-
+    
     @ViewBuilder func proofOfWorkComponent(matric: GeometryProxy, proofPage: Int, totalPage: Int, datePhoto: String) -> some View {
         VStack {
             ZStack {
@@ -125,23 +123,23 @@ extension ReviseView {
                 }
             }
             .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
-                .onEnded { value in
-                    if abs(value.translation.height) < abs(value.translation.width) {
-                        if abs(value.translation.width) > 50.0 {
-                            if value.translation.width > 0 {
-                                if proofPage == 0 {
-                                } else {
-                                    self.proofPage -= 1
-                                }
-                            } else if value.translation.width < 0 {
-                                if proofPage == totalPage - 1 {
-                                } else {
-                                    self.proofPage += 1
-                                }
-                            }
-                        }
-                    }
-                }
+                                    .onEnded { value in
+                                        if abs(value.translation.height) < abs(value.translation.width) {
+                                            if abs(value.translation.width) > 50.0 {
+                                                if value.translation.width > 0 {
+                                                    if proofPage == 0 {
+                                                    } else {
+                                                        self.proofPage -= 1
+                                                    }
+                                                } else if value.translation.width < 0 {
+                                                    if proofPage == totalPage - 1 {
+                                                    } else {
+                                                        self.proofPage += 1
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
             )
             PageControl(totalPage: totalPage, current: proofPage)
         }
@@ -153,11 +151,11 @@ extension ReviseView {
                 .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
         )
     }
-
+    
     @ViewBuilder func reviseButton() -> some View {
         Button {
             // MARK: ACTION BUTTON REVISE
-
+            
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
             self.presentationMode.wrappedValue.dismiss()
         } label: {
@@ -175,11 +173,11 @@ extension ReviseView {
             )
         }
     }
-
+    
     func approveButton() -> some View {
         Button {
             // MARK: ACTION BUTTON APPROVE
-
+            
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
             self.presentationMode.wrappedValue.dismiss()
         } label: {

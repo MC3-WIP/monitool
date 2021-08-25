@@ -11,6 +11,27 @@ import SwiftUI
 // MARK: - View Builders
 
 extension TodayListView {
+    private var actionSheet: ActionSheet {
+        ActionSheet(
+            title: Text("Choose mode"),
+            message: Text("Please choose your preferred mode to set your profile image"),
+            buttons: [
+                ActionSheet.Button.default(Text("Camera")) {
+                    self.showImagePicker.toggle()
+                    self.sourceType = .camera
+                },
+                ActionSheet.Button.cancel()
+            ]
+        )
+    }
+
+    private var imagePicker: some View {
+        ImagePicker(sourceType: sourceType) { image in
+            todayListViewModel.imageToBeAdded = image
+            todayListViewModel.update()
+        }
+    }
+    
     @ViewBuilder func LeftColumn() -> some View {
         VStack(alignment: .leading) {
             Text(todayListViewModel.task.name)
@@ -18,13 +39,16 @@ extension TodayListView {
             if let image = todayListViewModel.task.photoReference {
                 WebImage(url: URL(string: image))
                     .resizable()
+                    .placeholder(Image("MonitoolEmptyReferenceIllus"))
+                    .indicator { _, _ in
+                        ProgressView()
+                    }
+                    .transition(.fade)
                     .aspectRatio(contentMode: .fit)
-                    .frame(maxHeight: 400)
             } else {
                 Image("MonitoolEmptyReferenceIllus")
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(maxHeight: 400)
+                    .scaledToFit()
             }
             if let desc = todayListViewModel.task.desc {
                 Text(desc)
@@ -32,12 +56,11 @@ extension TodayListView {
             }
         }.frame(minWidth: 0, maxWidth: .infinity)
     }
-
     @ViewBuilder func RightColumn() -> some View {
-        GeometryReader { matric in
-            VStack(spacing: 24) {
-                //			ScrollView {
-                HStack {
+        VStack(alignment: .leading, spacing: 24) {
+            // MARK: - Proof of Work
+            VStack(alignment: .leading) {
+                HStack(alignment: .firstTextBaseline) {
                     Text("Proof of Work")
                         .padding(.bottom, 8)
                         .font(.system(size: 20, weight: .bold))
@@ -49,84 +72,17 @@ extension TodayListView {
                             self.showActionSheet.toggle()
                         } label: {
                             HStack(alignment: .lastTextBaseline) {
-                                Text("Add Photo")
+                                Text(todayListViewModel.imageToBeAdded != nil ? "Retake" : "Add Photo")
                                 Image(systemName: "camera")
                             }
                         }
-                        .sheet(isPresented: $showImagePicker) {
-                            ImagePicker(sourceType: self.sourceType) { image in
-                                self.image = image
-                                if let image = self.image {
-                                    storageService.upload(
-                                        image: image,
-                                        path: "proofPhoto/\(todayListViewModel.task.id!)/\(UUID().uuidString)"
-                                    )
-                                }
-                            }
-                        }
-                        .actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
-                            ActionSheet(
-                                title: Text("Choose mode"),
-                                message: Text("Please choose your preferred mode to set your profile image"),
-                                buttons: [
-                                    ActionSheet.Button.default(Text("Camera")) {
-                                        self.showImagePicker.toggle()
-                                        self.sourceType = .camera
-                                    },
-                                    ActionSheet.Button.cancel()
-                                ]
-                            )
-                        }
-                    }
-                    if role.isOwner {
-                        ProofOfWork(image: "MonitoolAddPhotoIllustration", date: "p")
-                            .frame(width: matric.size.width * 0.75, height: matric.size.width * 0.75)
-                            .padding(.vertical, 10)
-                            .background(Color(hex: "F0F9F8"))
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
-                            )
-                    } else {
-                        Button {
-                            self.showActionSheet.toggle()
-                        } label: {
-                            ProofOfWork(image: "MonitoolAddPhotoIllustration", date: "p")
-                                .frame(width: matric.size.width * 0.75, height: matric.size.width * 0.75)
-                                .padding(.vertical, 10)
-                                .background(Color(hex: "F0F9F8"))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
-                                )
-                        }
-                        .sheet(isPresented: $showImagePicker) {
-                            ImagePicker(sourceType: self.sourceType) { image in
-                                self.image = image
-                                if let image = self.image {
-                                    storageService.upload(
-                                        image: image,
-                                        path: "proofPhoto/\(todayListViewModel.task.id!)/\(UUID().uuidString)"
-                                    )
-                                }
-                            }
-                        }
-                        .actionSheet(isPresented: $showActionSheet) {() -> ActionSheet in
-                            ActionSheet(
-                                title: Text("Choose mode"),
-                                message: Text("Please choose your preferred mode to set your profile image"),
-                                buttons: [
-                                    ActionSheet.Button.default(Text("Camera")) {
-                                        self.showImagePicker.toggle()
-                                        self.sourceType = .camera
-                                    },
-                                    ActionSheet.Button.cancel()
-                                ]
-                            )
-                        }
+                        .sheet(isPresented: $showImagePicker) { imagePicker }
+                        .actionSheet(isPresented: $showActionSheet) { actionSheet }
                     }
                 }
+                proofOfWork()
             }
+            // MARK: - Setelah Proof of Work
             if role.isOwner {
                 CustomText(title: "PIC: ", content: todayListViewModel.pic?.name)
                 CustomText(title: "Notes: ", content: todayListViewModel.task.notes)
@@ -141,9 +97,31 @@ extension TodayListView {
                     presentationMode.wrappedValue.dismiss()
                 }.buttonStyle(PrimaryButtonStyle())
             }
-        }.frame(minWidth: 0, maxWidth: .infinity)
+        }
     }
-
+    
+    @ViewBuilder func proofOfWork() -> some View {
+        if let imageToBeAdded = todayListViewModel.imageToBeAdded {
+            Image(uiImage: imageToBeAdded)
+                .resizable()
+                .aspectRatio(1, contentMode: .fit)
+                .cornerRadius(12)
+        } else if let proofOfWork = todayListViewModel.proofOfWork, proofOfWork.count > 0 {
+            Carousel(images: todayListViewModel.task.proof)
+        } else {
+            Button {
+                self.showActionSheet.toggle()
+            } label: {
+                Image("MonitoolAddPhotoIllustration")
+                    .resizable()
+                    .aspectRatio(1, contentMode: .fit)
+                    .padding(36)
+            }
+            .sheet(isPresented: $showImagePicker) { imagePicker }
+            .actionSheet(isPresented: $showActionSheet) { actionSheet }
+        }
+    }
+    
     @ViewBuilder func EmployeePicker() -> some View {
         VStack(spacing: -36) {
             HStack {
@@ -161,7 +139,7 @@ extension TodayListView {
             }
             .padding()
             .zIndex(1)
-
+            
             Picker("PIC", selection: $todayListViewModel.picSelection) {
                 ForEach(0..<employeeRepository.employees.count) { index in
                     Text(employeeRepository.employees[index].name).tag(index)
@@ -169,7 +147,7 @@ extension TodayListView {
             }
         }
     }
-
+    
     @ViewBuilder func PICSelector() -> some View {
         VStack(alignment: .leading) {
             Text("PIC")
@@ -194,7 +172,7 @@ extension TodayListView {
             .modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
         }
     }
-
+    
     @ViewBuilder func NotesTextField() -> some View {
         VStack(alignment: .leading) {
             Text("Notes")
@@ -209,7 +187,7 @@ extension TodayListView {
                 .zIndex(1)
         }
     }
-
+    
     @ViewBuilder func CustomText(title: String, content: String?) -> some View {
         HStack {
             Text(title)
@@ -218,7 +196,7 @@ extension TodayListView {
             Text(content ?? "-")
         }.frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
     }
-
+    
     @ViewBuilder func ProofOfWork(image: String, date: String) -> some View {
         VStack {
             Image(image)

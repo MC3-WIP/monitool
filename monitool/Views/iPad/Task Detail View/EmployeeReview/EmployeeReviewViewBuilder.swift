@@ -15,9 +15,7 @@ extension EmployeeReviewView {
         VStack(alignment: .leading) {
             // Task Title
             Text(viewModel.title)
-                .font(.largeTitle)
-                .bold()
-
+                .font(.system(size: 28, weight: .bold))
             // Reference Image
             if let image = viewModel.photoReference {
                 WebImage(url: URL(string: image))
@@ -27,16 +25,17 @@ extension EmployeeReviewView {
                         ProgressView()
                     }
                     .transition(.fade)
-                    .aspectRatio(1, contentMode: .fill)
+                    .aspectRatio(contentMode: .fit)
             } else {
                 Image("MonitoolEmptyReferenceIllus")
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
             }
 
             // Task Desc
             Text(viewModel.desc)
-        }
+                .font(.system(size: 17))
+        }.frame(minWidth: 0, maxWidth: .infinity)
     }
 
     @ViewBuilder func RightColumn() -> some View {

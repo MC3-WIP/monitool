@@ -10,6 +10,7 @@ import FirebaseStorage
 import FirebaseFirestore
 
 class TodayListViewModel: TaskDetailViewModel {
+    
     @Published var notesText = ""
     @Published var picSelection = 0
     @Published var isEmployeePickerPresenting = false

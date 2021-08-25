@@ -31,10 +31,11 @@ struct OwnerReviewView: View {
     var body: some View {
         VStack {
             ScrollView {
-                HStack {
+                HStack(alignment: .top, spacing: 24) {
                     LeftColumn()
                     RightColumn()
                 }
+                .padding(.top)
                 .frame(height: 680)
             }
 
@@ -43,9 +44,8 @@ struct OwnerReviewView: View {
                     reviseButton()
                     approveButton()
                 }
-            }
-            .padding()
-        }
+            }.padding(.all, 5)
+        }.padding([.leading, .trailing], 24)
     }
 }
 
