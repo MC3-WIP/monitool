@@ -7,15 +7,14 @@
 
 import Firebase
 import SwiftUI
+import UserNotifications
 
 @main
 struct MonitoolApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    init() {
-        FirebaseApp.configure()
-    }
 
     var body: some Scene {
+        
         WindowGroup {
             MainOnboardingView()
         }
