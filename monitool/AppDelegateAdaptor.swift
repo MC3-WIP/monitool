@@ -52,7 +52,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // this callback will not be fired till the user taps on the notification launching the application.
         // TODO: Handle data of notification
         // With swizzling disabled you must let Messaging know about the message, for Analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
+         Messaging.messaging().appDidReceiveMessage(userInfo)
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
           print("Message ID: \(messageID)")
@@ -69,7 +69,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // this callback will not be fired till the user taps on the notification launching the application.
         // TODO: Handle data of notification
         // With swizzling disabled you must let Messaging know about the message, for Analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
+         Messaging.messaging().appDidReceiveMessage(userInfo)
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
           print("Message ID: \(messageID)")
@@ -90,6 +90,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
       // the FCM registration token.
       func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         print("APNs token retrieved: \(deviceToken)")
+        Messaging.messaging().apnsToken = deviceToken
 
         // With swizzling disabled you must set the APNs token here.
         // Messaging.messaging().apnsToken = deviceToken
@@ -108,7 +109,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     let userInfo = notification.request.content.userInfo
 
     // With swizzling disabled you must let Messaging know about the message, for Analytics
-    // Messaging.messaging().appDidReceiveMessage(userInfo)
+     Messaging.messaging().appDidReceiveMessage(userInfo)
     // Print message ID.
     if let messageID = userInfo[gcmMessageIDKey] {
       print("Message ID: \(messageID)")
@@ -131,7 +132,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     }
 
     // With swizzling disabled you must let Messaging know about the message, for Analytics
-    // Messaging.messaging().appDidReceiveMessage(userInfo)
+     Messaging.messaging().appDidReceiveMessage(userInfo)
     // Print full message.
     print(userInfo)
 
