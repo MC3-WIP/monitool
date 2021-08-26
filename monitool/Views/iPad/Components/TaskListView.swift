@@ -19,6 +19,7 @@ struct TaskListView: View {
 
     var filteredData: [Task] {
         if let filter = filter {
+            
             return taskViewModel.tasks.filter { task in
                 task.status == filter
             }

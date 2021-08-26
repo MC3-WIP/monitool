@@ -77,6 +77,7 @@
 		8EA5EEDF26BFBEB5009C534F /* OwnerReviewViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEDE26BFBEB5009C534F /* OwnerReviewViewBuilder.swift */; };
 		8EA5EEE226BFC9B2009C534F /* EmployeeReviewViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE126BFC9B2009C534F /* EmployeeReviewViewBuilder.swift */; };
 		8EA5EEE526BFCF07009C534F /* ReviseViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */; };
+		8EA8BBAE26D7A0FB005B3A28 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8EA8BBAD26D7A0FB005B3A28 /* GoogleService-Info.plist */; };
 		8EB4FA7F26BE4620009AABAF /* TodayListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EB4FA7E26BE4620009AABAF /* TodayListView.swift */; };
 		8EC03EA826C680ED001245E5 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC03EA726C680ED001245E5 /* ProfileView.swift */; };
 		8EC03EAB26C6CD94001245E5 /* IphoneReviseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8EC03EAA26C6CD94001245E5 /* IphoneReviseView.swift */; };
@@ -91,7 +92,6 @@
 		B84F220026CA75BB00244A40 /* PasscodeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84F21FF26CA75BB00244A40 /* PasscodeField.swift */; };
 		B84F220526CBA93F00244A40 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84F220426CBA93F00244A40 /* String.swift */; };
 		B84F220726CBA98700244A40 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84F220626CBA98700244A40 /* Int.swift */; };
-		B850700926B1461800530CBA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B850700826B1461800530CBA /* GoogleService-Info.plist */; };
 		B850700B26B14B3000530CBA /* CompanyOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B850700A26B14B3000530CBA /* CompanyOnboardingView.swift */; };
 		B85ACC4D26C4121400B3BA31 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B85ACC4C26C4121400B3BA31 /* Montserrat-SemiBold.ttf */; };
 		B85ACC4F26C413A600B3BA31 /* TextBindingHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B85ACC4E26C413A600B3BA31 /* TextBindingHelper.swift */; };
@@ -179,6 +179,7 @@
 		8EA5EEDE26BFBEB5009C534F /* OwnerReviewViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnerReviewViewBuilder.swift; sourceTree = "<group>"; };
 		8EA5EEE126BFC9B2009C534F /* EmployeeReviewViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeReviewViewBuilder.swift; sourceTree = "<group>"; };
 		8EA5EEE426BFCF07009C534F /* ReviseViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviseViewBuilder.swift; sourceTree = "<group>"; };
+		8EA8BBAD26D7A0FB005B3A28 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8EB4FA7E26BE4620009AABAF /* TodayListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayListView.swift; sourceTree = "<group>"; };
 		8EC03EA726C680ED001245E5 /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileView.swift; path = "monitool/Views/Iphone/Components/Tab Items/ProfileView.swift"; sourceTree = SOURCE_ROOT; };
 		8EC03EAA26C6CD94001245E5 /* IphoneReviseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IphoneReviseView.swift; sourceTree = "<group>"; };
@@ -195,7 +196,6 @@
 		B84F220426CBA93F00244A40 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		B84F220626CBA98700244A40 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		B850700726B1435900530CBA /* monitool.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = monitool.entitlements; sourceTree = "<group>"; };
-		B850700826B1461800530CBA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B850700A26B14B3000530CBA /* CompanyOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyOnboardingView.swift; sourceTree = "<group>"; };
 		B85ACC4C26C4121400B3BA31 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		B85ACC4E26C413A600B3BA31 /* TextBindingHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBindingHelper.swift; sourceTree = "<group>"; };
@@ -226,6 +226,7 @@
 		830B1DE626A8149E00D38AE9 = {
 			isa = PBXGroup;
 			children = (
+				8EA8BBAD26D7A0FB005B3A28 /* GoogleService-Info.plist */,
 				830B1DF126A8149E00D38AE9 /* monitool */,
 				830B1DF026A8149E00D38AE9 /* Products */,
 				BE97FB7DC49FBB4DCF8E6A7C /* Pods */,
@@ -371,7 +372,6 @@
 			isa = PBXGroup;
 			children = (
 				830B1E0026A8149F00D38AE9 /* Info.plist */,
-				B850700826B1461800530CBA /* GoogleService-Info.plist */,
 				B850700726B1435900530CBA /* monitool.entitlements */,
 			);
 			path = Configs;
@@ -710,9 +710,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				830B1DFA26A8149F00D38AE9 /* Preview Assets.xcassets in Resources */,
+				8EA8BBAE26D7A0FB005B3A28 /* GoogleService-Info.plist in Resources */,
 				839C026226C15CA500F69773 /* Misc.xcassets in Resources */,
 				839C025E26C15C3700F69773 /* Images.xcassets in Resources */,
-				B850700926B1461800530CBA /* GoogleService-Info.plist in Resources */,
 				839C026026C15C7900F69773 /* Colors.xcassets in Resources */,
 				B85ACC4D26C4121400B3BA31 /* Montserrat-SemiBold.ttf in Resources */,
 				83ECAF6626AA115B0069CF25 /* Localizable.strings in Resources */,
@@ -963,6 +963,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -1019,6 +1020,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
