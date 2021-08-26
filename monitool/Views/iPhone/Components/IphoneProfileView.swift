@@ -10,7 +10,7 @@ import SwiftUI
 struct IphoneProfileView: View {
     @StateObject var companyViewModel = CompanyViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
-    @ObservedObject var ownerPin = TextLimiter(limit: 4)
+    @ObservedObject var ownerPin = TextBindingHelper(limit: 4)
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
     @ObservedObject var role: RoleService = .shared
     var company: Company?
@@ -40,13 +40,12 @@ struct IphoneProfileView: View {
                         CompanyInfoTextField(
                             title: "Owner PIN",
                             placeholder: profileViewModel.company.ownerPin,
-                            text: $ownerPin.value
+                            text: $ownerPin.text
                         )
                         .onChange(of: profileViewModel.company.ownerPin) { value in
-                            if value.count < 4{
-                                
+                            if value.count < 4 {
                             }
-                            else{
+                            else {
                                 profileViewModel.company.ownerPin = value
                             }
                         }
