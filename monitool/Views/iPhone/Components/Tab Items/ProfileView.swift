@@ -12,7 +12,7 @@ struct ProfileView: View {
     @StateObject var companyViewModel = CompanyViewModel()
     @ObservedObject var profileViewModel: ProfileViewModel = .shared
 
-    @ObservedObject var ownerPin = TextBindingHelper(limit: 4)
+    @ObservedObject var ownerPin = TextLimiter(limit: 4)
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
     @ObservedObject var role: RoleService = .shared
     @State var editMode: EditMode = .inactive {
@@ -52,7 +52,7 @@ struct ProfileView: View {
                                     Spacer()
                                 }
                                 .frame(width: metrics.size.width * 0.2)
-                                TextField(profileViewModel.company.ownerPin, text: $ownerPin.text)
+                                TextField(profileViewModel.company.ownerPin, text: $ownerPin.value)
                                     .onChange(of: profileViewModel.company.ownerPin) { value in
                                         if value.count < 4{
                                             

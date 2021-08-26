@@ -336,6 +336,7 @@
 			children = (
 				83E9492726AFCA9D003903FE /* EmployeeHelper.swift */,
 				B85ACC4E26C413A600B3BA31 /* TextBindingHelper.swift */,
+				8E039A9226D6B6870012C09E /* TextLimiter.swift */,
 				8352931226CA6A8A009F0F92 /* DateHelper.swift */,
 				83A3EB5926CD0A67005E410D /* TaskHelper.swift */,
 			);
@@ -514,7 +515,6 @@
 				B84F21FF26CA75BB00244A40 /* PasscodeField.swift */,
 				8352931426CA6C49009F0F92 /* HistoryRow.swift */,
 				835F9ACB26CF993B00B9F52C /* ReviewerStatus.swift */,
-				8E039A9226D6B6870012C09E /* TextLimiter.swift */,
 			);
 			path = "Shared Components";
 			sourceTree = "<group>";
