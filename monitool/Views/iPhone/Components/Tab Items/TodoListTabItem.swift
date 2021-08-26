@@ -35,7 +35,7 @@ struct TodoListTabItem: View {
                     .onTapGesture { self.selectDeselect(taskStatuses[index]) }
                 }
             }
-            .navigationTitle("Task List")
+            .navigationBarTitle("To-Do List", displayMode: .inline)
             .toolbar {
                 NavigationLink(destination: HistoryView()) {
                     Image(systemName: "clock")
@@ -43,8 +43,8 @@ struct TodoListTabItem: View {
             }
         }
         .tabItem {
-            Image(systemName: "list.number")
-            Text("Task List")
+            Image(systemName: "list.bullet.rectangle")
+            Text("To-Do List")
         }
     }
 
@@ -80,7 +80,7 @@ struct TasksRowView: View {
         if isExpanded {
             if tasks.count != 0 {
                 ForEach(tasks) { task in
-                    NavigationLink(destination: IphoneEmployeeReview(task: task)) {
+                    NavigationLink(destination: IphoneTodayListView(task: task)) {
                         Text(task.name)
                     }
                 }
