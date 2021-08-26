@@ -76,4 +76,19 @@ final class TaskListRepository: ObservableObject {
             }
         }
     }
+    
+    func repeatTask(day: String) {
+        let dayDefault = UserDefaults.standard.integer(forKey: "currentDay")
+        for tasks in taskLists {
+            if let repeatedTask = tasks.repeated {
+                for i in 0...repeatedTask.count {
+                    if repeatedTask[i] {
+                        if i == dayDefault {
+                            add(tasks)
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

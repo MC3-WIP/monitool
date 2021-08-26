@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
+    @ObservedObject var dateService = DateService()
     private var device = UIDevice.current.userInterfaceIdiom
 
     var body: some View {
@@ -21,7 +22,12 @@ extension MainView {
     @ViewBuilder
     func Layout() -> some View {
         if device == .pad {
-            PadLayout()
+            if dateService.isDayChanged() {
+                Text("day berubah")
+            } else {
+                Text("gak berubah")
+            }
+//            PadLayout()
         } else if device == .phone {
             PhoneLayout()
         } else {
