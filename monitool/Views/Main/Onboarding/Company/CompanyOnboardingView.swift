@@ -14,11 +14,11 @@ struct CompanyOnboardingView: View {
     @State private var showingSheet = false
     @State var isLinkActive = false
 
-	@StateObject var ownerPin = TextBindingHelper(limit: 4)
+	  @StateObject var ownerPin = TextBindingHelper(limit: 4)
 
-	@ObservedObject var employeeViewModel: EmployeeListViewModel = .shared
-	@ObservedObject var companyViewModel: CompanyViewModel = .shared
-	@ObservedObject var storageService: StorageService = .shared
+	  @ObservedObject var employeeViewModel: EmployeeListViewModel = .shared
+	  @ObservedObject var companyViewModel: CompanyViewModel = .shared
+	  @ObservedObject var storageService: StorageService = .shared
     @ObservedObject var userAuth: AuthService = .shared
 
     var body: some View {
