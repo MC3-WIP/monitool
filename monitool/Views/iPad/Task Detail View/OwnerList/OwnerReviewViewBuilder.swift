@@ -35,8 +35,8 @@ extension OwnerReviewView {
             }
         }
     }
-    
-    @ViewBuilder func reviseButton() -> some View {
+
+	@ViewBuilder func reviseButton() -> some View {
         Button {
             TaskRepository.shared.updateStatus(
                 taskID: ownerReviewViewModel.task.id,
@@ -57,8 +57,8 @@ extension OwnerReviewView {
             )
         }
     }
-    
-    @ViewBuilder func approveButton() -> some View {
+
+	@ViewBuilder func approveButton() -> some View {
         Button {
             TaskRepository.shared.updateStatus(
                 taskID: ownerReviewViewModel.task.id,

@@ -57,8 +57,8 @@ extension ReviseView {
             )
         }
     }
-    
-    func approveButton() -> some View {
+
+	func approveButton() -> some View {
         Button {
 			TaskRepository.shared.updateStatus(
 				taskID: reviseViewModel.task.id,

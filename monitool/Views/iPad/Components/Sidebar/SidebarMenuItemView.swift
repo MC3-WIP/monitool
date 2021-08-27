@@ -12,6 +12,8 @@ struct SidebarMenuItemView: View {
     private let title: String
     private let view: AnyView
 
+	@State var isActive = false
+
     init(type: SidebarMenuItem) {
         icon = type.icon
         title = type.title
@@ -19,11 +21,16 @@ struct SidebarMenuItemView: View {
     }
 
     var body: some View {
-        NavigationLink(destination: view) {
+		NavigationLink(destination: view, isActive: $isActive) {
             HStack {
                 Image(systemName: icon)
                 Text(title)
             }
         }
+		.onAppear {
+			if title == SidebarMenuItem.todayList.title {
+				isActive.toggle()
+			}
+		}
     }
 }
