@@ -63,33 +63,6 @@ struct ReviseView: View {
 			}
 		}.padding(24)
 	}
-
-	@ViewBuilder func renderLeftColumn() -> some View {
-		VStack(alignment: .leading) {
-			// Task Title
-			Text(reviseViewModel.title).font(.title.bold())
-
-			// Reference Image
-			if let image = reviseViewModel.photoReference {
-				WebImage(url: URL(string: image))
-					.resizable()
-					.indicator { _, _ in
-						ProgressView()
-					}
-					.scaledToFill()
-					.frame(height: 320)
-					.clipped()
-			} else {
-				Image("MonitoolEmptyReferenceIllus")
-					.resizable()
-					.scaledToFill()
-					.padding([.horizontal, .bottom], 36)
-			}
-
-			Text(reviseViewModel.desc)
-		}
-		.padding()
-	}
 }
 
 struct ReviseTaskDetailView_Previews: PreviewProvider {

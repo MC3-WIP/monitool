@@ -69,7 +69,9 @@ struct TodayListView: View {
                     .indicator { _, _ in
                         ProgressView()
                     }
-                    .scaledToFill()
+					.scaledToFill()
+					.frame(height: 320)
+					.clipped()
             } else {
                 Image("MonitoolEmptyReferenceIllus")
                     .resizable()

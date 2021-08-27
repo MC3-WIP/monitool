@@ -10,6 +10,33 @@ import SDWebImageSwiftUI
 import SwiftUI
 
 extension ReviseView {
+	@ViewBuilder func renderLeftColumn() -> some View {
+		VStack(alignment: .leading) {
+			// Task Title
+			Text(reviseViewModel.title).font(.title.bold())
+
+			// Reference Image
+			if let image = reviseViewModel.photoReference {
+				WebImage(url: URL(string: image))
+					.resizable()
+					.indicator { _, _ in
+						ProgressView()
+					}
+					.scaledToFill()
+					.frame(height: 320)
+					.clipped()
+			} else {
+				Image("MonitoolEmptyReferenceIllus")
+					.resizable()
+					.scaledToFill()
+					.padding([.horizontal, .bottom], 36)
+			}
+
+			Text(reviseViewModel.desc)
+		}
+		.padding()
+	}
+
     @ViewBuilder func reviseButton() -> some View {
         Button {
 			TaskRepository.shared.updateStatus(
