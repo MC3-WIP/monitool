@@ -10,11 +10,6 @@ import FirebaseStorage
 import FirebaseFirestore
 
 class TodayListViewModel: TaskDetailViewModel {
-    
-    @Published var notesText = ""
-    @Published var picSelection = 0
-    @Published var isEmployeePickerPresenting = false
-
     func submitTask(pic: Employee, notes: String? = nil) {
         taskRepository.updatePIC(taskID: task.id, employee: pic)
 
@@ -25,9 +20,6 @@ class TodayListViewModel: TaskDetailViewModel {
         taskRepository.updateStatus(taskID: task.id, status: TaskStatus.waitingEmployeeReview.rawValue)
     }
 
-    // Props
-    @Published var proofOfWork: [String]?
-
     // Repository
     @Published private var store: Store = .shared
 
@@ -36,7 +28,6 @@ class TodayListViewModel: TaskDetailViewModel {
 
     // Fields
     @Published var taskTitle: String
-    @Published var imageToBeAdded: UIImage?
 
     private var taskTitleHasChanges: Bool {
         task.name != taskTitle
@@ -48,7 +39,6 @@ class TodayListViewModel: TaskDetailViewModel {
 
     override init(task: Task) {
         taskTitle       = task.name
-        proofOfWork     = task.proof
         super.init(task: task)
     }
 
@@ -103,20 +93,6 @@ class TodayListViewModel: TaskDetailViewModel {
                 }
             } catch {
                 logError(error: error)
-            }
-        }
-    }
-
-    func update() {
-        // Update changes, if any.
-        if fieldsAreValid, taskTitleHasChanges {
-            store.update(task: task, field: .name, with: taskTitle)
-        }
-
-        // Add proof of work, if any.
-        if let image = imageToBeAdded {
-            store.post(task: task, image: image) { [self] metadata, error in
-                handleImagePostCompletion(task: task, metadata, error)
             }
         }
     }

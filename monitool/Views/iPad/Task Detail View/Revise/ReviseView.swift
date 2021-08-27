@@ -6,59 +6,94 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
+
+class ReviseViewModel: TaskDetailViewModel {
+}
 
 struct ReviseView: View {
-    @StateObject var reviseViewModel: TodayListViewModel
-    @StateObject var taskDetailViewModel: TaskDetailViewModel
-    @ObservedObject var taskViewModel = TaskViewModel()
-    @Environment(\.presentationMode) var presentationMode
+	@Environment(\.presentationMode) var presentationMode
 
-    init(task: Task) {
-        _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
-        _reviseViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
-    }
+	@StateObject var reviseViewModel: ReviseViewModel
 
-    private let notes = "Sudah Pak Bos"
-    private let pic = "Mawar"
+	@ObservedObject var role: RoleService = .shared
 
-    @State var totalPage: Int = 3
-    @State var datePhoto = "21 Juli 2021 at 15.57"
-    @State private var comment: String = ""
-    @State var proofPage = 0
+	init(task: Task) {
+		_reviseViewModel = StateObject(wrappedValue: ReviseViewModel(task: task))
+	}
 
-    var body: some View {
-        VStack {
-            ScrollView {
-                HStack(alignment: .top, spacing: 24) {
-                    LeftColumn()
-                    RightColumn()
-                }
-                .padding(.top)
-                .frame(height: 680)
-            }
-            
-            HStack(spacing: 24) {
-                reviseButton()
-                approveButton()
-            }.padding(.all, 5)
-        }.padding([.leading, .trailing], 24)
-    }
+	var body: some View {
+		VStack {
+			ScrollView {
+				HStack(alignment: .top, spacing: 24) {
+					renderLeftColumn()
 
-    @ViewBuilder
-    func ProofOfWork(image: String, date _: String, metricSize: GeometryProxy) -> some View {
-        VStack {
-            Image(image)
-                .resizable()
-                .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
-            Text("21 Jul 2021 at 15:57")
-                .font(.system(size: 11))
-                .frame(width: metricSize.size.width * 0.7, height: 12, alignment: .leading)
-        }
-    }
+					VStack(alignment: .leading, spacing: 24) {
+						ProofOfWork(task: reviseViewModel.task)
+
+						RightColumn<ReviseViewModel>(
+							components: role.isOwner ? [
+								.picText,
+								.notesText,
+								.commentTextField
+							] : [
+								.picText,
+								.notesTextField,
+								.commentText
+							],
+							viewModel: reviseViewModel
+						)
+
+						if !role.isOwner {
+							Button("Submit") {
+								// Update photo & notes
+
+								presentationMode.wrappedValue.dismiss()
+							}.buttonStyle(PrimaryButtonStyle())
+						}
+					}
+				}
+			}
+
+			if role.isOwner {
+				HStack(spacing: 24) {
+					reviseButton()
+					approveButton()
+				}
+			}
+		}.padding(24)
+	}
+
+	@ViewBuilder func renderLeftColumn() -> some View {
+		VStack(alignment: .leading) {
+			// Task Title
+			Text(reviseViewModel.title).font(.title.bold())
+
+			// Reference Image
+			if let image = reviseViewModel.photoReference {
+				WebImage(url: URL(string: image))
+					.resizable()
+					.indicator { _, _ in
+						ProgressView()
+					}
+					.scaledToFill()
+					.frame(height: 320)
+					.clipped()
+			} else {
+				Image("MonitoolEmptyReferenceIllus")
+					.resizable()
+					.scaledToFill()
+					.padding(36)
+			}
+
+			Text(reviseViewModel.desc)
+		}
+		.padding()
+	}
 }
 
 struct ReviseTaskDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReviseView(task: Task(name: "Revise Page", repeated: []))
-    }
+	static var previews: some View {
+		ReviseView(task: Task(name: "Revise Page", repeated: []))
+	}
 }

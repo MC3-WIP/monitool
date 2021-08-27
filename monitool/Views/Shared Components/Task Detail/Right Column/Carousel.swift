@@ -11,14 +11,12 @@ import SDWebImageSwiftUI
 struct Carousel: View {
     var images: [String]?
 
-    @State var index = 0
+    @State private var index = 0
 
     var body: some View {
         if let images = images {
             VStack {
-                Spacer(minLength: 300)
-//                    .frame(width: 200, height: 200, alignment: .center)
-//                    .clipped()
+                Spacer(minLength: 320)
                 PageControl(totalPage: images.count, current: index)
             }
             .padding([.leading, .top, .trailing])
@@ -29,12 +27,6 @@ struct Carousel: View {
                         ProgressView()
                     }
                     .scaledToFill()
-            )
-            .cornerRadius(8)
-            .clipped()
-            .overlay(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(AppColor.accent, lineWidth: 2)
             )
             .highPriorityGesture(
                 DragGesture(minimumDistance: 25, coordinateSpace: .local)

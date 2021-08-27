@@ -28,14 +28,14 @@ struct HistoryView: View {
         }
         .navigationBarTitle("History", displayMode: .inline)
         .listStyle(InsetGroupedListStyle())
-        .background(Color.white)
     }
 }
 
 struct HistoriesSection: View {
-    private var device = UIDevice.current.userInterfaceIdiom
-    var dateHelper = DateHelper()
-    var histories: [Task]
+    private let device = UIDevice.current.userInterfaceIdiom
+	private let dateHelper = DateHelper()
+
+	var histories: [Task]
     var day: String
 
     init(histories: [Task]) {
@@ -48,17 +48,17 @@ struct HistoriesSection: View {
     }
 
     var body: some View {
-        Section(header: Text(day).font(.title).foregroundColor(.black).fontWeight(.bold)) {
+		Section(header: Text(day).font(.title.bold()).foregroundColor(AppColor.primaryBackground)) {
             ForEach(histories, id: \.id) { history in
                 if device == .pad {
                     NavigationLink(destination: HistoryTaskDetailView(task: history)) {
-                        HistoryRow(task: history)
                     }
-                    .listRowBackground(Color("LightTosca"))
+					.listRowBackground(AppColor.lightAccent)
                 } else if device == .phone {
                     NavigationLink(destination: HistoryDetail(history: history)) {
-                        HistoryRow(task: history)
-                    }.listRowBackground(Color("LightTosca"))
+						
+                    }
+					.listRowBackground(AppColor.lightAccent)
                 }
             }
         }

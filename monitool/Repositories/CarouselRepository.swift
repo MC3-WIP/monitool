@@ -23,29 +23,6 @@ final class Store: ObservableObject {
     private let storage = Storage.storage()
     static let shared = Store()
 
-    @Published var tasks = [Task]()
-
-    private init() {
-        fetchTasks()
-    }
-
-    func fetchTasks() {
-        store.collection(Directory.tasks.rawValue).addSnapshotListener { snapshot, err in
-            if let err = err {
-                print("Debug:", err.localizedDescription)
-                fatalError()
-            }
-            guard let documents = snapshot?.documents else {
-                print("Debug: No documents found.")
-                fatalError()
-            }
-
-            self.tasks = documents.compactMap { snapshot in
-                try? snapshot.data(as: Task.self)
-            }
-        }
-    }
-
     func post(task: Task, completion: StoreCompletionHandler? = nil) -> DocumentReference? {
         do {
             return try store

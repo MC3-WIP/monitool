@@ -32,10 +32,6 @@ struct IphoneTodayListView: View {
                     )
                 }
 
-                Button("Save Changes") {
-                    todayListViewModel.update()
-                }.padding()
-
                 if let imageToBeAdded = todayListViewModel.imageToBeAdded {
                     Image(uiImage: imageToBeAdded)
                         .resizable()

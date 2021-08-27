@@ -8,15 +8,12 @@
 import SwiftUI
 
 struct EmployeeReviewView: View {
-    @ObservedObject var role: RoleService = .shared
-    @Environment(\.presentationMode) var presentationMode
-    @StateObject var viewModel: EmployeeReviewViewModel
-    @ObservedObject var profileViewModel: ProfileViewModel = .shared
+	@Environment(\.presentationMode) var presentationMode
 
-    // Dummy data
-    @State var proofPage = 0
-    var totalPage = 3
-    var datePhoto = "21 Juli 2021 at 15.57"
+	@StateObject var viewModel: EmployeeReviewViewModel
+
+	@ObservedObject var role: RoleService = .shared
+    @ObservedObject var profileViewModel: ProfileViewModel = .shared
 
     init(task: Task) {
         _viewModel = StateObject(wrappedValue: EmployeeReviewViewModel(task: task))
@@ -40,9 +37,23 @@ struct EmployeeReviewView: View {
     private var content: some View {
         VStack {
             ScrollView {
-                HStack {
-                    LeftColumn()
-                    RightColumn()
+                HStack(alignment: .top, spacing: 24) {
+                    renderLeftColumn()
+                    VStack(alignment: .leading, spacing: 24) {
+                        ProofOfWork(task: viewModel.task)
+
+                        RightColumn<EmployeeReviewViewModel>(
+                            components: role.isOwner ? [
+                                .picText,
+                                .notesText
+                            ] : [
+                                .picText,
+                                .notesText,
+                                .reviewStatus
+                            ],
+                            viewModel: viewModel
+                        )
+                    }
                 }
             }
             if !role.isOwner {
@@ -52,7 +63,7 @@ struct EmployeeReviewView: View {
               }
             }
         }
-        .padding()
+        .padding(24)
         .sheet(isPresented: $showingPinField) {
             PasscodeField(isPinTrue: $isPinTrue) { inputtedPin, _ in
                 if isApproving {

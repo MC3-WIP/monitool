@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct TodayListView: View {
     @State var showImagePicker: Bool = false
@@ -29,14 +30,62 @@ struct TodayListView: View {
         VStack(alignment: .leading) {
             ScrollView {
                 HStack(alignment: .top, spacing: 24) {
-                    LeftColumn()
-                    RightColumn()
+					renderLeftColumn()
+
+                    VStack(alignment: .leading, spacing: 24) {
+                        ProofOfWork(task: todayListViewModel.task)
+
+                        RightColumn<TodayListViewModel>(
+                            components: role.isOwner ? [
+                                .picText,
+                                .notesText
+                            ] : [
+                                .picSelector,
+                                .notesTextField
+                            ],
+                            viewModel: todayListViewModel
+                        )
+
+                        if !role.isOwner {
+                            Button("Submit") {
+                                todayListViewModel.submitTask(
+                                    pic: employeeRepository.employees[todayListViewModel.picSelection],
+                                    notes: todayListViewModel.notesTextField
+                                )
+
+                                presentationMode.wrappedValue.dismiss()
+                            }.buttonStyle(PrimaryButtonStyle())
+                        }
+                    }
                 }
                 .padding(.top)
             }
         }
         .padding([.leading, .trailing], 24)
         .navigationTitle("Today List")
+    }
+
+    @ViewBuilder func renderLeftColumn() -> some View {
+        VStack(alignment: .leading) {
+            Text(todayListViewModel.task.name).font(.title.bold())
+
+            if let image = todayListViewModel.task.photoReference {
+                WebImage(url: URL(string: image))
+                    .resizable()
+                    .indicator { _, _ in
+                        ProgressView()
+                    }
+                    .scaledToFill()
+            } else {
+                Image("MonitoolEmptyReferenceIllus")
+                    .resizable()
+                    .scaledToFit()
+                    .padding(36)
+            }
+            if let desc = todayListViewModel.task.desc {
+                Text(desc)
+            }
+        }.frame(minWidth: 0, maxWidth: .infinity)
     }
 }
 
