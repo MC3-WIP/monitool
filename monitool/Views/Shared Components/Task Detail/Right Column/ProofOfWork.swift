@@ -19,6 +19,7 @@ class ProofOfWorkModel: ObservableObject {
 
     init(task: Task) {
         self.task = task
+		proofOfWork = task.proof
     }
 
     func saveChanges() {
