@@ -18,8 +18,6 @@ Monitool is an app native iOS Apps that helps small business owner to monitor th
 | Primary Color   | ![#4EB0AB](https://via.placeholder.com/10/4EB0AB?text=+) #4EB0AB |
 | Secondary Color | ![#F0F9F8](https://via.placeholder.com/10/F0F9F8?text=+) #F0F9F8 |
 
----
-
 ## Tech Stack
 
 - **Languange:** [Swift](https://swift.org/)
@@ -53,8 +51,6 @@ Monitool is an app native iOS Apps that helps small business owner to monitor th
 - UI Designer : [Natalia Fellyana](https://github.com/nataliafellyana)
 - UI Designer : [Ricksen Tanata](https://github.com/ricksentnt)
 - UI Designer : [Scaltiel Gloria](https://github.com/scaltielgloriaa)
-
----
 
 ## FAQ
 
