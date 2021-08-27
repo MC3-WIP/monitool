@@ -254,16 +254,11 @@ extension RightColumn {
     }
 }
 
+#if DEBUG
 class MyViewModel: RightColumnViewModel {
     var company: Company? = Company(name: "Monitool", minReview: 0, ownerPin: "1234", hasLoggedIn: true, profileImage: nil)
 
     var reviewer: [Employee] = []
-
-    func saveChanges() {
-        print("Hehe")
-    }
-
-    @Published var isImagePickerPresenting: Bool = false
 
     @Published var picSelection: Int = 0
 
@@ -290,19 +285,16 @@ class MyViewModel: RightColumnViewModel {
     @Published var notes = "This is a note."
 
     @Published var employees: [Employee] = []
-
-    @Published var imageToBeAdded: UIImage?
-
-    @Published var proofOfWork: [String]?
 }
 
 struct RightColumn_Previews: PreviewProvider {
     static var previews: some View {
         RightColumn<MyViewModel>(components: [
 			.picSelector,
-            .notesTextField,
+            .notesTextField
         ], viewModel: MyViewModel())
         .padding()
         .previewLayout(.fixed(width: 400, height: 1200))
     }
 }
+#endif

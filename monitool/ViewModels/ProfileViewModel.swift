@@ -20,7 +20,6 @@ class ProfileViewModel: ObservableObject {
     @Published var isAddEmployeePresenting = false
 
     @Published var pinInputted = ""
-    @Published var showingAlert = false
     @Published var isPasscodeFieldDisabled = false
     static let shared = ProfileViewModel()
 

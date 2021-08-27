@@ -8,13 +8,8 @@
 import SwiftUI
 
 struct IphoneProfileView: View {
-    @StateObject var companyViewModel = CompanyViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
-    @ObservedObject var employeeListViewModel = EmployeeListViewModel()
-    @ObservedObject var role: RoleService = .shared
-    var company: Company?
-    @State var companyName = ""
-    @State var editModeIphone: EditMode = .inactive {
+	@State var editModeIphone: EditMode = .inactive {
         didSet {
             if editModeIphone.isEditing {
                 profileViewModel.isPinHidden = false
@@ -22,7 +17,10 @@ struct IphoneProfileView: View {
                 profileViewModel.isPinHidden = true
             }
         }
-    }
+	}
+
+	@ObservedObject var role: RoleService = .shared
+	@ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
 
     var body: some View {
         VStack {

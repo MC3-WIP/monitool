@@ -30,7 +30,6 @@
 		834FBB3A26C1743700ABAACF /* EmployeeReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834FBB3926C1743700ABAACF /* EmployeeReviewViewModel.swift */; };
 		8352931326CA6A8A009F0F92 /* DateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8352931226CA6A8A009F0F92 /* DateHelper.swift */; };
 		8352931526CA6C49009F0F92 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8352931426CA6C49009F0F92 /* HistoryRow.swift */; };
-		8352931B26CA7238009F0F92 /* HistoryTabItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8352931A26CA7238009F0F92 /* HistoryTabItem.swift */; };
 		835E357E26B15FC300DE542C /* EmployeeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835E357D26B15FC300DE542C /* EmployeeRepository.swift */; };
 		835F9ACC26CF993B00B9F52C /* ReviewStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835F9ACB26CF993B00B9F52C /* ReviewStatus.swift */; };
 		838B23F926BE943D004979A4 /* PrimaryButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838B23F826BE943D004979A4 /* PrimaryButtonStyle.swift */; };
@@ -56,7 +55,6 @@
 		83B395CD26CE30A400AE6824 /* PhonePopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B395CC26CE30A400AE6824 /* PhonePopover.swift */; };
 		83B664B926BBE30200F64364 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B664B826BBE30200F64364 /* ProfileViewModel.swift */; };
 		83BCB48126D55C1100265411 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCB48026D55C1100265411 /* Carousel.swift */; };
-		83BCB48326D5634600265411 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCB48226D5634600265411 /* UIApplication.swift */; };
 		83BCB48526D563FC00265411 /* CarouselRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83BCB48426D563FC00265411 /* CarouselRepository.swift */; };
 		83E0A9F026D635F3008E9081 /* RightColumn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E0A9EF26D635F3008E9081 /* RightColumn.swift */; };
 		83E9492426AFC384003903FE /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E9492326AFC384003903FE /* Employee.swift */; };
@@ -134,7 +132,6 @@
 		834FBB3926C1743700ABAACF /* EmployeeReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeReviewViewModel.swift; sourceTree = "<group>"; };
 		8352931226CA6A8A009F0F92 /* DateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateHelper.swift; sourceTree = "<group>"; };
 		8352931426CA6C49009F0F92 /* HistoryRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryRow.swift; sourceTree = "<group>"; };
-		8352931A26CA7238009F0F92 /* HistoryTabItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTabItem.swift; sourceTree = "<group>"; };
 		835E357D26B15FC300DE542C /* EmployeeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeRepository.swift; sourceTree = "<group>"; };
 		835F9ACB26CF993B00B9F52C /* ReviewStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewStatus.swift; sourceTree = "<group>"; };
 		838B23F826BE943D004979A4 /* PrimaryButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButtonStyle.swift; sourceTree = "<group>"; };
@@ -160,7 +157,6 @@
 		83B395CC26CE30A400AE6824 /* PhonePopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhonePopover.swift; sourceTree = "<group>"; };
 		83B664B826BBE30200F64364 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		83BCB48026D55C1100265411 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
-		83BCB48226D5634600265411 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		83BCB48426D563FC00265411 /* CarouselRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselRepository.swift; sourceTree = "<group>"; };
 		83E0A9EF26D635F3008E9081 /* RightColumn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RightColumn.swift; sourceTree = "<group>"; };
 		83E9492326AFC384003903FE /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
@@ -441,7 +437,6 @@
 				83EF2A9226B29F1C00378602 /* TodoListTabItem.swift */,
 				83A023EF26B404EE002D24CC /* ProfileTabItem.swift */,
 				8322357C26C44A2800E74ABF /* TaskListTabItem.swift */,
-				8352931A26CA7238009F0F92 /* HistoryTabItem.swift */,
 				6F923E6E26CF647A00E77615 /* HistoryDetail.swift */,
 			);
 			path = "Tab Items";
@@ -463,7 +458,6 @@
 				83A7209C26BD7E6E007A30D3 /* Color.swift */,
 				B84F220426CBA93F00244A40 /* String.swift */,
 				B84F220626CBA98700244A40 /* Int.swift */,
-				83BCB48226D5634600265411 /* UIApplication.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -841,7 +835,6 @@
 				83A023EC26B402A0002D24CC /* MainView.swift in Sources */,
 				83A7209A26BD4B96007A30D3 /* NavigationBarModifier.swift in Sources */,
 				6F0CC8E826B137CB00D15B96 /* TaskViewModel.swift in Sources */,
-				83BCB48326D5634600265411 /* UIApplication.swift in Sources */,
 				8EC984F126C3994E000961E1 /* OnboardingStepView.swift in Sources */,
 				838B23FD26BE9B76004979A4 /* RoundedEdge.swift in Sources */,
 				B823A78926B7DEBA0035D9F4 /* AddDataPopOver.swift in Sources */,
@@ -854,7 +847,6 @@
 				83A3EB5726CCE4F2005E410D /* PhoneLayout.swift in Sources */,
 				833CCA9D26B67DCC00BA67CA /* AppColor.swift in Sources */,
 				8EA5EEE526BFCF07009C534F /* ReviseViewBuilder.swift in Sources */,
-				8352931B26CA7238009F0F92 /* HistoryTabItem.swift in Sources */,
 				83A023F926B40B42002D24CC /* TabItemRow.swift in Sources */,
 				83A06C8D26C58DFD0098863F /* TaskManagerDetailView.swift in Sources */,
 				B84F220026CA75BB00244A40 /* PasscodeField.swift in Sources */,

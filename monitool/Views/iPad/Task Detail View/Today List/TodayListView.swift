@@ -9,18 +9,12 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct TodayListView: View {
-    @State var showImagePicker: Bool = false
-    @State var showActionSheet = false
-    @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @State var images = [String]()
-    @State var image: UIImage?
-    @State var proofPage = 0
-    @State var totalPage: Int = 0
-    @StateObject var todayListViewModel: TodayListViewModel
-    @ObservedObject var role: RoleService = .shared
+	@Environment(\.presentationMode) var presentationMode
+
+	@StateObject var todayListViewModel: TodayListViewModel
+
+	@ObservedObject var role: RoleService = .shared
     @ObservedObject var employeeRepository: EmployeeRepository = .shared
-    @ObservedObject var storageService = StorageService()
-    @Environment(\.presentationMode) var presentationMode
 
     init(task: Task) {
         _todayListViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))

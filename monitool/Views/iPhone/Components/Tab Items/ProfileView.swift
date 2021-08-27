@@ -8,19 +8,17 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @StateObject var companyViewModel = CompanyViewModel()
+	@State var isPinTrue: Bool?
+	@State var editMode: EditMode = .inactive {
+		didSet {
+			if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
+		}
+	}
+
     @ObservedObject var profileViewModel: ProfileViewModel = .shared
+	@ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
+	@ObservedObject var role: RoleService = .shared
 
-    @ObservedObject var employeeListViewModel = EmployeeListViewModel()
-    @ObservedObject var role: RoleService = .shared
-    @State var editMode: EditMode = .inactive {
-        didSet {
-            if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
-        }
-    }
-
-    @State var isPinTrue: Bool?
     var body: some View {
         VStack {
             LazyVStack(spacing: 10) {
@@ -131,21 +129,6 @@ extension ProfileView {
         }
         .background(AppColor.primaryForeground)
         .textCase(.none)
-    }
-
-    @ViewBuilder func CompanyInfoTextField(title: String, placeholder: String, text: Binding<String>) -> some View {
-        GeometryReader { metrics in
-            HStack {
-                HStack {
-                    Text(title)
-                    Spacer()
-                }
-                .frame(width: metrics.size.width * 0.2)
-                TextField(placeholder, text: text)
-            }
-        }
-        .padding(.top, 4)
-        .padding(.bottom, 6)
     }
 
     @ViewBuilder func ReviewPolicy() -> some View {

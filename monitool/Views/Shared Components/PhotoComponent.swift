@@ -14,13 +14,11 @@ struct PhotoComponent: View {
     @State private var showActionSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
+	var imageURL: String
 
-    @ObservedObject var profileViewModel: ProfileViewModel = .shared
+	@Binding var editMode: EditMode
 
-    var imageURL: String
-    @Binding var editMode: EditMode
-
-    @ObservedObject var storageService = StorageService()
+	@ObservedObject var storageService: StorageService = .shared
 
     var body: some View {
         VStack {

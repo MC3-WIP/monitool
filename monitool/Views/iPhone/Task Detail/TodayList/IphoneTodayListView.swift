@@ -85,14 +85,6 @@ struct IphoneTodayListView: View {
             .padding()
         }
     }
-
-    @ViewBuilder func ProofOfWork(image _: String, date _: String, metricSize: GeometryProxy) -> some View {
-        VStack {
-            Image("MonitoolAddPhotoIllustration")
-                .resizable()
-                .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
-        }
-    }
 }
 
 struct IphoneTodayListView_Previews: PreviewProvider {

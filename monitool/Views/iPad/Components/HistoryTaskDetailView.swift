@@ -12,8 +12,6 @@ class HistoryViewModel: TaskDetailViewModel {
 }
 
 struct HistoryTaskDetailView: View {
-	@Environment(\.presentationMode) var presentationMode
-
     @StateObject var historyViewModel: HistoryViewModel
 
 	@ObservedObject var role: RoleService = .shared

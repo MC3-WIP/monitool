@@ -23,18 +23,6 @@ final class Store: ObservableObject {
     private let storage = Storage.storage()
     static let shared = Store()
 
-    func post(task: Task, completion: StoreCompletionHandler? = nil) -> DocumentReference? {
-        do {
-            return try store
-                .collection(Directory.tasks.rawValue)
-                .addDocument(from: task, completion: completion)
-        } catch {
-            print(error.localizedDescription)
-        }
-
-        return nil
-    }
-
     func post(task: Task, image: UIImage, completion: StorageCompletionHandler? = nil) {
         if let data = image.jpegData(compressionQuality: 0.1),
            let metadata = StorageMetadata(dictionary: ["contentType": "image/jpg"]),

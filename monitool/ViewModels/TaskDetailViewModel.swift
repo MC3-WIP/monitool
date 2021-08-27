@@ -20,7 +20,6 @@ class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
 	@Published var picSelection = 0
 
 	@Published var isEmployeePickerPresenting = false
-	@Published var isImagePickerPresenting = false
 
 	@Published var task: Task
 
