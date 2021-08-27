@@ -69,7 +69,7 @@ struct IphoneEmployeeReview: View {
 
                     // Review Status
                     if let company = viewModel.company {
-                        ReviewerStatus(currentReviewer: viewModel.reviewer.count, minReviewer: company.minReview)
+                        ReviewStatus(currentReviewer: viewModel.reviewer.count, minReviewer: company.minReview)
                     }
                 }
 

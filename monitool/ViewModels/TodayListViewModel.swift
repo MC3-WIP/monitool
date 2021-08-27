@@ -5,20 +5,29 @@
 //  Created by Christianto Budisaputra on 07/08/21.
 //
 
-import Foundation
+import UIKit
+import FirebaseStorage
+import FirebaseFirestore
 
 class TodayListViewModel: TaskDetailViewModel {
-    @Published var notesText = ""
-    @Published var picSelection = 0
-    @Published var isEmployeePickerPresenting = false
+    // Modals state
+    @Published var isImagePickerShowing = false
 
-    func submitTask(pic: Employee, notes: String? = nil) {
-        taskRepository.updatePIC(taskID: task.id, employee: pic)
-
-        if let notes = notes, notes != "" {
-            taskRepository.updateNotes(taskID: task.id, notes: notes)
-        }
-
-        taskRepository.updateStatus(taskID: task.id, status: TaskStatus.waitingEmployeeReview.rawValue)
+    override init(task: Task) {
+        super.init(task: task)
     }
+
+    func showImagePicker() {
+        isImagePickerShowing = true
+    }
+
+	func submitTask(pic: Employee, notes: String? = nil) {
+		taskRepository.updatePIC(taskID: task.id, employee: pic)
+
+		if let notes = notes, notes != "" {
+			taskRepository.updateNotes(taskID: task.id, notes: notes)
+		}
+
+		taskRepository.updateStatus(taskID: task.id, status: TaskStatus.waitingEmployeeReview.rawValue)
+	}
 }

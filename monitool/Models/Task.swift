@@ -60,6 +60,10 @@ class Task: Codable, Identifiable, Hashable {
 
 extension Task {
     static let defaultRepetition = [false, false, false, false, false, false, false]
+
+    enum Field: String {
+        case name, proof
+    }
 }
 
 enum TaskStatus: String, Codable, CaseIterable {

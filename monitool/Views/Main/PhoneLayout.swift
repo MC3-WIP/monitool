@@ -14,7 +14,7 @@ struct PhoneLayout: View {
 
     @State var selectedTab: PhoneTabItem
 
-    init(selectedTab: PhoneTabItem = .taskList) {
+    init(selectedTab: PhoneTabItem = .todoList) {
         _selectedTab = State(wrappedValue: selectedTab)
     }
 

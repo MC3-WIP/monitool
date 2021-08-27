@@ -13,7 +13,7 @@ import SwiftUI
 class StorageService: ObservableObject {
     let storage = Storage.storage()
     var storageRef: StorageReference?
-    @ObservedObject var companyViewModel = CompanyViewModel()
+	@ObservedObject var companyViewModel: CompanyViewModel = .shared
 
     static let shared = StorageService()
 
