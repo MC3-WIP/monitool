@@ -19,9 +19,7 @@ extension OwnerReviewView {
                     .indicator { _, _ in
                         ProgressView()
                     }
-                    .scaledToFill()
-                    .frame(height: 320)
-                    .clipped()
+                    .scaledToFit()
             } else {
                 Image("MonitoolEmptyReferenceIllus")
                     .resizable()

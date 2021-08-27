@@ -22,9 +22,7 @@ extension ReviseView {
 					.indicator { _, _ in
 						ProgressView()
 					}
-					.scaledToFill()
-					.frame(height: 320)
-					.clipped()
+					.scaledToFit()
 			} else {
 				Image("MonitoolEmptyReferenceIllus")
 					.resizable()
@@ -34,7 +32,6 @@ extension ReviseView {
 
 			Text(reviseViewModel.desc)
 		}
-		.padding()
 	}
 
     @ViewBuilder func reviseButton() -> some View {

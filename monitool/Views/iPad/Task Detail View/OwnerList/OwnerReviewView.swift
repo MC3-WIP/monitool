@@ -52,7 +52,7 @@ struct OwnerReviewView: View {
 					approveButton()
 				}
 			}
-		}.padding(24)
+		}.padding([.top, .leading, .trailing], 24.0)
 	}
 }
 

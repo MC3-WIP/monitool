@@ -52,10 +52,9 @@ struct TodayListView: View {
                         }
                     }
                 }
-                .padding(.top)
             }
         }
-        .padding([.leading, .trailing], 24)
+        .padding([.top, .leading, .trailing], 24.0)
         .navigationTitle("Today List")
     }
 
@@ -69,9 +68,7 @@ struct TodayListView: View {
                     .indicator { _, _ in
                         ProgressView()
                     }
-					.scaledToFill()
-					.frame(height: 320)
-					.clipped()
+					.scaledToFit()
             } else {
                 Image("MonitoolEmptyReferenceIllus")
                     .resizable()

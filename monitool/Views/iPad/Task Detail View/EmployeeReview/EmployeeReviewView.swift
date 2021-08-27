@@ -63,7 +63,7 @@ struct EmployeeReviewView: View {
               }
             }
         }
-        .padding(24)
+        .padding([.top, .leading, .trailing], 24.0)
         .sheet(isPresented: $showingPinField) {
             PasscodeField(isPinTrue: $isPinTrue) { inputtedPin, _ in
                 if isApproving {

@@ -89,7 +89,7 @@ struct ProofOfWork: View {
             // MARK: Photo Preview
             Image(uiImage: imageToBeAdded)
                 .resizable()
-                .aspectRatio(1, contentMode: .fit)
+                .scaledToFill()
                 .cornerRadius(12)
         } else if let proofOfWork = viewModel.proofOfWork {
             // MARK: Proof of Work

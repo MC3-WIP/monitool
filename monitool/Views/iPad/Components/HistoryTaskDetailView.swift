@@ -43,9 +43,10 @@ struct HistoryTaskDetailView: View {
 							viewModel: historyViewModel
 						)
 					}
-				}
+                }
+                .padding([.top, .leading, .trailing], 24.0)
 			}
-		}.padding(24)
+        }
     }
 
 	@ViewBuilder func renderLeftColumn() -> some View {
@@ -60,9 +61,7 @@ struct HistoryTaskDetailView: View {
 					.indicator { _, _ in
 						ProgressView()
 					}
-					.scaledToFill()
-					.frame(height: 320)
-					.clipped()
+					.scaledToFit()
 			} else {
 				Image("MonitoolEmptyReferenceIllus")
 					.resizable()
@@ -72,6 +71,5 @@ struct HistoryTaskDetailView: View {
 
 			Text(historyViewModel.desc)
 		}
-		.padding()
 	}
 }
