@@ -17,7 +17,7 @@ struct AddDataPopOver: View {
     @State var taskDesc = ""
     @State var taskRepeated = Task.defaultRepetition
     @State var taskPhotoReference: String?
-	@ObservedObject var employeeViewModel: EmployeeListViewModel = .shared
+    @ObservedObject var employeeViewModel: EmployeeListViewModel = .shared
     @ObservedObject var taskViewModel = TaskViewModel()
     @Binding var showingPopOver: Bool
 
