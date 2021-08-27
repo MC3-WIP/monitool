@@ -68,9 +68,9 @@ struct IphoneTodayListView: View {
                     } else {
                         Image("MonitoolEmptyReferenceIllus")
                             .resizable()
+							.padding(36)
                     }
                 }
-                .padding(36)
 
                 if let desc = todayListViewModel.task.desc {
                     Text(desc)

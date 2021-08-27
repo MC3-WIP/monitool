@@ -80,7 +80,7 @@ struct TodayListView: View {
                 Image("MonitoolEmptyReferenceIllus")
                     .resizable()
                     .scaledToFit()
-                    .padding(36)
+                    .padding([.horizontal, .bottom], 36)
             }
             if let desc = todayListViewModel.task.desc {
                 Text(desc)

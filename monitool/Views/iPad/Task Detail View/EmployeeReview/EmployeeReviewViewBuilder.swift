@@ -30,7 +30,7 @@ extension EmployeeReviewView {
                 Image("MonitoolEmptyReferenceIllus")
                     .resizable()
                     .scaledToFill()
-                    .padding(36)
+                    .padding([.horizontal, .bottom], 36)
             }
 
             // Task Desc

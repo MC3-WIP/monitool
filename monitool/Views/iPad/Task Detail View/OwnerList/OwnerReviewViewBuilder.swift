@@ -26,7 +26,7 @@ extension OwnerReviewView {
                 Image("MonitoolEmptyReferenceIllus")
                     .resizable()
                     .scaledToFit()
-                    .padding(36)
+                    .padding([.horizontal, .bottom], 36)
             }
 
             if let desc = ownerReviewViewModel.task.desc {

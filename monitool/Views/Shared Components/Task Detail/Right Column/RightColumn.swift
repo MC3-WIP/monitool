@@ -20,12 +20,9 @@ protocol RightColumnViewModel: ObservableObject {
     var notes: String { get }
     var notesTextField: String { get set }
     var employees: [Employee] { get }
-    var imageToBeAdded: UIImage? { get set }
-    var proofOfWork: [String]? { get set }
     var logs: [ActivityLog] { get set }
     var isEmployeePickerPresenting: Bool { get set }
     var picSelection: Int { get set }
-    var isImagePickerPresenting: Bool { get set }
     var reviewer: [Employee] { get set }
     var company: Company? { get set }
 }
@@ -45,16 +42,13 @@ struct RightColumn<Model>: View where Model: RightColumnViewModel {
     }
 
     private var content: some View {
-        VStack(alignment: .leading, spacing: 24) {
+        VStack(alignment: .leading, spacing: 12) {
             renderComponents()
         }
     }
 
     @ViewBuilder
     private func renderComponents() -> some View {
-        if components.contains(.proofOfWork) {
-//            renderProofOfWork()
-        }
         if components.contains(.picSelector) {
             renderPICSelector()
         }
@@ -88,8 +82,7 @@ struct RightColumn<Model>: View where Model: RightColumnViewModel {
 
 extension RightColumn {
     enum Component: String {
-        case proofOfWork,
-             picSelector,
+        case picSelector,
              notesTextField,
              picText,
              notesText,
@@ -259,13 +252,6 @@ extension RightColumn {
             )
         }
     }
-
-    private var imagePicker: some View {
-        ImagePicker(sourceType: .camera) { image in
-            viewModel.imageToBeAdded = image
-//            viewModel.saveChanges()
-        }
-    }
 }
 
 class MyViewModel: RightColumnViewModel {
@@ -313,15 +299,8 @@ class MyViewModel: RightColumnViewModel {
 struct RightColumn_Previews: PreviewProvider {
     static var previews: some View {
         RightColumn<MyViewModel>(components: [
-//            .proofOfWork,
-            .commentText,
-            .commentTextField,
-            .notesText,
+			.picSelector,
             .notesTextField,
-            .picText,
-            .picSelector,
-            .reviewStatus,
-            .logs
         ], viewModel: MyViewModel())
         .padding()
         .previewLayout(.fixed(width: 400, height: 1200))

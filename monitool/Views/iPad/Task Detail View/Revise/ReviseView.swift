@@ -83,7 +83,7 @@ struct ReviseView: View {
 				Image("MonitoolEmptyReferenceIllus")
 					.resizable()
 					.scaledToFill()
-					.padding(36)
+					.padding([.horizontal, .bottom], 36)
 			}
 
 			Text(reviseViewModel.desc)
