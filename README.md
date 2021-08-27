@@ -1,4 +1,4 @@
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+![Logo](https://github.com/MC3-WIP/monitool/blob/feature/edit_readme/Assets/readme_header.png?raw=true)
 
 # Monitool - Level Up Your Business
 
@@ -18,6 +18,8 @@ Monitool is an app native iOS Apps that helps small business owner to monitor th
 | Primary Color   | ![#4EB0AB](https://via.placeholder.com/10/4EB0AB?text=+) #4EB0AB |
 | Secondary Color | ![#F0F9F8](https://via.placeholder.com/10/F0F9F8?text=+) #F0F9F8 |
 
+---
+
 ## Tech Stack
 
 - **Languange:** [Swift](https://swift.org/)
@@ -26,15 +28,21 @@ Monitool is an app native iOS Apps that helps small business owner to monitor th
 
 - **Backend:** [Firebase](https://firebase.google.com/)
 
+  - Authentication
+  - Firestore
+  - Storage
+  - Functions
+  - Crashlytics
+
 - **Code Analysis:** [SwiftLint](https://github.com/realm/SwiftLint), [Periphery](https://github.com/peripheryapp/periphery)
 
 - **Dependencies ([CocoaPods](https://cocoapods.org/)):**
   - [SDWebImageSwiftUI](https://github.com/SDWebImage/SDWebImageSwiftUI)
   - [Introspect](https://github.com/siteline/SwiftUI-Introspect)
 
-## Screenshots
+<!-- ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here) -->
 
 ## Team
 
@@ -45,6 +53,8 @@ Monitool is an app native iOS Apps that helps small business owner to monitor th
 - UI Designer : [Natalia Fellyana](https://github.com/nataliafellyana)
 - UI Designer : [Ricksen Tanata](https://github.com/ricksentnt)
 - UI Designer : [Scaltiel Gloria](https://github.com/scaltielgloriaa)
+
+---
 
 ## FAQ
 
