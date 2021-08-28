@@ -42,6 +42,7 @@ extension ReviseView {
 			) { _ in
 				self.presentationMode.wrappedValue.dismiss()
 			}
+            reviseViewModel.reviseTask(comment: reviseViewModel.commentTextField)
         } label: {
             HStack {
                 Image(systemName: "repeat")

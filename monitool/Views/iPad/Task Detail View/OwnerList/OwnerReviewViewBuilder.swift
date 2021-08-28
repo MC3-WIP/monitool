@@ -44,6 +44,8 @@ extension OwnerReviewView {
             ) { _ in
                 self.presentationMode.wrappedValue.dismiss()
             }
+            ownerReviewViewModel.reviseTask(comment: ownerReviewViewModel.commentTextField)
+            
         } label: {
             HStack {
                 Image(systemName: "repeat").font(.headline)
