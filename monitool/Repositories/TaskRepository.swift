@@ -99,12 +99,15 @@ final class TaskRepository: ObservableObject {
             }
     }
 
-    func add(_ task: Task, _ taskList: TaskList, _ id: String, completion: ((Error?) -> Void)? = nil) {
-        do {
-            try store.collection(path.task).document(id).setData(from: task, completion: completion)
-            try store.collection(path.taskList).document(id).setData(from: taskList, completion: completion)
-        } catch {
-            fatalError("Fail adding new task")
+    func add(_ task: Task, _ taskList: TaskList, _ id: String, completion: (() -> Void)? = nil) {
+        DispatchQueue.global().async { [self] in
+            do {
+                try store.collection(path.task).document(id).setData(from: task)
+                try store.collection(path.taskList).document(id).setData(from: taskList)
+                completion?()
+            } catch {
+                fatalError("Fail adding new task")
+            }
         }
     }
 
@@ -152,16 +155,20 @@ final class TaskRepository: ObservableObject {
                     .collection(path.task)
                     .document(taskID)
                     .setData(["photoReference": url.absoluteString], merge: true, completion: completion)
+                store
+                    .collection(path.taskList)
+                    .document(taskID)
+                    .setData(["photoReference": url.absoluteString], merge: true, completion: completion)
             }
         }
     }
 
     func submitTask(task: Task, taskList: TaskList, photo: UIImage, id: String) {
-        add(task, taskList, id) { _ in
+        add(task, taskList, id) {
             // Setelah task ada di firebase, baru upload photo
             StorageService
                 .shared
-                .upload(image: photo, path: "taskPhotoReference/\(id)/\(UUID().uuidString)") { metadata, _ in
+                .upload(image: photo, path: "taskPhotoReference/\(id)") { metadata, _ in
                     // Setelah photo di upload, update field photo ref task tadi
                     if let metadata = metadata,
                        let path = metadata.path {
