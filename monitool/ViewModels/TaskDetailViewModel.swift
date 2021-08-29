@@ -50,17 +50,17 @@ class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
     private let dateHelper = DateLogHelper()
     
     var logs: [ActivityLog] {
-        for index in 0...task.titleLog.count{
-            ActivityLog(title: task.titleLog[index], timestamp: dateHelper.getStringFromDate(date: task.timeStampLog[index]))
+        var log: [ActivityLog] = []
+        for index in 0...task.titleLog.count - 1 {
+            log.append(ActivityLog(title: task.titleLog[index], timestamp: dateHelper.getStringFromDate(date: task.timeStampLog[index])))
         }
-        return 
+        return log
     }
 
     let taskRepository: TaskRepository = .shared
 
     var company: Company?
     private let companyRepository: CompanyRepository = .shared
-    
 
     @Published var pic: Employee?
 
@@ -131,6 +131,10 @@ class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
         self.task = task
         task.approvingReviewer?.forEach(mapReviewer)
         task.disapprovingReviewer?.forEach(mapReviewer)
+    }
+    
+    func getActivityLog(){
+        
     }
 
     private func mapReviewer(_ ref: DocumentReference) {

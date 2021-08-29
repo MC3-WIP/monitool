@@ -12,7 +12,7 @@ struct DateLogHelper {
     
     init() {
         dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "YY, MMM d, HH:mm:ss"
+        dateFormatter.dateFormat = "MMM d, h:mm a"
     }
     
     func getStringFromDate(date: Date) -> String {
