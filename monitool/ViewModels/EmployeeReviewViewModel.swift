@@ -64,6 +64,7 @@ class EmployeeReviewViewModel: TaskDetailViewModel {
 				taskID: task.id,
 				employee: employee
 			) { self.handleReviewCompletion($0) }
+            taskRepository.updateLogTask(taskID: task.id, titleLog: "Approved by \(employee.name)", timeStamp: Date())
 		case let .failure(error):
 			if isPinTrue.wrappedValue != nil {
 				isPinTrue.wrappedValue = false
@@ -84,6 +85,7 @@ class EmployeeReviewViewModel: TaskDetailViewModel {
 				taskID: task.id,
 				employee: employee
 			) { self.handleReviewCompletion($0, approving: false) }
+            taskRepository.updateLogTask(taskID: task.id, titleLog: "Rejected by \(employee.name)", timeStamp: Date())
 		case let .failure(error):
 			if isPinTrue.wrappedValue != nil {
 				isPinTrue.wrappedValue = false

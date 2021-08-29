@@ -9,14 +9,16 @@ import FirebaseFirestore
 import Foundation
 
 class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
+    
 	@Published var notesTextField       = ""
 	@Published var commentTextField     = ""
 
 	@Published var imageToBeAdded: UIImage?
 	@Published var proofOfWork: [String]?
 
-	@Published var logs = [ActivityLog]()
-
+    @Published var titleLog = ""
+    @Published var timeStampLog: Date?
+    
 	@Published var picSelection = 0
 
 	@Published var isEmployeePickerPresenting = false
@@ -44,11 +46,21 @@ class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
 	var desc: String {
 		task.desc ?? ""
 	}
+    
+    private let dateHelper = DateLogHelper()
+    
+    var logs: [ActivityLog] {
+        for index in 0...task.titleLog.count{
+            ActivityLog(title: task.titleLog[index], timestamp: dateHelper.getStringFromDate(date: task.timeStampLog[index]))
+        }
+        return 
+    }
 
     let taskRepository: TaskRepository = .shared
 
     var company: Company?
     private let companyRepository: CompanyRepository = .shared
+    
 
     @Published var pic: Employee?
 

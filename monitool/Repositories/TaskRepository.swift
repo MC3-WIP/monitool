@@ -135,6 +135,17 @@ final class TaskRepository: ObservableObject {
             store.collection(path.task).document(taskID).updateData(["status": status], completion: completion)
         }
     }
+    
+    func updateLogTask(taskID: String, titleLog: String, timeStamp: Date){
+        store.collection(path.task).document(taskID).setData(
+            [
+                "titleLog" : FieldValue.arrayUnion([titleLog]),
+                "timeStampLog" : FieldValue.arrayUnion([timeStamp]),
+                
+           ],
+            merge: true
+        )
+    }
 
     func appendReviewer(approving: Bool = true, taskID: String, employee: Employee, completion: ((Error?) -> Void)? = nil) {
         let employeeRef: DocumentReference = store.collection(path.employee).document(employee.id)

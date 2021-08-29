@@ -20,6 +20,9 @@ class Task: Codable, Identifiable, Hashable {
     var notes: String?
     var comment: String?
 
+    var titleLog: [String]
+    var timeStampLog: [Date]
+
     var pic: DocumentReference?
     var approvingReviewer: [DocumentReference]?
     var disapprovingReviewer: [DocumentReference]?
@@ -41,6 +44,8 @@ class Task: Codable, Identifiable, Hashable {
         isHistory = false
         self.photoReference = photoReference
         self.repeated = repeated
+        self.titleLog = ["\(name) created by Owner"]
+        self.timeStampLog = [Date()]
     }
 
     static func == (lhs: Task, rhs: Task) -> Bool {
