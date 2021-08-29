@@ -12,6 +12,7 @@ struct CompanyOnboardingView: View {
     @State var minReviewers = 0
     @State var companyName: String = ""
     @State private var showingSheet = false
+    @State private var showingAlert = false
     @State var isLinkActive = false
 
     @StateObject var ownerPin = TextBindingHelper(limit: 4)
@@ -39,27 +40,24 @@ struct CompanyOnboardingView: View {
                         }
                         HStack {
                             Text("Owner Pin")
-                            TextField("Owner Pin", text: $ownerPin.value)
+                            TextField("Owner Pin", text: $ownerPin.text)
                                 .multilineTextAlignment(.trailing)
                                 .keyboardType(.numberPad)
-                                .onChange(of: ownerPin.value, perform: { value in
-                                    if value.count < 4 {
-                                        ownerPin.value = "1234"
-                                    }
-                                })
                         }
                         HStack {
                             Text("Task Reviewer: ")
                             Spacer()
-                            Stepper("\(minReviewers) Reviewer(s)", onIncrement: {
-                                if minReviewers < employeeViewModel.employees.count {
-                                    minReviewers += 1
+                            Stepper("\(minReviewers) Reviewer(s)") {
+                                minReviewers += 1
+                                if minReviewers > employeeViewModel.employees.count {
+                                    minReviewers = employeeViewModel.employees.count
                                 }
-                            }, onDecrement: {
-                                if minReviewers > 0 {
-                                    minReviewers -= 1
+                            } onDecrement: {
+                                minReviewers -= 1
+                                if minReviewers < 0 {
+                                    minReviewers = 0
                                 }
-                            })
+                            }.disabled(employeeViewModel.employees.count == 0)
                         }
                     }
                     Section(
@@ -92,12 +90,12 @@ struct CompanyOnboardingView: View {
                         }
                         .onDelete(perform: employeeViewModel.delete)
                     }.textCase(nil)
-                    
                 }.listStyle(GroupedListStyle())
+
                 HStack {
                     Button {
                         self.isLinkActive = true
-                        if companyName == "" && ownerPin.value == "" {
+                        if companyName == "" || ownerPin.text == "" {
                                 showingAlert = true
                         } else {
                             let company = Company(
@@ -121,8 +119,8 @@ struct CompanyOnboardingView: View {
                             .cornerRadius(8)
                             .alert(isPresented: $showingAlert) {
                                 Alert(
-                                    title: Text("Important Messages"), 
-                                    message: Text("Please input your Company Name & Owner Pin before Continue"), 
+                                    title: Text("Missing Info"),
+                                    message: Text("Please input your company name and a PIN before proceeding."),
                                     dismissButton: .default(Text("Got it!"))
                                 )
                             }

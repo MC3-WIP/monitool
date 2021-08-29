@@ -16,7 +16,7 @@ struct ProfileView: View {
 	}
 
     @StateObject var ownerPin = TextLimiter(limit: 4)
-    
+
     @ObservedObject var profileViewModel: ProfileViewModel = .shared
     @ObservedObject var role: RoleService = .shared
     @ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
@@ -38,7 +38,6 @@ struct ProfileView: View {
                                     .onChange(of: profileViewModel.company.name) { value in
                                         profileViewModel.company.name = value
                                     }
-                                    
                             }
                         }
                         .padding(.top, 4)
@@ -52,15 +51,10 @@ struct ProfileView: View {
                                 .frame(width: metrics.size.width * 0.2)
                                 TextField(profileViewModel.company.ownerPin, text: $ownerPin.value)
                                     .onChange(of: profileViewModel.company.ownerPin) { value in
-                                        if value.count < 4{
-                                            
-                                        }
-                                        else{
+                                        if value.count == 4 {
                                             profileViewModel.company.ownerPin = value
                                         }
                                     }
-                                    
-                                    
                             }
                         }
                         .padding(.top, 4)
@@ -70,7 +64,6 @@ struct ProfileView: View {
                 }
 
                 // MARK: - Employee List
-                
                 Section(header: EmployeeListHeader()) {
                     ForEach(employeeListViewModel.employees) { employee in
                         EmployeeRow(employee: employee)
@@ -246,7 +239,7 @@ extension ProfileView {
         .cornerRadius(8)
         .disabled(editMode.isEditing)
     }
-    
+
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }

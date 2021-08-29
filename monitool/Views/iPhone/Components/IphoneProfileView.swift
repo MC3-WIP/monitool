@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct IphoneProfileView: View {
-    
     @State var editModeIphone: EditMode = .inactive {
         didSet {
             if editModeIphone.isEditing {
@@ -43,9 +42,7 @@ struct IphoneProfileView: View {
                             text: $ownerPin.value
                         )
                         .onChange(of: profileViewModel.company.ownerPin) { value in
-                            if value.count < 4 {
-                            }
-                            else {
+                            if value.count == 4 {
                                 profileViewModel.company.ownerPin = value
                             }
                         }
