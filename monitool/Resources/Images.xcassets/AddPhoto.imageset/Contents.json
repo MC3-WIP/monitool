@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "MonitoolEmptyReferenceIllus.png",
+      "filename" : "MonitoolAddPhotoHere.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "MonitoolAddPhotoHere@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "MonitoolAddPhotoHere@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

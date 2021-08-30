@@ -43,7 +43,7 @@ struct IphoneEmployeeReview: View {
                         .bold()
                         .foregroundColor(.gray)
 
-                    Image("MonitoolEmptyReferenceIllus")
+                    Image("EmptyReference")
                         .resizable()
                         .scaledToFill()
                         .overlay(RoundedRectangle(cornerRadius: 8).stroke(AppColor.accent, lineWidth: 2))
@@ -82,7 +82,7 @@ struct IphoneEmployeeReview: View {
                             .foregroundColor(.gray)
                         WebImage(url: URL(string: referenceImage))
                             .resizable()
-                            .placeholder(Image("MonitoolEmptyReferenceIllus"))
+                            .placeholder(Image("EmptyReference"))
                             .indicator { _, _ in
                                 ProgressView()
                             }
@@ -91,7 +91,7 @@ struct IphoneEmployeeReview: View {
                             .cornerRadius(8)
                     }
                 } else {
-                    Image("MonitoolEmptyReferenceIllus")
+                    Image("EmptyReference")
                         .resizable()
                         .scaledToFill()
                 }
