@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ReviewerStatus: View {
+struct ReviewStatus: View {
     let currentReviewer: Int
     let minReviewer: Int
 
@@ -28,9 +28,8 @@ struct ReviewerStatus: View {
             HStack {
                 Text("Reviewed by:")
                     .foregroundColor(.gray)
-                    .bold()
                 Text(reviewerStatus)
-            }
+            }.font(.headline)
 
             HStack {
                 ForEach(0 ..< currentReviewer) { _ in
@@ -48,7 +47,7 @@ struct ReviewerStatus: View {
 
 struct ReviewerStatus_Previews: PreviewProvider {
     static var previews: some View {
-        ReviewerStatus(currentReviewer: 2, minReviewer: 8)
+        ReviewStatus(currentReviewer: 2, minReviewer: 8)
             .previewLayout(.sizeThatFits)
     }
 }

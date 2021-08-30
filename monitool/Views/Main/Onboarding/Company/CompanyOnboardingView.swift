@@ -20,9 +20,12 @@ struct CompanyOnboardingView: View {
     @ObservedObject var ownerPin = TextLimiter(limit: 4)
     @State private var showingAlert = false
 
-    init() {
-        userAuth = .shared
-    }
+    @StateObject var ownerPin = TextBindingHelper(limit: 4)
+
+    @ObservedObject var employeeViewModel: EmployeeListViewModel = .shared
+    @ObservedObject var companyViewModel: CompanyViewModel = .shared
+    @ObservedObject var storageService: StorageService = .shared
+    @ObservedObject var userAuth: AuthService = .shared
 
     var body: some View {
         NavigationView {
@@ -65,18 +68,20 @@ struct CompanyOnboardingView: View {
                             })
                         }
                     }
-                    Section(header: HStack {
-                        Text("Employee")
-                            .font(.title2.weight(.semibold))
-                            .foregroundColor(.black)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        Spacer()
-                        Button("Add Employee") {
-                            showingSheet = true
-                        }
-                        .popover(isPresented: $showingSheet) {
-                            AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
-                                .frame(width: 400, height: 400)
+                    Section(
+                        header: HStack {
+                            Text("Employee")
+                                .font(.title2.weight(.semibold))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Spacer()
+                            Button("Add Employee") {
+                                showingSheet = true
+                            }
+                            .popover(isPresented: $showingSheet) {
+                                AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
+                                    .frame(width: 400, height: 400)
+                            }
                         }
                     }, footer: HStack {
                         Spacer()
@@ -124,10 +129,32 @@ struct CompanyOnboardingView: View {
                     }.textCase(nil)
                     
                 }.listStyle(GroupedListStyle())
-            }.navigationTitle("Profile").navigationBarTitleDisplayMode(.inline)
+                HStack {
+                    Button {
+                        self.isLinkActive = true
+                        let company = Company(
+                            name: companyName,
+                            minReview: minReviewers,
+                            ownerPin: ownerPin.text,
+                            hasLoggedIn: true,
+                            profileImage: ""
+                        )
+                        companyViewModel.create(company)
+                        storageService.updateImageURL(category: "profile")
+                        userAuth.hasLogin()
+                    } label: {
+                        Text("Save")
+                            .padding()
+                            .frame(minWidth: 0, maxWidth: .infinity)
+                            .background(AppColor.accent)
+                            .foregroundColor(AppColor.primaryForeground)
+                            .contentShape(Rectangle())
+                            .cornerRadius(8)
+                    }
+                }.padding()
+            }.navigationBarTitle("Profile", displayMode: .inline)
         }.navigationViewStyle(StackNavigationViewStyle())
     }
-    
     func saveCompanyData(company _: Company) {}
 }
 

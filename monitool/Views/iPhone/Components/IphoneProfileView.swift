@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct IphoneProfileView: View {
-    @StateObject var companyViewModel = CompanyViewModel()
     @StateObject var profileViewModel = ProfileViewModel()
     @ObservedObject var ownerPin = TextLimiter(limit: 4)
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
@@ -23,7 +22,10 @@ struct IphoneProfileView: View {
                 profileViewModel.isPinHidden = true
             }
         }
-    }
+	}
+
+	@ObservedObject var role: RoleService = .shared
+	@ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
 
     var body: some View {
         VStack {
@@ -60,12 +62,12 @@ struct IphoneProfileView: View {
                     .onDelete(perform: employeeListViewModel.delete)
                 }
             }
-            .listStyle(GroupedListStyle())
+            .listStyle(InsetGroupedListStyle())
             .onAppear {
                 UITableView.appearance().separatorColor = .clear
             }
         }
-        .padding()
+        .padding(.vertical, 10)
         .toolbar {
             EditButton()
         }

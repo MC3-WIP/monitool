@@ -16,7 +16,7 @@ struct TodoListTabItem: View {
 
     let statusIcon: [Image] = [
         Image(systemName: "list.bullet.below.rectangle"),
-        Image(systemName: "person.3"),
+        Image(systemName: "person.2"),
         Image(systemName: "person.crop.circle.badge.checkmark"),
         Image(systemName: "repeat")
     ]
@@ -31,11 +31,11 @@ struct TodoListTabItem: View {
                         isExpanded: self.selection.contains(taskStatuses[index]),
                         icon: statusIcon[index]
                     )
-                    .animation(Animation.easeIn)
+                    .animation(.easeIn)
                     .onTapGesture { self.selectDeselect(taskStatuses[index]) }
                 }
             }
-            .navigationTitle("Task List")
+            .navigationTitle("To-Do List")
             .toolbar {
                 NavigationLink(destination: HistoryView()) {
                     Image(systemName: "clock")
@@ -43,8 +43,8 @@ struct TodoListTabItem: View {
             }
         }
         .tabItem {
-            Image(systemName: "list.number")
-            Text("Task List")
+            Image(systemName: "list.bullet.rectangle")
+            Text("To-Do List")
         }
     }
 
@@ -57,8 +57,7 @@ struct TodoListTabItem: View {
     }
 
     func getFilteredTask(filter: TaskStatus) -> [Task] {
-        let result = taskViewModel.tasks.filter { $0.status == filter }
-        return result
+        taskViewModel.tasks.filter { $0.status == filter }
     }
 }
 
@@ -78,9 +77,9 @@ struct TasksRowView: View {
         .contentShape(Rectangle())
         .animation(.linear(duration: 0.3))
         if isExpanded {
-            if tasks.count != 0 {
+            if tasks.count > 0 {
                 ForEach(tasks) { task in
-                    NavigationLink(destination: IphoneEmployeeReview(task: task)) {
+                    NavigationLink(destination: IphoneTodayListView(task: task)) {
                         Text(task.name)
                     }
                 }
