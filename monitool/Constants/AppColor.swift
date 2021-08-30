@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AppColor {
     static let accent = Color("Accent")
+    static let lightAccent = Color("LightAccent")
     static let primaryForeground = Color("Primary Foreground")
     static let primaryBackground = Color("Primary Background")
     static let secondary = Color("Secondary")

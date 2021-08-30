@@ -7,46 +7,53 @@
 
 import SwiftUI
 
+class OwnerReviewViewModel: TaskDetailViewModel {
+
+}
+
 struct OwnerReviewView: View {
-    @StateObject var OwnerViewModel: TodayListViewModel
-    @StateObject var taskDetailViewModel: TaskDetailViewModel
-    @ObservedObject var role: RoleService = .shared
-    @ObservedObject var employeeRepository: EmployeeRepository = .shared
-    @ObservedObject var taskViewModel = TaskViewModel()
-    @Environment(\.presentationMode) var presentationMode
+	@Environment(\.presentationMode) var presentationMode
 
-    init(task: Task) {
-        _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
-        _OwnerViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
-    }
+	@StateObject var ownerReviewViewModel: OwnerReviewViewModel
 
-    private let notes = "Sudah Pak Bos"
-    private let pic = "Mawar"
+	@ObservedObject var role: RoleService = .shared
 
-    @State var totalPage: Int = 3
-    @State var datePhoto = "21 Juli 2021 at 15.57"
-    @State private var comment: String = ""
-    @State var proofPage = 0
+	init(task: Task) {
+		_ownerReviewViewModel = StateObject(wrappedValue: OwnerReviewViewModel(task: task))
+	}
 
-    var body: some View {
-        VStack {
-            ScrollView {
-                HStack {
-                    LeftColumn()
-                    RightColumn()
-                }
-                .frame(height: 680)
-            }
+	var body: some View {
+		VStack {
+			ScrollView {
+				HStack(alignment: .top, spacing: 24) {
+					renderLeftColumn()
 
-            HStack(spacing: 24) {
-                if role.isOwner {
-                    reviseButton()
-                    approveButton()
-                }
-            }
-            .padding()
-        }
-    }
+					VStack(alignment: .leading, spacing: 24) {
+						ProofOfWork(task: ownerReviewViewModel.task)
+
+						RightColumn<OwnerReviewViewModel>(
+							components: role.isOwner ? [
+								.picText,
+								.notesText,
+								.commentTextField
+							] : [
+								.picText,
+								.notesText
+							],
+							viewModel: ownerReviewViewModel
+						)
+					}
+				}
+			}
+
+			if role.isOwner {
+				HStack(spacing: 24) {
+					reviseButton()
+					approveButton()
+				}
+			}
+		}.padding([.top, .leading, .trailing], 24.0)
+	}
 }
 
 struct OwnerReviewView_Preview: PreviewProvider {

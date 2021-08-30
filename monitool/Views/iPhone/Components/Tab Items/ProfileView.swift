@@ -8,10 +8,14 @@
 import SwiftUI
 
 struct ProfileView: View {
-    @Environment(\.presentationMode) var presentationMode
-    @StateObject var companyViewModel = CompanyViewModel()
-    @ObservedObject var profileViewModel: ProfileViewModel = .shared
+	@State var isPinTrue: Bool?
+	@State var editMode: EditMode = .inactive {
+		didSet {
+			if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
+		}
+	}
 
+    @ObservedObject var ownerPin = TextLimiter(limit: 4)
     @ObservedObject var employeeListViewModel = EmployeeListViewModel()
     @ObservedObject var role: RoleService = .shared
     @State var editMode: EditMode = .inactive {
@@ -19,13 +23,11 @@ struct ProfileView: View {
             if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
         }
     }
-
-    @State var isPinTrue: Bool?
+    @ObservedObject var profileViewModel: ProfileViewModel = .shared
     var body: some View {
         VStack {
-            LazyVStack(spacing: 10) {
+            List {
                 // MARK: - Company Profile
-
                 Section(header: CompanyProfileHeader()) {
                     if editMode.isEditing {
                         GeometryReader { metrics in
@@ -39,6 +41,7 @@ struct ProfileView: View {
                                     .onChange(of: profileViewModel.company.name) { value in
                                         profileViewModel.company.name = value
                                     }
+                                    
                             }
                         }
                         .padding(.top, 4)
@@ -50,10 +53,17 @@ struct ProfileView: View {
                                     Spacer()
                                 }
                                 .frame(width: metrics.size.width * 0.2)
-                                TextField("1234", text: $profileViewModel.company.ownerPin)
+                                TextField(profileViewModel.company.ownerPin, text: $ownerPin.value)
                                     .onChange(of: profileViewModel.company.ownerPin) { value in
-                                        profileViewModel.company.ownerPin = value
+                                        if value.count < 4{
+                                            
+                                        }
+                                        else{
+                                            profileViewModel.company.ownerPin = value
+                                        }
                                     }
+                                    
+                                    
                             }
                         }
                         .padding(.top, 4)
@@ -63,7 +73,7 @@ struct ProfileView: View {
                 }
 
                 // MARK: - Employee List
-
+                
                 Section(header: EmployeeListHeader()) {
                     ForEach(employeeListViewModel.employees) { employee in
                         EmployeeRow(employee: employee)
@@ -71,13 +81,11 @@ struct ProfileView: View {
                     .onDelete(perform: employeeListViewModel.delete)
                 }
             }
-
+            .listStyle(InsetGroupedListStyle())
             Spacer()
-
             SwitchRoleButton()
         }
         .padding(.vertical, 36)
-        .padding(.horizontal, 16)
         .navigationBarTitle("Profile", displayMode: .inline)
         .toolbar {
             if role.isOwner {
@@ -130,21 +138,6 @@ extension ProfileView {
         }
         .background(AppColor.primaryForeground)
         .textCase(.none)
-    }
-
-    @ViewBuilder func CompanyInfoTextField(title: String, placeholder: String, text: Binding<String>) -> some View {
-        GeometryReader { metrics in
-            HStack {
-                HStack {
-                    Text(title)
-                    Spacer()
-                }
-                .frame(width: metrics.size.width * 0.2)
-                TextField(placeholder, text: text)
-            }
-        }
-        .padding(.top, 4)
-        .padding(.bottom, 6)
     }
 
     @ViewBuilder func ReviewPolicy() -> some View {
@@ -255,7 +248,7 @@ extension ProfileView {
         .cornerRadius(8)
         .disabled(editMode.isEditing)
     }
-
+    
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }

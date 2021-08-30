@@ -10,7 +10,6 @@ import SwiftUI
 struct AddDataPopOver: View {
     var sheetType: String
     @State private var device = UIDevice.current.userInterfaceIdiom
-    @Environment(\.presentationMode) var presentationMode
     @State private var repeatPopover = false
     @State var employeeName: String = ""
     @State var employeePin = Employee.Helper.generatePIN()
@@ -18,8 +17,7 @@ struct AddDataPopOver: View {
     @State var taskDesc = ""
     @State var taskRepeated = Task.defaultRepetition
     @State var taskPhotoReference: String?
-    @State var days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    @ObservedObject var employeeViewModel = EmployeeListViewModel()
+    @ObservedObject var employeeViewModel: EmployeeListViewModel = .shared
     @ObservedObject var taskViewModel = TaskViewModel()
     @Binding var showingPopOver: Bool
 

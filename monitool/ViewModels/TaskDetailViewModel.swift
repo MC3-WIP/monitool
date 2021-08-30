@@ -8,8 +8,43 @@
 import FirebaseFirestore
 import Foundation
 
-class TaskDetailViewModel: ObservableObject {
-    @Published var task: Task
+class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
+	@Published var notesTextField       = ""
+	@Published var commentTextField     = ""
+
+	@Published var imageToBeAdded: UIImage?
+	@Published var proofOfWork: [String]?
+
+	@Published var logs = [ActivityLog]()
+
+	@Published var picSelection = 0
+
+	@Published var isEmployeePickerPresenting = false
+
+	@Published var task: Task
+
+	var comment: String {
+		task.comment ?? "-"
+	}
+	var notes: String {
+		task.notes ?? "-"
+	}
+	var employees: [Employee] {
+		EmployeeRepository.shared.employees
+	}
+
+	var photoReference: String? {
+		task.photoReference
+	}
+
+	var title: String {
+		task.name
+	}
+
+	var desc: String {
+		task.desc ?? ""
+	}
+
     let taskRepository: TaskRepository = .shared
 
     var company: Company?
