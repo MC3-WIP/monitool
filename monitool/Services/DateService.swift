@@ -16,7 +16,7 @@ class DateService: ObservableObject {
     func getCurrentDay() -> Int {
         dateFormatter.dateFormat = "EEEE"
         let currentDay = dateFormatter.string(from: date)
-        let currentDayNumber = date.dayNumberOfWeek(day: currentDay) + 1
+        let currentDayNumber = date.dayNumberOfWeek(day: currentDay)
         UserDefaults.standard.set(currentDayNumber, forKey: "currentDay")
         return currentDayNumber
     }

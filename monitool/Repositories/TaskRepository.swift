@@ -136,7 +136,9 @@ final class TaskRepository: ObservableObject {
              "isHistory": false,
              "photoReference": task.photoReference ?? "",
              "parentId": task.id as Any,
-             "status": "Today List"], completion: completion)
+             "status": "Today List",
+             "timeStampLog": [Date()],
+             "titleLog": ["\(task.name) created by Owner"]], completion: completion)
 
     }
 
@@ -156,7 +158,7 @@ final class TaskRepository: ObservableObject {
     func updateComment(taskID: String, comment: String) {
         store.collection(path.task).document(taskID).setData(["comment": comment], merge: true)
     }
-    
+
     func updateStatus(taskID: String, status: String, completion: ((Error?) -> Void)? = nil) {
         if status == TaskStatus.completed.title {
             store
@@ -167,13 +169,13 @@ final class TaskRepository: ObservableObject {
             store.collection(path.task).document(taskID).updateData(["status": status], completion: completion)
         }
     }
-    
-    func updateLogTask(taskID: String, titleLog: String, timeStamp: Date){
+
+    func updateLogTask(taskID: String, titleLog: String, timeStamp: Date) {
         store.collection(path.task).document(taskID).setData(
             [
-                "titleLog" : FieldValue.arrayUnion([titleLog]),
-                "timeStampLog" : FieldValue.arrayUnion([timeStamp]),
-                
+                "titleLog": FieldValue.arrayUnion([titleLog]),
+                "timeStampLog": FieldValue.arrayUnion([timeStamp])
+
            ],
             merge: true
         )
@@ -242,6 +244,7 @@ final class TaskRepository: ObservableObject {
                 self.getChildTask(parentId: tasks.id) { task in
                     for childTask in task {
                         self.updateStatus(taskID: childTask.id, status: TaskStatus.completed.title)
+                        self.updateLogTask(taskID: childTask.id, titleLog: "Auto Complete", timeStamp: Date())
                     }
                     if let repeatedTask = tasks.repeated {
                         for i in 0...repeatedTask.count - 1 where repeatedTask[i] && i == day {

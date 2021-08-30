@@ -26,11 +26,14 @@ struct PhotoComponent: View {
                 if image == nil {
                     WebImage(url: URL(string: imageURL))
                         .resizable()
+                        .indicator { _, _ in
+                            ProgressView()
+                        }
+                        .scaledToFill()
                         .frame(width: 100, height: 100, alignment: .center)
                         .clipShape(Circle())
                         .padding(.bottom, 10.0)
-                }
-                else {
+                } else {
                     if let image = image {
                         Image(uiImage: image)
                             .resizable()

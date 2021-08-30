@@ -90,43 +90,34 @@ struct CompanyOnboardingView: View {
                         .onDelete(perform: employeeViewModel.delete)
                     }.textCase(nil)
                 }.listStyle(GroupedListStyle())
-
-                HStack {
-                    Button {
-                        self.isLinkActive = true
-                        if companyName == "" || ownerPin.text == "" {
-                                showingAlert = true
-                        } else {
-                            let company = Company(
-                                name: companyName,
-                                minReview: minReviewers,
-                                ownerPin: ownerPin.text,
-                                hasLoggedIn: true,
-                                profileImage: ""
-                            )
-                            companyViewModel.create(company)
-                            storageService.updateImageURL(category: "profile")
-                            userAuth.hasLogin()
-                        }
-                    } label: {
-                        Text("Save")
-                            .padding()
-                            .frame(minWidth: 0, maxWidth: .infinity)
-                            .background(AppColor.accent)
-                            .foregroundColor(AppColor.primaryForeground)
-                            .contentShape(Rectangle())
-                            .cornerRadius(8)
-                            .alert(isPresented: $showingAlert) {
-                                Alert(
-                                    title: Text("Missing Info"),
-                                    message: Text("Please input your company name and a PIN before proceeding."),
-                                    dismissButton: .default(Text("Got it!"))
-                                )
-                            }
-                    }
-                }.padding()
             }.navigationBarTitle("Profile", displayMode: .inline)
+            .toolbar {
+                Button("Save") {
+                    self.isLinkActive = true
+                    if companyName == "" || ownerPin.text == "" {
+                            showingAlert = true
+                    } else {
+                        let company = Company(
+                            name: companyName,
+                            minReview: minReviewers,
+                            ownerPin: ownerPin.text,
+                            hasLoggedIn: true,
+                            profileImage: ""
+                        )
+                        companyViewModel.create(company)
+                        storageService.updateImageURL(category: "profile")
+                        userAuth.hasLogin()
+                    }
+                }
+            }.alert(isPresented: $showingAlert) {
+                Alert(
+                    title: Text("Missing Info"),
+                    message: Text("Please input your company name and a PIN before proceeding."),
+                    dismissButton: .default(Text("Got it!"))
+                )
+            }
         }.navigationViewStyle(StackNavigationViewStyle())
+        .accentColor(AppColor.accent)
     }
 }
 

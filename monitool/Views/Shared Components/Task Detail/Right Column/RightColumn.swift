@@ -257,7 +257,7 @@ extension RightColumn {
 #if DEBUG
 class MyViewModel: RightColumnViewModel {
     var logs: [ActivityLog] = []
-    
+
     var company: Company? = Company(name: "Monitool", minReview: 0, ownerPin: "1234", hasLoggedIn: true, profileImage: nil)
 
     var reviewer: [Employee] = []

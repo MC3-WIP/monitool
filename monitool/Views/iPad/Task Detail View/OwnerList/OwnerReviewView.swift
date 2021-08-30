@@ -8,7 +8,7 @@
 import SwiftUI
 
 class OwnerReviewViewModel: TaskDetailViewModel {
-    func reviseTask(comment: String? = nil){
+    func reviseTask(comment: String? = nil) {
         if let comment = comment, comment != "" {
             taskRepository.updateComment(taskID: task.id, comment: comment)
         }

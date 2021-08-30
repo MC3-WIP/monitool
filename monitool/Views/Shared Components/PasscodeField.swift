@@ -57,8 +57,8 @@ public struct PasscodeField: View {
             // Introspect library can used to make the textField become first resonder on appearing
             // if you decide to add the pod 'Introspect' and import it, comment #50 to #53 and uncomment #55 to #61
 
-//            .accentColor(.white)
-//            .foregroundColor(.white)
+//            .accentColor(.clear)
+//            .foregroundColor(.clear)
 //            .keyboardType(.decimalPad)
 //            .disabled(profileViewModel.isPasscodeFieldDisabled)
 
