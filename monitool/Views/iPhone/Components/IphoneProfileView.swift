@@ -8,10 +8,6 @@
 import SwiftUI
 
 struct IphoneProfileView: View {
-    @StateObject var profileViewModel = ProfileViewModel()
-    @ObservedObject var ownerPin = TextLimiter(limit: 4)
-    var company: Company?
-    @State var companyName = ""
     @State var editModeIphone: EditMode = .inactive {
         didSet {
             if editModeIphone.isEditing {
@@ -20,51 +16,44 @@ struct IphoneProfileView: View {
                 profileViewModel.isPinHidden = true
             }
         }
-	}
-
-	@ObservedObject var role: RoleService = .shared
-	@ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
-
+    }
+    @StateObject var ownerPin = TextLimiter(limit: 4)
+    @ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
+    @ObservedObject var role: RoleService = .shared
+    @ObservedObject var profileViewModel: ProfileViewModel = .shared
+    
     var body: some View {
-        VStack {
-            List {
-                Section(header: CompanyProfileHeader()) {
-                    if editModeIphone.isEditing {
-                        CompanyInfoNameTextField(
-                            placeholder: "Company Inc.",
-                            text: $profileViewModel.company.name
-                        )
-                        .onChange(of: profileViewModel.company.name) { value in
-                            profileViewModel.company.name = value
-                        }
-                        CompanyInfoTextField(
-                            title: "Owner PIN",
-                            placeholder: profileViewModel.company.ownerPin,
-                            text: $ownerPin.value
-                        )
-                        .onChange(of: ownerPin.value) { value in
-                            if value.count < 4 {
-                            }
-                            else {
-                                profileViewModel.company.ownerPin = value
-                            }
+        List {
+            Section(header: CompanyProfileHeader()) {
+                if editModeIphone.isEditing {
+                    CompanyInfoNameTextField(
+                        placeholder: "Company Inc.",
+                        text: $profileViewModel.company.name
+                    )
+                    .onChange(of: profileViewModel.company.name) { value in
+                        profileViewModel.company.name = value
+                    }
+                    CompanyInfoTextField(
+                        title: "Owner PIN",
+                        placeholder: profileViewModel.company.ownerPin,
+                        text: $ownerPin.value
+                    )
+                    .onChange(of: ownerPin.value) { value in
+                        if value.count >= 4 {
+                            profileViewModel.company.ownerPin = value
                         }
                     }
-                    ReviewPolicy()
                 }
-//                .frame(width: UIScreen.main.bounds.size.width)
-                Section(header: EmployeeListHeader()) {
-                    ForEach(employeeListViewModel.employees) { employee in
-                        EmployeeRow(employee: employee)
-                    }
-                    .onDelete(perform: employeeListViewModel.delete)
-                }
+                ReviewPolicy()
             }
-            .listStyle(GroupedListStyle())
-            .onAppear {
-                UITableView.appearance().separatorColor = .clear
+            Section(header: EmployeeListHeader()) {
+                ForEach(employeeListViewModel.employees) { employee in
+                    EmployeeRow(employee: employee)
+                }
+                .onDelete(perform: employeeListViewModel.delete)
             }
         }
+        .listStyle(InsetGroupedListStyle())
         .padding()
         .toolbar {
             EditButton()
@@ -92,7 +81,7 @@ extension IphoneProfileView {
         .background(AppColor.primaryForeground)
         .textCase(.none)
     }
-
+    
     @ViewBuilder func CompanyInfoTextField(title: String, placeholder: String, text: Binding<String>) -> some View {
         GeometryReader { metrics in
             HStack {
@@ -109,7 +98,7 @@ extension IphoneProfileView {
         .padding(.top, 4)
         .padding(.bottom, 6)
     }
-
+    
     @ViewBuilder func CompanyInfoNameTextField(placeholder: String, text: Binding<String>) -> some View {
         HStack {
             TextField(placeholder, text: text)
@@ -117,7 +106,7 @@ extension IphoneProfileView {
         .padding(.top, 4)
         .padding(.bottom, 6)
     }
-
+    
     @ViewBuilder func ReviewPolicy() -> some View {
         VStack {
             HStack {
@@ -150,7 +139,7 @@ extension IphoneProfileView {
         }
         .padding(.top, 6)
     }
-
+    
     @ViewBuilder func EmployeeListHeader() -> some View {
         VStack(spacing: 24) {
             HStack {
@@ -199,7 +188,7 @@ extension IphoneProfileView {
         .padding(.top, 28)
         .textCase(.none)
     }
-
+    
     @ViewBuilder func EmployeeRow(employee: Employee) -> some View {
         HStack {
             Text(employee.name)

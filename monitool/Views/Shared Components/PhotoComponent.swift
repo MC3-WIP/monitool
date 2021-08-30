@@ -23,22 +23,12 @@ struct PhotoComponent: View {
     var body: some View {
         VStack {
             if imageURL != "" {
-                if image == nil {
-                    WebImage(url: URL(string: imageURL))
-                        .resizable()
-                        .frame(width: 100, height: 100, alignment: .center)
-                        .clipShape(Circle())
-                        .padding(.bottom, 10.0)
-                }
-                else {
-                    if let image = image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .frame(width: 100, height: 100, alignment: .center)
-                            .clipShape(Circle())
-                            .padding(.bottom, 10.0)
-                    }
-                }
+                WebImage(url: URL(string: imageURL))
+                    .resizable()
+                    .frame(width: 100, height: 100, alignment: .center)
+                    .clipShape(Circle())
+                    .padding(.bottom, 10.0)
+               
             } else {
                 if image == nil {
                     Image("profile")
