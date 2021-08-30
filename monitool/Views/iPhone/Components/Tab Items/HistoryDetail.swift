@@ -59,7 +59,7 @@ struct HistoryDetail: View {
                 .resizable()
                 .frame(width: 100, height: 100, alignment: .leading)
         } else {
-            Image("MonitoolEmptyReferenceIllus")
+            Image("EmptyReference")
                 .resizable()
                 .frame(width: 100, height: 100, alignment: .leading)
         }

@@ -74,7 +74,7 @@ struct IphoneOwnerReview: View {
                             .resizable()
                             .frame(width: proxy.size.width, height: proxy.size.width)
                     } else {
-                        Image("MonitoolEmptyReferenceIllus")
+                        Image("EmptyReference")
                             .resizable()
                             .frame(width: proxy.size.width, height: proxy.size.width)
                     }
@@ -121,7 +121,7 @@ struct IphoneOwnerReview: View {
                         datePhoto: datePhoto
                     )
                 default:
-                    Image("MonitoolAddPhotoIllustration")
+                    Image("AddPhoto")
                 }
             }
             .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
@@ -156,7 +156,7 @@ struct IphoneOwnerReview: View {
 
     @ViewBuilder func ProofOfWork(image _: String, date _: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
         VStack {
-            Image("MonitoolAddPhotoIllustration")
+            Image("AddPhoto")
                 .resizable()
                 .frame(width: metricSize.size.width * 0.85, height: metricSize.size.width * 0.85)
             Text(datePhoto)

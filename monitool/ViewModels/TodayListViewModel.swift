@@ -30,6 +30,5 @@ class TodayListViewModel: TaskDetailViewModel {
 
 		taskRepository.updateStatus(taskID: task.id, status: TaskStatus.waitingEmployeeReview.rawValue)
         taskRepository.updateLogTask(taskID: task.id, titleLog: "Submited by \(pic.name)", timeStamp: Date())
-        
 	}
 }
