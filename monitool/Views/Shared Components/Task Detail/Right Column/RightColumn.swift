@@ -20,7 +20,7 @@ protocol RightColumnViewModel: ObservableObject {
     var notes: String { get }
     var notesTextField: String { get set }
     var employees: [Employee] { get }
-    var logs: [ActivityLog] { get set }
+    var logs: [ActivityLog] { get }
     var isEmployeePickerPresenting: Bool { get set }
     var picSelection: Int { get set }
     var reviewer: [Employee] { get set }
@@ -256,6 +256,8 @@ extension RightColumn {
 
 #if DEBUG
 class MyViewModel: RightColumnViewModel {
+    var logs: [ActivityLog] = []
+    
     var company: Company? = Company(name: "Monitool", minReview: 0, ownerPin: "1234", hasLoggedIn: true, profileImage: nil)
 
     var reviewer: [Employee] = []
@@ -268,15 +270,15 @@ class MyViewModel: RightColumnViewModel {
 
     @Published var notesTextField = ""
 
-    @Published var logs: [ActivityLog] = [
-        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59"),
-        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59"),
-        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59"),
-        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59"),
-        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59"),
-        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59"),
-        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59")
-    ]
+//    @Published var logs: [ActivityLog] = [
+//        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59"),
+//        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59"),
+//        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59"),
+//        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59"),
+//        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59"),
+//        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59"),
+//        ActivityLog(title: "Submitted by Mawar", timestamp: "21 Jul 2021 at 15:59")
+//    ]
 
     @Published var comment = "No comment"
 

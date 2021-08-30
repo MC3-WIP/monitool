@@ -121,6 +121,10 @@ final class TaskRepository: ObservableObject {
         store.collection(path.task).document(taskID).setData(["notes": notes], merge: true)
     }
 
+    func updateComment(taskID: String, comment: String) {
+        store.collection(path.task).document(taskID).setData(["comment": comment], merge: true)
+    }
+    
     func updateStatus(taskID: String, status: String, completion: ((Error?) -> Void)? = nil) {
         if status == TaskStatus.completed.title {
             store
@@ -130,6 +134,17 @@ final class TaskRepository: ObservableObject {
         } else {
             store.collection(path.task).document(taskID).updateData(["status": status], completion: completion)
         }
+    }
+    
+    func updateLogTask(taskID: String, titleLog: String, timeStamp: Date){
+        store.collection(path.task).document(taskID).setData(
+            [
+                "titleLog" : FieldValue.arrayUnion([titleLog]),
+                "timeStampLog" : FieldValue.arrayUnion([timeStamp]),
+                
+           ],
+            merge: true
+        )
     }
 
     func appendReviewer(approving: Bool = true, taskID: String, employee: Employee, completion: ((Error?) -> Void)? = nil) {
