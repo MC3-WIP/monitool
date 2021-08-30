@@ -89,7 +89,7 @@ struct IphoneTodayListView: View {
 
 struct IphoneTodayListView_Previews: PreviewProvider {
     static var previews: some View {
-        IphoneTodayListView(task: Task(name: "Task1", repeated: []))
+        IphoneTodayListView(task: Task(name: "Task1"))
             .previewDevice("Iphone 12")
     }
 }

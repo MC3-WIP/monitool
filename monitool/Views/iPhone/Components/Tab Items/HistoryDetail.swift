@@ -112,6 +112,6 @@ struct HistoryDetail: View {
 
 struct HistoryDetail_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryDetail(history: Task(name: "Test", repeated: [false]))
+        HistoryDetail(history: Task(name: "Test"))
     }
 }

@@ -99,6 +99,23 @@ final class TaskRepository: ObservableObject {
             }
     }
 
+    func getChildTask(parentId: String, completion: (([Task]) -> Void)? = nil) {
+        store.collection(path.task).whereField("parentId", isEqualTo: parentId).getDocuments { snapshot, err in
+            if let err = err {
+                print("Debug:", err.localizedDescription)
+                fatalError()
+            }
+            guard let documents = snapshot?.documents else {
+                print("Debug: No documents found.")
+                fatalError()
+            }
+            self.tasks = documents.compactMap { snapshot in
+                try? snapshot.data(as: Task.self)
+            }
+            completion?(self.tasks)
+        }
+    }
+
     func add(_ task: Task, _ taskList: TaskList, _ id: String, completion: (() -> Void)? = nil) {
         DispatchQueue.global().async { [self] in
             do {
@@ -109,6 +126,20 @@ final class TaskRepository: ObservableObject {
                 fatalError("Fail adding new task")
             }
         }
+    }
+
+    func add(_ task: TaskList, _ id: String, completion: ((Error?) -> Void)? = nil) {
+        store.collection(path.task).document(id).setData(
+            ["name": task.name,
+             "createdAt": Date(),
+             "desc": task.desc ?? "",
+             "isHistory": false,
+             "photoReference": task.photoReference ?? "",
+             "parentId": task.id as Any,
+             "status": "Today List",
+             "timeStampLog": [Date()],
+             "titleLog": ["\(task.name) created by Owner"]], completion: completion)
+
     }
 
     func delete(_ task: Task) {
@@ -127,7 +158,7 @@ final class TaskRepository: ObservableObject {
     func updateComment(taskID: String, comment: String) {
         store.collection(path.task).document(taskID).setData(["comment": comment], merge: true)
     }
-    
+
     func updateStatus(taskID: String, status: String, completion: ((Error?) -> Void)? = nil) {
         if status == TaskStatus.completed.title {
             store
@@ -138,13 +169,13 @@ final class TaskRepository: ObservableObject {
             store.collection(path.task).document(taskID).updateData(["status": status], completion: completion)
         }
     }
-    
-    func updateLogTask(taskID: String, titleLog: String, timeStamp: Date){
+
+    func updateLogTask(taskID: String, titleLog: String, timeStamp: Date) {
         store.collection(path.task).document(taskID).setData(
             [
-                "titleLog" : FieldValue.arrayUnion([titleLog]),
-                "timeStampLog" : FieldValue.arrayUnion([timeStamp]),
-                
+                "titleLog": FieldValue.arrayUnion([titleLog]),
+                "timeStampLog": FieldValue.arrayUnion([timeStamp])
+
            ],
             merge: true
         )
@@ -206,4 +237,23 @@ final class TaskRepository: ObservableObject {
                 merge: true
             )
     }
+
+    func repeatTask(day: Int, taskListRepo: TaskListRepository) {
+        taskListRepo.get { taskList in
+            for tasks in taskList {
+                self.getChildTask(parentId: tasks.id) { task in
+                    for childTask in task {
+                        self.updateStatus(taskID: childTask.id, status: TaskStatus.completed.title)
+                        self.updateLogTask(taskID: childTask.id, titleLog: "Auto Complete", timeStamp: Date())
+                    }
+                    if let repeatedTask = tasks.repeated {
+                        for i in 0...repeatedTask.count - 1 where repeatedTask[i] && i == day {
+                            self.add(tasks, "\(UUID().uuidString)")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }

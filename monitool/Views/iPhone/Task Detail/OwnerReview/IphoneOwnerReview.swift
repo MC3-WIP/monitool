@@ -169,7 +169,11 @@ struct IphoneOwnerReview: View {
         Button {
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
             self.presentationMode.wrappedValue.dismiss()
-            TaskRepository.shared.updateLogTask(taskID: taskDetailViewModel.task.id, titleLog: "Rejected by Owner", timeStamp: Date())
+            TaskRepository.shared.updateLogTask(
+                taskID: taskDetailViewModel.task.id,
+                titleLog: "Rejected by Owner",
+                timeStamp: Date()
+            )
         } label: {
             HStack {
                 Image(systemName: "repeat")
@@ -190,7 +194,11 @@ struct IphoneOwnerReview: View {
         Button {
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
             self.presentationMode.wrappedValue.dismiss()
-            TaskRepository.shared.updateLogTask(taskID: taskDetailViewModel.task.id, titleLog: "Approved by Owner", timeStamp: Date())
+            TaskRepository.shared.updateLogTask(
+                taskID: taskDetailViewModel.task.id,
+                titleLog: "Approved by Owner",
+                timeStamp: Date()
+            )
         } label: {
             HStack {
                 Image(systemName: "checkmark")
@@ -210,6 +218,6 @@ struct IphoneOwnerReview: View {
 
 struct IphoneOwnerReview_Previews: PreviewProvider {
     static var previews: some View {
-        IphoneOwnerReview(task: Task(name: "Task", repeated: []))
+        IphoneOwnerReview(task: Task(name: "Task"))
     }
 }

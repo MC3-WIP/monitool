@@ -26,6 +26,8 @@ struct AddDataPopOver: View {
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
 
+    @State var id = UUID().uuidString
+
     var body: some View {
         NavigationView {
             if sheetType == "Employee" {
@@ -142,7 +144,7 @@ struct AddDataPopOver: View {
                                 name: taskName,
                                 description: taskDesc,
                                 photoReference: taskPhotoReference,
-                                repeated: taskRepeated
+                                parentId: id
                             )
                             let taskList = TaskList(
                                 name: taskName,
@@ -151,9 +153,9 @@ struct AddDataPopOver: View {
                                 photoReference: taskPhotoReference
                             )
                             if let image = image {
-                                taskViewModel.add(task, taskList, photo: image, id: UUID().uuidString)
+                                taskViewModel.add(task, taskList, photo: image, id: id)
                             } else {
-                                taskViewModel.add(task, taskList, id: UUID().uuidString)
+                                taskViewModel.add(task, taskList, id: id)
                             }
                         }
                     }).foregroundColor(AppColor.accent))
