@@ -47,12 +47,12 @@ struct IphoneProfileView: View {
                     .onDelete(perform: employeeListViewModel.delete)
                 }
             }
-            .listStyle(GroupedListStyle())
+            .listStyle(InsetGroupedListStyle())
             .onAppear {
                 UITableView.appearance().separatorColor = .clear
             }
         }
-        .padding()
+        .padding(.vertical, 10)
         .toolbar {
             EditButton()
         }
