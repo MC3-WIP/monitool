@@ -38,9 +38,9 @@ struct IphoneProfileView: View {
                         placeholder: profileViewModel.company.ownerPin,
                         text: $ownerPin.value
                     )
-                    .onChange(of: ownerPin.value) { value in
-                        if value.count >= 4 {
-                            profileViewModel.company.ownerPin = value
+                    .onChange(of: ownerPin.value) { pin in
+                        if pin.count >= 4 {
+                            profileViewModel.company.ownerPin = pin
                         }
                     }
                 }
