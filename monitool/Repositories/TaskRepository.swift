@@ -99,6 +99,23 @@ final class TaskRepository: ObservableObject {
             }
     }
 
+    func getChildTask(parentId: String, completion: (([Task]) -> Void)? = nil) {
+        store.collection(path.task).whereField("parentId", isEqualTo: parentId).getDocuments { snapshot, err in
+            if let err = err {
+                print("Debug:", err.localizedDescription)
+                fatalError()
+            }
+            guard let documents = snapshot?.documents else {
+                print("Debug: No documents found.")
+                fatalError()
+            }
+            self.tasks = documents.compactMap { snapshot in
+                try? snapshot.data(as: Task.self)
+            }
+            completion?(self.tasks)
+        }
+    }
+
     func add(_ task: Task, _ taskList: TaskList, _ id: String, completion: ((Error?) -> Void)? = nil) {
         do {
             try store.collection(path.task).document(id).setData(from: task, completion: completion)
@@ -106,6 +123,18 @@ final class TaskRepository: ObservableObject {
         } catch {
             fatalError("Fail adding new task")
         }
+    }
+
+    func add(_ task: TaskList, _ id: String, completion: ((Error?) -> Void)? = nil) {
+        store.collection(path.task).document(id).setData(
+            ["name": task.name,
+             "createdAt": Date(),
+             "desc": task.desc ?? "",
+             "isHistory": false,
+             "photoReference": task.photoReference ?? "",
+             "parentId": task.id as Any,
+             "status": "Today List"], completion: completion)
+
     }
 
     func delete(_ task: Task) {
@@ -152,6 +181,10 @@ final class TaskRepository: ObservableObject {
                     .collection(path.task)
                     .document(taskID)
                     .setData(["photoReference": url.absoluteString], merge: true, completion: completion)
+                store
+                    .collection(path.taskList)
+                    .document(taskID)
+                    .setData(["photoReference": url.absoluteString], merge: true, completion: completion)
             }
         }
     }
@@ -184,4 +217,22 @@ final class TaskRepository: ObservableObject {
                 merge: true
             )
     }
+
+    func repeatTask(day: Int, taskListRepo: TaskListRepository) {
+        taskListRepo.get { taskList in
+            for tasks in taskList {
+                self.getChildTask(parentId: tasks.id) { task in
+                    for childTask in task {
+                        self.updateStatus(taskID: childTask.id, status: TaskStatus.completed.title)
+                    }
+                    if let repeatedTask = tasks.repeated {
+                        for i in 0...repeatedTask.count - 1 where repeatedTask[i] && i == day {
+                            self.add(tasks, "\(UUID().uuidString)")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 }

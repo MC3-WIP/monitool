@@ -15,7 +15,6 @@ class Task: Codable, Identifiable, Hashable {
     let createdAt: Date
 
     var status: TaskStatus
-    var repeated: [Bool]
     var proof: [String]?
     var notes: String?
     var comment: String?
@@ -28,11 +27,13 @@ class Task: Codable, Identifiable, Hashable {
 
     var photoReference: String?
 
+    var parentId: String?
+
     init(
         name: String,
         description: String? = nil,
         photoReference: String? = nil,
-        repeated: [Bool]
+        parentId: String? = nil
     ) {
         self.name = name
         desc = description
@@ -40,7 +41,7 @@ class Task: Codable, Identifiable, Hashable {
         status = .todayList
         isHistory = false
         self.photoReference = photoReference
-        self.repeated = repeated
+        self.parentId = parentId
     }
 
     static func == (lhs: Task, rhs: Task) -> Bool {
@@ -48,7 +49,6 @@ class Task: Codable, Identifiable, Hashable {
             lhs.name == rhs.name &&
             lhs.createdAt == rhs.createdAt &&
             lhs.status == rhs.status &&
-            lhs.repeated == rhs.repeated &&
             rhs.isHistory == lhs.isHistory
     }
 

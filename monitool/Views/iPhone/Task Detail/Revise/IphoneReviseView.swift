@@ -200,6 +200,6 @@ struct IphoneReviseView: View {
 
 struct IphoneReviseView_Previews: PreviewProvider {
     static var previews: some View {
-        IphoneReviseView(task: Task(name: "Revise Iphone", repeated: []))
+        IphoneReviseView(task: Task(name: "Revise Iphone"))
     }
 }

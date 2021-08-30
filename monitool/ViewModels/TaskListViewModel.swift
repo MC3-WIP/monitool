@@ -55,8 +55,4 @@ final class TaskListViewModel: ObservableObject {
                 }
             }
     }
-    
-    func repeatTask(day: String) {
-        repository.repeatTask(day: day)
-    }
 }

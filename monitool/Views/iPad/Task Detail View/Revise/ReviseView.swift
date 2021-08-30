@@ -58,6 +58,6 @@ struct ReviseView: View {
 
 struct ReviseTaskDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ReviseView(task: Task(name: "Revise Page", repeated: []))
+        ReviseView(task: Task(name: "Revise Page"))
     }
 }

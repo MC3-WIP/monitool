@@ -10,11 +10,14 @@ import SwiftUI
 
 class TaskViewModel: ObservableObject {
     @ObservedObject private var repository: TaskRepository = .shared
+    @ObservedObject private var taskListRepository: TaskListRepository = .shared
     @Published var tasks = [Task]()
     @Published var histories = [Task]()
     @Published var historiesPerDay = [[Task]]()
 
     private var cancellables = Set<AnyCancellable>()
+
+    static let shared = TaskViewModel()
 
     init() {
         repository.$tasks
@@ -52,6 +55,10 @@ class TaskViewModel: ObservableObject {
 
     func updateStatus(id: String, status: String) {
         repository.updateStatus(taskID: id, status: status)
+    }
+
+    func repeatTask(day: Int) {
+        repository.repeatTask(day: day, taskListRepo: taskListRepository)
     }
 
     @ViewBuilder

@@ -91,7 +91,6 @@ struct ProfileView: View {
                     role.switchRole(to: .owner)
                     profileViewModel.isPinPresenting = false
                     isPinTrue = true
-                    hideKeyboard()
                 } else {
                     profileViewModel.pinInputted = ""
                     profileViewModel.isPasscodeFieldDisabled = false

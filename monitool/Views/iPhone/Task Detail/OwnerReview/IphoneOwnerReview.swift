@@ -209,6 +209,6 @@ struct IphoneOwnerReview: View {
 
 struct IphoneOwnerReview_Previews: PreviewProvider {
     static var previews: some View {
-        IphoneOwnerReview(task: Task(name: "Task", repeated: []))
+        IphoneOwnerReview(task: Task(name: "Task"))
     }
 }

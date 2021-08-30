@@ -42,6 +42,24 @@ final class TaskListRepository: ObservableObject {
             }
     }
 
+    func get(completion: (([TaskList]) -> Void)? = nil) {
+        store.collection(path.taskList).getDocuments { snapshot, err in
+            if let err = err {
+                print("Debug:", err.localizedDescription)
+                fatalError()
+            }
+            guard let documents = snapshot?.documents else {
+                print("Debug: No documents found.")
+                fatalError()
+            }
+
+            self.taskLists = documents.compactMap { snapshot in
+                try? snapshot.data(as: TaskList.self)
+            }
+            completion?(self.taskLists)
+        }
+    }
+
     func add(_ taskList: TaskList) {
         do {
             _ = try store.collection(path.taskList).addDocument(from: taskList)
@@ -76,19 +94,17 @@ final class TaskListRepository: ObservableObject {
             }
         }
     }
-    
-    func repeatTask(day: String) {
-        let dayDefault = UserDefaults.standard.integer(forKey: "currentDay")
-        for tasks in taskLists {
-            if let repeatedTask = tasks.repeated {
-                for i in 0...repeatedTask.count {
-                    if repeatedTask[i] {
-                        if i == dayDefault {
-                            add(tasks)
-                        }
+
+    func repeatTask(day: Int) {
+        get { taskLists in
+            for tasks in taskLists {
+                if let repeatedTask = tasks.repeated {
+                    for i in 0...repeatedTask.count - 1 where repeatedTask[i] && i == day {
+                        self.add(tasks)
                     }
                 }
             }
         }
+
     }
 }

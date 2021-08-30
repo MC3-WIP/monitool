@@ -7,6 +7,7 @@
 
 import Introspect
 import SwiftUI
+import SwiftUIX
 
 public struct PasscodeField: View {
     var maxDigits = 4
@@ -51,21 +52,20 @@ public struct PasscodeField: View {
             self.submitPin()
         })
 
-        return TextField("", text: boundPin, onCommit: submitPin)
+        return CocoaTextField("", text: boundPin, onCommit: submitPin).isFirstResponder(true)
 
             // Introspect library can used to make the textField become first resonder on appearing
             // if you decide to add the pod 'Introspect' and import it, comment #50 to #53 and uncomment #55 to #61
 
-//           .accentColor(.clear)
-//           .foregroundColor(.clear)
-//           .keyboardType(.numberPad)
-//           .disabled(isDisabled)
+//            .accentColor(.white)
+//            .foregroundColor(.white)
+//            .keyboardType(.decimalPad)
+//            .disabled(profileViewModel.isPasscodeFieldDisabled)
 
             .introspectTextField { textField in
                 textField.tintColor = .clear
                 textField.textColor = .clear
                 textField.keyboardType = .numberPad
-                textField.becomeFirstResponder()
                 textField.isEnabled = !profileViewModel.isPasscodeFieldDisabled
             }
     }

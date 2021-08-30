@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct MainView: View {
-    @ObservedObject var dateService = DateService()
+    @ObservedObject var dateService: DateService = .shared
+    @ObservedObject var taskViewModel: TaskViewModel = .shared
     private var device = UIDevice.current.userInterfaceIdiom
+
+    init() {
+        if dateService.isDayChanged() {
+            taskViewModel.repeatTask(day: dateService.getCurrentDay())
+        }
+    }
 
     var body: some View {
         Layout()
@@ -22,12 +29,7 @@ extension MainView {
     @ViewBuilder
     func Layout() -> some View {
         if device == .pad {
-            if dateService.isDayChanged() {
-                Text("day berubah")
-            } else {
-                Text("gak berubah")
-            }
-//            PadLayout()
+            PadLayout()
         } else if device == .phone {
             PhoneLayout()
         } else {

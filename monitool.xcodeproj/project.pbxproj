@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -90,6 +90,7 @@
 		B8172B5226D77F7C009FE090 /* DateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8172B5126D77F7C009FE090 /* DateService.swift */; };
 		B823A78926B7DEBA0035D9F4 /* AddDataPopOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = B823A78826B7DEBA0035D9F4 /* AddDataPopOver.swift */; };
 		B82B2CBD26D78F4F00CD8CD7 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = B82B2CBC26D78F4F00CD8CD7 /* Date.swift */; };
+		B82B2CC026DCCA9000CD8CD7 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = B82B2CBF26DCCA9000CD8CD7 /* SwiftUIX */; };
 		B84F220026CA75BB00244A40 /* PasscodeField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84F21FF26CA75BB00244A40 /* PasscodeField.swift */; };
 		B84F220526CBA93F00244A40 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84F220426CBA93F00244A40 /* String.swift */; };
 		B84F220726CBA98700244A40 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = B84F220626CBA98700244A40 /* Int.swift */; };
@@ -218,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				451881067891BAAC4BD8922A /* Pods_monitool.framework in Frameworks */,
+				B82B2CC026DCCA9000CD8CD7 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +666,9 @@
 			dependencies = (
 			);
 			name = monitool;
+			packageProductDependencies = (
+				B82B2CBF26DCCA9000CD8CD7 /* SwiftUIX */,
+			);
 			productName = monitool;
 			productReference = 830B1DEF26A8149E00D38AE9 /* monitool.app */;
 			productType = "com.apple.product-type.application";
@@ -692,6 +697,9 @@
 				id,
 			);
 			mainGroup = 830B1DE626A8149E00D38AE9;
+			packageReferences = (
+				B82B2CBE26DCCA9000CD8CD7 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+			);
 			productRefGroup = 830B1DF026A8149E00D38AE9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1107,6 +1115,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B82B2CBE26DCCA9000CD8CD7 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B82B2CBF26DCCA9000CD8CD7 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B82B2CBE26DCCA9000CD8CD7 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
+			productName = SwiftUIX;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 830B1DE726A8149E00D38AE9 /* Project object */;
 }

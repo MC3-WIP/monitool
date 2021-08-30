@@ -51,7 +51,7 @@ struct OwnerReviewView: View {
 
 struct OwnerReviewView_Preview: PreviewProvider {
     static var previews: some View {
-        OwnerReviewView(task: Task(name: "OwnerReview", repeated: []))
+        OwnerReviewView(task: Task(name: "OwnerReview"))
             .previewDevice("iPad Pro (12.9-inch) (5th generation)")
             .previewLayout(.fixed(width: 1112, height: 834))
     }
