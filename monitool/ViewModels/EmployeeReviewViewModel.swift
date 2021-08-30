@@ -10,6 +10,8 @@ import SwiftUI
 
 class EmployeeReviewViewModel: TaskDetailViewModel {
 
+    @Published var isInputPinSuccess: Bool = true
+    
 	private let employeeRepository: EmployeeRepository = .shared
 
 	var picName: String {
@@ -55,7 +57,7 @@ class EmployeeReviewViewModel: TaskDetailViewModel {
 		}
 	}
 
-	func approveTask(pin: String, isPinTrue: Binding<Bool?>, presentation: Binding<PresentationMode>, showPin: Binding<Bool>, pinInputted: Binding<String>, isPasscodeFieldDisabled: Binding<Bool>) {
+    func approveTask(pin: String, isPinTrue: Binding<Bool?>, presentation: Binding<PresentationMode>, showPin: Binding<Bool>, pinInputted: Binding<String>, isPasscodeFieldDisabled: Binding<Bool>, isInputPinFail: Binding<Bool>, errorMessages: Binding<String>) {
 		switch validateApproval(pin: pin) {
 		case let .success(employee):
 			showPin.wrappedValue = false
@@ -71,6 +73,8 @@ class EmployeeReviewViewModel: TaskDetailViewModel {
 			}
 			pinInputted.wrappedValue = ""
 			isPasscodeFieldDisabled.wrappedValue = false
+            isInputPinFail.wrappedValue = true
+            errorMessages.wrappedValue = error.localizedDescription
 			print("Validation Error:", error.localizedDescription)
 		}
 	}
