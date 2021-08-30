@@ -42,6 +42,8 @@ extension ReviseView {
 			) { _ in
 				self.presentationMode.wrappedValue.dismiss()
 			}
+            reviseViewModel.reviseTask(comment: reviseViewModel.commentTextField)
+            TaskRepository.shared.updateLogTask(taskID: reviseViewModel.task.id, titleLog: "Rejected by Owner", timeStamp: Date())
         } label: {
             HStack {
                 Image(systemName: "repeat")
@@ -66,6 +68,7 @@ extension ReviseView {
 			) { _ in
 				self.presentationMode.wrappedValue.dismiss()
 			}
+            TaskRepository.shared.updateLogTask(taskID: reviseViewModel.task.id, titleLog: "Approved by Owner", timeStamp: Date())
         } label: {
             HStack {
                 Image(systemName: "checkmark")

@@ -9,6 +9,11 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 class ReviseViewModel: TaskDetailViewModel {
+    func reviseTask(comment: String? = nil){
+        if let comment = comment, comment != "" {
+            taskRepository.updateComment(taskID: task.id, comment: comment)
+        }
+    }
 }
 
 struct ReviseView: View {
