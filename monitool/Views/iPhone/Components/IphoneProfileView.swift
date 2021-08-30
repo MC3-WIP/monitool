@@ -10,8 +10,6 @@ import SwiftUI
 struct IphoneProfileView: View {
     @StateObject var profileViewModel = ProfileViewModel()
     @ObservedObject var ownerPin = TextLimiter(limit: 4)
-    @ObservedObject var employeeListViewModel = EmployeeListViewModel()
-    @ObservedObject var role: RoleService = .shared
     var company: Company?
     @State var companyName = ""
     @State var editModeIphone: EditMode = .inactive {

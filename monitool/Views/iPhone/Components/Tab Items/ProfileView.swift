@@ -14,15 +14,9 @@ struct ProfileView: View {
 			if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
 		}
 	}
-
     @ObservedObject var ownerPin = TextLimiter(limit: 4)
-    @ObservedObject var employeeListViewModel = EmployeeListViewModel()
+    @ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
     @ObservedObject var role: RoleService = .shared
-    @State var editMode: EditMode = .inactive {
-        didSet {
-            if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
-        }
-    }
     @ObservedObject var profileViewModel: ProfileViewModel = .shared
     var body: some View {
         VStack {
