@@ -5,81 +5,67 @@
 //  Created by Devin Winardi on 11/08/21.
 //
 
-import Foundation
 import SwiftUI
+import Combine
+
+class TodoListTabItemModel: ObservableObject {
+    @Published var tasks = [Task]()
+
+    private var cancellables = Set<AnyCancellable>()
+
+    init() {
+        TaskRepository.shared.$tasks
+            .assign(to: \.tasks, on: self)
+            .store(in: &cancellables)
+    }
+}
 
 struct TodoListTabItem: View {
-    @StateObject var taskViewModel = TaskViewModel()
-    @State private var selection: Set<TaskStatus> = []
-
-    let taskStatuses: [TaskStatus] = [.todayList, .waitingEmployeeReview, .waitingOwnerReview, .revise]
-
-    let statusIcon: [Image] = [
-        Image(systemName: "list.bullet.below.rectangle"),
-        Image(systemName: "person.2"),
-        Image(systemName: "person.crop.circle.badge.checkmark"),
-        Image(systemName: "repeat")
-    ]
+    @StateObject var viewModel = TodoListTabItemModel()
+    @State var selections: Set<TaskStatus> = [.todayList]
 
     var body: some View {
         NavigationView {
             List {
-                ForEach(0 ..< 4) { index in
-                    TasksRowView(
-                        taskStatus: taskStatuses[index],
-                        tasks: getFilteredTask(filter: taskStatuses[index]),
-                        isExpanded: self.selection.contains(taskStatuses[index]),
-                        icon: statusIcon[index]
-                    )
-                    .animation(.easeIn)
-                    .onTapGesture { self.selectDeselect(taskStatuses[index]) }
-                }
+                section(for: .todayList, icon: "list.bullet.below.rectangle")
+                section(for: .waitingEmployeeReview, icon: "person.2")
+                section(for: .waitingOwnerReview, icon: "person.crop.circle.badge.checkmark")
+                section(for: .revise, icon: "repeat")
             }
-            .navigationTitle("To-Do List")
+            .navigationBarTitle("To-Do List")
             .toolbar {
                 NavigationLink(destination: HistoryView()) {
                     Image(systemName: "clock")
                 }
             }
         }
-        .tabItem {
-            Image(systemName: "list.bullet.rectangle")
-            Text("To-Do List")
-        }
     }
 
-    func selectDeselect(_ taskStatus: TaskStatus) {
-        if selection.contains(taskStatus) {
-            selection.remove(taskStatus)
-        } else {
-            selection.insert(taskStatus)
-        }
-    }
-
-    func getFilteredTask(filter: TaskStatus) -> [Task] {
-        taskViewModel.tasks.filter { $0.status == filter }
-    }
-}
-
-struct TasksRowView: View {
-    let taskStatus: TaskStatus
-    let tasks: [Task]
-    let isExpanded: Bool
-    let icon: Image
-
-    var body: some View {
+    @ViewBuilder
+    private func sectionHeader(for status: TaskStatus, icon: String) -> some View {
         HStack {
-            icon.foregroundColor(AppColor.accent)
-            Text(taskStatus.title).font(.headline)
+            Image(systemName: icon)
+                .foregroundColor(AppColor.accent)
+            Text(status.title)
             Spacer()
-            Image(systemName: "chevron.down").foregroundColor(Color(hex: "#4EB0AB"))
+            Image(systemName: selections.contains(status) ? "chevron.up" : "chevron.down")
+                .foregroundColor(.gray)
         }
         .contentShape(Rectangle())
         .animation(.linear(duration: 0.3))
-        if isExpanded {
-            if tasks.count > 0 {
-                ForEach(tasks) { task in
-                    NavigationLink(destination: IphoneTodayListView(task: task)) {
+        .onTapGesture {
+            toggleSelection(for: status)
+        }
+    }
+
+    @ViewBuilder
+    private func section(for status: TaskStatus, icon: String) -> some View {
+        sectionHeader(for: status, icon: icon)
+
+        if selections.contains(status) {
+            if viewModel.tasks.filter({ $0.status == status }).count > 0 {
+                ForEach(viewModel.tasks.filter { $0.status == status }) { task in
+                    NavigationLink(destination: route(task: task, status: status)) {
                         Text(task.name)
                     }
                 }
@@ -88,10 +74,33 @@ struct TasksRowView: View {
             }
         }
     }
+
+    private func toggleSelection(for status: TaskStatus) {
+        if selections.contains(status) {
+            selections.remove(status)
+        } else {
+            selections.insert(status)
+        }
+    }
+
+    private func route(task: Task, status: TaskStatus) -> AnyView {
+        switch status {
+        case .todayList:
+            return AnyView(IphoneTodayListView(task: task))
+        case .waitingEmployeeReview:
+            return AnyView(IphoneEmployeeReview(task: task))
+        case .waitingOwnerReview:
+            return AnyView(IphoneOwnerReview(task: task))
+        case .revise:
+            return AnyView(IphoneReviseView(task: task))
+        default:
+            return AnyView(EmptyView())
+        }
+    }
 }
 
 struct TodoListTabItem_Previews: PreviewProvider {
     static var previews: some View {
-        TodoListTabItem()
+        PhoneLayout()
     }
 }
