@@ -20,13 +20,21 @@ struct PhoneLayout: View {
 
     var body: some View {
         TabView(selection: $selectedTab) {
-            TodoListTabItem()
-                .tag(PhoneTabItem.todoList)
+            todoList
             TaskListTabItem()
                 .tag(PhoneTabItem.taskList)
             ProfileTabItem()
                 .tag(PhoneTabItem.profile)
         }.accentColor(AppColor.accent)
+    }
+
+    var todoList: some View {
+        TodoListTabItem()
+            .tabItem {
+                Image(systemName: "list.bullet.rectangle")
+                Text("To-Do List")
+            }
+            .tag(PhoneTabItem.todoList)
     }
 }
 

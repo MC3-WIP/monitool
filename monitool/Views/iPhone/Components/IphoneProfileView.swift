@@ -10,8 +10,6 @@ import SwiftUI
 struct IphoneProfileView: View {
     @StateObject var profileViewModel = ProfileViewModel()
     @ObservedObject var ownerPin = TextLimiter(limit: 4)
-    @ObservedObject var employeeListViewModel = EmployeeListViewModel()
-    @ObservedObject var role: RoleService = .shared
     var company: Company?
     @State var companyName = ""
     @State var editModeIphone: EditMode = .inactive {
@@ -44,7 +42,7 @@ struct IphoneProfileView: View {
                             placeholder: profileViewModel.company.ownerPin,
                             text: $ownerPin.value
                         )
-                        .onChange(of: profileViewModel.company.ownerPin) { value in
+                        .onChange(of: ownerPin.value) { value in
                             if value.count < 4 {
                             }
                             else {
@@ -62,12 +60,12 @@ struct IphoneProfileView: View {
                     .onDelete(perform: employeeListViewModel.delete)
                 }
             }
-            .listStyle(InsetGroupedListStyle())
+            .listStyle(GroupedListStyle())
             .onAppear {
                 UITableView.appearance().separatorColor = .clear
             }
         }
-        .padding(.vertical, 10)
+        .padding()
         .toolbar {
             EditButton()
         }

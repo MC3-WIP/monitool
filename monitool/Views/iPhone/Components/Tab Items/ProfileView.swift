@@ -14,20 +14,15 @@ struct ProfileView: View {
 			if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
 		}
 	}
-
     @ObservedObject var ownerPin = TextLimiter(limit: 4)
-    @ObservedObject var employeeListViewModel = EmployeeListViewModel()
+    @ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
     @ObservedObject var role: RoleService = .shared
-    @State var editMode: EditMode = .inactive {
-        didSet {
-            if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
-        }
-    }
     @ObservedObject var profileViewModel: ProfileViewModel = .shared
     var body: some View {
         VStack {
-            List {
+            LazyVStack(spacing: 10) {
                 // MARK: - Company Profile
+
                 Section(header: CompanyProfileHeader()) {
                     if editMode.isEditing {
                         GeometryReader { metrics in
@@ -39,6 +34,7 @@ struct ProfileView: View {
                                 .frame(width: metrics.size.width * 0.2)
                                 TextField("Company Inc.", text: $profileViewModel.company.name)
                                     .onChange(of: profileViewModel.company.name) { value in
+                                        print("company name berubah kok")
                                         profileViewModel.company.name = value
                                     }
                                     
@@ -54,9 +50,8 @@ struct ProfileView: View {
                                 }
                                 .frame(width: metrics.size.width * 0.2)
                                 TextField(profileViewModel.company.ownerPin, text: $ownerPin.value)
-                                    .onChange(of: profileViewModel.company.ownerPin) { value in
+                                    .onChange(of: ownerPin.value) { value in
                                         if value.count < 4{
-                                            
                                         }
                                         else{
                                             profileViewModel.company.ownerPin = value
@@ -73,7 +68,7 @@ struct ProfileView: View {
                 }
 
                 // MARK: - Employee List
-                
+
                 Section(header: EmployeeListHeader()) {
                     ForEach(employeeListViewModel.employees) { employee in
                         EmployeeRow(employee: employee)
@@ -81,11 +76,13 @@ struct ProfileView: View {
                     .onDelete(perform: employeeListViewModel.delete)
                 }
             }
-            .listStyle(InsetGroupedListStyle())
+
             Spacer()
+
             SwitchRoleButton()
         }
         .padding(.vertical, 36)
+        .padding(.horizontal, 16)
         .navigationBarTitle("Profile", displayMode: .inline)
         .toolbar {
             if role.isOwner {
