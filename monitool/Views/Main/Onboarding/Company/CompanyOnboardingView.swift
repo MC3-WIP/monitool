@@ -11,6 +11,7 @@ struct CompanyOnboardingView: View {
     @State var minReviewers = 0
     @State var companyName: String = ""
     @State private var showingSheet = false
+    @State private var showingAlert = false
     @State var isLinkActive = false
 
     @StateObject var ownerPin = TextBindingHelper(limit: 4)
@@ -25,36 +26,38 @@ struct CompanyOnboardingView: View {
             VStack {
                 List {
                     Section(header: Color.clear
-                        .frame(width: 0, height: 0)
-                        .accessibilityHidden(true)) {
-                            HStack {
-                                Spacer()
-                                PhotoComponent(imageURL: "", editMode: .constant(.active))
-                                Spacer()
-                            }
-                            HStack {
-                                Text("Company Name")
-                                TextField("Company Name", text: $companyName).multilineTextAlignment(.trailing)
-                            }
-                            HStack {
-                                Text("Owner Pin")
-                                TextField("Owner Pin", text: $ownerPin.text)
-                                    .multilineTextAlignment(.trailing)
-                                    .keyboardType(.numberPad)
-                            }
-                            HStack {
-                                Text("Task Reviewer: ")
-                                Spacer()
-                                Stepper("\(minReviewers) Reviewer(s)", onIncrement: {
-                                    if minReviewers < employeeViewModel.employees.count {
-                                        minReviewers += 1
-                                    }
-                                }, onDecrement: {
-                                    if minReviewers > 0 {
-                                        minReviewers -= 1
-                                    }
-                                })
-                            }
+                                .frame(width: 0, height: 0)
+                                .accessibilityHidden(true)) {
+                        HStack {
+                            Spacer()
+                            PhotoComponent(imageURL: "", editMode: .constant(.active))
+                            Spacer()
+                        }
+                        HStack {
+                            Text("Company Name")
+                            TextField("Company Name", text: $companyName).multilineTextAlignment(.trailing)
+                        }
+                        HStack {
+                            Text("Owner Pin")
+                            TextField("Owner Pin", text: $ownerPin.text)
+                                .multilineTextAlignment(.trailing)
+                                .keyboardType(.numberPad)
+                        }
+                        HStack {
+                            Text("Task Reviewer: ")
+                            Spacer()
+                            Stepper("\(minReviewers) Reviewer(s)") {
+                                minReviewers += 1
+                                if minReviewers > employeeViewModel.employees.count {
+                                    minReviewers = employeeViewModel.employees.count
+                                }
+                            } onDecrement: {
+                                minReviewers -= 1
+                                if minReviewers < 0 {
+                                    minReviewers = 0
+                                }
+                            }.disabled(employeeViewModel.employees.count == 0)
+                        }
                     }
                     Section(
                         header: HStack {
@@ -86,21 +89,25 @@ struct CompanyOnboardingView: View {
                         }
                         .onDelete(perform: employeeViewModel.delete)
                     }.textCase(nil)
-
                 }.listStyle(GroupedListStyle())
+
                 HStack {
                     Button {
                         self.isLinkActive = true
-                        let company = Company(
-                            name: companyName,
-                            minReview: minReviewers,
-                            ownerPin: ownerPin.text,
-                            hasLoggedIn: true,
-                            profileImage: ""
-                        )
-                        companyViewModel.create(company)
-                        storageService.updateImageURL(category: "profile")
-                        userAuth.hasLogin()
+                        if companyName == "" || ownerPin.text == "" {
+                                showingAlert = true
+                        } else {
+                            let company = Company(
+                                name: companyName,
+                                minReview: minReviewers,
+                                ownerPin: ownerPin.text,
+                                hasLoggedIn: true,
+                                profileImage: ""
+                            )
+                            companyViewModel.create(company)
+                            storageService.updateImageURL(category: "profile")
+                            userAuth.hasLogin()
+                        }
                     } label: {
                         Text("Save")
                             .padding()
@@ -109,6 +116,13 @@ struct CompanyOnboardingView: View {
                             .foregroundColor(AppColor.primaryForeground)
                             .contentShape(Rectangle())
                             .cornerRadius(8)
+                            .alert(isPresented: $showingAlert) {
+                                Alert(
+                                    title: Text("Missing Info"),
+                                    message: Text("Please input your company name and a PIN before proceeding."),
+                                    dismissButton: .default(Text("Got it!"))
+                                )
+                            }
                     }
                 }.padding()
             }.navigationBarTitle("Profile", displayMode: .inline)
