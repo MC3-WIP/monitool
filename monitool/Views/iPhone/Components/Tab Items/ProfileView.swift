@@ -26,8 +26,9 @@ struct ProfileView: View {
     @ObservedObject var profileViewModel: ProfileViewModel = .shared
     var body: some View {
         VStack {
-            List {
+            LazyVStack(spacing: 10) {
                 // MARK: - Company Profile
+
                 Section(header: CompanyProfileHeader()) {
                     if editMode.isEditing {
                         GeometryReader { metrics in
@@ -73,7 +74,7 @@ struct ProfileView: View {
                 }
 
                 // MARK: - Employee List
-                
+
                 Section(header: EmployeeListHeader()) {
                     ForEach(employeeListViewModel.employees) { employee in
                         EmployeeRow(employee: employee)
@@ -81,11 +82,13 @@ struct ProfileView: View {
                     .onDelete(perform: employeeListViewModel.delete)
                 }
             }
-            .listStyle(InsetGroupedListStyle())
+
             Spacer()
+
             SwitchRoleButton()
         }
         .padding(.vertical, 36)
+        .padding(.horizontal, 16)
         .navigationBarTitle("Profile", displayMode: .inline)
         .toolbar {
             if role.isOwner {
