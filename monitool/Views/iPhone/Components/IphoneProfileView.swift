@@ -42,7 +42,7 @@ struct IphoneProfileView: View {
                             placeholder: profileViewModel.company.ownerPin,
                             text: $ownerPin.value
                         )
-                        .onChange(of: profileViewModel.company.ownerPin) { value in
+                        .onChange(of: ownerPin.value) { value in
                             if value.count < 4 {
                             }
                             else {

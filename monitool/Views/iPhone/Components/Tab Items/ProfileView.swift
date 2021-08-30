@@ -34,6 +34,7 @@ struct ProfileView: View {
                                 .frame(width: metrics.size.width * 0.2)
                                 TextField("Company Inc.", text: $profileViewModel.company.name)
                                     .onChange(of: profileViewModel.company.name) { value in
+                                        print("company name berubah kok")
                                         profileViewModel.company.name = value
                                     }
                                     
@@ -49,9 +50,8 @@ struct ProfileView: View {
                                 }
                                 .frame(width: metrics.size.width * 0.2)
                                 TextField(profileViewModel.company.ownerPin, text: $ownerPin.value)
-                                    .onChange(of: profileViewModel.company.ownerPin) { value in
+                                    .onChange(of: ownerPin.value) { value in
                                         if value.count < 4{
-                                            
                                         }
                                         else{
                                             profileViewModel.company.ownerPin = value
