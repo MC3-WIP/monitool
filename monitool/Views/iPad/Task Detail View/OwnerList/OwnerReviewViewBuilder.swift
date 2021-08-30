@@ -21,7 +21,7 @@ extension OwnerReviewView {
                     }
                     .scaledToFit()
             } else {
-                Image("MonitoolEmptyReferenceIllus")
+                Image("EmptyReference")
                     .resizable()
                     .scaledToFit()
                     .padding([.horizontal, .bottom], 36)

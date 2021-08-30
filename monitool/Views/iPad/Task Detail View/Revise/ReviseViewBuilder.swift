@@ -24,7 +24,7 @@ extension ReviseView {
 					}
 					.scaledToFit()
 			} else {
-				Image("MonitoolEmptyReferenceIllus")
+				Image("EmptyReference")
 					.resizable()
 					.scaledToFill()
 					.padding([.horizontal, .bottom], 36)

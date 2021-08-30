@@ -23,14 +23,23 @@ struct TaskListView: View {
     }
 
     var body: some View {
-        List {
-            ForEach(filteredData) { task in
-                NavigationLink(
-                    destination: taskViewModel.route(filter, task: task)) {
-                        TaskListRow(task: task)
+        Group {
+            if taskViewModel.tasks.filter({ $0.status == filter }).isEmpty {
+                Image("EmptyTask")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 360, alignment: .center)
+            } else {
+                List {
+                    ForEach(filteredData) { task in
+                        NavigationLink(
+                            destination: taskViewModel.route(filter, task: task)) {
+                            TaskListRow(task: task)
+                        }
+                    }
+                    .onDelete(perform: taskViewModel.delete)
                 }
             }
-            .onDelete(perform: taskViewModel.delete)
         }
         .navigationBarTitle(filter?.title ?? "Task List", displayMode: .inline)
         .toolbar {
@@ -54,8 +63,7 @@ struct TaskListView: View {
                     .font(.subheadline)
                     .foregroundColor(.gray)
             }
-        }
-        .padding(8)
+        }.padding(8)
     }
 }
 
