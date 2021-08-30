@@ -9,7 +9,12 @@ import SwiftUI
 
 struct IphoneProfileView: View {
     @StateObject var profileViewModel = ProfileViewModel()
-	@State var editModeIphone: EditMode = .inactive {
+    @ObservedObject var ownerPin = TextLimiter(limit: 4)
+    @ObservedObject var employeeListViewModel = EmployeeListViewModel()
+    @ObservedObject var role: RoleService = .shared
+    var company: Company?
+    @State var companyName = ""
+    @State var editModeIphone: EditMode = .inactive {
         didSet {
             if editModeIphone.isEditing {
                 profileViewModel.isPinHidden = false
@@ -31,11 +36,21 @@ struct IphoneProfileView: View {
                             placeholder: "Company Inc.",
                             text: $profileViewModel.company.name
                         )
+                        .onChange(of: profileViewModel.company.name) { value in
+                            profileViewModel.company.name = value
+                        }
                         CompanyInfoTextField(
                             title: "Owner PIN",
-                            placeholder: "1234",
-                            text: $profileViewModel.company.ownerPin
+                            placeholder: profileViewModel.company.ownerPin,
+                            text: $ownerPin.value
                         )
+                        .onChange(of: profileViewModel.company.ownerPin) { value in
+                            if value.count < 4 {
+                            }
+                            else {
+                                profileViewModel.company.ownerPin = value
+                            }
+                        }
                     }
                     ReviewPolicy()
                 }

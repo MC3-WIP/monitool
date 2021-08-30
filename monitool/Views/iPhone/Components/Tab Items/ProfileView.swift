@@ -15,10 +15,15 @@ struct ProfileView: View {
 		}
 	}
 
+    @ObservedObject var ownerPin = TextLimiter(limit: 4)
+    @ObservedObject var employeeListViewModel = EmployeeListViewModel()
+    @ObservedObject var role: RoleService = .shared
+    @State var editMode: EditMode = .inactive {
+        didSet {
+            if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
+        }
+    }
     @ObservedObject var profileViewModel: ProfileViewModel = .shared
-	@ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
-	@ObservedObject var role: RoleService = .shared
-
     var body: some View {
         VStack {
             List {
@@ -36,6 +41,7 @@ struct ProfileView: View {
                                     .onChange(of: profileViewModel.company.name) { value in
                                         profileViewModel.company.name = value
                                     }
+                                    
                             }
                         }
                         .padding(.top, 4)
@@ -47,10 +53,17 @@ struct ProfileView: View {
                                     Spacer()
                                 }
                                 .frame(width: metrics.size.width * 0.2)
-                                TextField("1234", text: $profileViewModel.company.ownerPin)
+                                TextField(profileViewModel.company.ownerPin, text: $ownerPin.value)
                                     .onChange(of: profileViewModel.company.ownerPin) { value in
-                                        profileViewModel.company.ownerPin = value
+                                        if value.count < 4{
+                                            
+                                        }
+                                        else{
+                                            profileViewModel.company.ownerPin = value
+                                        }
                                     }
+                                    
+                                    
                             }
                         }
                         .padding(.top, 4)
@@ -236,7 +249,7 @@ extension ProfileView {
         .cornerRadius(8)
         .disabled(editMode.isEditing)
     }
-
+    
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
