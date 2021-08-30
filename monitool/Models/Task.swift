@@ -45,7 +45,6 @@ class Task: Codable, Identifiable, Hashable {
         isHistory = false
         self.photoReference = photoReference
         self.parentId = parentId
-        self.repeated = repeated
         self.titleLog = ["\(name) created by Owner"]
         self.timeStampLog = [Date()]
     }
