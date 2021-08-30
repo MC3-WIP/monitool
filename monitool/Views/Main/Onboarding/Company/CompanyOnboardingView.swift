@@ -4,24 +4,22 @@
 //
 //  Created by Naufaldi Athallah Rifqi on 28/07/21.
 //
-
-import SwiftUI
 import FirebaseAuth
+import SwiftUI
 
 struct CompanyOnboardingView: View {
     @State var minReviewers = 0
     @State var companyName: String = ""
     @State private var showingSheet = false
+    @State private var showingAlert = false
     @State var isLinkActive = false
-    @ObservedObject var employeeViewModel = EmployeeListViewModel()
-    @ObservedObject var companyViewModel = CompanyViewModel()
-    @ObservedObject var storageService = StorageService()
-    @ObservedObject var userAuth: AuthService
-    @ObservedObject var ownerPin = TextBindingHelper(limit: 4)
 
-    init() {
-        self.userAuth = .shared
-    }
+    @StateObject var ownerPin = TextBindingHelper(limit: 4)
+
+    @ObservedObject var employeeViewModel: EmployeeListViewModel = .shared
+    @ObservedObject var companyViewModel: CompanyViewModel = .shared
+    @ObservedObject var storageService: StorageService = .shared
+    @ObservedObject var userAuth: AuthService = .shared
 
     var body: some View {
         NavigationView {
@@ -42,58 +40,40 @@ struct CompanyOnboardingView: View {
                         HStack {
                             Text("Owner Pin")
                             TextField("Owner Pin", text: $ownerPin.text)
-								.multilineTextAlignment(.trailing)
-								.keyboardType(.numberPad)
+                                .multilineTextAlignment(.trailing)
+                                .keyboardType(.numberPad)
                         }
                         HStack {
                             Text("Task Reviewer: ")
                             Spacer()
-                            Stepper("\(minReviewers) Reviewer(s)", onIncrement: {
-                                if minReviewers < employeeViewModel.employees.count {
-                                    minReviewers += 1
+                            Stepper("\(minReviewers) Reviewer(s)") {
+                                minReviewers += 1
+                                if minReviewers > employeeViewModel.employees.count {
+                                    minReviewers = employeeViewModel.employees.count
                                 }
-                            }, onDecrement: {
-                                if minReviewers > 0 {
-                                    minReviewers -= 1
+                            } onDecrement: {
+                                minReviewers -= 1
+                                if minReviewers < 0 {
+                                    minReviewers = 0
                                 }
-                            })
+                            }.disabled(employeeViewModel.employees.count == 0)
                         }
                     }
-                    Section(header: HStack {
-                        Text("Employee")
-							.font(.title2.weight(.semibold))
-							.foregroundColor(.black)
-							.frame(maxWidth: .infinity, alignment: .leading)
-                        Spacer()
-                        Button("Add Employee") {
-                            showingSheet = true
+                    Section(
+                        header: HStack {
+                            Text("Employee")
+                                .font(.title2.weight(.semibold))
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                            Spacer()
+                            Button("Add Employee") {
+                                showingSheet = true
+                            }
+                            .popover(isPresented: $showingSheet) {
+                                AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
+                                    .frame(width: 400, height: 400)
+                            }
                         }
-                        .popover(isPresented: $showingSheet) {
-                            AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
-								.frame(width: 400, height: 400)
-                        }
-                    }, footer: HStack {
-                        Spacer()
-                        Button("Save", action: {
-                            self.isLinkActive = true
-                            let company = Company(
-								name: companyName,
-								minReview: minReviewers,
-								ownerPin: ownerPin.text,
-								hasLoggedIn: true,
-								profileImage: ""
-							)
-                            companyViewModel.create(company)
-                            storageService.updateImageURL(category: "profile")
-                            userAuth.hasLogin()
-                        })
-                        .padding()
-						.background(AppColor.accent)
-						.foregroundColor(AppColor.primaryForeground)
-                        .clipShape(Rectangle())
-                        .cornerRadius(10)
-                        Spacer()
-                    }
                     ) {
                         HStack {
                             Text("Name").foregroundColor(.gray)
@@ -109,14 +89,35 @@ struct CompanyOnboardingView: View {
                         }
                         .onDelete(perform: employeeViewModel.delete)
                     }.textCase(nil)
-
                 }.listStyle(GroupedListStyle())
-            }.navigationTitle("Profile").navigationBarTitleDisplayMode(.inline)
+            }.navigationBarTitle("Profile", displayMode: .inline)
+            .toolbar {
+                Button("Save") {
+                    self.isLinkActive = true
+                    if companyName == "" || ownerPin.text == "" {
+                            showingAlert = true
+                    } else {
+                        let company = Company(
+                            name: companyName,
+                            minReview: minReviewers,
+                            ownerPin: ownerPin.text,
+                            hasLoggedIn: true,
+                            profileImage: ""
+                        )
+                        companyViewModel.create(company)
+                        storageService.updateImageURL(category: "profile")
+                        userAuth.hasLogin()
+                    }
+                }
+            }.alert(isPresented: $showingAlert) {
+                Alert(
+                    title: Text("Missing Info"),
+                    message: Text("Please input your company name and a PIN before proceeding."),
+                    dismissButton: .default(Text("Got it!"))
+                )
+            }
         }.navigationViewStyle(StackNavigationViewStyle())
-    }
-
-    func saveCompanyData(company: Company) {
-
+        .accentColor(AppColor.accent)
     }
 }
 

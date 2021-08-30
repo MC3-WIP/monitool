@@ -4,8 +4,9 @@
 //
 //  Created by Mac-albert on 11/08/21.
 //
-import SwiftUI
+
 import SDWebImageSwiftUI
+import SwiftUI
 
 struct IphoneTodayListView: View {
     @StateObject var todayListViewModel: TodayListViewModel
@@ -15,75 +16,80 @@ struct IphoneTodayListView: View {
     }
 
     var body: some View {
-        VStack {
-            GeometryReader {proxy in
-                NoSeparatorList {
-                    Text(todayListViewModel.task.name)
-                        .font(.system(size: 28, weight: .bold))
-                        .frame(width: proxy.size.width, alignment: .leading)
-                    Text("Proof of Work")
-                        .font(.system(size: 20, weight: .bold))
-                        .frame(width: proxy.size.width, alignment: .leading)
-                        .foregroundColor(Color(hex: "898989"))
-                    ProofOfWork(image: "kucing2", date: "p", metricSize: proxy)
-                        .frame(width: proxy.size.width, height: proxy.size.width)
-                        .padding(.vertical, 10)
-                        .background(Color(hex: "F0F9F8"))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 5)
-                                .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
-                        )
-                    VStack(spacing: 4) {
-                        HStack {
-                            Text("PIC: ")
-                                .foregroundColor(Color(hex: "6C6C6C"))
-                                .fontWeight(.bold)
-                            Text(todayListViewModel.task.notes ?? "-")
-                        }
-                        .frame(width: proxy.size.width, alignment: .leading)
-                        HStack {
-                            Text("Notes: ")
-                                .foregroundColor(Color(hex: "6C6C6C"))
-                                .fontWeight(.bold)
-                            Text(todayListViewModel.task.notes ?? "-")
-                        }
-                        .frame(width: proxy.size.width, alignment: .leading)
-                    }
-                    .font(.system(size: 17))
-                    .padding(.vertical, 18)
+        ScrollView {
+            LazyVStack(alignment: .leading, spacing: 16) {
+                Text(todayListViewModel.task.name.capitalized)
+                    .font(.title2.weight(.bold))
 
+                HStack {
+                    Text("Proof of Work")
+                        .font(.title3.weight(.bold))
+                        .foregroundColor(.gray)
+                    Spacer()
+                    Button(
+                        todayListViewModel.imageToBeAdded != nil ? "Retake" : "Add Photo",
+                        action: todayListViewModel.showImagePicker
+                    )
+                }
+
+                if let imageToBeAdded = todayListViewModel.imageToBeAdded {
+                    Image(uiImage: imageToBeAdded)
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .cornerRadius(12)
+                } else if let proofOfWork = todayListViewModel.proofOfWork, proofOfWork.count > 0 {
+                    Carousel(images: todayListViewModel.task.proof)
+                } else {
+                    Image("AddPhoto")
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .padding(36)
+                }
+
+                VStack(alignment: .leading, spacing: 8) {
+                    HStack {
+                        Text("PIC: ")
+                            .foregroundColor(.gray)
+                            .bold()
+                        Text(todayListViewModel.task.notes ?? "-")
+                    }
+                    HStack {
+                        Text("Notes: ")
+                            .foregroundColor(.gray)
+                            .bold()
+                        Text(todayListViewModel.task.notes ?? "-")
+                    }
+                }
+
+                Group {
                     if let image = todayListViewModel.task.photoReference {
                         WebImage(url: URL(string: image))
                             .resizable()
-                            .frame(width: proxy.size.width, height: proxy.size.width)
                     } else {
-                        Image("MonitoolEmptyReferenceIllus")
+                        Image("EmptyReference")
                             .resizable()
-                            .frame(width: proxy.size.width, height: proxy.size.width)
-                    }
-                    if let desc = todayListViewModel.task.desc {
-                        Text(desc)
-                            .font(.system(size: 17))
-                            .multilineTextAlignment(.leading)
+							.padding(36)
                     }
                 }
-                .frame(width: proxy.size.width, height: proxy.size.height, alignment: .topLeading)
+
+                if let desc = todayListViewModel.task.desc {
+                    Text(desc)
+                }
             }
-        }
-        .padding()
-    }
-    @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy) -> some View {
-        VStack {
-            Image("MonitoolAddPhotoIllustration")
-                .resizable()
-                .frame(width: metricSize.size.width * 0.7, height: metricSize.size.width * 0.7)
+            .fullScreenCover(isPresented: $todayListViewModel.isImagePickerShowing) {
+                ImagePicker(sourceType: .camera) { image in
+                    todayListViewModel.imageToBeAdded = image
+                }
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .padding()
         }
     }
 }
 
 struct IphoneTodayListView_Previews: PreviewProvider {
     static var previews: some View {
-        IphoneTodayListView(task: Task(name: "Task1", repeated: []))
+        IphoneTodayListView(task: Task(name: "Task1"))
             .previewDevice("Iphone 12")
     }
 }

@@ -5,12 +5,21 @@
 //  Created by Christianto Budisaputra on 07/08/21.
 //
 
-import Foundation
+import UIKit
+import FirebaseStorage
+import FirebaseFirestore
 
 class TodayListViewModel: TaskDetailViewModel {
-	@Published var notesText = ""
-	@Published var picSelection = 0
-	@Published var isEmployeePickerPresenting = false
+    // Modals state
+    @Published var isImagePickerShowing = false
+
+    override init(task: Task) {
+        super.init(task: task)
+    }
+
+    func showImagePicker() {
+        isImagePickerShowing = true
+    }
 
 	func submitTask(pic: Employee, notes: String? = nil) {
 		taskRepository.updatePIC(taskID: task.id, employee: pic)
@@ -20,5 +29,6 @@ class TodayListViewModel: TaskDetailViewModel {
 		}
 
 		taskRepository.updateStatus(taskID: task.id, status: TaskStatus.waitingEmployeeReview.rawValue)
+        taskRepository.updateLogTask(taskID: task.id, titleLog: "Submited by \(pic.name)", timeStamp: Date())
 	}
 }

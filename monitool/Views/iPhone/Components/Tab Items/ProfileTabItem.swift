@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct ProfileTabItem: View {
-	var body: some View {
-		Text("Profile View!")
-			.tabItem {
-				Image(systemName: "person.crop.circle")
-				Text("Profile")
-			}
-	}
+    var body: some View {
+        NavigationView {
+            IphoneProfileView()
+        }
+        .tabItem {
+            Image(systemName: "person.crop.circle")
+            Text("Profile")
+        }
+    }
 }
 
 struct ProfileTabItem_Previews: PreviewProvider {
-	static var previews: some View {
-		ProfileTabItem()
-	}
+    static var previews: some View {
+        ProfileTabItem()
+    }
 }

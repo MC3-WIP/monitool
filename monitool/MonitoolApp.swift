@@ -5,12 +5,11 @@
 //  Created by Christianto Budisaputra on 21/07/21.
 //
 
-import SwiftUI
 import Firebase
+import SwiftUI
 
 @main
 struct MonitoolApp: App {
-
     init() {
         FirebaseApp.configure()
     }

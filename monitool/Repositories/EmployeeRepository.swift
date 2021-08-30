@@ -5,34 +5,34 @@
 //  Created by Christianto Budisaputra on 28/07/21.
 //
 
-import FirebaseFirestore
 import Combine
+import FirebaseFirestore
 
 final class EmployeeRepository: ObservableObject {
-	@Published var employees = [Employee]()
-	private let paths = RepositoriesPath()
+    @Published var employees = [Employee]()
+    private let paths = RepositoriesPath()
 
-	private let store = Firestore.firestore()
-	private let employeeRepository: CollectionReference
+    private let store = Firestore.firestore()
+    private let employeeRepository: CollectionReference
 
-	static let shared = EmployeeRepository()
+    static let shared = EmployeeRepository()
 
     private init() {
-		employeeRepository = store.collection(paths.employee)
-		get()
-	}
+        employeeRepository = store.collection(paths.employee)
+        get()
+    }
 
-	func get() {
-		employeeRepository.addSnapshotListener { [self] querySnapshot, error in
-			if let error = error {
-				fatalError("Unresolved error \(error.localizedDescription)")
-			}
+    func get() {
+        employeeRepository.addSnapshotListener { [self] querySnapshot, error in
+            if let error = error {
+                fatalError("Unresolved error \(error.localizedDescription)")
+            }
 
-			employees = querySnapshot?
-				.documents
-				.compactMap { try? $0.data(as: Employee.self) } ?? []
-		}
-	}
+            employees = querySnapshot?
+                .documents
+                .compactMap { try? $0.data(as: Employee.self) } ?? []
+        }
+    }
 
     func add(_ employee: Employee) {
         do {

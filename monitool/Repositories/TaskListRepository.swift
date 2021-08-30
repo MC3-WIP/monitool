@@ -5,11 +5,11 @@
 //  Created by Naufaldi Athallah Rifqi on 04/08/21.
 //
 
-import Firebase
 import Combine
-import PhotosUI
-import FirebaseStorage
+import Firebase
 import FirebaseFirestore
+import FirebaseStorage
+import PhotosUI
 
 final class TaskListRepository: ObservableObject {
     private let path = RepositoriesPath()
@@ -18,7 +18,7 @@ final class TaskListRepository: ObservableObject {
 
     @Published var taskLists: [TaskList] = []
 
-	static let shared = TaskListRepository()
+    static let shared = TaskListRepository()
 
     private init() {
         get()
@@ -32,7 +32,7 @@ final class TaskListRepository: ObservableObject {
                     return
                 }
 
-                let taskLists = querySnapshot?.documents.compactMap {document in
+                let taskLists = querySnapshot?.documents.compactMap { document in
                     try? document.data(as: TaskList.self)
                 } ?? []
 
@@ -40,6 +40,24 @@ final class TaskListRepository: ObservableObject {
                     self.taskLists = taskLists
                 }
             }
+    }
+
+    func get(completion: (([TaskList]) -> Void)? = nil) {
+        store.collection(path.taskList).getDocuments { snapshot, err in
+            if let err = err {
+                print("Debug:", err.localizedDescription)
+                fatalError()
+            }
+            guard let documents = snapshot?.documents else {
+                print("Debug: No documents found.")
+                fatalError()
+            }
+
+            self.taskLists = documents.compactMap { snapshot in
+                try? snapshot.data(as: TaskList.self)
+            }
+            completion?(self.taskLists)
+        }
     }
 
     func add(_ taskList: TaskList) {
@@ -62,4 +80,31 @@ final class TaskListRepository: ObservableObject {
         ])
     }
 
+    func updatePhotoReference(taskID: String, photoRef: String, completion: ((Error?) -> Void)? = nil) {
+        storage.reference().child(photoRef).downloadURL { [self] url, _ in
+            if let url = url {
+                store
+                    .collection(path.taskList)
+                    .document(taskID)
+                    .setData(["photoReference": url.absoluteString], merge: true, completion: completion)
+                store
+                    .collection(path.task)
+                    .document(taskID)
+                    .setData(["photoReference": url.absoluteString], merge: true, completion: completion)
+            }
+        }
+    }
+
+    func repeatTask(day: Int) {
+        get { taskLists in
+            for tasks in taskLists {
+                if let repeatedTask = tasks.repeated {
+                    for i in 0...repeatedTask.count - 1 where repeatedTask[i] && i == day {
+                        self.add(tasks)
+                    }
+                }
+            }
+        }
+
+    }
 }

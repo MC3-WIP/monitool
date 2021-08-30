@@ -10,20 +10,22 @@ import SwiftUI
 // Strings.TaskList.title
 
 enum Strings {
-	// MARK: Page
-	/// Task List Page
-	enum TaskList: LocalizedStringKey {
-		case title = "tasklist.title"
-	}
+    // MARK: Page
 
-	// MARK: Task Status
-	enum TaskStatus: LocalizedStringKey {
-		case ongoing = "taskstatus.ongoing",
-			 waitingPeerReview = "taskstatus.peer_review",
-			 waitingOwnerReview = "taskstatus.owner_review",
-			 revised = "taskstatus.revise",
-			 completed = "taskstatus.completed"
-	}
+    /// Task List Page
+    enum TaskList: LocalizedStringKey {
+        case title = "tasklist.title"
+    }
+
+    // MARK: Task Status
+
+    enum TaskStatus: LocalizedStringKey {
+        case ongoing = "taskstatus.ongoing",
+             waitingPeerReview = "taskstatus.peer_review",
+             waitingOwnerReview = "taskstatus.owner_review",
+             revised = "taskstatus.revise",
+             completed = "taskstatus.completed"
+    }
 }
 
 // extension String {

@@ -4,8 +4,8 @@
 //
 //  Created by Mac-albert on 11/08/21.
 //
-import SwiftUI
 import SDWebImageSwiftUI
+import SwiftUI
 
 struct IphoneOwnerReview: View {
     @StateObject var OwnerViewModel: TodayListViewModel
@@ -19,7 +19,7 @@ struct IphoneOwnerReview: View {
 
     @Environment(\.presentationMode) var presentationMode
 
-    init (task: Task) {
+    init(task: Task) {
         _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
         _OwnerViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
     }
@@ -74,7 +74,7 @@ struct IphoneOwnerReview: View {
                             .resizable()
                             .frame(width: proxy.size.width, height: proxy.size.width)
                     } else {
-                        Image("MonitoolEmptyReferenceIllus")
+                        Image("EmptyReference")
                             .resizable()
                             .frame(width: proxy.size.width, height: proxy.size.width)
                     }
@@ -89,7 +89,6 @@ struct IphoneOwnerReview: View {
                         reviseButton()
                     }
                     .padding(.vertical, 24)
-
                 }
             }
         }
@@ -97,69 +96,67 @@ struct IphoneOwnerReview: View {
     }
 
     @ViewBuilder func proofOfWorkComponent(matric: GeometryProxy, proofPage: Int, totalPage: Int, datePhoto: String) -> some View {
-            VStack {
-                ZStack {
-                    switch proofPage {
-                    case 0:
-                        ProofOfWork(
-							image: "DefaultRefference",
-							date: "21 Jul 2021 at 15:57",
-							metricSize: matric,
-							datePhoto: datePhoto
-						)
-                    case 1:
-                        ProofOfWork(
-							image: "DefaultRefference",
-							date: "21 Jul 2021 at 15:57",
-							metricSize: matric,
-							datePhoto: datePhoto
-						)
-                    case 2:
-                        ProofOfWork(
-							image: "DefaultRefference",
-							date: "21 Jul 2021 at 15:57",
-							metricSize: matric,
-							datePhoto: datePhoto
-						)
-                    default:
-                        Image("MonitoolAddPhotoIllustration")
-                    }
+        VStack {
+            ZStack {
+                switch proofPage {
+                case 0:
+                    ProofOfWork(
+                        image: "DefaultRefference",
+                        date: "21 Jul 2021 at 15:57",
+                        metricSize: matric,
+                        datePhoto: datePhoto
+                    )
+                case 1:
+                    ProofOfWork(
+                        image: "DefaultRefference",
+                        date: "21 Jul 2021 at 15:57",
+                        metricSize: matric,
+                        datePhoto: datePhoto
+                    )
+                case 2:
+                    ProofOfWork(
+                        image: "DefaultRefference",
+                        date: "21 Jul 2021 at 15:57",
+                        metricSize: matric,
+                        datePhoto: datePhoto
+                    )
+                default:
+                    Image("AddPhoto")
                 }
-                .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
-                    .onEnded { value in
-                        if abs(value.translation.height) < abs(value.translation.width) {
-                            if abs(value.translation.width) > 50.0 {
-                                if value.translation.width > 0 {
-                                    if proofPage == 0 {
-
-                                    } else {
-                                        self.proofPage -= 1
-                                    }
-                                } else if value.translation.width < 0 {
-                                    if proofPage == totalPage - 1 {
-
-                                    } else {
-                                        self.proofPage += 1
-                                    }
+            }
+            .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
+                .onEnded { value in
+                    if abs(value.translation.height) < abs(value.translation.width) {
+                        if abs(value.translation.width) > 50.0 {
+                            if value.translation.width > 0 {
+                                if proofPage == 0 {
+                                } else {
+                                    self.proofPage -= 1
+                                }
+                            } else if value.translation.width < 0 {
+                                if proofPage == totalPage - 1 {
+                                } else {
+                                    self.proofPage += 1
                                 }
                             }
                         }
                     }
-                )
-                PageControl(totalPage: totalPage, current: proofPage)
-            }
-            .frame(width: matric.size.width)
-            .padding(.vertical, 20)
-            .background(Color(hex: "F0F9F8"))
-            .overlay(
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+                }
             )
+            PageControl(totalPage: totalPage, current: proofPage)
+        }
+        .frame(width: matric.size.width)
+        .padding(.vertical, 20)
+        .background(Color(hex: "F0F9F8"))
+        .overlay(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
+        )
     }
 
-    @ViewBuilder func ProofOfWork(image: String, date: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
+    @ViewBuilder func ProofOfWork(image _: String, date _: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
         VStack {
-            Image("MonitoolAddPhotoIllustration")
+            Image("AddPhoto")
                 .resizable()
                 .frame(width: metricSize.size.width * 0.85, height: metricSize.size.width * 0.85)
             Text(datePhoto)
@@ -172,8 +169,12 @@ struct IphoneOwnerReview: View {
         Button {
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
             self.presentationMode.wrappedValue.dismiss()
-
-		} label: {
+            TaskRepository.shared.updateLogTask(
+                taskID: taskDetailViewModel.task.id,
+                titleLog: "Rejected by Owner",
+                timeStamp: Date()
+            )
+        } label: {
             HStack {
                 Image(systemName: "repeat")
                 Text("Revise")
@@ -185,7 +186,7 @@ struct IphoneOwnerReview: View {
             .background(
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(Color(hex: "#4FB0AB"), lineWidth: 2)
-                            )
+            )
         }
     }
 
@@ -193,7 +194,12 @@ struct IphoneOwnerReview: View {
         Button {
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
             self.presentationMode.wrappedValue.dismiss()
-		} label: {
+            TaskRepository.shared.updateLogTask(
+                taskID: taskDetailViewModel.task.id,
+                titleLog: "Approved by Owner",
+                timeStamp: Date()
+            )
+        } label: {
             HStack {
                 Image(systemName: "checkmark")
                 Text("Approve")
@@ -212,6 +218,6 @@ struct IphoneOwnerReview: View {
 
 struct IphoneOwnerReview_Previews: PreviewProvider {
     static var previews: some View {
-        IphoneOwnerReview(task: Task(name: "Task", repeated: []))
+        IphoneOwnerReview(task: Task(name: "Task"))
     }
 }

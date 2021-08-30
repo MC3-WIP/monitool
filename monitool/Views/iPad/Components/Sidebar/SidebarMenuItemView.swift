@@ -8,22 +8,29 @@
 import SwiftUI
 
 struct SidebarMenuItemView: View {
-	private let icon: String
-	private let title: String
-	private let view: AnyView
+    private let icon: String
+    private let title: String
+    private let view: AnyView
 
-	init(type: SidebarMenuItem) {
-		self.icon = type.icon
-		self.title = type.title
-		self.view = type.view
-	}
+	@State var isActive = false
 
-	var body: some View {
-		NavigationLink(destination: view) {
-			HStack {
-				Image(systemName: icon)
-				Text(title)
+    init(type: SidebarMenuItem) {
+        icon = type.icon
+        title = type.title
+        view = type.view
+    }
+
+    var body: some View {
+		NavigationLink(destination: view, isActive: $isActive) {
+            HStack {
+                Image(systemName: icon)
+                Text(title)
+            }
+        }
+		.onAppear {
+			if title == SidebarMenuItem.todayList.title {
+				isActive.toggle()
 			}
 		}
-	}
+    }
 }

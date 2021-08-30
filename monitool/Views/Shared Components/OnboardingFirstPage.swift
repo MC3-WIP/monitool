@@ -25,10 +25,10 @@ struct OnboardingFirstPage: View {
                         .multilineTextAlignment(.center)
                         .font(.custom("Montserrat-SemiBold", size: 34))
                         .foregroundColor(.gray)
-                }.frame(width: proxy.size.width, height: proxy.size.height, alignment: .center )
+                }.frame(width: proxy.size.width, height: proxy.size.height, alignment: .center)
             }
         }
-    .padding()
+        .padding()
     }
 }
 

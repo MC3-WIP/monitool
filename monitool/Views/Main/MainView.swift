@@ -8,25 +8,34 @@
 import SwiftUI
 
 struct MainView: View {
-	private var device = UIDevice.current.userInterfaceIdiom
+    @ObservedObject var dateService: DateService = .shared
+    @ObservedObject var taskViewModel: TaskViewModel = .shared
+    private var device = UIDevice.current.userInterfaceIdiom
 
-	var body: some View {
-		Layout()
+    init() {
+        if dateService.isDayChanged() {
+            taskViewModel.repeatTask(day: dateService.getCurrentDay())
+        }
+    }
+
+    var body: some View {
+        Layout()
     }
 }
 
 // MARK: - View Builders
+
 extension MainView {
-	@ViewBuilder
-	func Layout() -> some View {
-		if device == .pad {
-			PadLayout()
-		} else if device == .phone {
-			PhoneLayout()
-		} else {
-			Text("Monitool's only available for iPhone and iPad, so how'd u get here?")
-		}
-	}
+    @ViewBuilder
+    func Layout() -> some View {
+        if device == .pad {
+            PadLayout()
+        } else if device == .phone {
+            PhoneLayout()
+        } else {
+            Text("Monitool's only available for iPhone and iPad, so how'd u get here?")
+        }
+    }
 }
 
 struct MainView_Previews: PreviewProvider {

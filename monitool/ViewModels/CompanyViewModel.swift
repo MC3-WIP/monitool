@@ -8,8 +8,12 @@
 import Combine
 import SwiftUI
 
-class CompanyViewModel: ObservableObject {
-	@ObservedObject private var repository: CompanyRepository = .shared
+final class CompanyViewModel: ObservableObject {
+    private let repository: CompanyRepository = .shared
+
+	static let shared = CompanyViewModel()
+
+	private init() {}
 
     func create(_ company: Company) {
         repository.add(company)
@@ -18,5 +22,4 @@ class CompanyViewModel: ObservableObject {
     func addImage(imageURL: String) {
         repository.addImage(imageURL: imageURL)
     }
-
 }

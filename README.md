@@ -1,4 +1,4 @@
-![Logo](https://github.com/MC3-WIP/monitool/blob/dev/Assets/readme_header.png)
+![Logo](https://github.com/MC3-WIP/monitool/blob/dev/Assets/readme_header.png?raw=true)
 
 # Monitool - Level Up Your Business
 
