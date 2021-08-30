@@ -14,10 +14,13 @@ struct ProfileView: View {
 			if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
 		}
 	}
-    @ObservedObject var ownerPin = TextLimiter(limit: 4)
-    @ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
-    @ObservedObject var role: RoleService = .shared
+
+    @StateObject var ownerPin = TextLimiter(limit: 4)
+
     @ObservedObject var profileViewModel: ProfileViewModel = .shared
+    @ObservedObject var role: RoleService = .shared
+    @ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
+
     var body: some View {
         VStack {
             LazyVStack(spacing: 10) {
@@ -37,7 +40,6 @@ struct ProfileView: View {
                                         print("company name berubah kok")
                                         profileViewModel.company.name = value
                                     }
-                                    
                             }
                         }
                         .padding(.top, 4)
@@ -50,15 +52,11 @@ struct ProfileView: View {
                                 }
                                 .frame(width: metrics.size.width * 0.2)
                                 TextField(profileViewModel.company.ownerPin, text: $ownerPin.value)
-                                    .onChange(of: ownerPin.value) { value in
-                                        if value.count < 4{
-                                        }
-                                        else{
+                                    .onChange(of: profileViewModel.company.ownerPin) { value in
+                                        if value.count == 4 {
                                             profileViewModel.company.ownerPin = value
                                         }
                                     }
-                                    
-                                    
                             }
                         }
                         .padding(.top, 4)
@@ -68,7 +66,6 @@ struct ProfileView: View {
                 }
 
                 // MARK: - Employee List
-
                 Section(header: EmployeeListHeader()) {
                     ForEach(employeeListViewModel.employees) { employee in
                         EmployeeRow(employee: employee)
@@ -246,7 +243,7 @@ extension ProfileView {
         .cornerRadius(8)
         .disabled(editMode.isEditing)
     }
-    
+
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }
