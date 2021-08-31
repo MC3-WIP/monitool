@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TaskListDetailView: View {
+    @State private var device = UIDevice.current.userInterfaceIdiom
     @State var taskTitle: String = ""
     @State var description: String = ""
     @State private var repeatPopover = false
@@ -34,9 +35,16 @@ struct TaskListDetailView: View {
                         repeatPopover = true
                     }
                     .popover(isPresented: $repeatPopover) {
-                        RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
-                            .frame(width: 400, height: 400)
+                        if device == .pad {
+                            RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
+                                .frame(width: 400, height: 400)
+                        }
+                        else {
+                            RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
+                                .frame(width: 400, height: 400, alignment: .top)
+                        }
                     }
+                    .frame(alignment: .top)
                     Spacer()
                     Button {
                         repeatPopover = true

@@ -13,9 +13,8 @@ struct CompanyOnboardingView: View {
     @State private var showingSheet = false
     @State private var showingAlert = false
     @State var isLinkActive = false
-
     @StateObject var ownerPin = TextBindingHelper(limit: 4)
-
+    @State private var device = UIDevice.current.userInterfaceIdiom
     @ObservedObject var employeeViewModel: EmployeeListViewModel = .shared
     @ObservedObject var companyViewModel: CompanyViewModel = .shared
     @ObservedObject var storageService: StorageService = .shared
@@ -68,8 +67,14 @@ struct CompanyOnboardingView: View {
                                 showingSheet = true
                             }
                             .popover(isPresented: $showingSheet) {
-                                AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
-                                    .frame(width: 400, height: 400)
+                                if device == .pad {
+                                    AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
+                                        .frame(width: 400, height: 400)
+                                } else {
+                                    AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
+                                        .frame(width: 400, height: 400, alignment: .top)
+                                }
+                                
                             }
                         }
                     ) {
