@@ -10,7 +10,8 @@ import SwiftUI
 
 struct EditTaskListView: View {
     @Environment(\.presentationMode) var presentationMode
-
+    @State private var device = UIDevice.current.userInterfaceIdiom
+    
     let taskID: String
     @State var title: String
     @State var description: String
@@ -71,8 +72,14 @@ struct EditTaskListView: View {
                     Text(TaskHelper.convertRepetition(repeated, simplified: true))
                     Image(systemName: "chevron.right")
                         .popover(isPresented: $repeatPopover) {
-                            RepeatSheetView(repeated: $repeated, isPresented: $repeatPopover)
-                                .frame(width: 400, height: 400)
+                            if device == .pad {
+                                RepeatSheetView(repeated: $repeated, isPresented: $repeatPopover)
+                                    .frame(width: 400, height: 400)
+                            }
+                            else {
+                                RepeatSheetView(repeated: $repeated, isPresented: $repeatPopover)
+                                    .frame(alignment: .top)
+                            }
                         }
                 }.foregroundColor(.gray)
             }
