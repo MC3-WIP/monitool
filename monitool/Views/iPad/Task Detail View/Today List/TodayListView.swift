@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 struct TodayListView: View {
 	@Environment(\.presentationMode) var presentationMode
@@ -62,19 +61,8 @@ struct TodayListView: View {
         VStack(alignment: .leading) {
             Text(todayListViewModel.task.name).font(.title.bold())
 
-            if let image = todayListViewModel.task.photoReference {
-                WebImage(url: URL(string: image))
-                    .resizable()
-                    .indicator { _, _ in
-                        ProgressView()
-                    }
-					.scaledToFit()
-            } else {
-                Image("EmptyReference")
-                    .resizable()
-                    .scaledToFit()
-                    .padding([.horizontal, .bottom], 36)
-            }
+            PhotoReference(url: todayListViewModel.task.photoReference)
+
             if let desc = todayListViewModel.task.desc {
                 Text(desc)
             }

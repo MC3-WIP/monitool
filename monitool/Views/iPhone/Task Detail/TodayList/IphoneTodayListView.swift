@@ -61,16 +61,7 @@ struct IphoneTodayListView: View {
                     }
                 }
 
-                Group {
-                    if let image = todayListViewModel.task.photoReference {
-                        WebImage(url: URL(string: image))
-                            .resizable()
-                    } else {
-                        Image("EmptyReference")
-                            .resizable()
-							.padding(36)
-                    }
-                }
+                PhotoReference(url: todayListViewModel.task.photoReference)
 
                 if let desc = todayListViewModel.task.desc {
                     Text(desc)

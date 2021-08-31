@@ -21,7 +21,7 @@ struct HistoryDetail: View {
                 descComponent()
                 Spacer()
                 statusComponent()
-                proofOfWorkComponent()
+                ProofOfWork(task: taskDetailViewModel.task)
                 PICComponent()
                 notesComponent()
                 commentComponent()
@@ -48,21 +48,6 @@ struct HistoryDetail: View {
             .padding(.horizontal, 15)
             .background(Color("LightTosca"))
             .cornerRadius(40)
-    }
-
-    @ViewBuilder func proofOfWorkComponent() -> some View {
-        Text("Proof of Work")
-            .font(.title2)
-            .fontWeight(.bold)
-        if let image = taskDetailViewModel.task.photoReference {
-            WebImage(url: URL(string: image))
-                .resizable()
-                .frame(width: 100, height: 100, alignment: .leading)
-        } else {
-            Image("EmptyReference")
-                .resizable()
-                .frame(width: 100, height: 100, alignment: .leading)
-        }
     }
 
     @ViewBuilder func PICComponent() -> some View {

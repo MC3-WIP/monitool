@@ -21,7 +21,7 @@ struct IphoneProfileView: View {
     @ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
     @ObservedObject var role: RoleService = .shared
     @ObservedObject var profileViewModel: ProfileViewModel = .shared
-    
+
     var body: some View {
         List {
             Section(header: CompanyProfileHeader()) {
@@ -81,7 +81,7 @@ extension IphoneProfileView {
         .background(AppColor.primaryForeground)
         .textCase(.none)
     }
-    
+
     @ViewBuilder func CompanyInfoTextField(title: String, placeholder: String, text: Binding<String>) -> some View {
         GeometryReader { metrics in
             HStack {
@@ -98,7 +98,7 @@ extension IphoneProfileView {
         .padding(.top, 4)
         .padding(.bottom, 6)
     }
-    
+
     @ViewBuilder func CompanyInfoNameTextField(placeholder: String, text: Binding<String>) -> some View {
         HStack {
             TextField(placeholder, text: text)
@@ -106,7 +106,7 @@ extension IphoneProfileView {
         .padding(.top, 4)
         .padding(.bottom, 6)
     }
-    
+
     @ViewBuilder func ReviewPolicy() -> some View {
         VStack {
             HStack {
@@ -139,7 +139,7 @@ extension IphoneProfileView {
         }
         .padding(.top, 6)
     }
-    
+
     @ViewBuilder func EmployeeListHeader() -> some View {
         VStack(spacing: 24) {
             HStack {
@@ -188,7 +188,7 @@ extension IphoneProfileView {
         .padding(.top, 28)
         .textCase(.none)
     }
-    
+
     @ViewBuilder func EmployeeRow(employee: Employee) -> some View {
         HStack {
             Text(employee.name)

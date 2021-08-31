@@ -69,15 +69,8 @@ struct IphoneOwnerReview: View {
                             .modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
                     }
 
-                    if let image = OwnerViewModel.task.photoReference {
-                        WebImage(url: URL(string: image))
-                            .resizable()
-                            .frame(width: proxy.size.width, height: proxy.size.width)
-                    } else {
-                        Image("EmptyReference")
-                            .resizable()
-                            .frame(width: proxy.size.width, height: proxy.size.width)
-                    }
+                    PhotoReference(url: OwnerViewModel.task.photoReference)
+
                     if let desc = taskDetailViewModel.task.desc {
                         Text(desc)
                             .font(.system(size: 17))

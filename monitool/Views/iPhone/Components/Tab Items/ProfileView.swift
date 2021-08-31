@@ -18,7 +18,7 @@ struct ProfileView: View {
     @ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
     @ObservedObject var role: RoleService = .shared
     @ObservedObject var profileViewModel: ProfileViewModel = .shared
-    
+
     var body: some View {
         VStack {
             LazyVStack(spacing: 10) {

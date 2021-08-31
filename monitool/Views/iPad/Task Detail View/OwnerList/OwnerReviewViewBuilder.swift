@@ -5,7 +5,6 @@
 //  Created by Mac-albert on 08/08/21.
 //
 
-import SDWebImageSwiftUI
 import SwiftUI
 
 extension OwnerReviewView {
@@ -13,19 +12,7 @@ extension OwnerReviewView {
         VStack(alignment: .leading, spacing: 24) {
             Text(ownerReviewViewModel.task.name).font(.title.bold())
 
-            if let image = ownerReviewViewModel.task.photoReference {
-                WebImage(url: URL(string: image))
-                    .resizable()
-                    .indicator { _, _ in
-                        ProgressView()
-                    }
-                    .scaledToFit()
-            } else {
-                Image("EmptyReference")
-                    .resizable()
-                    .scaledToFit()
-                    .padding([.horizontal, .bottom], 36)
-            }
+            PhotoReference(url: ownerReviewViewModel.task.photoReference)
 
             if let desc = ownerReviewViewModel.task.desc {
                 Text(desc)

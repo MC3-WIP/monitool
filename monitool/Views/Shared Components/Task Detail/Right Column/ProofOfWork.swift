@@ -71,7 +71,7 @@ struct ProofOfWork: View {
                 }
             }
             // MARK: Pictures
-            renderImages()
+            renderImage()
             .frame(minWidth: 0, maxWidth: .infinity, maxHeight: 360)
             .background(AppColor.lightAccent)
             .cornerRadius(12)
@@ -85,7 +85,7 @@ struct ProofOfWork: View {
     }
 
     @ViewBuilder
-    private func renderImages() -> some View {
+    private func renderImage() -> some View {
         if let imageToBeAdded = viewModel.imageToBeAdded {
             // MARK: Photo Preview
             Image(uiImage: imageToBeAdded)

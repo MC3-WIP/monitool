@@ -28,7 +28,6 @@ struct PhotoComponent: View {
                     .frame(width: 100, height: 100, alignment: .center)
                     .clipShape(Circle())
                     .padding(.bottom, 10.0)
-               
             } else {
                 if image == nil {
                     Image("profile")

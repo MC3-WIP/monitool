@@ -16,19 +16,7 @@ extension ReviseView {
 			Text(reviseViewModel.title).font(.title.bold())
 
 			// Reference Image
-			if let image = reviseViewModel.photoReference {
-				WebImage(url: URL(string: image))
-					.resizable()
-					.indicator { _, _ in
-						ProgressView()
-					}
-					.scaledToFit()
-			} else {
-				Image("EmptyReference")
-					.resizable()
-					.scaledToFill()
-					.padding([.horizontal, .bottom], 36)
-			}
+            PhotoReference(url: reviseViewModel.photoReference)
 
 			Text(reviseViewModel.desc)
 		}
