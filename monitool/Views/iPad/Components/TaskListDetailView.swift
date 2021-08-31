@@ -23,7 +23,7 @@ struct TaskListDetailView: View {
             List {
                 HStack(spacing: 70) {
                     Text("Title")
-                    TextField("Buka Gerbang Toko", text: $taskTitle)
+                    TextField("Task Title", text: $taskTitle)
                 }
                 HStack(spacing: 16) {
                     Text("Description")

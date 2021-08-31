@@ -5,8 +5,6 @@
 //  Created by Mac-albert on 08/08/21.
 //
 
-import Foundation
-import SDWebImageSwiftUI
 import SwiftUI
 
 extension EmployeeReviewView {
@@ -17,19 +15,7 @@ extension EmployeeReviewView {
             Text(viewModel.title).font(.title.bold())
 
             // Reference Image
-            if let image = viewModel.photoReference {
-                WebImage(url: URL(string: image))
-                    .resizable()
-                    .indicator { _, _ in
-                        ProgressView()
-                    }
-                    .scaledToFit()
-            } else {
-                Image("EmptyReference")
-                    .resizable()
-                    .scaledToFill()
-                    .padding([.horizontal, .bottom], 36)
-            }
+            PhotoReference(url: viewModel.photoReference)
 
             // Task Desc
             Text(viewModel.desc)

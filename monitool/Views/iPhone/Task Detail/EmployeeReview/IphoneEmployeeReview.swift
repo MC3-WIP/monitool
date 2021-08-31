@@ -74,27 +74,7 @@ struct IphoneEmployeeReview: View {
                 }
 
                 // Reference Image
-                if let referenceImage = viewModel.photoReference {
-                    VStack(alignment: .leading) {
-                        Text("Photo Reference")
-                            .font(.title3)
-                            .bold()
-                            .foregroundColor(.gray)
-                        WebImage(url: URL(string: referenceImage))
-                            .resizable()
-                            .placeholder(Image("EmptyReference"))
-                            .indicator { _, _ in
-                                ProgressView()
-                            }
-                            .transition(.fade)
-                            .scaledToFill()
-                            .cornerRadius(8)
-                    }
-                } else {
-                    Image("EmptyReference")
-                        .resizable()
-                        .scaledToFill()
-                }
+                PhotoReference(url: viewModel.photoReference)
             }.padding()
         }.navigationBarTitle("Waiting Employee Review", displayMode: .inline)
     }

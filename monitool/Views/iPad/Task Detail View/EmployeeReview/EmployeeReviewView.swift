@@ -22,6 +22,8 @@ struct EmployeeReviewView: View {
     @State var showingPinField = false
     @State var isApproving = false
     @State var isPinTrue: Bool?
+    @State var isInputPinFail: Bool = false
+    @State var errorMessageValidatingPin: String = ""
 
     var body: some View {
         if viewModel.company == nil {
@@ -73,7 +75,9 @@ struct EmployeeReviewView: View {
                         presentation: presentationMode,
                         showPin: $showingPinField,
                         pinInputted: $profileViewModel.pinInputted,
-                        isPasscodeFieldDisabled: $profileViewModel.isPasscodeFieldDisabled
+                        isPasscodeFieldDisabled: $profileViewModel.isPasscodeFieldDisabled,
+                        isInputPinFail: $isInputPinFail,
+                        errorMessages: $errorMessageValidatingPin
                     )
                 } else {
                     viewModel.disapproveTask(
@@ -86,6 +90,12 @@ struct EmployeeReviewView: View {
                     )
                 }
             }
+            .alert(isPresented: $isInputPinFail) {
+                        Alert(title: Text("Error when Validating Pin"),
+                              message: Text(errorMessageValidatingPin),
+                              dismissButton: .default(Text("OK!"))
+                        )
+                    }
         }
     }
 }

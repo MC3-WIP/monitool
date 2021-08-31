@@ -14,12 +14,10 @@ struct ProfileView: View {
 			if editMode.isEditing { profileViewModel.isPinHidden = false } else { profileViewModel.isPinHidden = true }
 		}
 	}
-
     @StateObject var ownerPin = TextLimiter(limit: 4)
-
-    @ObservedObject var profileViewModel: ProfileViewModel = .shared
-    @ObservedObject var role: RoleService = .shared
     @ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
+    @ObservedObject var role: RoleService = .shared
+    @ObservedObject var profileViewModel: ProfileViewModel = .shared
 
     var body: some View {
         VStack {
@@ -52,8 +50,8 @@ struct ProfileView: View {
                                 }
                                 .frame(width: metrics.size.width * 0.2)
                                 TextField(profileViewModel.company.ownerPin, text: $ownerPin.value)
-                                    .onChange(of: profileViewModel.company.ownerPin) { value in
-                                        if value.count == 4 {
+                                    .onChange(of: ownerPin.value) { value in
+                                        if value.count >= 4 {
                                             profileViewModel.company.ownerPin = value
                                         }
                                     }
@@ -73,13 +71,13 @@ struct ProfileView: View {
                     .onDelete(perform: employeeListViewModel.delete)
                 }
             }
+            .listStyle(InsetGroupedListStyle())
 
             Spacer()
 
             SwitchRoleButton()
         }
-        .padding(.vertical, 36)
-        .padding(.horizontal, 16)
+        .padding()
         .navigationBarTitle("Profile", displayMode: .inline)
         .toolbar {
             if role.isOwner {

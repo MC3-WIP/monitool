@@ -21,31 +21,29 @@ struct HistoryTaskDetailView: View {
     }
 
     var body: some View {
-		VStack {
-			ScrollView {
-				HStack(alignment: .top, spacing: 24) {
-					renderLeftColumn()
+        ScrollView {
+            HStack(alignment: .top, spacing: 24) {
+                renderLeftColumn()
 
-					VStack(alignment: .leading, spacing: 24) {
-						ProofOfWork(task: historyViewModel.task)
+                VStack(alignment: .leading, spacing: 24) {
+                    ProofOfWork(task: historyViewModel.task)
 
-						RightColumn<HistoryViewModel>(
-							components: role.isOwner ? [
-								.picText,
-								.notesText,
-								.commentText,
-								.logs
-							] : [
-								.picText,
-								.notesText,
-								.commentText
-							],
-							viewModel: historyViewModel
-						)
-					}
+                    RightColumn<HistoryViewModel>(
+                        components: role.isOwner ? [
+                            .picText,
+                            .notesText,
+                            .commentText,
+                            .logs
+                        ] : [
+                            .picText,
+                            .notesText,
+                            .commentText
+                        ],
+                        viewModel: historyViewModel
+                    )
                 }
-                .padding([.top, .leading, .trailing], 24.0)
-			}
+            }
+            .padding([.top, .leading, .trailing], 24.0)
         }
     }
 
@@ -55,19 +53,7 @@ struct HistoryTaskDetailView: View {
 			Text(historyViewModel.title).font(.title.bold())
 
 			// Reference Image
-			if let image = historyViewModel.photoReference {
-				WebImage(url: URL(string: image))
-					.resizable()
-					.indicator { _, _ in
-						ProgressView()
-					}
-					.scaledToFit()
-			} else {
-				Image("EmptyReference")
-					.resizable()
-					.scaledToFill()
-					.padding([.horizontal, .bottom], 36)
-			}
+            PhotoReference(url: historyViewModel.photoReference)
 
 			Text(historyViewModel.desc)
 		}
