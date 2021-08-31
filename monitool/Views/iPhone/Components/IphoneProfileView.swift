@@ -13,6 +13,11 @@ struct IphoneProfileView: View {
             if editModeIphone.isEditing {
                 profileViewModel.isPinHidden = false
             } else {
+                profileViewModel.updateCompany(
+                    companyName: profileViewModel.company.name,
+                    companyPIN: profileViewModel.company.ownerPin,
+                    minReview: profileViewModel.company.minReview
+                )
                 profileViewModel.isPinHidden = true
             }
         }
