@@ -13,6 +13,11 @@ struct IphoneProfileView: View {
             if editModeIphone.isEditing {
                 profileViewModel.isPinHidden = false
             } else {
+                profileViewModel.updateCompany(
+                    companyName: profileViewModel.company.name,
+                    companyPIN: profileViewModel.company.ownerPin,
+                    minReview: profileViewModel.company.minReview
+                )
                 profileViewModel.isPinHidden = true
             }
         }
@@ -31,7 +36,6 @@ struct IphoneProfileView: View {
                         text: $profileViewModel.company.name
                     )
                     .onChange(of: profileViewModel.company.name) { value in
-                        print("Udah masuk OnChange: \(value)")
                         profileViewModel.company.name = value
                     }
                     CompanyInfoTextField(
@@ -61,15 +65,6 @@ struct IphoneProfileView: View {
         }
         .navigationBarTitle("Profile", displayMode: .inline)
         .environment(\.editMode, $editModeIphone)
-        .onChange(of: editModeIphone, perform: { value in
-            if !value.isEditing {
-                profileViewModel.updateCompany(
-                    companyName: profileViewModel.company.name,
-                    companyPIN: profileViewModel.company.ownerPin,
-                    minReview: profileViewModel.company.minReview
-                )
-            }
-        })
     }
 }
 
