@@ -8,7 +8,15 @@
 import SwiftUI
 
 struct MainView: View {
+    @ObservedObject var dateService: DateService = .shared
+    @ObservedObject var taskViewModel: TaskViewModel = .shared
     private var device = UIDevice.current.userInterfaceIdiom
+
+    init() {
+        if dateService.isDayChanged() {
+            taskViewModel.repeatTask(day: dateService.getCurrentDay())
+        }
+    }
 
     var body: some View {
         Layout()

@@ -70,7 +70,7 @@ struct TodayListView: View {
                     }
 					.scaledToFit()
             } else {
-                Image("MonitoolEmptyReferenceIllus")
+                Image("EmptyReference")
                     .resizable()
                     .scaledToFit()
                     .padding([.horizontal, .bottom], 36)
@@ -84,7 +84,7 @@ struct TodayListView: View {
 
 struct TodayListView_Previews: PreviewProvider {
     static var previews: some View {
-        TodayListView(task: Task(name: "Hehe", repeated: []))
+        TodayListView(task: Task(name: "Hehe"))
             .previewDevice("iPad Pro (12.9-inch) (5th generation)")
             .previewLayout(.fixed(width: 1112, height: 834))
     }

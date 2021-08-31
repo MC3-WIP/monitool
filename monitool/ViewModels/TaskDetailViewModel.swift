@@ -9,7 +9,7 @@ import FirebaseFirestore
 import Foundation
 
 class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
-    
+
 	@Published var notesTextField       = ""
 	@Published var commentTextField     = ""
 
@@ -18,7 +18,7 @@ class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
 
     @Published var titleLog = ""
     @Published var timeStampLog: Date?
-    
+
 	@Published var picSelection = 0
 
 	@Published var isEmployeePickerPresenting = false
@@ -46,13 +46,16 @@ class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
 	var desc: String {
 		task.desc ?? ""
 	}
-    
+
     private let dateHelper = DateLogHelper()
-    
+
     var logs: [ActivityLog] {
         var log: [ActivityLog] = []
         for index in 0...task.titleLog.count - 1 {
-            log.append(ActivityLog(title: task.titleLog[index], timestamp: dateHelper.getStringFromDate(date: task.timeStampLog[index])))
+            log.append(ActivityLog(
+                        title: task.titleLog[index],
+                        timestamp: dateHelper.getStringFromDate(date: task.timeStampLog[index])
+            ))
         }
         return log
     }
@@ -132,9 +135,9 @@ class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
         task.approvingReviewer?.forEach(mapReviewer)
         task.disapprovingReviewer?.forEach(mapReviewer)
     }
-    
-    func getActivityLog(){
-        
+
+    func getActivityLog() {
+
     }
 
     private func mapReviewer(_ ref: DocumentReference) {

@@ -59,7 +59,7 @@ struct HistoryDetail: View {
                 .resizable()
                 .frame(width: 100, height: 100, alignment: .leading)
         } else {
-            Image("MonitoolEmptyReferenceIllus")
+            Image("EmptyReference")
                 .resizable()
                 .frame(width: 100, height: 100, alignment: .leading)
         }
@@ -112,6 +112,6 @@ struct HistoryDetail: View {
 
 struct HistoryDetail_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryDetail(history: Task(name: "Test", repeated: [false]))
+        HistoryDetail(history: Task(name: "Test"))
     }
 }

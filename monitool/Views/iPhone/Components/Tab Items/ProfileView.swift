@@ -21,8 +21,9 @@ struct ProfileView: View {
     
     var body: some View {
         VStack {
-            List {
+            LazyVStack(spacing: 10) {
                 // MARK: - Company Profile
+
                 Section(header: CompanyProfileHeader()) {
                     if editMode.isEditing {
                         GeometryReader { metrics in
@@ -34,9 +35,9 @@ struct ProfileView: View {
                                 .frame(width: metrics.size.width * 0.2)
                                 TextField("Company Inc.", text: $profileViewModel.company.name)
                                     .onChange(of: profileViewModel.company.name) { value in
+                                        print("company name berubah kok")
                                         profileViewModel.company.name = value
                                     }
-                                    
                             }
                         }
                         .padding(.top, 4)
@@ -63,7 +64,6 @@ struct ProfileView: View {
                 }
 
                 // MARK: - Employee List
-
                 Section(header: EmployeeListHeader()) {
                     ForEach(employeeListViewModel.employees) { employee in
                         EmployeeRow(employee: employee)
@@ -91,7 +91,6 @@ struct ProfileView: View {
                     role.switchRole(to: .owner)
                     profileViewModel.isPinPresenting = false
                     isPinTrue = true
-                    hideKeyboard()
                 } else {
                     profileViewModel.pinInputted = ""
                     profileViewModel.isPasscodeFieldDisabled = false
@@ -241,7 +240,7 @@ extension ProfileView {
         .cornerRadius(8)
         .disabled(editMode.isEditing)
     }
-    
+
     func hideKeyboard() {
         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
     }

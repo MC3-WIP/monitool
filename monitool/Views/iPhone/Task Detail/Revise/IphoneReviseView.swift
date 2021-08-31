@@ -61,7 +61,7 @@ struct IphoneReviseView: View {
                             .resizable()
                             .frame(width: proxy.size.width, height: proxy.size.width)
                     } else {
-                        Image("MonitoolEmptyReferenceIllus")
+                        Image("EmptyReference")
                             .resizable()
                             .frame(width: proxy.size.width, height: proxy.size.width)
                     }
@@ -108,27 +108,27 @@ struct IphoneReviseView: View {
                         datePhoto: datePhoto
                     )
                 default:
-                    Image("MonitoolAddPhotoIllustration")
+                    Image("AddPhoto")
                 }
             }
             .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
-                .onEnded { value in
-                    if abs(value.translation.height) < abs(value.translation.width) {
-                        if abs(value.translation.width) > 50.0 {
-                            if value.translation.width > 0 {
-                                if proofPage == 0 {
-                                } else {
-                                    self.proofPage -= 1
-                                }
-                            } else if value.translation.width < 0 {
-                                if proofPage == totalPage - 1 {
-                                } else {
-                                    self.proofPage += 1
-                                }
-                            }
-                        }
-                    }
-                }
+                                    .onEnded { value in
+                                        if abs(value.translation.height) < abs(value.translation.width) {
+                                            if abs(value.translation.width) > 50.0 {
+                                                if value.translation.width > 0 {
+                                                    if proofPage == 0 {
+                                                    } else {
+                                                        self.proofPage -= 1
+                                                    }
+                                                } else if value.translation.width < 0 {
+                                                    if proofPage == totalPage - 1 {
+                                                    } else {
+                                                        self.proofPage += 1
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
             )
             PageControl(totalPage: totalPage, current: proofPage)
         }
@@ -144,7 +144,7 @@ struct IphoneReviseView: View {
     @ViewBuilder
     func ProofOfWork(image _: String, date _: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
         VStack {
-            Image("MonitoolAddPhotoIllustration")
+            Image("AddPhoto")
                 .resizable()
                 .frame(width: metricSize.size.width * 0.85, height: metricSize.size.width * 0.85)
             Text(datePhoto)
@@ -159,7 +159,11 @@ struct IphoneReviseView: View {
 
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
             self.presentationMode.wrappedValue.dismiss()
-            TaskRepository.shared.updateLogTask(taskID: taskDetailViewModel.task.id, titleLog: "Rejected by Owner", timeStamp: Date())
+            TaskRepository.shared.updateLogTask(
+                taskID: taskDetailViewModel.task.id,
+                titleLog: "Rejected by Owner",
+                timeStamp: Date()
+            )
         } label: {
             HStack {
                 Image(systemName: "repeat")
@@ -182,7 +186,11 @@ struct IphoneReviseView: View {
 
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
             self.presentationMode.wrappedValue.dismiss()
-            TaskRepository.shared.updateLogTask(taskID: taskDetailViewModel.task.id, titleLog: "Approved by Owner", timeStamp: Date())
+            TaskRepository.shared.updateLogTask(
+                taskID: taskDetailViewModel.task.id,
+                titleLog: "Approved by Owner",
+                timeStamp: Date()
+            )
         } label: {
             HStack {
                 Image(systemName: "checkmark")
@@ -202,6 +210,6 @@ struct IphoneReviseView: View {
 
 struct IphoneReviseView_Previews: PreviewProvider {
     static var previews: some View {
-        IphoneReviseView(task: Task(name: "Revise Iphone", repeated: []))
+        IphoneReviseView(task: Task(name: "Revise Iphone"))
     }
 }
