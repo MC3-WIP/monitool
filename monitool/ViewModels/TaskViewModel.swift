@@ -60,24 +60,4 @@ class TaskViewModel: ObservableObject {
     func repeatTask(day: Int) {
         repository.repeatTask(day: day, taskListRepo: taskListRepository)
     }
-
-    @ViewBuilder
-    func route(_ filter: TaskStatus?, task: Task) -> some View {
-        if let filter = filter {
-            switch filter {
-            case .todayList:
-                TodayListView(task: task)
-            case .waitingEmployeeReview:
-                EmployeeReviewView(task: task)
-            case .waitingOwnerReview:
-                OwnerReviewView(task: task)
-            case .revise:
-                ReviseView(task: task)
-            default:
-                EmptyView()
-            }
-        } else {
-            TaskListDetailView()
-        }
-    }
 }

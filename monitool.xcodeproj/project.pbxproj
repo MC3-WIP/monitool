@@ -1084,7 +1084,7 @@
 				CODE_SIGN_ENTITLEMENTS = monitool/Configs/monitool.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 22;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"monitool/Resources/dev\"";
 				DEVELOPMENT_TEAM = 8KKWD6QU49;
@@ -1113,7 +1113,7 @@
 				CODE_SIGN_ENTITLEMENTS = monitool/Configs/monitool.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_ASSET_PATHS = "\"monitool/Resources/dev\"";
 				DEVELOPMENT_TEAM = 8KKWD6QU49;
 				ENABLE_PREVIEWS = YES;
