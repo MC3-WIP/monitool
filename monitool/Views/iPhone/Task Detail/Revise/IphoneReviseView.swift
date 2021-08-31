@@ -56,15 +56,8 @@ struct IphoneReviseView: View {
                     .font(.system(size: 17))
                     .padding(.vertical, 18)
 
-                    if let image = reviseViewModel.task.photoReference {
-                        WebImage(url: URL(string: image))
-                            .resizable()
-                            .frame(width: proxy.size.width, height: proxy.size.width)
-                    } else {
-                        Image("EmptyReference")
-                            .resizable()
-                            .frame(width: proxy.size.width, height: proxy.size.width)
-                    }
+                    PhotoReference(url: reviseViewModel.task.photoReference)
+
                     if let desc = taskDetailViewModel.task.desc {
                         Text(desc)
                             .font(.system(size: 17))

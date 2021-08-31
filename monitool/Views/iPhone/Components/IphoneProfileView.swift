@@ -16,52 +16,44 @@ struct IphoneProfileView: View {
                 profileViewModel.isPinHidden = true
             }
         }
-	}
-
-    @StateObject var profileViewModel = ProfileViewModel()
+    }
     @StateObject var ownerPin = TextLimiter(limit: 4)
-
-	@ObservedObject var role: RoleService = .shared
-	@ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
+    @ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
+    @ObservedObject var role: RoleService = .shared
+    @ObservedObject var profileViewModel: ProfileViewModel = .shared
 
     var body: some View {
-        VStack {
-            List {
-                Section(header: CompanyProfileHeader()) {
-                    if editModeIphone.isEditing {
-                        CompanyInfoNameTextField(
-                            placeholder: "Company Inc.",
-                            text: $profileViewModel.company.name
-                        )
-                        .onChange(of: profileViewModel.company.name) { value in
-                            profileViewModel.company.name = value
-                        }
-                        CompanyInfoTextField(
-                            title: "Owner PIN",
-                            placeholder: profileViewModel.company.ownerPin,
-                            text: $ownerPin.value
-                        )
-                        .onChange(of: profileViewModel.company.ownerPin) { value in
-                            if value.count == 4 {
-                                profileViewModel.company.ownerPin = value
-                            }
+        List {
+            Section(header: CompanyProfileHeader()) {
+                if editModeIphone.isEditing {
+                    CompanyInfoNameTextField(
+                        placeholder: "Company Inc.",
+                        text: $profileViewModel.company.name
+                    )
+                    .onChange(of: profileViewModel.company.name) { value in
+                        profileViewModel.company.name = value
+                    }
+                    CompanyInfoTextField(
+                        title: "Owner PIN",
+                        placeholder: profileViewModel.company.ownerPin,
+                        text: $ownerPin.value
+                    )
+                    .onChange(of: ownerPin.value) { pin in
+                        if pin.count >= 4 {
+                            profileViewModel.company.ownerPin = pin
                         }
                     }
-                    ReviewPolicy()
                 }
-//                .frame(width: UIScreen.main.bounds.size.width)
-                Section(header: EmployeeListHeader()) {
-                    ForEach(employeeListViewModel.employees) { employee in
-                        EmployeeRow(employee: employee)
-                    }
-                    .onDelete(perform: employeeListViewModel.delete)
-                }
+                ReviewPolicy()
             }
-            .listStyle(GroupedListStyle())
-            .onAppear {
-                UITableView.appearance().separatorColor = .clear
+            Section(header: EmployeeListHeader()) {
+                ForEach(employeeListViewModel.employees) { employee in
+                    EmployeeRow(employee: employee)
+                }
+                .onDelete(perform: employeeListViewModel.delete)
             }
         }
+        .listStyle(InsetGroupedListStyle())
         .padding()
         .toolbar {
             EditButton()

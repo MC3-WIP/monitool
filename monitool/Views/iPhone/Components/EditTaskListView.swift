@@ -36,7 +36,9 @@ struct EditTaskListView: View {
         _description = State(wrappedValue: task.desc ?? "")
         _isDisabled = isDisabled
 
-        if let imageRef = task.photoReference, let imageUrl = URL(string: imageRef) {
+        if let imageRef = task.photoReference,
+           !imageRef.isEmpty,
+           let imageUrl = URL(string: imageRef) {
             self.imageUrl = imageUrl
         }
     }
@@ -145,11 +147,18 @@ struct EditTaskListView: View {
                         .scaledToFill()
                         .cornerRadius(8)
                 }
-            } else if let image = image {
-                Image(uiImage: image)
-                    .resizable()
-                    .scaledToFill()
-                    .cornerRadius(8)
+            } else {
+                if let image = image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .cornerRadius(8)
+                } else {
+                    Image("EmptyReference")
+                        .resizable()
+                        .scaledToFit()
+                        .padding(36)
+                }
             }
         }
         .padding()

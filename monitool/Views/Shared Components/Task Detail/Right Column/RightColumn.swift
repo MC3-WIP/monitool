@@ -100,25 +100,22 @@ extension RightColumn {
         VStack(alignment: .leading) {
             sectionHeader(title: "Logs")
 
-            ScrollView(.vertical) {
+            NoSeparatorList {
                 if viewModel.logs.count > 0 {
-                    LazyVStack(spacing: 12) {
-                        ForEach(viewModel.logs, id: \.id) { log in
-                            HStack {
-                                Text(log.title)
-                                Spacer()
-                                Text(log.timestamp)
-                            }
+                    ForEach(viewModel.logs, id: \.id) { log in
+                        HStack {
+                            Text(log.title)
+                            Spacer()
+                            Text(log.timestamp)
                         }
                     }
-                    .frame(maxWidth: .infinity, alignment: .topLeading)
                 } else {
                     Text("There hasn't been anything going on.")
                         .foregroundColor(.gray)
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                 }
             }
-            .padding()
+            .padding([.horizontal, .top])
             .frame(height: 120, alignment: .topLeading)
             .background(AppColor.lightAccent)
             .modifier(

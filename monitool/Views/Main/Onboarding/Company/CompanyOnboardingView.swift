@@ -26,38 +26,36 @@ struct CompanyOnboardingView: View {
             VStack {
                 List {
                     Section(header: Color.clear
-                                .frame(width: 0, height: 0)
-                                .accessibilityHidden(true)) {
-                        HStack {
-                            Spacer()
-                            PhotoComponent(imageURL: "", editMode: .constant(.active))
-                            Spacer()
-                        }
-                        HStack {
-                            Text("Company Name")
-                            TextField("Company Name", text: $companyName).multilineTextAlignment(.trailing)
-                        }
-                        HStack {
-                            Text("Owner Pin")
-                            TextField("Owner Pin", text: $ownerPin.text)
-                                .multilineTextAlignment(.trailing)
-                                .keyboardType(.numberPad)
-                        }
-                        HStack {
-                            Text("Task Reviewer: ")
-                            Spacer()
-                            Stepper("\(minReviewers) Reviewer(s)") {
-                                minReviewers += 1
-                                if minReviewers > employeeViewModel.employees.count {
-                                    minReviewers = employeeViewModel.employees.count
-                                }
-                            } onDecrement: {
-                                minReviewers -= 1
-                                if minReviewers < 0 {
-                                    minReviewers = 0
-                                }
-                            }.disabled(employeeViewModel.employees.count == 0)
-                        }
+                        .frame(width: 0, height: 0)
+                        .accessibilityHidden(true)) {
+                            HStack {
+                                Spacer()
+                                PhotoComponent(imageURL: "", editMode: .constant(.active))
+                                Spacer()
+                            }
+                            HStack {
+                                Text("Company Name")
+                                TextField("Company Name", text: $companyName).multilineTextAlignment(.trailing)
+                            }
+                            HStack {
+                                Text("Owner Pin")
+                                TextField("Owner Pin", text: $ownerPin.text)
+                                    .multilineTextAlignment(.trailing)
+                                    .keyboardType(.numberPad)
+                            }
+                            HStack {
+                                Text("Task Reviewer: ")
+                                Spacer()
+                                Stepper("\(minReviewers) Reviewer(s)", onIncrement: {
+                                    if minReviewers < employeeViewModel.employees.count {
+                                        minReviewers += 1
+                                    }
+                                }, onDecrement: {
+                                    if minReviewers > 0 {
+                                        minReviewers -= 1
+                                    }
+                                })
+                            }
                     }
                     Section(
                         header: HStack {
