@@ -23,18 +23,26 @@ struct PhoneLayout: View {
             todoList
             TaskListTabItem()
                 .tag(PhoneTabItem.taskList)
-            ProfileTabItem()
-                .tag(PhoneTabItem.profile)
+            profileView
         }.accentColor(AppColor.accent)
     }
 
-    var todoList: some View {
+    private var todoList: some View {
         TodoListTabItem()
             .tabItem {
                 Image(systemName: "list.bullet.rectangle")
                 Text("To-Do List")
             }
             .tag(PhoneTabItem.todoList)
+    }
+
+    private var profileView: some View {
+        ProfileTabItem()
+            .tabItem {
+                Image(systemName: "person.crop.circle")
+                Text("Profile")
+            }
+            .tag(PhoneTabItem.profile)
     }
 }
 

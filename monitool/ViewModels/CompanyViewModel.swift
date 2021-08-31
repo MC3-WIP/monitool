@@ -20,6 +20,6 @@ final class CompanyViewModel: ObservableObject {
     }
 
     func addImage(imageURL: String) {
-        repository.addImage(imageURL: imageURL)
+        repository.updateProfileImage(url: imageURL)
     }
 }

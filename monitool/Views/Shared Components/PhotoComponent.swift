@@ -14,7 +14,7 @@ struct PhotoComponent: View {
     @State private var showActionSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
-	var imageURL: String
+    var imageURL: String
 
 	@Binding var editMode: EditMode
 
@@ -22,32 +22,35 @@ struct PhotoComponent: View {
 
     var body: some View {
         VStack {
-            if imageURL != "" {
-                WebImage(url: URL(string: imageURL))
-                    .resizable()
-                    .frame(width: 100, height: 100, alignment: .center)
-                    .clipShape(Circle())
-                    .padding(.bottom, 10.0)
-            } else {
-                if image == nil {
-                    Image("profile")
-                        .resizable()
-                        .frame(width: 100, height: 100, alignment: .center)
-                        .clipShape(Circle())
-                        .padding(.bottom, 10.0)
-                } else {
-                    if let image = image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .frame(width: 100, height: 100, alignment: .center)
-                            .clipShape(Circle())
-                            .padding(.bottom, 10.0)
-                    }
-                }
-            }
+            renderPhoto()
             if editMode.isEditing {
                 UploadButton()
             }
+        }
+    }
+
+    @ViewBuilder func renderPhoto() -> some View {
+        if let image = image {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 100, height: 100, alignment: .center)
+                .clipShape(Circle())
+        } else if !imageURL.isEmpty {
+            WebImage(url: URL(string: imageURL))
+                .resizable()
+                .indicator { _, _ in
+                    ProgressView()
+                }
+                .scaledToFill()
+                .frame(width: 100, height: 100, alignment: .center)
+                .clipShape(Circle())
+        } else {
+            Image("profile")
+                .resizable()
+                .scaledToFill()
+                .frame(width: 100, height: 100, alignment: .center)
+                .clipShape(Circle())
         }
     }
 
@@ -59,24 +62,30 @@ struct PhotoComponent: View {
             ImagePicker(sourceType: self.sourceType) { image in
                 self.image = image
                 if let image = self.image {
-                    storageService.upload(image: image, path: "profile")
+                    storageService.upload(image: image, path: "profile") { metadata, _ in
+                        if let path = metadata?.path {
+                            Store.shared.getDownloadURL(path: path) { url in
+                                CompanyRepository.shared.updateProfileImage(url: url)
+                            }
+                        }
+                    }
                 }
             }
         }
-        .actionSheet(isPresented: $showActionSheet) { () -> ActionSheet in
+        .actionSheet(isPresented: $showActionSheet) {
             ActionSheet(
                 title: Text("Choose mode"),
                 message: Text("Please choose your preferred mode to set your profile image"),
                 buttons: [
-                    ActionSheet.Button.default(Text("Camera")) {
+                    .default(Text("Camera")) {
                         self.showImagePicker.toggle()
                         self.sourceType = .camera
                     },
-                    ActionSheet.Button.default(Text("Photo Library")) {
+                    .default(Text("Photo Library")) {
                         self.showImagePicker.toggle()
                         self.sourceType = .photoLibrary
                     },
-                    ActionSheet.Button.cancel()
+                    .cancel()
                 ]
             )
         }
