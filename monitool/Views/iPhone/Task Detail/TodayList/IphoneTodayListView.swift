@@ -40,7 +40,7 @@ struct IphoneTodayListView: View {
                 } else if let proofOfWork = todayListViewModel.proofOfWork, proofOfWork.count > 0 {
                     Carousel(images: todayListViewModel.task.proof)
                 } else {
-                    Image("MonitoolAddPhotoIllustration")
+                    Image("AddPhoto")
                         .resizable()
                         .aspectRatio(1, contentMode: .fit)
                         .padding(36)
@@ -66,7 +66,7 @@ struct IphoneTodayListView: View {
                         WebImage(url: URL(string: image))
                             .resizable()
                     } else {
-                        Image("MonitoolEmptyReferenceIllus")
+                        Image("EmptyReference")
                             .resizable()
 							.padding(36)
                     }
@@ -89,7 +89,7 @@ struct IphoneTodayListView: View {
 
 struct IphoneTodayListView_Previews: PreviewProvider {
     static var previews: some View {
-        IphoneTodayListView(task: Task(name: "Task1", repeated: []))
+        IphoneTodayListView(task: Task(name: "Task1"))
             .previewDevice("Iphone 12")
     }
 }

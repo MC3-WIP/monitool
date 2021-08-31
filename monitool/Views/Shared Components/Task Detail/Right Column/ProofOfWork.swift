@@ -99,14 +99,14 @@ struct ProofOfWork: View {
             // MARK: Default Image
             Group {
                 if RoleService.shared.isOwner {
-                    Image("MonitoolAddPhotoIllustration")
+                    Image("AddPhoto")
                         .resizable()
                         .scaledToFit()
                 } else {
                     Button {
                         viewModel.isImagePickerPresenting.toggle()
                     } label: {
-                        Image("MonitoolAddPhotoIllustration")
+                        Image("AddPhoto")
                         .resizable()
                         .scaledToFit()
                     }

@@ -74,7 +74,7 @@ struct IphoneOwnerReview: View {
                             .resizable()
                             .frame(width: proxy.size.width, height: proxy.size.width)
                     } else {
-                        Image("MonitoolEmptyReferenceIllus")
+                        Image("EmptyReference")
                             .resizable()
                             .frame(width: proxy.size.width, height: proxy.size.width)
                     }
@@ -121,7 +121,7 @@ struct IphoneOwnerReview: View {
                         datePhoto: datePhoto
                     )
                 default:
-                    Image("MonitoolAddPhotoIllustration")
+                    Image("AddPhoto")
                 }
             }
             .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
@@ -156,7 +156,7 @@ struct IphoneOwnerReview: View {
 
     @ViewBuilder func ProofOfWork(image _: String, date _: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
         VStack {
-            Image("MonitoolAddPhotoIllustration")
+            Image("AddPhoto")
                 .resizable()
                 .frame(width: metricSize.size.width * 0.85, height: metricSize.size.width * 0.85)
             Text(datePhoto)
@@ -169,7 +169,11 @@ struct IphoneOwnerReview: View {
         Button {
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
             self.presentationMode.wrappedValue.dismiss()
-            TaskRepository.shared.updateLogTask(taskID: taskDetailViewModel.task.id, titleLog: "Rejected by Owner", timeStamp: Date())
+            TaskRepository.shared.updateLogTask(
+                taskID: taskDetailViewModel.task.id,
+                titleLog: "Rejected by Owner",
+                timeStamp: Date()
+            )
         } label: {
             HStack {
                 Image(systemName: "repeat")
@@ -190,7 +194,11 @@ struct IphoneOwnerReview: View {
         Button {
             taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
             self.presentationMode.wrappedValue.dismiss()
-            TaskRepository.shared.updateLogTask(taskID: taskDetailViewModel.task.id, titleLog: "Approved by Owner", timeStamp: Date())
+            TaskRepository.shared.updateLogTask(
+                taskID: taskDetailViewModel.task.id,
+                titleLog: "Approved by Owner",
+                timeStamp: Date()
+            )
         } label: {
             HStack {
                 Image(systemName: "checkmark")
@@ -210,6 +218,6 @@ struct IphoneOwnerReview: View {
 
 struct IphoneOwnerReview_Previews: PreviewProvider {
     static var previews: some View {
-        IphoneOwnerReview(task: Task(name: "Task", repeated: []))
+        IphoneOwnerReview(task: Task(name: "Task"))
     }
 }

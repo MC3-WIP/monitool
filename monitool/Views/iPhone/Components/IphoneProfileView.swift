@@ -8,10 +8,6 @@
 import SwiftUI
 
 struct IphoneProfileView: View {
-    @StateObject var profileViewModel = ProfileViewModel()
-    @ObservedObject var ownerPin = TextLimiter(limit: 4)
-    var company: Company?
-    @State var companyName = ""
     @State var editModeIphone: EditMode = .inactive {
         didSet {
             if editModeIphone.isEditing {
@@ -21,6 +17,9 @@ struct IphoneProfileView: View {
             }
         }
 	}
+
+    @StateObject var profileViewModel = ProfileViewModel()
+    @StateObject var ownerPin = TextLimiter(limit: 4)
 
 	@ObservedObject var role: RoleService = .shared
 	@ObservedObject var employeeListViewModel: EmployeeListViewModel = .shared
@@ -42,10 +41,8 @@ struct IphoneProfileView: View {
                             placeholder: profileViewModel.company.ownerPin,
                             text: $ownerPin.value
                         )
-                        .onChange(of: ownerPin.value) { value in
-                            if value.count < 4 {
-                            }
-                            else {
+                        .onChange(of: profileViewModel.company.ownerPin) { value in
+                            if value.count == 4 {
                                 profileViewModel.company.ownerPin = value
                             }
                         }

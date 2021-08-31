@@ -9,7 +9,7 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 class ReviseViewModel: TaskDetailViewModel {
-    func reviseTask(comment: String? = nil){
+    func reviseTask(comment: String? = nil) {
         if let comment = comment, comment != "" {
             taskRepository.updateComment(taskID: task.id, comment: comment)
         }
@@ -71,7 +71,7 @@ struct ReviseView: View {
 }
 
 struct ReviseTaskDetailView_Previews: PreviewProvider {
-	static var previews: some View {
-		ReviseView(task: Task(name: "Revise Page", repeated: []))
-	}
+    static var previews: some View {
+        ReviseView(task: Task(name: "Revise Page"))
+    }
 }

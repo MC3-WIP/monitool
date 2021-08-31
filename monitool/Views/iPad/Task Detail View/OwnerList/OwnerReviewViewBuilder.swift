@@ -21,7 +21,7 @@ extension OwnerReviewView {
                     }
                     .scaledToFit()
             } else {
-                Image("MonitoolEmptyReferenceIllus")
+                Image("EmptyReference")
                     .resizable()
                     .scaledToFit()
                     .padding([.horizontal, .bottom], 36)
@@ -45,7 +45,11 @@ extension OwnerReviewView {
                 self.presentationMode.wrappedValue.dismiss()
             }
             ownerReviewViewModel.reviseTask(comment: ownerReviewViewModel.commentTextField)
-            TaskRepository.shared.updateLogTask(taskID: ownerReviewViewModel.task.id, titleLog: "Rejected by Owner", timeStamp: Date())
+            TaskRepository.shared.updateLogTask(
+                taskID: ownerReviewViewModel.task.id,
+                titleLog: "Rejected by Owner",
+                timeStamp: Date()
+            )
         } label: {
             HStack {
                 Image(systemName: "repeat").font(.headline)
@@ -68,7 +72,11 @@ extension OwnerReviewView {
             ) { _ in
                 self.presentationMode.wrappedValue.dismiss()
             }
-            TaskRepository.shared.updateLogTask(taskID: ownerReviewViewModel.task.id, titleLog: "Approved by Owner", timeStamp: Date())
+            TaskRepository.shared.updateLogTask(
+                taskID: ownerReviewViewModel.task.id,
+                titleLog: "Approved by Owner",
+                timeStamp: Date()
+            )
         } label: {
             HStack {
                 Image(systemName: "checkmark").font(.headline)
