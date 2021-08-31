@@ -10,16 +10,25 @@ import FirebaseAuth
 import FirebaseFirestore
 
 final class CompanyRepository: ObservableObject {
-    @Published var companies = [Company]()
     private let paths = RepositoriesPath()
     private let store = Firestore.firestore()
     var companyRef: DocumentReference?
 
     static let shared = CompanyRepository()
 
+    @Published var company: Company?
+
     private init() {
         if let user = Auth.auth().currentUser {
             companyRef = store.collection(paths.company).document(user.uid)
+        }
+
+        companyRef?.addSnapshotListener { snapshot, _ in
+            do {
+                self.company = try snapshot?.data(as: Company.self)
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 
@@ -32,8 +41,8 @@ final class CompanyRepository: ObservableObject {
         ])
     }
 
-    func addImage(imageURL: String) {
-        companyRef?.updateData(["profileImage": imageURL])
+    func updateProfileImage(url: String) {
+        companyRef?.updateData(["profileImage": url])
     }
 
     func delete(_ company: Company) {
@@ -51,10 +60,4 @@ final class CompanyRepository: ObservableObject {
     func editCompanyPIN(ownerPIN: String) {
         companyRef?.updateData(["ownerPin": ownerPIN])
     }
-
-    // MARK: EDIT PHOTO BELOM
-
-    func approveTask(status _: String) {}
-
-    func rejectTask(status _: String) {}
 }

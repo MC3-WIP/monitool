@@ -21,7 +21,7 @@ struct HistoryTaskDetailView: View {
     }
 
     var body: some View {
-        ScrollView {
+        ScrollView(.vertical) {
             HStack(alignment: .top, spacing: 24) {
                 renderLeftColumn()
 
