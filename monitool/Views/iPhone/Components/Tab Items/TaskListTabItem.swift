@@ -15,12 +15,15 @@ struct TaskListTabItem: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(taskListViewModel.taskLists, id: \.id) { task in
-                    NavigationLink(destination: EditTaskListView(task: task, isDisabled: $isDisabled)) {
-                        TaskListRow(task: task)
-                    }
-                }.onDelete(perform: taskListViewModel.delete)
+            Group {
+                if taskListViewModel.taskLists.isEmpty {
+                    Image("EmptyTask")
+                        .resizable()
+                        .scaledToFit()
+                        .padding(36)
+                } else {
+                    content
+                }
             }
             .navigationBarTitle("Task List", displayMode: .inline)
             .toolbar {
@@ -36,6 +39,16 @@ struct TaskListTabItem: View {
         }
         .disabled(isDisabled)
         .accentColor(isDisabled ? .gray : AppColor.accent)
+    }
+
+    private var content: some View {
+        List {
+            ForEach(taskListViewModel.taskLists, id: \.id) { task in
+                NavigationLink(destination: EditTaskListView(task: task, isDisabled: $isDisabled)) {
+                    TaskListRow(task: task)
+                }
+            }.onDelete(perform: taskListViewModel.delete)
+        }
     }
 }
 

@@ -12,7 +12,6 @@ struct CompanyOnboardingView: View {
     @State var companyName: String = ""
     @State private var showingSheet = false
     @State private var showingAlert = false
-    @State var isLinkActive = false
     @StateObject var ownerPin = TextBindingHelper(limit: 4)
     @State private var device = UIDevice.current.userInterfaceIdiom
     @ObservedObject var employeeViewModel: EmployeeListViewModel = .shared
@@ -72,9 +71,7 @@ struct CompanyOnboardingView: View {
                                         .frame(width: 400, height: 400)
                                 } else {
                                     AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
-                                        .frame(width: 400, height: 400, alignment: .top)
                                 }
-                                
                             }
                         }
                     ) {
@@ -96,7 +93,6 @@ struct CompanyOnboardingView: View {
             }.navigationBarTitle("Profile", displayMode: .inline)
             .toolbar {
                 Button("Save") {
-                    self.isLinkActive = true
                     if companyName == "" || ownerPin.text == "" {
                             showingAlert = true
                     } else {

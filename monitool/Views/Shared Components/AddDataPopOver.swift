@@ -14,20 +14,20 @@ struct AddDataPopOver: View {
     @State var employeeName: String = ""
     @State var employeePin = Employee.Helper.generatePIN()
     @State var taskName = ""
-    @State var taskDesc = ""
+    @State var taskDesc = "Description"
     @State var taskRepeated = Task.defaultRepetition
     @State var taskPhotoReference: String?
     @ObservedObject var employeeViewModel: EmployeeListViewModel = .shared
     @ObservedObject var taskViewModel = TaskViewModel()
     @Binding var showingPopOver: Bool
-    
+
     @State var showImagePicker: Bool = false
     @State private var showActionSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
-    
+
     @State var id = UUID().uuidString
-    
+
     var body: some View {
         NavigationView {
             if sheetType == "Employee" {
@@ -57,7 +57,6 @@ struct AddDataPopOver: View {
                         employeeViewModel.add(employee)
                     }
                 }))
-                .foregroundColor(AppColor.accent)
             } else {
                 VStack {
                     List {
@@ -66,7 +65,7 @@ struct AddDataPopOver: View {
                                     .accessibilityHidden(true)) {
                             HStack {
                                 Text("Title")
-                                TextField("", text: $taskName).multilineTextAlignment(.trailing)
+                                TextField("Title", text: $taskName).multilineTextAlignment(.trailing)
                             }
                             HStack {
                                 Text("Description")
@@ -162,5 +161,6 @@ struct AddDataPopOver: View {
                 }).foregroundColor(AppColor.accent))
             }
         }.navigationViewStyle(StackNavigationViewStyle())
+        .accentColor(AppColor.accent)
     }
 }

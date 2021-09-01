@@ -11,7 +11,7 @@ import SwiftUI
 struct EditTaskListView: View {
     @Environment(\.presentationMode) var presentationMode
     @State private var device = UIDevice.current.userInterfaceIdiom
-    
+
     let taskID: String
     @State var title: String
     @State var description: String
@@ -75,8 +75,7 @@ struct EditTaskListView: View {
                             if device == .pad {
                                 RepeatSheetView(repeated: $repeated, isPresented: $repeatPopover)
                                     .frame(width: 400, height: 400)
-                            }
-                            else {
+                            } else {
                                 RepeatSheetView(repeated: $repeated, isPresented: $repeatPopover)
                                     .frame(alignment: .top)
                             }

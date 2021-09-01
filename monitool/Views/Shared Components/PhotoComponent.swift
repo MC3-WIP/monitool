@@ -14,7 +14,7 @@ struct PhotoComponent: View {
     @State private var showActionSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
-    var imageURL: String
+    @State var imageURL: String
 
 	@Binding var editMode: EditMode
 

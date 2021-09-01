@@ -21,7 +21,7 @@ struct ProfileView: View {
 
     var body: some View {
         VStack {
-            LazyVStack(spacing: 10) {
+            List {
                 // MARK: - Company Profile
 
                 Section(header: CompanyProfileHeader()) {
@@ -118,7 +118,7 @@ extension ProfileView {
         VStack {
             HStack {
                 Spacer()
-                PhotoComponent(imageURL: profileViewModel.company.profileImage ?? "", editMode: $editMode)
+                PhotoComponent(imageURL: CompanyRepository.shared.company?.profileImage ?? "", editMode: $editMode)
                 Spacer()
             }
             if !editMode.isEditing {
@@ -141,11 +141,11 @@ extension ProfileView {
                         Text("Task Reviewer")
                         Spacer()
                     }
-                    .frame(width: metrics.size.width * 0.7)
+                    .frame(width: metrics.size.width * 0.2)
                     if editMode.isEditing {
                         HStack {
                             Stepper(
-                                "\(profileViewModel.company.minReview)",
+                                "\(profileViewModel.company.minReview) Reviewer(s)",
                                 value: $profileViewModel.company.minReview, in: 0 ... max - 1
                             )
                         }
@@ -240,10 +240,6 @@ extension ProfileView {
         .cornerRadius(8)
         .disabled(editMode.isEditing)
     }
-
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
 }
 
 // MARK: - Preview
@@ -251,26 +247,5 @@ extension ProfileView {
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileView()
-            .previewDevice("iPad Air (4th generation)")
-    }
-}
-
-private struct LandscapeModifier: ViewModifier {
-    let height = UIScreen.main.bounds.width
-    let width = UIScreen.main.bounds.height
-
-    var isPad: Bool {
-        return height >= 768
-    }
-
-    var isRegularWidth: Bool {
-        return height >= 414
-    }
-
-    func body(content: Content) -> some View {
-        content
-            .previewLayout(.fixed(width: height, height: width))
-            .environment(\.horizontalSizeClass, isRegularWidth ? .regular : .compact)
-            .environment(\.verticalSizeClass, isPad ? .regular : .compact)
     }
 }

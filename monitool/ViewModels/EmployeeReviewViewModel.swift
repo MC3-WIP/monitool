@@ -10,8 +10,6 @@ import SwiftUI
 
 class EmployeeReviewViewModel: TaskDetailViewModel {
 
-    @Published var isInputPinSuccess: Bool = true
-
     private let employeeRepository: EmployeeRepository = .shared
 
 	var picName: String {

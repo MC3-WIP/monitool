@@ -212,7 +212,7 @@ extension ProfileTabItem {
                 Spacer()
                 Stepper(
                     value: $viewModel.minReviewerField,
-                    in: (0...viewModel.employees.count)
+                    in: (0...viewModel.employees.count - 1)
                 ) {}
             }.padding(.horizontal, 18)
 

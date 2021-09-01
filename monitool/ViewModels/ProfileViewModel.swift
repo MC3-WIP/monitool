@@ -11,7 +11,6 @@ import FirebaseStorage
 import Foundation
 
 class ProfileViewModel: ObservableObject {
-    @Published var employees = [Employee]()
     @Published var company: Company
 
     // UI State
@@ -30,24 +29,8 @@ class ProfileViewModel: ObservableObject {
         getCompany()
     }
 
-    func delete(_ offsets: IndexSet) {
-        offsets.forEach { index in
-            employees.remove(at: index)
-        }
-    }
-
     var reviewerString: String {
         "\(company.minReview) Reviewer\(company.minReview > 1 ? "s" : "")"
-    }
-
-    func incrementReviewer() {
-        company.minReview += 1
-        if company.minReview > employees.count { company.minReview = employees.count }
-    }
-
-    func decrementReviewer() {
-        company.minReview -= 1
-        if company.minReview < 0 { company.minReview = 0 }
     }
 
     func updateCompany(companyName: String, companyPIN: String, minReview: Int) {

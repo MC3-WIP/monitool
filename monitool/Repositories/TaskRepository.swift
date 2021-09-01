@@ -18,7 +18,6 @@ final class TaskRepository: ObservableObject {
 
     @Published var tasks: [Task] = []
     @Published var histories: [Task] = []
-    @Published var completedTasks: [Task] = []
 
     static let shared = TaskRepository()
 
@@ -79,24 +78,6 @@ final class TaskRepository: ObservableObject {
                 }
             }
         }
-    }
-
-    func getComplete() {
-        store.collection(path.task).whereField("status", isEqualTo: "Completed")
-            .addSnapshotListener { querySnapshot, error in
-                if let error = error {
-                    print("Error getting stories: \(error.localizedDescription)")
-                    return
-                }
-
-                let completedTasks = querySnapshot?.documents.compactMap { document in
-                    try? document.data(as: Task.self)
-                } ?? []
-
-                DispatchQueue.main.async {
-                    self.completedTasks = completedTasks
-                }
-            }
     }
 
     func getChildTask(parentId: String, completion: (([Task]) -> Void)? = nil) {

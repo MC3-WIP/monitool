@@ -41,8 +41,8 @@ final class CompanyRepository: ObservableObject {
         ])
     }
 
-    func updateProfileImage(url: String) {
-        companyRef?.updateData(["profileImage": url])
+    func updateProfileImage(url: String, completion: ((Error?) -> Void)? = nil) {
+        companyRef?.updateData(["profileImage": url], completion: completion)
     }
 
     func delete(_ company: Company) {
