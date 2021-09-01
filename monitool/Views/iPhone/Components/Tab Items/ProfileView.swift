@@ -21,7 +21,7 @@ struct ProfileView: View {
 
     var body: some View {
         VStack {
-            LazyVStack(spacing: 10) {
+            List {
                 // MARK: - Company Profile
 
                 Section(header: CompanyProfileHeader()) {
@@ -118,7 +118,7 @@ extension ProfileView {
         VStack {
             HStack {
                 Spacer()
-                PhotoComponent(imageURL: profileViewModel.company.profileImage ?? "", editMode: $editMode)
+                PhotoComponent(imageURL: CompanyRepository.shared.company?.profileImage ?? "", editMode: $editMode)
                 Spacer()
             }
             if !editMode.isEditing {
@@ -141,11 +141,11 @@ extension ProfileView {
                         Text("Task Reviewer")
                         Spacer()
                     }
-                    .frame(width: metrics.size.width * 0.7)
+                    .frame(width: metrics.size.width * 0.2)
                     if editMode.isEditing {
                         HStack {
                             Stepper(
-                                "\(profileViewModel.company.minReview)",
+                                "\(profileViewModel.company.minReview) Reviewer(s)",
                                 value: $profileViewModel.company.minReview, in: 0 ... max - 1
                             )
                         }

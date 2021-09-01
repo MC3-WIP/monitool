@@ -72,7 +72,6 @@ struct CompanyOnboardingView: View {
                                         .frame(width: 400, height: 400)
                                 } else {
                                     AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
-                                        .frame(width: 400, height: 400, alignment: .top)
                                 }
                                 
                             }
