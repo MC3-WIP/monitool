@@ -17,10 +17,6 @@ class TodayListViewModel: TaskDetailViewModel {
         super.init(task: task)
     }
 
-    func showImagePicker() {
-        isImagePickerShowing = true
-    }
-
 	func submitTask(pic: Employee, notes: String? = nil) {
 		taskRepository.updatePIC(taskID: task.id, employee: pic)
 

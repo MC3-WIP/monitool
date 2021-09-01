@@ -13,11 +13,7 @@ class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
 	@Published var notesTextField       = ""
 	@Published var commentTextField     = ""
 
-	@Published var imageToBeAdded: UIImage?
 	@Published var proofOfWork: [String]?
-
-    @Published var titleLog = ""
-    @Published var timeStampLog: Date?
 
 	@Published var picSelection = 0
 
@@ -136,10 +132,6 @@ class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
         self.task = task
         task.approvingReviewer?.forEach(mapReviewer)
         task.disapprovingReviewer?.forEach(mapReviewer)
-    }
-
-    func getActivityLog() {
-
     }
 
     private func mapReviewer(_ ref: DocumentReference) {

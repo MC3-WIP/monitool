@@ -9,7 +9,6 @@ import SwiftUI
 
 struct HistoryView: View {
 	@StateObject private var taskViewModel = TaskViewModel()
-	private let dateHelper = DateHelper()
 
 	init() {
 		UITableView.appearance().backgroundColor = .clear

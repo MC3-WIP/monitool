@@ -12,7 +12,6 @@ struct CompanyOnboardingView: View {
     @State var companyName: String = ""
     @State private var showingSheet = false
     @State private var showingAlert = false
-    @State var isLinkActive = false
     @StateObject var ownerPin = TextBindingHelper(limit: 4)
     @State private var device = UIDevice.current.userInterfaceIdiom
     @ObservedObject var employeeViewModel: EmployeeListViewModel = .shared
@@ -94,7 +93,6 @@ struct CompanyOnboardingView: View {
             }.navigationBarTitle("Profile", displayMode: .inline)
             .toolbar {
                 Button("Save") {
-                    self.isLinkActive = true
                     if companyName == "" || ownerPin.text == "" {
                             showingAlert = true
                     } else {

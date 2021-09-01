@@ -94,17 +94,4 @@ final class TaskListRepository: ObservableObject {
             }
         }
     }
-
-    func repeatTask(day: Int) {
-        get { taskLists in
-            for tasks in taskLists {
-                if let repeatedTask = tasks.repeated {
-                    for i in 0...repeatedTask.count - 1 where repeatedTask[i] && i == day {
-                        self.add(tasks)
-                    }
-                }
-            }
-        }
-
-    }
 }

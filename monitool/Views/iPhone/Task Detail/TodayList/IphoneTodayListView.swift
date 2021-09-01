@@ -55,11 +55,6 @@ struct IphoneTodayListView: View {
                     Text(desc)
                 }
             }
-            .fullScreenCover(isPresented: $todayListViewModel.isImagePickerShowing) {
-                ImagePicker(sourceType: .camera) { image in
-                    todayListViewModel.imageToBeAdded = image
-                }
-            }
             .navigationBarTitleDisplayMode(.inline)
             .padding()
         }
