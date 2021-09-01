@@ -21,23 +21,11 @@ struct IphoneTodayListView: View {
                 Text(todayListViewModel.task.name.capitalized)
                     .font(.title2.weight(.bold))
 
-                HStack {
-                    Text("Proof of Work")
-                        .font(.title3.weight(.bold))
-                        .foregroundColor(.gray)
-                    Spacer()
-                    Button(
-                        todayListViewModel.imageToBeAdded != nil ? "Retake" : "Add Photo",
-                        action: todayListViewModel.showImagePicker
-                    )
-                }
+                Text("Proof of Work")
+                    .font(.title3.weight(.bold))
+                    .foregroundColor(.gray)
 
-                if let imageToBeAdded = todayListViewModel.imageToBeAdded {
-                    Image(uiImage: imageToBeAdded)
-                        .resizable()
-                        .aspectRatio(1, contentMode: .fit)
-                        .cornerRadius(12)
-                } else if let proofOfWork = todayListViewModel.proofOfWork, proofOfWork.count > 0 {
+                if let proofOfWork = todayListViewModel.proofOfWork, proofOfWork.count > 0 {
                     Carousel(images: todayListViewModel.task.proof)
                 } else {
                     Image("AddPhoto")
@@ -59,7 +47,7 @@ struct IphoneTodayListView: View {
                             .bold()
                         Text(todayListViewModel.task.notes ?? "-")
                     }
-                }
+                }.padding(.bottom)
 
                 PhotoReference(url: todayListViewModel.task.photoReference)
 

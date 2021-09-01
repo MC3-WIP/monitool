@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct EmployeeReviewView: View {
-	@Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) var presentationMode
 
-	@StateObject var viewModel: EmployeeReviewViewModel
+    @StateObject var viewModel: EmployeeReviewViewModel
 
-	@ObservedObject var role: RoleService = .shared
+    @ObservedObject var role: RoleService = .shared
     @ObservedObject var profileViewModel: ProfileViewModel = .shared
 
     init(task: Task) {
@@ -59,10 +59,10 @@ struct EmployeeReviewView: View {
                 }
             }
             if !role.isOwner {
-              HStack(spacing: 24) {
-                  dissaprroveButton()
-                  approveButton()
-              }
+                HStack(spacing: 24) {
+                    dissaprroveButton()
+                    approveButton()
+                }
             }
         }
         .padding([.top, .leading, .trailing], 24.0)
@@ -91,11 +91,11 @@ struct EmployeeReviewView: View {
                 }
             }
             .alert(isPresented: $isInputPinFail) {
-                        Alert(title: Text("Error when Validating Pin"),
-                              message: Text(errorMessageValidatingPin),
-                              dismissButton: .default(Text("OK!"))
-                        )
-                    }
+                Alert(title: Text("Error when Validating Pin"),
+                      message: Text(errorMessageValidatingPin),
+                      dismissButton: .default(Text("OK!"))
+                )
+            }
         }
     }
 }

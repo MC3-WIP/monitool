@@ -38,8 +38,7 @@ struct TaskListDetailView: View {
                         if device == .pad {
                             RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
                                 .frame(width: 400, height: 400)
-                        }
-                        else {
+                        } else {
                             RepeatSheetView(repeated: $taskRepeated, isPresented: $repeatPopover)
                                 .frame(width: 400, height: 400, alignment: .top)
                         }

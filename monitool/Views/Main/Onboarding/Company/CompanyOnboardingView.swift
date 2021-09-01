@@ -73,7 +73,6 @@ struct CompanyOnboardingView: View {
                                 } else {
                                     AddDataPopOver(sheetType: "Employee", showingPopOver: $showingSheet)
                                 }
-                                
                             }
                         }
                     ) {

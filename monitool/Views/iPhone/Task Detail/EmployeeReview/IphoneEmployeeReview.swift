@@ -15,38 +15,21 @@ struct IphoneEmployeeReview: View {
     }
 
     var body: some View {
-        if viewModel.company == nil {
-            VStack(spacing: 24) {
-                ProgressView()
-                Text("Loading...")
-            }
-        } else {
-            content
-        }
-    }
-
-    private var content: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: 32) {
+            LazyVStack(alignment: .leading, spacing: 24) {
                 // About Task
-                VStack(alignment: .leading) {
-                    Text(viewModel.title)
-                        .font(.largeTitle)
-                        .bold()
-                    Text(viewModel.desc)
-                }
+                Text(viewModel.title)
+                    .font(.largeTitle)
+                    .bold()
 
                 // Proof of Work
-                VStack(alignment: .leading) {
-                    Text("Proof of Work")
-                        .font(.title3)
-                        .bold()
-                        .foregroundColor(.gray)
-
-                    Image("EmptyReference")
+                if let proofOfWork = viewModel.proofOfWork, proofOfWork.count > 0 {
+                    Carousel(images: viewModel.task.proof)
+                } else {
+                    Image("AddPhoto")
                         .resizable()
-                        .scaledToFill()
-                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(AppColor.accent, lineWidth: 2))
+                        .aspectRatio(1, contentMode: .fit)
+                        .padding(36)
                 }
 
                 // Detail
@@ -68,13 +51,16 @@ struct IphoneEmployeeReview: View {
                     }
 
                     // Review Status
-                    if let company = viewModel.company {
+                    if let company = viewModel.company, company.minReview > 0 {
                         ReviewStatus(currentReviewer: viewModel.reviewer.count, minReviewer: company.minReview)
                     }
                 }
 
                 // Reference Image
                 PhotoReference(url: viewModel.photoReference)
+
+                // Task Desc
+                Text(viewModel.desc)
             }.padding()
         }.navigationBarTitle("Waiting Employee Review", displayMode: .inline)
     }

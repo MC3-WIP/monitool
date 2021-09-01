@@ -52,10 +52,12 @@ class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
     var logs: [ActivityLog] {
         var log: [ActivityLog] = []
         for index in 0...task.titleLog.count - 1 {
-            log.append(ActivityLog(
-                        title: task.titleLog[index],
-                        timestamp: dateHelper.getStringFromDate(date: task.timeStampLog[index])
-            ))
+            log.append(
+                ActivityLog(
+                    title: task.titleLog[index],
+                    timestamp: dateHelper.getStringFromDate(date: task.timeStampLog[index])
+                )
+            )
         }
         return log
     }
@@ -106,7 +108,7 @@ class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
 
     func getCompany() {
         if let ref = companyRepository.companyRef {
-            ref.getDocument(completion: { doc, err in
+            ref.getDocument { doc, err in
                 if let err = err {
                     fatalError("Unresolved error: \(err)")
                 }
@@ -118,7 +120,7 @@ class TaskDetailViewModel: ObservableObject, RightColumnViewModel {
                         print("Unresolved error: \(error.localizedDescription)")
                     }
                 }
-            })
+            }
         }
     }
 

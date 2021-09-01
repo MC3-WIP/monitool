@@ -41,7 +41,7 @@ struct HistoryRow: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 4) {
 			Text(viewModel.taskTitle)
 			Text("PIC: \(viewModel.picName)")
                 .font(.caption)

@@ -8,162 +8,98 @@ import SDWebImageSwiftUI
 import SwiftUI
 
 struct IphoneOwnerReview: View {
-    @StateObject var OwnerViewModel: TodayListViewModel
-    @StateObject var taskDetailViewModel: TaskDetailViewModel
-    @ObservedObject var taskViewModel = TaskViewModel()
-
-    @State var totalPage: Int = 3
-    @State var datePhoto = "21 Juli 2021 at 15.57"
-    @State var proofPage = 0
-    @State var notes: String = ""
+    @StateObject var viewModel: OwnerReviewViewModel
 
     @Environment(\.presentationMode) var presentationMode
 
+    @State var notes = ""
+
     init(task: Task) {
-        _taskDetailViewModel = StateObject(wrappedValue: TaskDetailViewModel(task: task))
-        _OwnerViewModel = StateObject(wrappedValue: TodayListViewModel(task: task))
+        _viewModel = StateObject(wrappedValue: OwnerReviewViewModel(task: task))
     }
 
     var body: some View {
-        VStack {
-            GeometryReader { proxy in
-                NoSeparatorList {
-                    Text(taskDetailViewModel.task.name)
-                        .font(.system(size: 28, weight: .bold))
-                        .frame(width: proxy.size.width, alignment: .leading)
-                    Text("Proof of Work")
-                        .font(.system(size: 20, weight: .bold))
-                        .frame(width: proxy.size.width, alignment: .leading)
-                        .foregroundColor(Color(hex: "898989"))
-                    proofOfWorkComponent(matric: proxy, proofPage: proofPage, totalPage: totalPage, datePhoto: datePhoto)
-                        .padding(.top, 10)
+        ScrollView(.vertical) {
+            LazyVStack(alignment: .leading, spacing: 24) {
+                Text(viewModel.task.name)
+                    .font(.system(size: 28, weight: .bold))
+                Text("Proof of Work")
+                    .font(.title3.weight(.bold))
+                    .foregroundColor(.gray)
 
-                    VStack(spacing: 4) {
-                        HStack {
-                            Text("PIC: ")
-                                .foregroundColor(Color(hex: "6C6C6C"))
-                                .fontWeight(.bold)
-                            Text(taskDetailViewModel.pic?.name ?? "-")
-                        }
-                        .frame(width: proxy.size.width, alignment: .leading)
-                        HStack {
-                            Text("Notes: ")
-                                .foregroundColor(Color(hex: "6C6C6C"))
-                                .fontWeight(.bold)
-                            Text(taskDetailViewModel.task.notes ?? "-")
-                        }
-                        .frame(width: proxy.size.width, alignment: .leading)
-                    }
-                    .font(.system(size: 17))
-                    .padding(.vertical, 18)
-
-                    VStack {
-                        Text("Comment: ")
-                            .foregroundColor(Color(hex: "6C6C6C"))
-                            .font(.system(size: 20, weight: .bold))
-                            .frame(width: proxy.size.width * 0.97, height: 25, alignment: .leading)
-                        TextField("Add notes here", text: $notes)
-                            .padding()
-                            .frame(width: proxy.size.width * 0.97, height: 120, alignment: .top)
-                            .background(Color(hex: "F0F9F8"))
-                            .modifier(RoundedEdge(width: 2, color: AppColor.accent, cornerRadius: 8))
-                    }
-
-                    PhotoReference(url: OwnerViewModel.task.photoReference)
-
-                    if let desc = taskDetailViewModel.task.desc {
-                        Text(desc)
-                            .font(.system(size: 17))
-                            .multilineTextAlignment(.leading)
-                    }
-
-                    VStack(spacing: 8) {
-                        approveButton()
-                        reviseButton()
-                    }
-                    .padding(.vertical, 24)
-                }
-            }
-        }
-        .padding()
-    }
-
-    @ViewBuilder func proofOfWorkComponent(matric: GeometryProxy, proofPage: Int, totalPage: Int, datePhoto: String) -> some View {
-        VStack {
-            ZStack {
-                switch proofPage {
-                case 0:
-                    ProofOfWork(
-                        image: "DefaultRefference",
-                        date: "21 Jul 2021 at 15:57",
-                        metricSize: matric,
-                        datePhoto: datePhoto
-                    )
-                case 1:
-                    ProofOfWork(
-                        image: "DefaultRefference",
-                        date: "21 Jul 2021 at 15:57",
-                        metricSize: matric,
-                        datePhoto: datePhoto
-                    )
-                case 2:
-                    ProofOfWork(
-                        image: "DefaultRefference",
-                        date: "21 Jul 2021 at 15:57",
-                        metricSize: matric,
-                        datePhoto: datePhoto
-                    )
-                default:
+                if let proofOfWork = viewModel.proofOfWork, proofOfWork.count > 0 {
+                    Carousel(images: viewModel.task.proof)
+                } else {
                     Image("AddPhoto")
+                        .resizable()
+                        .aspectRatio(1, contentMode: .fit)
+                        .padding(36)
                 }
-            }
-            .highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
-                .onEnded { value in
-                    if abs(value.translation.height) < abs(value.translation.width) {
-                        if abs(value.translation.width) > 50.0 {
-                            if value.translation.width > 0 {
-                                if proofPage == 0 {
-                                } else {
-                                    self.proofPage -= 1
-                                }
-                            } else if value.translation.width < 0 {
-                                if proofPage == totalPage - 1 {
-                                } else {
-                                    self.proofPage += 1
-                                }
-                            }
-                        }
+
+                // Detail
+                VStack(alignment: .leading, spacing: 16) {
+                    // PIC
+                    HStack {
+                        Text("PIC: ")
+                            .foregroundColor(.gray)
+                            .bold()
+                        Text(viewModel.pic?.name ?? "-")
+                    }
+
+                    // Notes
+                    HStack {
+                        Text("Notes: ")
+                            .foregroundColor(.gray)
+                            .bold()
+                        Text(viewModel.notes)
+                    }
+
+                    // Review Status
+                    if let company = viewModel.company, company.minReview > 0 {
+                        ReviewStatus(currentReviewer: viewModel.reviewer.count, minReviewer: company.minReview)
                     }
                 }
-            )
-            PageControl(totalPage: totalPage, current: proofPage)
-        }
-        .frame(width: matric.size.width)
-        .padding(.vertical, 20)
-        .background(Color(hex: "F0F9F8"))
-        .overlay(
-            RoundedRectangle(cornerRadius: 5)
-                .stroke(Color(hex: "4EB0AB"), lineWidth: 1)
-        )
-    }
 
-    @ViewBuilder func ProofOfWork(image _: String, date _: String, metricSize: GeometryProxy, datePhoto: String) -> some View {
-        VStack {
-            Image("AddPhoto")
-                .resizable()
-                .frame(width: metricSize.size.width * 0.85, height: metricSize.size.width * 0.85)
-            Text(datePhoto)
-                .font(.system(size: 11))
-                .frame(width: metricSize.size.width * 0.85, height: 12, alignment: .leading)
+                VStack(alignment: .leading) {
+                    Text("Comment").foregroundColor(.gray).font(.title3).bold()
+
+                    TextField("Type your comment here", text: $notes)
+                        .padding()
+                        .frame(minHeight: 120, alignment: .topLeading)
+                        .background(AppColor.lightAccent)
+                        .modifier(
+                            RoundedEdge(
+                                width: 2,
+                                color: AppColor.accent,
+                                cornerRadius: 8)
+                        )
+                }.padding(.bottom)
+
+                PhotoReference(url: viewModel.task.photoReference)
+
+                Text(viewModel.desc).multilineTextAlignment(.leading)
+
+                VStack(spacing: 12) {
+                    approveButton()
+                    reviseButton()
+                }.padding(.vertical)
+            }
         }
+        .navigationBarTitle("Waiting Owner Review", displayMode: .inline)
+        .padding()
     }
 
     @ViewBuilder func reviseButton() -> some View {
         Button {
-            taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.revise.title)
+            TaskRepository.shared.updateStatus(
+                taskID: viewModel.task.id,
+                status: TaskStatus.revise.title
+            )
+
             self.presentationMode.wrappedValue.dismiss()
+
             TaskRepository.shared.updateLogTask(
-                taskID: taskDetailViewModel.task.id,
+                taskID: viewModel.task.id,
                 titleLog: "Rejected by Owner",
                 timeStamp: Date()
             )
@@ -175,20 +111,26 @@ struct IphoneOwnerReview: View {
             .frame(minWidth: 0, maxWidth: .infinity)
             .font(.system(size: 17, weight: .semibold))
             .padding()
-            .foregroundColor(Color(hex: "#4FB0AB"))
+            .foregroundColor(AppColor.accent)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color(hex: "#4FB0AB"), lineWidth: 2)
+                    .stroke(AppColor.accent, lineWidth: 2)
+                    .padding(.horizontal, 2)
             )
         }
     }
 
     @ViewBuilder func approveButton() -> some View {
         Button {
-            taskViewModel.updateStatus(id: taskDetailViewModel.task.id, status: TaskStatus.completed.title)
+            TaskRepository.shared.updateStatus(
+                taskID: viewModel.task.id,
+                status: TaskStatus.completed.title
+            )
+
             self.presentationMode.wrappedValue.dismiss()
+
             TaskRepository.shared.updateLogTask(
-                taskID: taskDetailViewModel.task.id,
+                taskID: viewModel.task.id,
                 titleLog: "Approved by Owner",
                 timeStamp: Date()
             )
@@ -202,9 +144,9 @@ struct IphoneOwnerReview: View {
             .padding()
             .foregroundColor(Color.white)
             .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(Color(hex: "#4FB0AB"), lineWidth: 2)
-            ).background(RoundedRectangle(cornerRadius: 8).fill(Color(hex: "#4FB0AB")))
+                AppColor.accent
+            )
+            .cornerRadius(8)
         }
     }
 }

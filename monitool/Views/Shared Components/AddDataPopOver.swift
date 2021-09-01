@@ -20,14 +20,14 @@ struct AddDataPopOver: View {
     @ObservedObject var employeeViewModel: EmployeeListViewModel = .shared
     @ObservedObject var taskViewModel = TaskViewModel()
     @Binding var showingPopOver: Bool
-    
+
     @State var showImagePicker: Bool = false
     @State private var showActionSheet = false
     @State var sourceType: UIImagePickerController.SourceType = .photoLibrary
     @State var image: UIImage?
-    
+
     @State var id = UUID().uuidString
-    
+
     var body: some View {
         NavigationView {
             if sheetType == "Employee" {
